@@ -79,7 +79,7 @@ If you have an idea for a new feature, please open an issue on [GitHub Issues](h
 
    Commit messages also follow a similar pattern.
 
-   > Example: `refactor: use a single state for formData` or `refactor(HNG-1234): use a single state for formData`
+   > Example: `refactor: use a single state for formData` or `refactor: use a single state for formData`
 
 > Please notice how both branch names an commit messages use the imperative tense. The imperative tense is a command or request, which makes it clear what the commit does. i.e., "fix login issue", NOT "I fixed login issue", and NOT "fixed login issue"
 
