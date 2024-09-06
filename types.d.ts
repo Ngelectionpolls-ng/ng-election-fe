@@ -1,0 +1,3 @@
+interface DashboardLayoutProps {
+    children: ReactNode;
+  }
