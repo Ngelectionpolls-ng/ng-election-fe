@@ -1,19 +1,47 @@
-import React from 'react'
-import newsImg from '@/public/assets/images/bg-2.png' 
+"use client";
+
 import Image from 'next/image'
+import { dateHandler } from './FunctionUtils';
+import { NewsDetails } from '@/types';
+import { useEffect, useState } from 'react';
 
-type Props = {}
+type NewsProps = {
+  info: NewsDetails
+}
 
-export default function NewsWrap({}: Props) {
+export default function NewsWrap({info}: NewsProps) {
+  const [isTruncated, setIsTruncated] = useState(true);
+  const [mediaWidth, setmediaWidth] = useState<number | undefined>(undefined);
+
+    useEffect(() => {
+    function handleResize() {
+      window.innerWidth <= 768 ? setmediaWidth(window.innerWidth) : undefined;
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, []);
+
+  const truncateText = (text: string, maxLength?: number) => {
+    // if (text.length > maxLength) {
+    //   return text.slice(0, maxLength) + '...';
+    // }
+    if (maxLength && maxLength < 500) {
+      return text.slice(0, maxLength - 290) + '...';
+    }
+    return text;
+  }
   return (
     <div className='flex gap-4'>
-      <Image src={newsImg} alt='img' className='max-w-32 md:max-w-52' />
+      <Image src={info.src} alt='img' className='max-w-32 md:max-w-52' />
       <div className='flex flex-col justify-center gap-1 lg:flex-col-reverse'>
-        <span className='text-xs lg:hidden'>pooling unit, local govt, state</span>
-        <span className='leading-5 font-normal'>Protest is ongoing. No Labour Party supporter would be allowed to vote in this ward.</span>
+        <span className='text-xs lg:hidden'>{info.poolingUnit}, {info.localGovt}, {info.state}</span>
+        <span className='leading-5 font-normal'>{truncateText(info.title, mediaWidth)}</span>
         <div className='flex text-xs gap-2'>
-          <span>status</span>
-          <span>2hrs ago</span>
+          <span>{info.status}</span>
+          <span>{dateHandler(info.createdAt)}</span>
         </div>
       </div>
     </div>
