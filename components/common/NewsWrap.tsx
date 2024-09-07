@@ -10,9 +10,7 @@ type NewsProps = {
 }
 
 export default function NewsWrap({info}: NewsProps) {
-  const [isTruncated, setIsTruncated] = useState(true);
   const [mediaWidth, setmediaWidth] = useState<number | undefined>(undefined);
-
     useEffect(() => {
     function handleResize() {
       window.innerWidth <= 768 ? setmediaWidth(window.innerWidth) : undefined;
@@ -25,9 +23,6 @@ export default function NewsWrap({info}: NewsProps) {
   }, []);
 
   const truncateText = (text: string, maxLength?: number) => {
-    // if (text.length > maxLength) {
-    //   return text.slice(0, maxLength) + '...';
-    // }
     if (maxLength && maxLength < 500) {
       return text.slice(0, maxLength - 290) + '...';
     }
