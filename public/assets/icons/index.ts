@@ -8,3 +8,5 @@ export { default as baseFeatureIcon4 } from "./base-feature-icon4.svg";
 export { default as baseFeatureIcon5 } from "./base-feature-icon5.svg";
 export { default as baseFeatureIcon6 } from "./base-feature-icon6.svg";
 export { default as hamburgerIcon } from "./hambuger-icon.svg";
+export { default as trendIcon } from "./trending-up.svg";
+export { default as cameraIcon } from "./camera.svg";
