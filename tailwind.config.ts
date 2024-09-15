@@ -32,6 +32,7 @@ const config = {
         },
         secondary: {
           DEFAULT: "#F7A600",
+
           foreground: "hsl(var(--secondary-foreground))",
         },
         destructive: {
@@ -54,7 +55,14 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        greenShades: {
+          DEFAULT: "#A5E2ACCC",
+          timestamp: "#00FF47",
+        },
+        "grey": "#EEEEEE",
+        "shadow": "#9E9E9E",
         "black-500": "#141414",
+        "lightGreen" : "#2BC155",
         "white-full-500": "#FAF8F8",
         "neutral-dark-1": "#525252",
         "neutral-dark-2": "#0A0A0A",
