@@ -1,19 +1,16 @@
 "use client"
-import { chatIcon, houseIcon, houseIconGreen, logoutIcon, paperIcon, pieChartIcon, puzzleIcon, searchIcon } from "@/public/assets/icons";
+import { logoutIcon } from "@/public/assets/icons";
+import { IsCollapsedProps } from "@/types";
 import { ChevronLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import Svg from "../common/Svg";
 
-function SideBar() {
-    const [isCollapsed, setIsCollapsed] = useState(false);
-
+function SideBar({isCollapsed, setIsCollapsed}:IsCollapsedProps) {
     const sideBarContent = [
         { id: 1, name: "Dashboard", icon1: "/assets/icons/house-icon.svg", icon2: "/assets/icons/house-icon-green.svg", path: "/dashboard" },
         { id: 2, name: "Election Map", icon1: "/assets/icons/puzzle-icon.svg", icon2: "/assets/icons/puzzle-icon-green.svg", path: "/dashboard/election-map" },
-        { id: 3, name: "Media Gallery",icon1: "/assets/icons/piechart-icon.svg", icon2: "/assets/icons/piechart-icon-green.svg", path: "/dashboard/media-gallery" },
+        { id: 3, name: "Media Gallery", icon1: "/assets/icons/piechart-icon.svg", icon2: "/assets/icons/piechart-icon-green.svg", path: "/dashboard/media-gallery" },
         { id: 4, name: "Eyewitness Reports", icon1: "/assets/icons/chat-icon.svg", icon2: "/assets/icons/chat-icon-green.svg", path: "/dashboard/eyewitness-report" },
         { id: 5, name: "News", icon1: "/assets/icons/paper.svg", icon2: "/assets/icons/paper-green.svg", path: "/dashboard/news" },
     ];
