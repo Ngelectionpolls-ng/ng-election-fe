@@ -20,3 +20,4 @@ export { default as pieChartIcon } from "./piechart-icon.svg";
 export { default as logoutIcon } from "./logout-icon.svg";
 export { default as logoutIconGreen } from "./logout-icon-green.svg";
 export { default as bellIcon } from "./bell-icon.svg";
+export { default as cloudIcon } from "./cloud-icon.svg";

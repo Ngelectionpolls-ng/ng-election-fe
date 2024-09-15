@@ -16,3 +16,13 @@ export type NewsDetails = {
   status: string;
   createdAt: string;
 };
+
+export interface NotificationItem {
+  id: number;
+  title: string;
+  context: string;
+}
+
+export type DropDownProps = {
+  notifications: NotificationItem[]
+};

@@ -5,8 +5,8 @@ import ghostImg from '@/public/assets/images/ghost.png';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Dashboard | Eyewitness Report Portal",
-  description: "Eyewitness Report Portal",
+    title: "Dashboard | Eyewitness Report Portal",
+    description: "Eyewitness Report Portal",
 };
 
 function Page() {
