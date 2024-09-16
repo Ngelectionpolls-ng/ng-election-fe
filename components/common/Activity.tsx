@@ -8,9 +8,10 @@ import Link from 'next/link';
 
 type NewsProps = {
   info: NewsDetails;
+  id: number;
 };
 
-export default function Activity({ info }: NewsProps) {
+export default function Activity({ info, id }: NewsProps) {
   const [mediaWidth, setmediaWidth] = useState<number | undefined>(undefined);
   // const navigate = useNavigate();
   useEffect(() => {
@@ -31,10 +32,10 @@ export default function Activity({ info }: NewsProps) {
     return text;
   };
   return (
-    <Link href={`/dashboard/`} className="flex gap-4">
+    <Link href={`/dashboard/activity/${id}`} className="flex gap-4">
       <Image src={info.src} alt="img" className="max-w-32 md:max-w-52" />
-      <div className="flex flex-col justify-center gap-1 lg:flex-col-reverse">
-        <span className="text-xs lg:hidden">
+      <div className="flex flex-col justify-center gap-1">
+        <span className="text-xs">
           {info.poolingUnit}, {info.localGovt}, {info.state}
         </span>
         <span className="leading-5 font-normal">
