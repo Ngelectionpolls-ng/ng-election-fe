@@ -1,5 +1,6 @@
 import { baseFeatureIcon, baseFeatureIcon2, baseFeatureIcon3, baseFeatureIcon4, baseFeatureIcon5, baseFeatureIcon6 } from '@/public/assets/icons'
 import Image from 'next/image'
+import Svg from '../common/Svg'
 
 function OurInitiative() {
     const ourInitiativeContent = [
@@ -20,7 +21,7 @@ function OurInitiative() {
                 {ourInitiativeContent.map((content) => {
                     return (
                         <div className='flex flex-col items-center' key={content.id}>
-                            <Image src={content.icon} width={41} height={41} alt='' />
+                            <Svg width={'41px'} height={'41px'} SvgIcon={content.icon} />
                             <h4 className='font-bold mt-4'>{content.title}</h4>
                             <p>{content.text}</p>
                         </div>

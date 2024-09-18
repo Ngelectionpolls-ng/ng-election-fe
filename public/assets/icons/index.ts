@@ -12,3 +12,16 @@ export { default as TrendIcon } from "./trending-up.svg";
 export { default as CameraIcon } from "./camera.svg";
 export { default as DownloadIcon } from "./downloadIcon.svg";
 export { default as ShareIcon} from "./shareIcon.svg";
+
+//DASHBOARD SIDEBAR
+export { default as houseIcon } from "./house-icon.svg";
+export { default as houseIconGreen } from "./house-icon-green.svg";
+export { default as searchIcon } from "./search-icon.svg";
+export { default as puzzleIcon } from "./puzzle-icon.svg";
+export { default as chatIcon } from "./chat-icon.svg";
+export { default as paperIcon } from "./paper.svg";
+export { default as pieChartIcon } from "./piechart-icon.svg";
+export { default as logoutIcon } from "./logout-icon.svg";
+export { default as logoutIconGreen } from "./logout-icon-green.svg";
+export { default as bellIcon } from "./bell-icon.svg";
+export { default as cloudIcon } from "./cloud-icon.svg";

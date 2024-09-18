@@ -1,7 +1,6 @@
 "use client";
 
 import { dummyNewsArr } from '@/utils/data/DummyObjects';
-import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import CollapsibleComponent from '@/components/ui/collapsible';
 import { CameraIcon, TrendIcon } from '@/public/assets/icons';
 import Activities from './_component/Activities';
@@ -12,7 +11,6 @@ import Svg from '@/components/common/Svg';
 function Page() {
   const [open, setOpen] = useState(false);
   return (
-    <DashboardLayout>
       <section className="grid gap-10 p-4">
         <CollapsibleComponent header="Capture Results">
           <span className="border-[3px] w-max rounded-md border-gray-400 text-lg p-3">
@@ -44,7 +42,6 @@ function Page() {
         </Modal>
         <Activities arr={dummyNewsArr} />
       </section>
-    </DashboardLayout>
   );
 }
 
