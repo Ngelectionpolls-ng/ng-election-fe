@@ -11,7 +11,7 @@ function ProfileDropDown({notifications}: DropDownProps) {
                 <span className="relative w-fit h-fit">
                     <Image src={bellIcon} width={24} height={24} alt="Bell Icon" />
                     <div className="absolute -top-4 -right-3 drop-shadow-custom-dropshadow size-[18px] bg-primary flex justify-center items-center p-1 text-white text-[10px] font-bold rounded-full">{notifications.length}</div>
-                </span>
+                 </span>
                 <div className="flex items-center gap-2">
                     <div className="size-9 rounded-full overflow-hidden">
                         <Image src={profileAvatar} width={40} height={40} alt="profile image" />
