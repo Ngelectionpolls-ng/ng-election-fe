@@ -1,4 +1,5 @@
 import ElectionUpdateSection from "@/components/home/ElectionUpdateSection";
+import FAQSection from "@/components/home/FAQSection";
 import Footer from "@/components/home/Footer";
 import Header from "@/components/home/Header";
 import JoinCommunitySection from "@/components/home/JoinCommunitySection";
@@ -16,6 +17,7 @@ export default function Home() {
       <OurMission />
       <OurInitiative />
       <NewsAndReports />
+      <FAQSection />
       <Footer />
     </main>
   );
