@@ -65,7 +65,13 @@ function Page() {
                                 <Controller
                                     name="email"
                                     control={control}
-                                    rules={{ required: "Email is required" }}
+                                    rules={{
+                                        required: "Email is required",
+                                        pattern: {
+                                            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                            message: "Please enter a valid email address",
+                                        }
+                                    }}
                                     render={({ field }) => (
                                         <FormControl
                                             as='input'
