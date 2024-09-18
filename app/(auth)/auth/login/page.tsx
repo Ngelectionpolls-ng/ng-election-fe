@@ -3,36 +3,63 @@ import FormControl from '@/components/common/FormControl';
 import { Button } from '@/components/ui/button';
 import { ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
-import { FieldValues, useForm } from 'react-hook-form';
+import { Controller, FieldValues, useForm } from 'react-hook-form';
 import AuthLayout from '../_component/authLayout';
 
 function Login() {
-    const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({ mode: "onChange" });
+    const { handleSubmit, control, formState: { errors } } = useForm<FieldValues>({ mode: "onChange" });
 
     const headerTitle = 'Login'
     const headerSubTitle = 'Welcome back, you’ve been missed!'
+
+    const getErrorMessage = (error: any): string | undefined => {
+        if (!error) return undefined;
+        if (typeof error === 'string') return error;
+        if (error.message) return error.message;
+        return undefined;
+    };
 
     return (
         <AuthLayout headerTitle={headerTitle} headerSubTitle={headerSubTitle} bgImg='login-bg.png'>
             <form onSubmit={handleSubmit(data => console.log(data))} className='w-full'>
                 <div className='flex flex-col gap-6 mt-6 w-full'>
-                    <FormControl
-                        as="input"
-                        inputStyle
-                        labelText="Email Address"
-                        placeholder="Enter your email address"
-                        type='email'
-                        error={typeof errors.email?.message === 'string' ? errors.email.message : undefined}
-                        {...register('email', { required: 'Email is required' })}
+                    <Controller
+                        name="email"
+                        control={control}
+                        rules={{
+                            required: "Email is required",
+                            pattern: {
+                                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                message: "Please enter a valid email address",
+                            }
+                        }}
+                        render={({ field }) => (
+                            <FormControl
+                                as='input'
+                                labelText='Email Address'
+                                placeholder='Enter your email address'
+                                type='email'
+                                {...field}
+                                error={getErrorMessage(errors.email)}
+                            />
+                        )}
                     />
-                    <FormControl
-                        as="input"
-                        inputStyle
-                        labelText="Password"
-                        placeholder="Enter your password"
-                        type='password'
-                        error={typeof errors.password?.message === 'string' ? errors.password.message : undefined}
-                        {...register('password', { required: 'Password is required', minLength: { value: 8, message: "It should contain at least 8 characters" } })}
+
+                    {/* Password input */}
+                    <Controller
+                        name="password"
+                        control={control}
+                        rules={{ required: "Password is required", minLength: { value: 8, message: "Password must be at least 8 characters" } }}
+                        render={({ field }) => (
+                            <FormControl
+                                as='input'
+                                labelText='Password'
+                                placeholder='Enter your password'
+                                type='password'
+                                {...field}
+                                error={getErrorMessage(errors.password)}
+                            />
+                        )}
                     />
                     <div className='w-full flex justify-between'>
                         <label htmlFor="rememberMe" className='flex items-center gap-1'>
