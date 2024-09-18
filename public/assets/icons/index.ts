@@ -25,4 +25,5 @@ export { default as pieChartIcon } from "./piechart-icon.svg";
 export { default as logoutIcon } from "./logout-icon.svg";
 export { default as logoutIconGreen } from "./logout-icon-green.svg";
 export { default as bellIcon } from "./bell-icon.svg";
-export { default as cloudIcon } from "./cloud-icon.svg";
+export { default as cloudIcon } from "./cloud-icon.svg";export { default as tiktok } from "./tiktok.svg";
+export { default as twitterX } from "./twitter-x.svg";

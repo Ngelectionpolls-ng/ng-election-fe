@@ -67,6 +67,7 @@ const config = {
         "white-full-500": "#FAF8F8",
         "neutral-dark-1": "#525252",
         "neutral-dark-2": "#0A0A0A",
+        "light-green": "#2BC155"
       },
       borderRadius: {
         lg: "var(--radius)",
