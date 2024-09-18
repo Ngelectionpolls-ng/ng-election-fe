@@ -1,3 +1,5 @@
+import { DashboardLayoutProps } from "@/types"
+
 function DashboardLayout({children}: DashboardLayoutProps) {
   return (
     <main>

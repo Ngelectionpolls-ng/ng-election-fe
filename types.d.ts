@@ -1,4 +1,4 @@
-interface DashboardLayoutProps {
+export interface DashboardLayoutProps {
   children: ReactNode;
 }
 
