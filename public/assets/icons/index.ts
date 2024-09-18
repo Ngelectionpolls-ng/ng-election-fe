@@ -8,6 +8,10 @@ export { default as baseFeatureIcon4 } from "./base-feature-icon4.svg";
 export { default as baseFeatureIcon5 } from "./base-feature-icon5.svg";
 export { default as baseFeatureIcon6 } from "./base-feature-icon6.svg";
 export { default as hamburgerIcon } from "./hambuger-icon.svg";
+export { default as TrendIcon } from "./trending-up.svg";
+export { default as CameraIcon } from "./camera.svg";
+export { default as DownloadIcon } from "./downloadIcon.svg";
+export { default as ShareIcon} from "./shareIcon.svg";
 
 //DASHBOARD SIDEBAR
 export { default as houseIcon } from "./house-icon.svg";

@@ -1,6 +1,6 @@
 // Utility function to handle date formatting
 export const dateHandler = (dateStr: string | undefined, pathname?: string | undefined) => {
-  if (dateStr === undefined) return null;
+  if (dateStr === undefined) return "";
 
   const date = new Date(dateStr);
 
