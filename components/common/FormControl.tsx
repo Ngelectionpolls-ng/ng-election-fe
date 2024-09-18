@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import {
     FieldValues,
     Path,
@@ -20,6 +20,8 @@ type InputProps = React.ComponentPropsWithoutRef<'input'>;
 type SelectProps = {
     options: { value: string; label: string }[];
     placeholder?: string;
+    value?: string;
+    onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
 } & React.ComponentPropsWithoutRef<'select'>;
 type TextAreaProps = React.ComponentPropsWithoutRef<'textarea'>;
 export type Register = UseFormRegister<FieldValues>;
@@ -68,13 +70,13 @@ export default function FormControl({
     };
 
     let content;
-    let notice = props.required ? '*' : '';
+    const notice = props.required ? '*' : '';
 
     if (isSelect(as, props)) {
-        const { options, placeholder } = props;
+        const { options, placeholder, value, onChange } = props;
 
         content = (
-            <Select>
+            <Select value={value} onValueChange={(val) => onChange?.(val as unknown as ChangeEvent<HTMLSelectElement>)}>
                 <SelectTrigger>
                     <SelectValue placeholder={placeholder || "Select..."} />
                 </SelectTrigger>
@@ -88,8 +90,7 @@ export default function FormControl({
             </Select>
         );
     } else if (isInput(as, props)) {
-        const inputType =
-            props.type === 'password' && showPassword ? 'text' : props.type;
+        const inputType = props.type === 'password' && showPassword ? 'text' : props.type;
 
         content = (
             <div className="relative">
@@ -100,9 +101,8 @@ export default function FormControl({
                         required: props.required && 'This field is required',
                         ...registerOptions,
                     })}
-                    className={`${
-                        error ? 'border-red-600' : 'border-[#CBD5E1]'
-                    } border rounded-md h-12 outline-none px-4 text-neutral-dark-2 w-full pr-10`} // Added padding to the right for the icon
+                    className={`${error ? 'border-red-600' : 'border-[#CBD5E1]'
+                        } border rounded-md h-12 outline-none px-4 text-neutral-dark-2 w-full pr-10 font-light`}
                 />
                 {props.type === 'password' && (
                     <span
@@ -122,21 +122,10 @@ export default function FormControl({
                     required: props.required && 'This field is required',
                     ...registerOptions,
                 })}
-                className={`flex b-radius f-width ${props.className}`}
+                className={`border rounded-md p-2 ${error ? 'border-red-600' : 'border-[#CBD5E1]'} w-full`}
             />
         );
     }
-
-    // Function to extract error message from FieldError
-    const getErrorMessage = (error?: string | FieldError) => {
-        if (typeof error === 'string') {
-            return error;
-        }
-        if (error && typeof error.message === 'string') {
-            return error.message;
-        }
-        return undefined;
-    };
 
     return (
         <div
@@ -152,9 +141,9 @@ export default function FormControl({
                 </div>
             )}
             {content}
-            {getErrorMessage(error) && (
+            {error && (
                 <span className="text-red-600 text-xs">
-                    {getErrorMessage(error)}
+                    {typeof error === 'string' ? error : error?.message}
                 </span>
             )}
         </div>

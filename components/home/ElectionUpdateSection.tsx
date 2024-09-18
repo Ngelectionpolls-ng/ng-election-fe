@@ -1,6 +1,6 @@
 import { nationalAssemblyIcon, thugAttackIcon, robberyIcon } from "@/public/assets/icons"
-import Image from "next/image"
 import Link from "next/link"
+import Svg from "../common/Svg"
 
 function ElectionUpdateSection() {
     const upcomingElectionData = [
@@ -44,7 +44,7 @@ function ElectionUpdateSection() {
                     </div>
                     <div className="bg-gray-100 flex flex-col gap-4 p-4 text-sm">
                         <div className="flex items-center gap-4">
-                            <Image src={nationalAssemblyIcon} width={60} height={60} alt="" />
+                            <Svg width={'60px'} height={'60px'} SvgIcon={nationalAssemblyIcon} />
                             <div className="flex flex-col">
                                 <p><span className="font-bold">Election Tribunal: </span>Incongruences in constitution and Tribunal judgements prompt protests and attacks
                                     on government facilities.</p>
@@ -52,14 +52,14 @@ function ElectionUpdateSection() {
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
-                            <Image src={thugAttackIcon} width={60} height={60} alt="" />
+                            <Svg width={'60px'} height={'60px'} SvgIcon={thugAttackIcon} />
                             <div className="flex flex-col">
                                 <p><span className="font-bold">Lagos: </span>Thugs reigns supreme as widespread violence mars state house of assembly elections.</p>
                                 <Link href={"#"} className="text-[#6366F1] mt-2 hover:underline">Read more</Link>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
-                            <Image src={robberyIcon} width={60} height={60} alt="" />
+                            <Svg width={'60px'} height={'60px'} SvgIcon={robberyIcon} />
                             <div className="flex flex-col">
                                 <p><span className="font-bold">Edo: </span>Targeted attacks against political figures continue after elections</p>
                                 <Link href={"#"} className="text-[#6366F1] mt-2 hover:underline">Read more</Link>
