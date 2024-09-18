@@ -5,6 +5,7 @@ import { ChevronLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Svg from "../common/Svg";
 
 function SideBar({isCollapsed, setIsCollapsed}:IsCollapsedProps) {
     const sideBarContent = [
@@ -71,7 +72,7 @@ function SideBar({isCollapsed, setIsCollapsed}:IsCollapsedProps) {
                         className={`flex items-center gap-2 px-4 py-3 text-white font-medium ${isCollapsed && "border-[0.4px] border-[#A5E2AC] rounded-[16px] hover:text-primary hover:bg-white hover:border-none"} hover:text-white/80`}
                         title="Logout"
                     >
-                        <Image src={logoutIcon} width={16} height={16} alt="" />
+                        <Svg width={'16px'} height={'16px'} SvgIcon={logoutIcon} />
                         {!isCollapsed && <span className="text-sm font-medium">Logout</span>}
                     </Link>
                 </div>

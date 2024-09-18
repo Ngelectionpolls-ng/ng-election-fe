@@ -2,7 +2,6 @@
 
 import Svg from '@/components/common/Svg';
 import TimeStamp from '@/components/common/TimeStamp';
-import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import { Button } from '@/components/ui/button';
 import CollapsibleComponent from '@/components/ui/collapsible';
 import { DownloadIcon, ShareIcon } from '@/public/assets/icons';
