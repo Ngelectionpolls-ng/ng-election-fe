@@ -84,3 +84,10 @@
     font-family: 'Averta', sans-serif;
   }
 }
+
+@layer components {
+  dialog::backdrop {
+    background: rgba(217, 217, 217, 0.51);
+    backdrop-filter: blur(2px);
+  }
+}

@@ -12,3 +12,6 @@ export { default as TrendIcon } from "./trending-up.svg";
 export { default as CameraIcon } from "./camera.svg";
 export { default as DownloadIcon } from "./downloadIcon.svg";
 export { default as ShareIcon} from "./shareIcon.svg";
+export { default as ResultIcon } from "./file-text.svg";
+export { default as ElectionMaterialIcon } from "./trello.svg";
+export { default as VideoIcon } from "./video.svg";
