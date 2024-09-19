@@ -60,11 +60,12 @@ const config = {
         },
         "grey": "#EEEEEE",
         "shadow": "#9E9E9E",
+        lightGreen: "#2BC155",
         "black-500": "#141414",
-        "lightGreen" : "#2BC155",
         "white-full-500": "#FAF8F8",
         "neutral-dark-1": "#525252",
         "neutral-dark-2": "#0A0A0A",
+        "light-green": "#2BC155"
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -89,6 +90,9 @@ const config = {
         "accordion-down": "accordion-down 300ms ease-out",
         "accordion-up": "accordion-up 300ms ease-out",
         "caret-blink": "caret-blink 1.25s ease-out infinite",
+      },
+      dropShadow: {
+        "custom-dropshadow": "0px 5.311px 7.082px rgba(135, 67, 223, 0.37)",
       },
     },
   },
