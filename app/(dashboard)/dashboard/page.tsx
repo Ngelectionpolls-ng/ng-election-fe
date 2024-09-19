@@ -1,7 +1,6 @@
 'use client'; // Necessary for Next.js to indicate this is a client-side component
 
 import { dummyNewsArr } from '@/utils/data/DummyObjects'; // Importing dummy data
-import DashboardLayout from '@/components/dashboard/DashboardLayout'; // Importing layout component
 import CollapsibleComponent from '@/components/ui/collapsible'; // Importing a reusable collapsible component
 import {
   CameraIcon,
