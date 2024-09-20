@@ -1,6 +1,6 @@
-import { nationalAssemblyIcon, thugAttackIcon, robberyIcon } from "@/public/assets/icons"
 import Link from "next/link"
-import Svg from "../common/Svg"
+import Image from "next/image"
+import { nationalAssemblyImg, robberyImg, thugAttackImg } from "@/public/assets/images/home"
 
 function ElectionUpdateSection() {
     const upcomingElectionData = [
@@ -8,6 +8,27 @@ function ElectionUpdateSection() {
         { id: 1, date: "June 13, 2024", state: "Delta State", electionType: "State Election" },
         { id: 2, date: "Febraury 3, 2024", state: "Anambra State", electionType: "State Election" },
         { id: 3, date: "Febraury 16, 2024", state: "Imo State", electionType: "State Election" },
+    ]
+
+    const newContent = [
+        {
+            id: 0,
+            icon: nationalAssemblyImg,
+            heading: "Election Tribunal",
+            content: "Incongruences in constitution and Tribunal judgements prompt protests and attacks on government facilities."
+        },
+        {
+            id: 1,
+            icon: thugAttackImg,
+            heading: "Lagos",
+            content: "Thugs reigns supreme as widespread violence mars state house of assembly elections."
+        },
+        {
+            id: 2,
+            icon: robberyImg,
+            heading: "Edo",
+            content: "Targeted attacks against political figures continue after elections"
+        },
     ]
     return (
         <section className='my-14 px-4 lg:px-10 max-w-[1280px] gap-20 flex flex-col md:flex-row'>
@@ -43,28 +64,17 @@ function ElectionUpdateSection() {
                         <p className="px-2">February 2023</p>
                     </div>
                     <div className="bg-gray-100 flex flex-col gap-4 p-4 text-sm">
-                        <div className="flex items-center gap-4">
-                            <Svg width={'60px'} height={'60px'} SvgIcon={nationalAssemblyIcon} />
-                            <div className="flex flex-col">
-                                <p><span className="font-bold">Election Tribunal: </span>Incongruences in constitution and Tribunal judgements prompt protests and attacks
-                                    on government facilities.</p>
-                                <Link href={"#"} className="text-[#6366F1] mt-2 hover:underline">Read more</Link>
-                            </div>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <Svg width={'60px'} height={'60px'} SvgIcon={thugAttackIcon} />
-                            <div className="flex flex-col">
-                                <p><span className="font-bold">Lagos: </span>Thugs reigns supreme as widespread violence mars state house of assembly elections.</p>
-                                <Link href={"#"} className="text-[#6366F1] mt-2 hover:underline">Read more</Link>
-                            </div>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <Svg width={'60px'} height={'60px'} SvgIcon={robberyIcon} />
-                            <div className="flex flex-col">
-                                <p><span className="font-bold">Edo: </span>Targeted attacks against political figures continue after elections</p>
-                                <Link href={"#"} className="text-[#6366F1] mt-2 hover:underline">Read more</Link>
-                            </div>
-                        </div>
+                        {newContent.map((content) => {
+                            return (
+                                <div className="flex items-center gap-4" key={content.id}>
+                                    <Image src={content.icon} width={60} height={60} alt="" />
+                                    <div className="flex flex-col">
+                                        <p><span className="font-bold">{content.heading}: </span>{content.content}</p>
+                                        <Link href={"#"} className="text-[#6366F1] mt-2 hover:underline">Read more</Link>
+                                    </div>
+                                </div>
+                            )
+                        })}
                     </div>
                     <div className="bg-primary p-3 text-white font-bold w-full">
                         <p className="px-2">September 2023</p>

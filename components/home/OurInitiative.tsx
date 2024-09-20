@@ -4,18 +4,48 @@ import Svg from '../common/Svg'
 
 function OurInitiative() {
     const ourInitiativeContent = [
-        { id: 0, title: "Eyewitness", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum.", icon: baseFeatureIcon },
-        { id: 1, title: "Election Live Stream", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum.", icon: baseFeatureIcon2 },
-        { id: 2, title: "Post Election Reports", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum.", icon: baseFeatureIcon3 },
-        { id: 3, title: "Public Polls & Surveys", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum.", icon: baseFeatureIcon4 },
-        { id: 4, title: "Rural Sensitization", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum.", icon: baseFeatureIcon5 },
-        { id: 5, title: "Research & Development", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum.", icon: baseFeatureIcon6 },
+        {
+            id: 0,
+            title: "Eyewitness",
+            text: "Enable logged-in users to upload videos or images and provide real-time reports from polling stations. Before being published, reports are authenticated.",
+            icon: baseFeatureIcon
+        },
+        {
+            id: 1,
+            title: "Election Live Stream", text:
+                "Provide citizens a clear and transparent view of the electoral process by live-streaming election results and activity from polling stations.",
+            icon: baseFeatureIcon2
+        },
+        {
+            id: 2,
+            title: "Post Election Reports", text:
+                "Provide in-depth evaluations of voter turnout, election results, and any irregularities that have been recorded. For transparency's sake, make sure these reports are available to the public.",
+            icon: baseFeatureIcon3
+        },
+        {
+            id: 3,
+            title: "Public Polls & Surveys", text:
+                "Collect real-time data from citizens on election day to evaluate voter satisfaction and highlight areas for improvement.",
+            icon: baseFeatureIcon4
+        },
+        {
+            id: 4,
+            title: "Rural Sensitization", text:
+                "Conduct grassroots campaigns to educate voters in rural areas on the importance of voting and how to avoid misleading information.",
+            icon: baseFeatureIcon5
+        },
+        {
+            id: 5,
+            title: "Research & Development", text:
+                "Actively develop the platform through researching new approaches to promote transparency, including collaboration with academic institutions and non-governmental organizations (NGOs).",
+            icon: baseFeatureIcon6
+        },
     ]
+
     return (
         <section className='max-w-[1280px] mx-auto px-4 pt-4 pb-8 mt-10 bg-white md:mx-10'>
             <div>
                 <h2 className='text-xl md:text-3xl text-center font-bold'>Our Initiative</h2>
-                <p className='text-center text-gray-500'>Lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation.</p>
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 p-5 mt-5 bg-white'>
                 {ourInitiativeContent.map((content) => {
@@ -23,7 +53,7 @@ function OurInitiative() {
                         <div className='flex flex-col items-center' key={content.id}>
                             <Svg width={'41px'} height={'41px'} SvgIcon={content.icon} />
                             <h4 className='font-bold mt-4'>{content.title}</h4>
-                            <p>{content.text}</p>
+                            <p className='text-center text-sm text-[#656565]'>{content.text}</p>
                         </div>
 
                     )
