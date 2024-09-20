@@ -7,7 +7,6 @@ import {
   ElectionMaterialIcon,
   ResultIcon,
   TrendIcon,
-  VideoIcon,
 } from '@/public/assets/icons'; // Importing icons
 import Activities from './_component/Activities'; // Importing Activities component
 import Modal from '@/components/common/Modal'; // Importing Modal component
@@ -15,17 +14,30 @@ import { useCallback, useEffect, useRef, useState } from 'react'; // React hooks
 import Svg from '@/components/common/Svg'; // Importing Svg component
 import Camera from '@/components/common/Camera'; // Importing Camera component
 import { Button } from '@/components/ui/button'; // Button component from your UI library
-import { SquareChevronLeft, X } from 'lucide-react'; // Icon components from Lucide-React
+import { SquareChevronLeft, X, SwitchCamera, Video } from 'lucide-react'; // Icon components from Lucide-React
 import Webcam from 'react-webcam'; // Importing Webcam for capturing camera input
 import Image from 'next/image'; // Importing next/image for optimized image rendering
+import VideoControl from './_component/VideoControl';
+import { time } from 'console';
+import { Play } from 'lucide-react';
+import { Upload } from 'lucide-react';
 
 function Page() {
   const [open, setOpen] = useState(false); // Modal open state
   const [camera, setCamera] = useState(false); // Camera open state
   const [capturedImage, setCapturedImage] = useState<string | null>(null); // State to hold captured image
+  const [facingMode, setFacingMode] = useState<'user' | 'environment'>(
+    'environment',
+  );
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 }); // State to hold dynamic camera dimensions
   const webcamRef = useRef<Webcam>(null); // Ref to control the Webcam component
 
+  // video recording
+  const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]); // Store video data chunks
+  const [playbackURL, setPlaybackURL] = useState<string | null>(null); // URL for video playback
+  const [videoTimer, setVideoTimer] = useState<string | null>(null); // Timer for recording duration
+
+  console.log(playbackURL);
   // Function to convert base64 image data to Blob
   const base64ToBlob = (base64: string) => {
     const byteString = atob(base64.split(',')[1]);
@@ -62,12 +74,74 @@ function Page() {
     return () => window.removeEventListener('resize', updateDimensions); // Cleanup the event listener on component unmount
   }, []);
 
+  const toggleCamera = () => {
+    console.log(facingMode);
+    setFacingMode((prevMode) =>
+      prevMode === 'environment' ? 'user' : 'environment',
+    );
+  };
+  console.log(playbackURL);
   // Video constraints for the Webcam component
   const videoConstraints = {
-    facingMode: 'user', // Front camera
+    facingMode: facingMode, // Front camera
     width: dimensions.width,
     height: dimensions.height,
   };
+
+  //video functions
+  // Playback the recorded video
+  const handlePlayback = () => {
+    if (recordedChunks.length > 0) {
+      const blob = new Blob(recordedChunks, { type: 'video/webm' });
+      const videoURL = URL.createObjectURL(blob);
+      setPlaybackURL(videoURL); // Set URL for video playback
+    }
+  };
+
+// Handle the upload of both images and videos
+const handleUpload = async (mediaType: 'image' | 'video') => {
+  let blob: Blob | null = null;
+
+  // Create the Blob based on media type
+  if (mediaType === 'video' && recordedChunks.length > 0) {
+    blob = new Blob(recordedChunks, { type: 'video/webm' });
+  } else if (mediaType === 'image' && webcamRef.current) {
+    // Capture the image from the webcam
+    const imageSrc = webcamRef.current.getScreenshot();
+    if (imageSrc) {
+      const byteString = atob(imageSrc.split(',')[1]);
+      const mimeString = imageSrc.split(',')[0].split(':')[1].split(';')[0];
+      const ab = new ArrayBuffer(byteString.length);
+      const ia = new Uint8Array(ab);
+      for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      blob = new Blob([ab], { type: mimeString });
+    }
+  }
+
+  if (blob) {
+    const formData = new FormData();
+    const fileName = mediaType === 'video' ? 'recorded-video.webm' : 'captured-image.jpg';
+    formData.append('file', blob, fileName); // Append the blob to form data
+
+    try {
+      const response = await fetch('https://your-backend-api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        console.log(`${mediaType} upload successful`);
+      } else {
+        console.log(`${mediaType} upload failed`);
+      }
+    } catch (error) {
+      console.error(`Error uploading ${mediaType}:`, error);
+    }
+  }
+};
+
 
   return (
     <section className="grid gap-10 p-4">
@@ -81,7 +155,7 @@ function Page() {
           <span>IGUEGBEN - EKEKHEN/IDUMU/OGO/EGBIKE</span>
         </div>
         <div>
-          <h5>Pooling Unit</h5>
+          <h5>Pulling Unit</h5>
           <span>IGUEGBEN - EKEKHEN/IDUMU/OGO/EGBIKE</span>
         </div>
         <div className="flex gap-4">
@@ -138,12 +212,44 @@ function Page() {
           onClick={() => setCamera(true)}
           className={`cursor-pointer flex gap-6 ${camera && 'hidden'}`}
         >
-          Eyewitness Report <Svg SvgIcon={VideoIcon} />
+          Eyewitness Report <Video />
         </div>
 
         {/* Camera View */}
         {camera ? (
           <div className="flex flex-col gap-8">
+            {videoTimer && (
+              <div className="flex gap-1 z-10 absolute top-6 mx-2">
+                <div className="bg-red-600 text-red-600 rounded-full w-5 h-5" />
+                <p>{videoTimer}</p>
+              </div>
+            )}
+            {playbackURL && (
+              <div className="absolute z-30 top-0 w-full">
+                {/* <h2>Recorded Video:</h2> */}
+                <Button
+                  onClick={() => {setPlaybackURL(null); setRecordedChunks([])}}
+                  className="absolute top-6 z-40 right-6"
+                  variant={'destructive'}
+                  size={'icon'}
+                >
+                  <X />
+                </Button>
+                <video src={playbackURL} controls />
+                <div onClick={() => handleUpload('video')}
+                  className="absolute bottom-20 right-4 z-40 border flex justify-center items-center rounded-full w-14 h-14 bg-black text-white"
+                >
+                  <Upload />
+                </div>
+              </div>
+            )}
+            <div
+              onClick={toggleCamera}
+              className={`border flex justify-center items-center rounded-full w-14 h-14 bg-white text-black-500 z-10 absolute top-3 right-3
+                ${(playbackURL || capturedImage) && 'hidden'}`}
+            >
+              <SwitchCamera />
+            </div>
             <Camera
               className={'h-[auto] rounded-2xl'}
               audio={false}
@@ -174,13 +280,30 @@ function Page() {
               </div>
               <div
                 onClick={capture}
-                className="border flex justify-center items-center rounded-full w-24 h-24 bg-white text-black-500"
+                className="border flex justify-center items-center rounded-full w-14 h-14 bg-white text-black-500"
               >
-                <Svg width={'3rem'} height={'3rem'} SvgIcon={CameraIcon} />
+                <Svg width={'1.5rem'} height={'1.5rem'} SvgIcon={CameraIcon} />
               </div>
-              <div className="border flex justify-center items-center rounded-full w-24 h-24 bg-black text-white">
-                <Svg width={'3rem'} height={'3rem'} SvgIcon={VideoIcon} />
+              <VideoControl
+                setRecordedChunks={setRecordedChunks}
+                setVideoTime={setVideoTimer}
+                webcamRef={webcamRef}
+              />
+              {capturedImage && (
+                <div onClick={() => handleUpload('image')}
+                className="border flex justify-center items-center rounded-full w-14 h-14 bg-black text-white"
+              >
+                <Upload />
               </div>
+              )}
+              {recordedChunks.length > 0 && (
+                <div
+                  onClick={handlePlayback}
+                  className="border flex justify-center items-center rounded-full w-14 h-14 bg-black text-white"
+                >
+                  <Play />
+                </div>
+              )}
             </div>
 
             {/* Display captured image */}
