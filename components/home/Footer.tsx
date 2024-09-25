@@ -2,6 +2,7 @@ import { tiktok, twitterX } from "@/public/assets/icons"
 import { Facebook, Instagram } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import Svg from "../common/Svg"
 
 function Footer() {
     return (
@@ -42,13 +43,13 @@ function Footer() {
                             <Facebook color="#000" />
                         </div>
                         <div className="size-10 bg-white flex items-center justify-center rounded-full">
-                            <Image src={tiktok} width={24} height={24} alt="" />
+                            <Svg SvgIcon={tiktok} width={'24px'} height={'24px'} />
                         </div>
                         <div className="size-10 bg-white flex items-center justify-center rounded-full">
                             <Instagram color="#000" />
                         </div>
                         <div className="size-10 bg-white flex items-center justify-center rounded-full">
-                            <Image src={twitterX} width={24} height={24} alt="" />
+                            <Svg SvgIcon={twitterX} width={'24px'} height={'24px'} />
                         </div>
                     </div>
                 </div>

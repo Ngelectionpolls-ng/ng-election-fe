@@ -1,6 +1,3 @@
-export { default as nationalAssemblyIcon } from "./national-assembly.svg";
-export { default as thugAttackIcon } from "./thug-attack-icon.svg";
-export { default as robberyIcon } from "./robbery-icon.svg";
 export { default as baseFeatureIcon } from "./base-feature-icon.svg";
 export { default as baseFeatureIcon2 } from "./base-feature-icon2.svg";
 export { default as baseFeatureIcon3 } from "./base-feature-icon3.svg";
