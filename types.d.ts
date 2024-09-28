@@ -26,3 +26,8 @@ export interface NotificationItem {
 export type DropDownProps = {
   notifications: NotificationItem[]
 };
+
+export interface OnSubmitProps {
+  email: string;
+  password: string;
+}
