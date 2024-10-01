@@ -31,3 +31,10 @@ export interface OnSubmitProps {
   email: string;
   password: string;
 }
+
+interface CustomUser {
+  id: string;
+  name: string;
+  email: string;
+  token: string;
+}

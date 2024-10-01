@@ -12,10 +12,8 @@ import { toast } from 'sonner';
 import { MoonLoader } from 'react-spinners'
 import { OnSubmitProps } from '@/types';
 
-
 function Login() {
     const router = useRouter();
-
     const [redirectTo, setRedirectTo] = useState("/dashboard");
 
     const { handleSubmit, control, formState: { errors, isSubmitting } } = useForm<OnSubmitProps>({ mode: "onChange" });
@@ -36,10 +34,18 @@ function Login() {
                 redirect: false,
             });
 
-            if (result?.error) {
-                toast.error("Invalid credentials");
-            } else {
+            if (result?.ok) {
+                toast.success("Login successful!");
                 router.push(redirectTo);
+            }
+            else if (result?.error) {
+                switch (result.error) {
+                    case "CredentialsSignin":
+                        toast.error("Invalid credentials. Please try again.");
+                        break;
+                    default:
+                        toast.error(result.error || "An unexpected error occurred");
+                }
             }
         } catch (error: any) {
             toast.error(`An unexpected error occurred: ${error.message}`);
@@ -105,14 +111,21 @@ function Login() {
                         </label>
                         <Link href={"/auth/forgot-password"}>Forgot password?</Link>
                     </div>
-                    <Button type="submit" disabled={isSubmitting}>{isSubmitting ? (<><MoonLoader color='white' size={18} /></>) : (<>Login</>)}</Button>
+                    <Button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? (<MoonLoader color='white' size={18} />) : "Login"}
+                    </Button>
                 </div>
-                <div className='flex justify-center text-sm mt-4 font-light'><p>Don&apos;t have an account? {" "}</p><Link href={"/auth/create-account"} className='font-bold hover:opacity-80 ml-1'> Create account</Link></div>
+                <div className='flex justify-center text-sm mt-4 font-light'>
+                    <p>Don&apos;t have an account?{" "}</p>
+                    <Link href={"/auth/create-account"} className='font-bold hover:opacity-80 ml-1'>
+                        Create account
+                    </Link>
+                </div>
                 <div className='flex items-center gap-1 font-light text-sm mt-4'>
                     <span className='size-4'>
                         <ShieldCheck size={16} strokeWidth={1.5} />
                     </span>
-                    <p>By logging in, you have confirmed that you have a valid PVC and agree to our <Link href={"#"} className='font-bold'>Terms of Service</Link> and <Link href={"#"} className='font-bold'>Privacy Policy</Link></p>
+                    <p>By logging in, you agree to our <Link href={"#"} className='font-bold'>Terms of Service</Link> and <Link href={"#"} className='font-bold'>Privacy Policy</Link></p>
                 </div>
             </form>
         </AuthLayout>
