@@ -1,21 +1,23 @@
 "use client"
-// import { fetchFile } from '@ffmpeg/util';
 import Svg from '@/components/common/Svg'
 import { SquareChevronLeft, CameraIcon, Upload, Play } from 'lucide-react'
 import React, { Dispatch, useCallback } from 'react'
 import VideoControl from './VideoControl'
 import Webcam from 'react-webcam'
+import { set } from 'react-hook-form'
 
 interface ControlProps {
   camera: boolean;
   recordedChunks: Blob[];
   capturedImage: string | null;
+  mediaStream: MediaStream | null;
+  setMediaStream: Dispatch<React.SetStateAction<MediaStream | null>>;
   webcamRef: React.RefObject<Webcam>;
   setCamera: Dispatch<React.SetStateAction<boolean>>;
   setCapturedImage: Dispatch<React.SetStateAction<string | null>>;
+  handleUpload: (mediaType: 'image' | 'video') => Promise<void>;
   setPlaybackURL: Dispatch<React.SetStateAction<string | null>>;
   setVideoTimer: Dispatch<React.SetStateAction<string | null>>;
-  handleUpload: (mediaType: 'image' | 'video') => Promise<void>;
   setRecordedChunks: Dispatch<React.SetStateAction<Blob[]>>;
   facingMode: 'user' | { exact: "environment" }
 }
@@ -47,7 +49,20 @@ export default function PictureAndVideoBtn({props}: {props: ControlProps}) {
       const videoURL = URL.createObjectURL(blob);
       props.setPlaybackURL(videoURL); // Set URL for video playback
     }
-    console.log(props.recordedChunks);
+  };
+
+  const stopWebcamStream = () => {
+    if (props.webcamRef.current?.stream) {
+      const stream = props.webcamRef.current.stream;
+      stream.getTracks().forEach((track) => track.stop()); // Stop all tracks (video and audio)
+    }
+    if (props.mediaStream) {
+      props.mediaStream.getTracks().forEach((track) => {
+        track.stop();
+      });
+    }
+    props.setMediaStream(null); // Reset media stream
+    props.setCamera(false); // Set camera off state
   };
   
   return (
@@ -57,7 +72,7 @@ export default function PictureAndVideoBtn({props}: {props: ControlProps}) {
   >
     <div
       className="bg-white flex justify-center items-center rounded-full w-16 h-16 text-black-500 text-2xl"
-      onClick={() => props.setCamera(false)}
+      onClick={() => stopWebcamStream()}
     >
       <SquareChevronLeft />
     </div>
@@ -68,18 +83,10 @@ export default function PictureAndVideoBtn({props}: {props: ControlProps}) {
       <Svg width={'1.5rem'} height={'1.5rem'} SvgIcon={CameraIcon} />
     </div>
     <VideoControl
-      facingMode={props.facingMode}
-      setRecordedChunks={props.setRecordedChunks}
+      mediaStream={props.mediaStream}
       setVideoTime={props.setVideoTimer}
-      webcamRef={props.webcamRef}
+      setRecordedChunks={props.setRecordedChunks}
     />
-    {props.capturedImage && (
-      <div onClick={() => props.handleUpload('image')}
-      className="border flex justify-center items-center rounded-full w-16 h-16 bg-black text-white"
-    >
-      <Upload />
-    </div>
-    )}
     {props.recordedChunks.length > 0 && (
       <div
         onClick={handlePlayback}

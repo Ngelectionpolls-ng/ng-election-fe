@@ -97,11 +97,29 @@ const config = {
             opacity: '0'
           }
         },
+        'open-info': {
+          from: {
+            opacity: '0',
+          },
+          to: {
+            opacity: '1',
+          }
+        },
+        'close-info': {
+          from: {
+            opacity: '1',
+          },
+          to: {
+            opacity: '0',
+          }
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'caret-blink': 'caret-blink 1.25s ease-out infinite',
+        'open-info': 'open-info 0.5s ease-in',
+        'close-info': 'close-info 0.5s ease-in'
       },
       dropShadow: {
         'custom-dropshadow': '0px 5.311px 7.082px rgba(135, 67, 223, 0.37)'
