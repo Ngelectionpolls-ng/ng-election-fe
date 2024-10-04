@@ -92,3 +92,19 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+@layer components {
+  dialog::backdrop {
+    background: rgba(217, 217, 217, 0.51);
+    backdrop-filter: blur(2px);
+  }
+}
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
