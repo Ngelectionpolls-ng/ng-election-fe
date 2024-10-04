@@ -38,4 +38,4 @@ jobs:
       - name: Deploy to Railway
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: sleep3 && railway up --service ng-election-fe
+        run: sleep 3 && railway up --service ng-election-fe
