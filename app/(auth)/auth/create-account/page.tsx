@@ -35,13 +35,13 @@ function Page() {
     const onSubmit = (data: FieldValues) => {
         const payload = {
             accountType: selectedTab,
-            redirectUrl: "/auth/verify",
+            redirectUrl: "/auth/verify-account",
             ...data,
         };
         mutate(payload, {
             onSuccess: (response) => {
                 toast.success(response?.data?.message)
-                router.push("/")
+                router.push("/auth/verify-account")
             },
             onError: (error: any) => {
                 toast.error(error?.response?.data?.message)
