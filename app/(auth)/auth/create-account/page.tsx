@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import AuthLayout from '../_component/authLayout';
 import FormControl from '@/components/common/FormControl';
 import { Button } from '@/components/ui/button';
@@ -7,15 +8,23 @@ import { ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 import GoogleAuthSection from './_GoogleAuthSection';
+import useCreateAccount from '@/hooks/mutations/auth/useCreateAccount';
+import { MoonLoader } from "react-spinners";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 function Page() {
+    const [selectedTab, setSelectedTab] = useState<string>('iWitness');
+
+    const router = useRouter();
+
     const headerTitle = 'Sign up';
     const headerSubTitle = 'Create an account to get started with us.';
 
-    // Initialize useForm hook
     const { control, handleSubmit, formState: { errors } } = useForm<FieldValues>({ mode: "onChange" });
+    const { mutate, isPending } = useCreateAccount();
 
-    // Helper function to retrieve error messages
+
     const getErrorMessage = (error: any): string | undefined => {
         if (!error) return undefined;
         if (typeof error === 'string') return error;
@@ -23,30 +32,46 @@ function Page() {
         return undefined;
     };
 
-    // Form submission handler
     const onSubmit = (data: FieldValues) => {
-        console.log("Form submitted successfully:", data);
-    };
+        let accountType = selectedTab;
 
-    // Log any errors during the form validation
-    const onError = (errors: any) => {
-        console.log("Form validation failed with errors:", errors);
+        if (selectedTab === "iWitness") {
+            accountType = "iwitness";
+        } else if (selectedTab === "pollingUnitAgent") {
+            accountType = "agent";
+        }
+
+        const payload = {
+            accountType,
+            redirectUrl: "/auth/verify-account",
+            ...data,
+        };
+        mutate(payload, {
+            onSuccess: (response) => {
+                toast.success(response?.data?.message)
+                localStorage.setItem("ng-election-email", data.email)
+                console.log(data.email)
+                router.push("/auth/verify-account")
+            },
+            onError: (error: any) => {
+                toast.error(error?.response?.data?.message)
+            },
+        });
     };
 
     return (
         <AuthLayout headerTitle={headerTitle} headerSubTitle={headerSubTitle} bgImg='auth-bg-img.png'>
             <div className="mt-4">
-                <Tabs defaultValue="eyewitness" className="w-full">
+                <Tabs value={selectedTab} onValueChange={setSelectedTab} className="w-full">
                     <TabsList>
-                        <TabsTrigger value="eyewitness">Eyewitness</TabsTrigger>
-                        <TabsTrigger value="pollingAgent">Polling Unit Agent</TabsTrigger>
+                        <TabsTrigger value="iWitness">Eyewitness</TabsTrigger>
+                        <TabsTrigger value="pollingUnitAgent">Polling Unit Agent</TabsTrigger>
                     </TabsList>
-                    <TabsContent value="eyewitness">
-                        {/* Form for Eyewitness */}
-                        <GoogleAuthSection />
-                        <form onSubmit={handleSubmit(onSubmit, onError)}>
+
+                    <TabsContent value="iWitness">
+                        <GoogleAuthSection role={selectedTab} />
+                        <form onSubmit={handleSubmit(onSubmit)}>
                             <div className='flex flex-col gap-6 mt-6'>
-                                {/* Name input */}
                                 <Controller
                                     name="name"
                                     control={control}
@@ -61,7 +86,6 @@ function Page() {
                                         />
                                     )}
                                 />
-                                {/* Email input */}
                                 <Controller
                                     name="email"
                                     control={control}
@@ -83,7 +107,6 @@ function Page() {
                                         />
                                     )}
                                 />
-                                {/* Password input */}
                                 <Controller
                                     name="password"
                                     control={control}
@@ -99,8 +122,7 @@ function Page() {
                                         />
                                     )}
                                 />
-                                {/* Submit button */}
-                                <Button type='submit'>Create Account</Button>
+                                <Button type='submit'>{isPending ? <MoonLoader color='white' size={18} /> : "Create Account"}</Button>
                             </div>
                             <div className='flex justify-center text-sm mt-4 font-light'>
                                 <p>Have an account? {" "}</p>
@@ -116,12 +138,11 @@ function Page() {
                             </div>
                         </form>
                     </TabsContent>
-                    <TabsContent value="pollingAgent">
-                        {/* Form for Polling Agent */}
-                        <GoogleAuthSection />
-                        <form onSubmit={handleSubmit(onSubmit, onError)}>
+
+                    <TabsContent value="pollingUnitAgent">
+                        <GoogleAuthSection role={selectedTab} />
+                        <form onSubmit={handleSubmit(onSubmit)}>
                             <div className='flex flex-col gap-6 mt-6'>
-                                {/* Name input */}
                                 <Controller
                                     name="name"
                                     control={control}
@@ -136,7 +157,6 @@ function Page() {
                                         />
                                     )}
                                 />
-                                {/* Email input */}
                                 <Controller
                                     name="email"
                                     control={control}
@@ -152,7 +172,6 @@ function Page() {
                                         />
                                     )}
                                 />
-                                {/* Password input */}
                                 <Controller
                                     name="password"
                                     control={control}
@@ -168,8 +187,7 @@ function Page() {
                                         />
                                     )}
                                 />
-                                {/* Submit button */}
-                                <Button type='submit'>Create Account</Button>
+                                <Button type='submit'>{isPending ? <MoonLoader color='white' size={18} /> : "Create Account"}</Button>
                             </div>
                             <div className='flex justify-center text-sm mt-4 font-light'>
                                 <p>Have an account? {" "}</p>
