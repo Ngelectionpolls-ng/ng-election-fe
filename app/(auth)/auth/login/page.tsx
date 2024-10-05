@@ -3,14 +3,57 @@ import FormControl from '@/components/common/FormControl';
 import { Button } from '@/components/ui/button';
 import { ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
-import { Controller, FieldValues, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import AuthLayout from '../_component/authLayout';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { signIn } from "next-auth/react";
+import { toast } from 'sonner';
+import { MoonLoader } from 'react-spinners'
+import { OnSubmitProps } from '@/types';
 
 function Login() {
-    const { handleSubmit, control, formState: { errors } } = useForm<FieldValues>({ mode: "onChange" });
+    const router = useRouter();
+    const [redirectTo, setRedirectTo] = useState("/dashboard");
 
-    const headerTitle = 'Login'
-    const headerSubTitle = 'Welcome back, you’ve been missed!'
+    const { handleSubmit, control, formState: { errors, isSubmitting } } = useForm<OnSubmitProps>({ mode: "onChange" });
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams(window.location.search);
+        const from = searchParams.get("from");
+        if (from) {
+            setRedirectTo(from);
+        }
+    }, []);
+
+    const onSubmit = async ({ email, password }: OnSubmitProps) => {
+        try {
+            const result = await signIn("credentials", {
+                email,
+                password,
+                redirect: false,
+            });
+
+            if (result?.ok) {
+                toast.success("Login successful!");
+                router.push(redirectTo);
+            }
+            else if (result?.error) {
+                switch (result.error) {
+                    case "CredentialsSignin":
+                        toast.error("Invalid credentials. Please try again.");
+                        break;
+                    default:
+                        toast.error(result.error || "An unexpected error occurred");
+                }
+            }
+        } catch (error: any) {
+            toast.error(`An unexpected error occurred: ${error.message}`);
+        }
+    };
+
+    const headerTitle = 'Login';
+    const headerSubTitle = 'Welcome back, you’ve been missed!';
 
     const getErrorMessage = (error: any): string | undefined => {
         if (!error) return undefined;
@@ -21,7 +64,7 @@ function Login() {
 
     return (
         <AuthLayout headerTitle={headerTitle} headerSubTitle={headerSubTitle} bgImg='login-bg.png'>
-            <form onSubmit={handleSubmit(data => console.log(data))} className='w-full'>
+            <form onSubmit={handleSubmit(onSubmit)} className='w-full'>
                 <div className='flex flex-col gap-6 mt-6 w-full'>
                     <Controller
                         name="email"
@@ -49,7 +92,7 @@ function Login() {
                     <Controller
                         name="password"
                         control={control}
-                        rules={{ required: "Password is required", minLength: { value: 8, message: "Password must be at least 8 characters" } }}
+                        rules={{ required: "Password is required" }}
                         render={({ field }) => (
                             <FormControl
                                 as='input'
@@ -68,10 +111,22 @@ function Login() {
                         </label>
                         <Link href={"/auth/forgot-password"}>Forgot password?</Link>
                     </div>
-                    <Button>Login</Button>
+                    <Button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? (<MoonLoader color='white' size={18} />) : "Login"}
+                    </Button>
                 </div>
-                <div className='flex justify-center text-sm mt-4 font-light'><p>Don&apos;t have an account? {" "}</p><Link href={"/auth/create-account"} className='font-bold hover:opacity-80 ml-1'> Create account</Link></div>
-                <div className='flex items-center gap-1 font-light text-sm mt-4'><ShieldCheck size={16} strokeWidth={1.5} /><p>By logging in, you agree to the <Link href={"#"} className='font-bold'>Terms of Service</Link> and <Link href={"#"} className='font-bold'>Privacy Policy</Link></p></div>
+                <div className='flex justify-center text-sm mt-4 font-light'>
+                    <p>Don&apos;t have an account?{" "}</p>
+                    <Link href={"/auth/create-account"} className='font-bold hover:opacity-80 ml-1'>
+                        Create account
+                    </Link>
+                </div>
+                <div className='flex items-center gap-1 font-light text-sm mt-4'>
+                    <span className='size-4'>
+                        <ShieldCheck size={16} strokeWidth={1.5} />
+                    </span>
+                    <p>By logging in, you agree to our <Link href={"#"} className='font-bold'>Terms of Service</Link> and <Link href={"#"} className='font-bold'>Privacy Policy</Link></p>
+                </div>
             </form>
         </AuthLayout>
     );
