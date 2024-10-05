@@ -5,40 +5,64 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/otp-input
 import AuthLayout from '../_component/authLayout';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import useVerifyAccount from '@/hooks/mutations/auth/useVerifyAccount';
+import { MoonLoader } from 'react-spinners';
+import { toast } from 'sonner';
+import useResendOTP from '@/hooks/mutations/auth/useResendOTP';
+import { ResendOTPPayload } from '@/services/api/auth';
 
 function VerifyAccount() {
     const [confirmation, setConfirmation] = useState(false);
     const [timeLeft, setTimeLeft] = useState(300);
+    const [idParam, setIdParam] = useState<string | null>("")
+
     const { register, handleSubmit, setValue, formState: { errors } } = useForm<FieldValues>({ mode: "onChange" });
 
-    const headerTitle = "Verify your account";
+    const { mutate: mutateVerifyAccount, isPending: isVerifyAccountPending } = useVerifyAccount()
+    const { mutate: mutateResendOTP, isPending: isResendOTPPending } = useResendOTP()
 
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
 
-    const expiryTime = (
-        <span className='text-[#F97316] font-bold'>
-            {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-        </span>
-    );
+    useEffect(() => {
+        const searchParams = new URLSearchParams(window.location.search);
+        const id = searchParams.get("id");
+        if (id) {
+            setIdParam(id)
+            console.log(idParam)
+        }
+    }, [idParam]);
 
-    const headerSubTitle = (
-        <>
-            We sent a code to your email. Input the code to complete registration. Code expires in {expiryTime}
-        </>
-    )
+
 
     // Function to resend OTP
     const handleResendOTP = () => {
-        console.log("OTP resent!");
-        setTimeLeft(300);
+        const payload: ResendOTPPayload = {
+            email: localStorage.getItem("ng-election-email"),
+            channel: "registration",
+            redirectUrl: "/verify-account"
+        }
+        console.log(payload)
+        mutateResendOTP(payload, {
+            onSuccess: (response) => {
+                toast.success(response.data.message)
+                setTimeLeft(300);
+            },
+            onError: (error: any) => {
+                toast.error(error.response.data.message[0])
+            }
+        })
     };
 
     // Function to handle OTP submission
     const onSubmit = (data: FieldValues) => {
-        const otpCode = data.otp;
-        console.log("OTP Code Submitted: ", otpCode);
-        setConfirmation(true);
+        const payload = {
+            id: data.otp
+        }
+        console.log(payload)
+        mutateVerifyAccount(payload, {
+            onSuccess: () => {
+                setConfirmation(true);
+            }
+        })
     };
 
     // Countdown timer effect
@@ -51,6 +75,22 @@ function VerifyAccount() {
 
         return () => clearInterval(interval);
     }, [timeLeft]);
+
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+
+    const expiryTime = (
+        <span className='text-[#F97316] font-bold'>
+            {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+        </span>
+    );
+
+    const headerTitle = "Verify your account";
+    const headerSubTitle = (
+        <>
+            We sent a code to your email. Input the code to complete registration. Code expires in {expiryTime}
+        </>
+    )
 
     return (
         <AuthLayout headerTitle={headerTitle} headerSubTitle='' confirmation={confirmation} bgImg='login-bg.png'>
@@ -83,7 +123,7 @@ function VerifyAccount() {
                                     Click to Resend
                                 </button>
                             </div>
-                            <Button type='submit'>Verify</Button>
+                            <Button type='submit'>{isVerifyAccountPending ? <MoonLoader color='white' size={18} /> : "Verify"}</Button>
                         </div>
                     </form></>
             )}
