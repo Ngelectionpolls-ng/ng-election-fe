@@ -2,6 +2,7 @@
 import DashboardNavBar from "@/components/dashboard/DashboardNavBar";
 import SideBar from "@/components/dashboard/SideBar";
 import { useState } from "react";
+import Capture from "./_component/Capture";
 
 export default function RootLayout({
     children,
@@ -15,6 +16,7 @@ export default function RootLayout({
             <section className={`${isCollapsed ? "pl-[80px]" : "pl-[230px]"} w-full pt-[100px] transition-all duration-300`}>
                 {children}
             </section>
+            <Capture />
             <SideBar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
         </main>
     );

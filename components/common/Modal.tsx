@@ -1,62 +1,60 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 import { Button } from '../ui/button';
-import { CrossIcon, ShieldCloseIcon } from 'lucide-react';
+import { X } from 'lucide-react';
 
 type ModalProps = {
   isVisible: boolean;
   closeModal?: () => void;
   className?: string;
+  btnClass?: string;
 } & React.ComponentProps<'dialog'>;
 
 export default function Modal({
   isVisible,
   closeModal,
   children,
+  btnClass,
   className,
 }: ModalProps) {
   const modal = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    function handleKeyDown(event: { key: string; preventDefault: () => void }) {
-      // if (isVisible && event.key === 'Escape') {
-      //   event.preventDefault(); // Prevent the default behavior of the escape key
-      //   // Optionally, you can add additional logic here before closing the modal
-      //   location.pathname.includes('dashboard') && !isLoggedIn ? null : modal?.current?.close();
-      // }
-    }
     if (isVisible) {
       modal.current?.showModal();
       // Disable window scroll
       document.body.style.overflowY = 'hidden';
-      // Add event listener when the modal is opened
-      // document.addEventListener('keydown', handleKeyDown);
     } else {
       modal.current?.close();
+      // Re-enable window scroll when modal closes
+      document.body.style.overflowY = 'auto';
     }
-    // Remove event listener when the modal is closed or unmounted
+
+    // Cleanup in case modal is closed by other means
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+    document.body.style.overflowY = 'auto';
     };
   }, [isVisible]);
 
   return (
     <dialog
-      className={`rounded-md p-10 ${className}`}
+      className={`rounded-md ${className}`}
       onClose={closeModal}
       ref={modal}
     >
-      <aside className={''}>
+      <aside className="flex flex-col gap-4">
         {children}
         <Button
           variant={'ghost'}
           size={'sm'}
-          className={`max-w-max absolute top-2 right-2`}
+          className={`max-w-max absolute top-2 right-2 ${btnClass}`}
           onClick={() => {
             closeModal && closeModal();
             modal?.current?.close();
           }}
         >
-          <ShieldCloseIcon />
+          <X />
         </Button>
       </aside>
     </dialog>
