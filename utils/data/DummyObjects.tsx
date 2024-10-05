@@ -72,3 +72,39 @@ export const dummyNewsArr = [
     createdAt: "2024-09-13T11:33:48.921Z",
   },
 ]
+
+export const partyArr = [
+  { label: "All Progressives Congress", value: "APC" },
+  { label: "Peoples Democratic Party", value: "PDP" },
+  { label: "Labour Party", value: "LP" },
+  { label: "Social Democratic Party", value: "SDP" },
+  { label: "All Progressives Grand Alliance", value: "APGA" },
+  { label: "Young Progressives Party", value: "YPP" },
+  { label: "New Nigeria Peoples Party", value: "NNPP" },
+  { label: "Action Democratic Party", value: "ADP" },
+  { label: "African Action Congress", value: "AAC" },
+  { label: "Accord Party", value: "AP" }
+];
+
+export const resultData = [
+  {
+    contestantName:'foo',
+    partyName:'PDP',
+    votesNo:23,
+  },
+  {
+    contestantName:'foo',
+    partyName:'PDP',
+    votesNo:23,
+  },
+  {
+    contestantName:'foo',
+    partyName:'PDP',
+    votesNo:23,
+  },
+  {
+    contestantName:'foo',
+    partyName:'PDP',
+    votesNo:23,
+  }
+]
