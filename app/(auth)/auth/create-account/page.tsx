@@ -14,7 +14,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 function Page() {
-    const [selectedTab, setSelectedTab] = useState<string>('iwitness');
+    const [selectedTab, setSelectedTab] = useState<string>('iWitness');
 
     const router = useRouter();
 
@@ -22,7 +22,7 @@ function Page() {
     const headerSubTitle = 'Create an account to get started with us.';
 
     const { control, handleSubmit, formState: { errors } } = useForm<FieldValues>({ mode: "onChange" });
-    const { mutate, isPending, isSuccess } = useCreateAccount();
+    const { mutate, isPending } = useCreateAccount();
 
 
     const getErrorMessage = (error: any): string | undefined => {
@@ -33,14 +33,24 @@ function Page() {
     };
 
     const onSubmit = (data: FieldValues) => {
+        let accountType = selectedTab;
+
+        if (selectedTab === "iWitness") {
+            accountType = "iwitness";
+        } else if (selectedTab === "pollingUnitAgent") {
+            accountType = "agent";
+        }
+
         const payload = {
-            accountType: selectedTab,
+            accountType,
             redirectUrl: "/auth/verify-account",
             ...data,
         };
         mutate(payload, {
             onSuccess: (response) => {
                 toast.success(response?.data?.message)
+                localStorage.setItem("ng-election-email", data.email)
+                console.log(data.email)
                 router.push("/auth/verify-account")
             },
             onError: (error: any) => {
@@ -54,12 +64,12 @@ function Page() {
             <div className="mt-4">
                 <Tabs value={selectedTab} onValueChange={setSelectedTab} className="w-full">
                     <TabsList>
-                        <TabsTrigger value="iwitness">Eyewitness</TabsTrigger>
-                        <TabsTrigger value="agent">Polling Unit Agent</TabsTrigger>
+                        <TabsTrigger value="iWitness">Eyewitness</TabsTrigger>
+                        <TabsTrigger value="pollingUnitAgent">Polling Unit Agent</TabsTrigger>
                     </TabsList>
 
-                    <TabsContent value="iwitness">
-                        <GoogleAuthSection />
+                    <TabsContent value="iWitness">
+                        <GoogleAuthSection role={selectedTab} />
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className='flex flex-col gap-6 mt-6'>
                                 <Controller
@@ -129,8 +139,8 @@ function Page() {
                         </form>
                     </TabsContent>
 
-                    <TabsContent value="agent">
-                        <GoogleAuthSection />
+                    <TabsContent value="pollingUnitAgent">
+                        <GoogleAuthSection role={selectedTab} />
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className='flex flex-col gap-6 mt-6'>
                                 <Controller
