@@ -15,7 +15,10 @@ import { Button } from '@/components/ui/button';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 import InputResult from './InputResult';
 import { partyArr, resultData as data } from '@/utils/data/DummyObjects';
-import DialogDemo from '@/components/ui/Dialog';
+import DialogDemo from '@/components/ui/DialogDemo';
+import ProgressDemo from '@/components/ui/Progress';
+import ResultTable from './ResultTable';
+import Results from './Results';
 
 export default function Capture() {
   const [toggle, setToggle] = useState(false);
@@ -29,7 +32,7 @@ export default function Capture() {
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]); // Store video data chunks
   const [playbackURL, setPlaybackURL] = useState<string | null>(null); // URL for video playback
   const [videoTimer, setVideoTimer] = useState<string | null>(null); // Timer for recording duration
-  const [formStep, setFormStep] = useState<boolean>(false)
+  const [formStep, setFormStep] = useState<1 | 2 | 3 >(1)
 
   // Function to update dimensions dynamically based on the screen size
   const updateDimensions = () => {
@@ -161,7 +164,7 @@ export default function Capture() {
     facingMode,
   };
 
-  const resProps = {data}
+  const resProps = {data, setFormStep}
 
   const { control, handleSubmit, formState: { errors } } = useForm<FieldValues>({ mode: "onChange" });
 
@@ -203,10 +206,12 @@ export default function Capture() {
         </div>
       )}
       {postMode === 'inputResult' && (
-        // <DialogDemo />
+        // <DialogDemo isVisible={!!postMode} closeModal={() => setPostMode('nil')} />
         <Modal isVisible={!!postMode} closeModal={() => setPostMode('nil')}
           className='bg-black w-full max-w-[30rem] p-4 text-accent'>
-            <InputResult props={resProps} />
+          {formStep === 1 && <InputResult props={resProps} />}
+          {formStep === 2 && <ResultTable props={resProps} />}
+          {formStep === 3 && <Results props={resProps} />}
         </Modal>
       )}
     </>
