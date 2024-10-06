@@ -8,3 +8,4 @@ export const VERIFY_REGISTRATION = "/auth/verify/registration";
 export const RESEND_OTP = "/auth/request-new-code";
 
 export const PASSWORD_RESET_LINK = "/auth/forgot-password"
+export const RESET_PASSWORD = "/auth/reset-password"
