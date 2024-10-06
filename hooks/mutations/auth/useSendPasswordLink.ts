@@ -1,8 +1,8 @@
-import { passwordResetLink, ResetPasswordPayload } from "@/services/api/auth";
+import { passwordResetLink, PasswordResetLinkPayload } from "@/services/api/auth";
 import { useMutation } from "@tanstack/react-query";
 
 export default function useSendPasswordLink() {
   return useMutation({
-    mutationFn: (payload: ResetPasswordPayload) => passwordResetLink(payload),
+    mutationFn: (payload: PasswordResetLinkPayload) => passwordResetLink(payload),
   });
 }
