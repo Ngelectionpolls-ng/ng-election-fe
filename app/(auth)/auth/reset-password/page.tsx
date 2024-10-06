@@ -1,7 +1,6 @@
 "use client";
 import FormControl from '@/components/common/FormControl';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 import AuthLayout from '../_component/authLayout';
 import { MoonLoader } from 'react-spinners';
