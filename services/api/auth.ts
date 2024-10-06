@@ -1,4 +1,4 @@
-import { CREATE_ACCOUNT, GOOGLE_OAUTH_CONSENT, RESEND_OTP, VERIFY_REGISTRATION } from "../endpoints";
+import { CREATE_ACCOUNT, GOOGLE_OAUTH_CONSENT, PASSWORD_RESET_LINK, RESEND_OTP, VERIFY_REGISTRATION } from "../endpoints";
 import { instance } from "../instance";
 
 export interface CreateAccountPayload {
@@ -9,6 +9,10 @@ export interface ResendOTPPayload {
   email: string | null;
   channel: string;
   redirectUrl: string;
+}
+export interface ResetPasswordPayload {
+  email: string | null;
+  resetUrl: string;
 }
 
 export const createAccount = (payload: CreateAccountPayload) => {
@@ -24,3 +28,6 @@ export const verifyAccount = (payload: string) =>
 
 export const resendOTP = (payload: ResendOTPPayload) =>
   instance.post(RESEND_OTP, payload);
+
+export const passwordResetLink = (payload: ResetPasswordPayload) =>
+  instance.post(PASSWORD_RESET_LINK, payload);

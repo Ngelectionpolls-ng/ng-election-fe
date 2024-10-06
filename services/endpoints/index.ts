@@ -6,3 +6,5 @@ export const GOOGLE_OAUTH_CONSENT = "/auth/consent-page";
 
 export const VERIFY_REGISTRATION = "/auth/verify/registration";
 export const RESEND_OTP = "/auth/request-new-code";
+
+export const PASSWORD_RESET_LINK = "/auth/forgot-password"
