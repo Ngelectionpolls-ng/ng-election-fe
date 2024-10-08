@@ -13,8 +13,8 @@ import { InputCode } from '@/components/common/InputCode';
 import useVerifyTokens from '@/hooks/mutations/auth/useVerifyTokens';
 
 function VerifyAccount() {
-    const [confirmation, setConfirmation] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(300);
+    const [confirmation, setConfirmation] = useState<boolean>(false);
+    const [timeLeft, setTimeLeft] = useState<number>(300);
     const [idParam, setIdParam] = useState<string | null>("");
     const [emailParam, setEmailParam] = useState<string | null>("");
     const [otpCode, setOtpCode] = useState<string>("");
