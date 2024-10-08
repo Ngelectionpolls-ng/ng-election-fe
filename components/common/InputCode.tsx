@@ -8,7 +8,7 @@ const cn = (...classes: (string | undefined)[]) => classes.filter(Boolean).join(
 // Main InputCode component
 const InputCode = forwardRef<
     HTMLDivElement,
-    { length: number; onChange: (code: string[]) => void; containerClassName?: string } & React.ComponentPropsWithoutRef<'div'>
+    { length: number; onChange: (code: string) => void; containerClassName?: string } & React.ComponentPropsWithoutRef<'div'>
 >(({ length, onChange, className, containerClassName = "", ...props }, ref) => {
     const [code, setCode] = React.useState<string[]>(Array(length).fill(""));
     const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -18,7 +18,9 @@ const InputCode = forwardRef<
         const newCode = [...code];
         newCode[index] = value ? value.slice(-1) : "";
         setCode(newCode);
-        onChange(newCode);
+
+        // Concatenate the array into a single string before passing it to the parent
+        onChange(newCode.join(""));
 
         // Automatically move to the next input if a value is entered and not at the last index
         if (value && index < length - 1) {

@@ -30,13 +30,16 @@ function ResetPassword() {
             id: idParam,
             newPassword: data.newPassword
         };
+        console.log(payload)
         mutate(payload, {
             onSuccess: (response) => {
                 toast.success(response.data.message);
+                console.log(response)
                 router.push("/auth/login")
             },
             onError: (error: any) => {
                 toast.error(error.data.message);
+                console.log(error)
             }
         });
     };

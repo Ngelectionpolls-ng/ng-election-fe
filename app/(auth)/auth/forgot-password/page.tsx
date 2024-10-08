@@ -16,7 +16,7 @@ function ForgotPassword() {
     const onSubmit = (data: FieldValues) => {
         const payload = {
             email: data.email,
-            resetUrl: '/reset-password'
+            resetUrl: '/auth/reset-password'
         }
         mutate(payload, {
             onSuccess: () => {
