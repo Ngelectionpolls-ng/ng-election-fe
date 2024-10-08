@@ -11,9 +11,10 @@ import { useEffect, useState } from 'react';
 
 function ResetPassword() {
     const [idParam, setIdParam] = useState<string | null>("")
-    const { handleSubmit, control, formState: { errors, isSubmitting }, watch } = useForm<FieldValues>({ mode: "onChange" });
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const { handleSubmit, control, formState: { errors }, watch } = useForm<FieldValues>({ mode: "onChange" });
 
-    const { mutate, isPending } = useResetPassword();
+    const { mutate } = useResetPassword();
 
     const router = useRouter();
     useEffect(() => {
@@ -21,7 +22,6 @@ function ResetPassword() {
         const id = searchParams.get("id");
         if (id) {
             setIdParam(id)
-            console.log(idParam)
         }
     }, [idParam]);
 
@@ -30,16 +30,16 @@ function ResetPassword() {
             id: idParam,
             newPassword: data.newPassword
         };
-        console.log(payload)
+        setIsLoading(true)
         mutate(payload, {
             onSuccess: (response) => {
                 toast.success(response.data.message);
-                console.log(response)
                 router.push("/auth/login")
+                setIsLoading(false)
             },
             onError: (error: any) => {
-                toast.error(error.data.message);
-                console.log(error)
+                setIsLoading(false)
+                toast.error(error.response.data.message);
             }
         });
     };
@@ -90,8 +90,6 @@ function ResetPassword() {
                         )}
                     />
 
-
-
                     {/* Confirm New Password Field */}
                     <Controller
                         name="confirmPassword"
@@ -113,8 +111,8 @@ function ResetPassword() {
                     />
 
                     {/* Submit Button */}
-                    <Button type="submit" disabled={isSubmitting}>
-                        {isSubmitting ? (<MoonLoader color='white' size={18} />) : "Send"}
+                    <Button type="submit" disabled={isLoading}>
+                        {isLoading ? (<MoonLoader color='white' size={18} />) : "Send"}
                     </Button>
                 </div>
             </form>

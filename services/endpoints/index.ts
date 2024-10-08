@@ -10,4 +10,5 @@ export const VERIFY_TOKENS = (id: string, code: string) =>
 export const RESEND_OTP = "/auth/request-new-code";
 
 export const PASSWORD_RESET_LINK = "/auth/forgot-password";
+export const VERIFY_RESET_TOKEN = "/auth/reset-password/verify";
 export const RESET_PASSWORD = "/auth/reset-password";

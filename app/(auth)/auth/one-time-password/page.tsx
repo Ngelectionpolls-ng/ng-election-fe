@@ -3,43 +3,80 @@ import { Button } from '@/components/ui/button';
 import { FieldValues, useForm } from 'react-hook-form';
 import AuthLayout from '../_component/authLayout';
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { MoonLoader } from 'react-spinners';
+import { toast } from 'sonner';
+import useResendOTP from '@/hooks/mutations/auth/useResendOTP';
+import { ResendOTPPayload } from '@/services/api/auth';
 import { InputCode } from '@/components/common/InputCode';
+import useVerifyResetPasswordToken from '@/hooks/mutations/auth/useVerifyResetPasswordToken';
+import { useRouter } from 'next/navigation';
 
-function OneTimePassword() {
-    const [confirmation, setConfirmation] = useState(false);
-    const [otpCode, setOtpCode] = useState<string[]>(Array(6).fill(""));
+function VerifyAccount() {
     const [timeLeft, setTimeLeft] = useState(300);
+    const [idParam, setIdParam] = useState<string | null>("");
+    const [emailParam, setEmailParam] = useState<string | null>("");
+    const [otpCode, setOtpCode] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const { handleSubmit } = useForm<FieldValues>({ mode: "onChange" });
 
-    const headerTitle = "Verify your account";
+    const { mutate: mutateVerifyTokens } = useVerifyResetPasswordToken();
+    const { mutate: mutateResendOTP } = useResendOTP();
 
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
+    useEffect(() => {
+        const searchParams = new URLSearchParams(window.location.search);
+        const id = searchParams.get("id");
+        const email = searchParams.get("email");
+        const otpFromQuery = searchParams.get("code");
 
-    const expiryTime = (
-        <span className='text-[#F97316] font-bold'>
-            {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-        </span>
-    );
+        if (id) {
+            setIdParam(id);
+            setEmailParam(email);
+        }
 
-    const headerSubTitle = (
-        <>
-            Confirm the OTP sent to ellafedora@gmail and enter the verification code that was sent. Code expires in {expiryTime}
-        </>
-    );
+        if (otpFromQuery) {
+            setOtpCode(otpFromQuery);
+        }
+    }, []);
+
+    const router = useRouter()
+
 
     // Function to resend OTP
     const handleResendOTP = () => {
-        console.log("OTP resent!");
-        setTimeLeft(300);
+        const payload: ResendOTPPayload = {
+            email: emailParam,
+            channel: "registration",
+            redirectUrl: "/auth/verify-account",
+        };
+        mutateResendOTP(payload, {
+            onSuccess: (response) => {
+                toast.success(response.data.message);
+                setTimeLeft(300);
+            },
+            onError: (error: any) => {
+                toast.error(error.response.data.message[0]);
+            }
+        });
     };
 
     // Function to handle OTP submission
-    const onSubmit = () => {
-        const otpString = otpCode.join('');
-        console.log("OTP Code Submitted: ", otpString);
-        setConfirmation(true);
+    const onSubmit = (data: any) => {
+        const payload = {
+            id: idParam,
+            code: data.code
+        };
+        setIsLoading(true)
+        mutateVerifyTokens(payload, {
+            onSuccess: (response) => {
+                setIsLoading(false)
+                router.push(`/auth/reset-password?id=${response.data.sessionId}`)
+            },
+            onError: (error: any) => {
+                setIsLoading(false)
+                toast.error(error.response.data.message);
+            }
+        });
     };
 
     // Countdown timer effect
@@ -53,42 +90,47 @@ function OneTimePassword() {
         return () => clearInterval(interval);
     }, [timeLeft]);
 
-    return (
-        <AuthLayout headerTitle={headerTitle} headerSubTitle='' verifyEmailConfirmation={confirmation} bgImg='login-bg.png'>
-            {confirmation ? (
-                <>
-                    <Link href={'/auth/login'} className='inline-flex items-center w-full justify-center whitespace-nowrap rounded-[30px] text-sm font-medium ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-4 py-2 mt-6'>
-                        Login
-                    </Link>
-                </>
-            ) : (
-                <>
-                    <div className='mt-6'>
-                        <p className='text-neutral-dark-1 text-center leading-[24px]'>{headerSubTitle}</p>
-                    </div>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className='flex flex-col items-center gap-6 mt-6 w-full'>
-                            <div className="flex justify-center gap-2">
-                                <InputCode
-                                    length={6}
-                                    onChange={(code: any) => setOtpCode(code)}
-                                />
-                            </div>
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
 
-                            {/* {errors.otp && <span className="text-red-500">{errors.otp.message}</span>} */}
-                            <div className='flex justify-center text-sm mt-4 font-light'>
-                                <p>Didn’t get a code?</p>
-                                <button type="button" onClick={handleResendOTP} className='font-bold hover:opacity-80 ml-1'>
-                                    Click to Resend
-                                </button>
-                            </div>
-                            <Button type='submit'>Verify</Button>
+    const expiryTime = (
+        <span className='text-[#F97316] font-bold'>
+            {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+        </span>
+    );
+
+    const headerTitle = "Verify your account";
+    const headerSubTitle = (
+        <>
+            Confirm the OTP sent to ellafedora@gmail and enter the verification code that was sent. Code expires in {expiryTime}
+        </>
+    );
+
+    return (
+        <AuthLayout headerTitle={headerTitle} headerSubTitle='' bgImg='login-bg.png'>
+            <>
+                <div className='mt-6'>
+                    <p className='text-neutral-dark-1 text-center leading-[24px]'>{headerSubTitle}</p>
+                </div>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className='flex flex-col items-center gap-6 mt-6 w-full'>
+                        <InputCode
+                            length={6}
+                            onChange={(code: any) => setOtpCode(code)}
+                            defaultValue={otpCode}
+                        />
+                        <div className='flex justify-center text-sm mt-4 font-light'>
+                            <p>Didn’t get a code?</p>
+                            <button type="button" onClick={handleResendOTP} className='font-bold hover:opacity-80 ml-1'>
+                                Click to Resend
+                            </button>
                         </div>
-                    </form>
-                </>
-            )}
+                        <Button type='submit' disabled={otpCode.length < 6}>{isLoading ? <MoonLoader color='white' size={18} /> : "Verify"}</Button>
+                    </div>
+                </form>
+            </>
         </AuthLayout>
     );
 }
 
-export default OneTimePassword;
+export default VerifyAccount;

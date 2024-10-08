@@ -5,6 +5,7 @@ import {
   RESEND_OTP,
   RESET_PASSWORD,
   VERIFY_REGISTRATION,
+  VERIFY_RESET_TOKEN,
   VERIFY_TOKENS,
 } from "../endpoints";
 import { instance } from "../instance";
@@ -21,6 +22,10 @@ export interface ResendOTPPayload {
 export interface PasswordResetLinkPayload {
   email: string | null;
   resetUrl: string;
+}
+export interface VerifyResetPasswordTokenPayload {
+  id: string | null;
+  code: string | null;
 }
 export interface ResetPasswordPayload {
   id: string | null;
@@ -47,6 +52,9 @@ export const resendOTP = (payload: ResendOTPPayload) =>
 
 export const passwordResetLink = (payload: PasswordResetLinkPayload) =>
   instance.post(PASSWORD_RESET_LINK, payload);
+
+export const verifyResetPasswordToken = (payload: VerifyResetPasswordTokenPayload) =>
+  instance.post(VERIFY_RESET_TOKEN, payload);
 
 export const resetPassword = (payload: ResetPasswordPayload) =>
   instance.post(RESET_PASSWORD, payload);
