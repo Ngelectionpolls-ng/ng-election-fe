@@ -10,9 +10,9 @@ interface ControlProps {
   capturedImage: string | null;
   mediaStream: MediaStream | null;
   webcamRef: React.RefObject<Webcam>;
-  postMode: 'camera' | 'inputResult' | 'nil';
+  postMode: 'camera' | 'inputResult' | 'post' | 'nil';
   setMediaStream: Dispatch<React.SetStateAction<MediaStream | null>>;
-  setPostMode: Dispatch<React.SetStateAction<'camera' | 'inputResult' | 'nil'>>;
+  setPostMode: Dispatch<React.SetStateAction<'camera' | 'inputResult' | 'post' | 'nil'>>;
   setCapturedImage: Dispatch<React.SetStateAction<string | null>>;
   handleUpload: (mediaType: 'image' | 'video') => Promise<void>;
   setPlaybackURL: Dispatch<React.SetStateAction<string | null>>;

@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import newsImg from '@/public/assets/images/bg-2.png';
 import ProgressDemo from '@/components/ui/Progress';
+import { FieldValues } from 'react-hook-form';
 
 interface ResultTableProps {
   data: {
@@ -10,20 +11,20 @@ interface ResultTableProps {
     partyName: string;
     votesNo: number;
   }[];
+  formData: FieldValues[];
   setFormStep: Dispatch<SetStateAction<1 | 2 | 3>>;
 }
 
 export default function ResultTable({ props }: { props: ResultTableProps }) {
   return (
-    <div className="flex flex-col gap-10 py-5">
+    <div className="flex flex-col gap-10 py-5 pt-12">
       <Button
         variant={'ghost'}
         onClick={() => props.setFormStep(1)}
-        className="bg-white absolute top-12 right-4 text-black max-w-max rounded-md"
+        className="bg-white absolute top-12 right-6 text-black max-w-max rounded-md"
       >
         Add Result
       </Button>
-      <h2 className="text-xl text-center">Result Table</h2>
       <div className="bg-white px-4 py-8 flex flex-col gap-3 text-black rounded-md">
         <span className="">21st september 2024</span>
         <div className="flex justify-between text-[15px]">

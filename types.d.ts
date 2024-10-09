@@ -38,3 +38,14 @@ interface CustomUser {
   email: string;
   token: string;
 }
+
+export type InputResult = {
+  registeredVoters: string;
+  accreditedVoters: string;
+  rejectedVotes: string;
+  spoiledVotes: string;
+  validVotes: string;
+  unusedBallotPapers: string;
+  politicalParty: string;
+  votesAllocated: string;
+};

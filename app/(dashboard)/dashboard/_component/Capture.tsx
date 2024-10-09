@@ -9,20 +9,30 @@ import CameraFeatures from './CameraFeatures';
 import PictureAndVideoBtn from './PictureAndVideoBtn';
 import Webcam from 'react-webcam';
 import CIResultButtons from './CIResultButtons';
-import Modal from '@/components/common/Modal';
 import FormControl from '@/components/common/FormControl';
 import { Button } from '@/components/ui/button';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
-import InputResult from './InputResult';
 import { partyArr, resultData as data } from '@/utils/data/DummyObjects';
-import DialogDemo from '@/components/ui/DialogDemo';
-import ProgressDemo from '@/components/ui/Progress';
+import  {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogClose,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
 import ResultTable from './ResultTable';
 import Results from './Results';
+import InputResult from './InputResult';
+import PostReport from './PostReport';
 
 export default function Capture() {
   const [toggle, setToggle] = useState(false);
-  const [postMode, setPostMode] = useState<'camera' | 'inputResult' | 'nil'>('nil'); // Camera open state
+  const [postMode, setPostMode] = useState<'camera' | 'inputResult' | 'post' | 'nil'>('nil'); // Camera open state
   const [capturedImage, setCapturedImage] = useState<string | null>(null); // State to hold captured image
   const [facingMode, setFacingMode] = useState<'user' | {exact: 'environment'}>({exact: 'environment'});
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -32,8 +42,9 @@ export default function Capture() {
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]); // Store video data chunks
   const [playbackURL, setPlaybackURL] = useState<string | null>(null); // URL for video playback
   const [videoTimer, setVideoTimer] = useState<string | null>(null); // Timer for recording duration
-  const [formStep, setFormStep] = useState<1 | 2 | 3 >(1)
-
+  const [formStep, setFormStep] = useState<1 | 2 | 3 >(1);
+  const [formData, setFormData] = useState<FieldValues[]>([])
+  console.log(formData)
   // Function to update dimensions dynamically based on the screen size
   const updateDimensions = () => {
     setDimensions({ width: window.innerWidth, height: window.innerHeight });
@@ -162,12 +173,18 @@ export default function Capture() {
     switchCamera, // Required by both components
     setPostMode, // Required by PictureAndVideoBtn
     facingMode,
+    toggle,
+    setToggle,
   };
 
-  const resProps = {data, setFormStep}
-
-  const { control, handleSubmit, formState: { errors } } = useForm<FieldValues>({ mode: "onChange" });
-
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isValid },
+    register,
+  } = useForm<FieldValues>({ mode: 'onChange' });
+  
+  const resProps = {data, isValid, formData, register, setFormStep, setFormData, handleSubmit}
 
   return (
     <>
@@ -183,12 +200,7 @@ export default function Capture() {
           {toggle ? <Undo2 /> : <CameraIcon />}
         </div>
       </div>
-      <CIResultButtons 
-        toggleInputResult={() => setPostMode('inputResult')}
-        toggleCamera={() => setPostMode('camera')}
-        setToggle={setToggle}
-        toggle={toggle}
-      />
+      <CIResultButtons props={CameraProps} />
       {postMode === 'camera' && (
         <div className="flex flex-col z-20 fixed top-0 left-0 bg-black h-full w-full gap-8">
           <Webcam
@@ -206,13 +218,30 @@ export default function Capture() {
         </div>
       )}
       {postMode === 'inputResult' && (
-        // <DialogDemo isVisible={!!postMode} closeModal={() => setPostMode('nil')} />
-        <Modal isVisible={!!postMode} closeModal={() => setPostMode('nil')}
-          className='bg-black w-full max-w-[30rem] p-4 text-accent'>
-          {formStep === 1 && <InputResult props={resProps} />}
-          {formStep === 2 && <ResultTable props={resProps} />}
-          {formStep === 3 && <Results props={resProps} />}
-        </Modal>
+        <Dialog open={!!postMode} onOpenChange={() => setPostMode('nil')}>
+          <DialogContent className='bg-black border-none text-white'>
+            <DialogHeader>
+              <DialogTitle className={formStep === 3 ? 'text-left' : ''}>
+              {formStep === 1 && 'Input Result'}
+              {formStep === 2 && 'Result Table'}
+              {formStep === 3 && 'Results'}
+              </DialogTitle>
+            </DialogHeader>
+            {formStep === 1 && <InputResult props={resProps} />}
+            {formStep === 2 && <ResultTable props={resProps} />}
+            {formStep === 3 && <Results props={resProps} />}
+          </DialogContent>
+        </Dialog>
+      )}
+      {postMode === 'post' && (
+        <Dialog open={!!postMode} onOpenChange={() => setPostMode('nil')}>
+          <DialogContent className='bg-black border-none text-white'>
+            <DialogHeader>
+              <DialogTitle>Make A Post</DialogTitle>
+            </DialogHeader>
+            <PostReport props={resProps} />
+          </DialogContent>
+        </Dialog>
       )}
     </>
   );

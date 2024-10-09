@@ -77,7 +77,7 @@ export default function FormControl({
 
         content = (
             <Select value={value} onValueChange={(val) => onChange?.(val as unknown as ChangeEvent<HTMLSelectElement>)}>
-                <SelectTrigger>
+                <SelectTrigger className='h-full text-slate-400'>
                     <SelectValue placeholder={placeholder || "Select..."} />
                 </SelectTrigger>
                 <SelectContent>

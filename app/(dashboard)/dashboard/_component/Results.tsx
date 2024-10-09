@@ -8,19 +8,18 @@ interface ResultProps {
 export default function Results({props}: {props: ResultProps}) {
   return (
     <div className="flex flex-col gap-10">
-      <h2 className="font-bold">Results</h2>
       <div className="flex justify-between">
         <div className="flex items-center gap-3">
           <CircleCheckBig />
-          <div className="flex flex-col text-sm">
+          <div className="flex flex-col text-[12px]">
             <span>PU 12/10/01/012 Result</span>
             <span>saved to IGUBEN</span>
           </div>
         </div>
-        <div className="flex items-center gap-2 cursor-pointer"
+        <div className="flex items-center text-[12px] gap-2 cursor-pointer"
           onClick={() => props.setFormStep(2)}
         >
-          <div className="border px-2 py-1 rounded-xl">
+          <div className="border px-2 py-0 rounded-xl">
             <PencilLine />
           </div>
           <span className="bg-slate-100 text-black px-2 py-1 rounded-xl">Click to Edit</span>
