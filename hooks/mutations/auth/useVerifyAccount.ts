@@ -3,6 +3,6 @@ import { useMutation } from "@tanstack/react-query";
 
 export default function useVerifyAccount() {
   return useMutation({
-    mutationFn: (payload: any) => verifyAccount(payload),
+    mutationFn: (payload: object) => verifyAccount(payload),
   });
 }
