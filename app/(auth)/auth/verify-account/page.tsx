@@ -3,16 +3,18 @@ import { Button } from '@/components/ui/button';
 import { FieldValues, useForm } from 'react-hook-form';
 import AuthLayout from '../_component/authLayout';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import useVerifyAccount from '@/hooks/mutations/auth/useVerifyAccount';
 import { MoonLoader } from 'react-spinners';
 import { toast } from 'sonner';
 import useResendOTP from '@/hooks/mutations/auth/useResendOTP';
 import { ResendOTPPayload } from '@/services/api/auth';
 import { InputCode } from '@/components/common/InputCode';
-import useVerifyResetPasswordToken from '@/hooks/mutations/auth/useVerifyResetPasswordToken';
-import { useRouter } from 'next/navigation';
+import useVerifyTokens from '@/hooks/mutations/auth/useVerifyTokens';
 
 function VerifyAccount() {
-    const [timeLeft, setTimeLeft] = useState(300);
+    const [confirmation, setConfirmation] = useState<boolean>(false);
+    const [timeLeft, setTimeLeft] = useState<number>(300);
     const [idParam, setIdParam] = useState<string | null>("");
     const [emailParam, setEmailParam] = useState<string | null>("");
     const [otpCode, setOtpCode] = useState<string>("");
@@ -20,7 +22,8 @@ function VerifyAccount() {
 
     const { handleSubmit } = useForm<FieldValues>({ mode: "onChange" });
 
-    const { mutate: mutateVerifyTokens } = useVerifyResetPasswordToken();
+    const { mutate: mutateVerifyAccount } = useVerifyAccount();
+    const { mutate: mutateVerifyTokens } = useVerifyTokens();
     const { mutate: mutateResendOTP } = useResendOTP();
 
     useEffect(() => {
@@ -38,8 +41,6 @@ function VerifyAccount() {
             setOtpCode(otpFromQuery);
         }
     }, []);
-
-    const router = useRouter()
 
 
     // Function to resend OTP
@@ -61,20 +62,28 @@ function VerifyAccount() {
     };
 
     // Function to handle OTP submission
-    const onSubmit = (data: any) => {
+    const onSubmit = () => {
         const payload = {
             id: idParam,
-            code: data.code
+            code: otpCode
         };
         setIsLoading(true)
         mutateVerifyTokens(payload, {
             onSuccess: (response) => {
-                setIsLoading(false)
-                router.push(`/auth/reset-password?id=${response.data.sessionId}`)
+                mutateVerifyAccount({ id: response.data.sessionId }, {
+                    onSuccess: () => {
+                        setIsLoading(false)
+                        setConfirmation(true);
+                    },
+                    onError: () => {
+                        toast.error("An error occurred while verifying account")
+                        setIsLoading(false)
+                    }
+                })
             },
-            onError: (error: any) => {
+            onError: (error) => {
                 setIsLoading(false)
-                toast.error(error.response.data.message);
+                toast.error(error.message);
             }
         });
     };
@@ -102,33 +111,41 @@ function VerifyAccount() {
     const headerTitle = "Verify your account";
     const headerSubTitle = (
         <>
-            Confirm the OTP sent to ellafedora@gmail and enter the verification code that was sent. Code expires in {expiryTime}
+            We sent a code to your email. Input the code to complete registration. Code expires in {expiryTime}
         </>
     );
 
     return (
-        <AuthLayout headerTitle={headerTitle} headerSubTitle='' bgImg='login-bg.png'>
-            <>
-                <div className='mt-6'>
-                    <p className='text-neutral-dark-1 text-center leading-[24px]'>{headerSubTitle}</p>
-                </div>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className='flex flex-col items-center gap-6 mt-6 w-full'>
-                        <InputCode
-                            length={6}
-                            onChange={(code: any) => setOtpCode(code)}
-                            defaultValue={otpCode}
-                        />
-                        <div className='flex justify-center text-sm mt-4 font-light'>
-                            <p>Didn’t get a code?</p>
-                            <button type="button" onClick={handleResendOTP} className='font-bold hover:opacity-80 ml-1'>
-                                Click to Resend
-                            </button>
-                        </div>
-                        <Button type='submit' disabled={otpCode.length < 6}>{isLoading ? <MoonLoader color='white' size={18} /> : "Verify"}</Button>
+        <AuthLayout headerTitle={headerTitle} headerSubTitle='' verifyEmailConfirmation={confirmation} bgImg='login-bg.png'>
+            {confirmation ? (
+                <>
+                    <Link href={'/auth/login'} className='inline-flex items-center w-full justify-center whitespace-nowrap rounded-[30px] text-sm font-medium ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-4 py-2 mt-6'>
+                        Login
+                    </Link>
+                </>
+            ) : (
+                <>
+                    <div className='mt-6'>
+                        <p className='text-neutral-dark-1 text-center leading-[24px]'>{headerSubTitle}</p>
                     </div>
-                </form>
-            </>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <div className='flex flex-col items-center gap-6 mt-6 w-full'>
+                            <InputCode
+                                length={6}
+                                onChange={(code: any) => setOtpCode(code)}
+                                defaultValue={otpCode}
+                            />
+                            <div className='flex justify-center text-sm mt-4 font-light'>
+                                <p>Didn’t get a code?</p>
+                                <button type="button" onClick={handleResendOTP} className='font-bold hover:opacity-80 ml-1'>
+                                    Click to Resend
+                                </button>
+                            </div>
+                            <Button type='submit' disabled={otpCode.length < 6}>{isLoading ? <MoonLoader color='white' size={18} /> : "Verify"}</Button>
+                        </div>
+                    </form>
+                </>
+            )}
         </AuthLayout>
     );
 }
