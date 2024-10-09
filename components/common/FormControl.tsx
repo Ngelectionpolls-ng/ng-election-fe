@@ -1,10 +1,12 @@
-import React, { useState, ChangeEvent } from 'react';
+"use client";
+import React, { useState } from 'react';
 import {
     FieldValues,
     Path,
     RegisterOptions,
     UseFormRegister,
     FieldError,
+    UseFormSetValue
 } from 'react-hook-form';
 import { Eye, EyeOff } from 'lucide-react';
 import {
@@ -21,7 +23,6 @@ type SelectProps = {
     options: { value: string; label: string }[];
     placeholder?: string;
     value?: string;
-    onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
 } & React.ComponentPropsWithoutRef<'select'>;
 type TextAreaProps = React.ComponentPropsWithoutRef<'textarea'>;
 export type Register = UseFormRegister<FieldValues>;
@@ -40,6 +41,7 @@ type ControlProps = (
     error?: string | FieldError;
     register?: Register;
     registerOptions?: RegisterOptions<FieldValues, Path<FieldValues>>;
+    setValue?: UseFormSetValue<FieldValues>; // Only needed for 'select'
 };
 
 function isSelect(as: FormControlElement, props: unknown): props is SelectProps {
@@ -61,6 +63,7 @@ export default function FormControl({
     registerOptions,
     onContainerFocus,
     register = (() => ({})) as unknown as Register,
+    setValue, // Only needed for 'select'
     ...props
 }: ControlProps) {
     const [showPassword, setShowPassword] = useState(false);
@@ -73,11 +76,11 @@ export default function FormControl({
     const notice = props.required ? '*' : '';
 
     if (isSelect(as, props)) {
-        const { options, placeholder, value, onChange } = props;
+        const { options, placeholder } = props;
 
         content = (
-            <Select value={value} onValueChange={(val) => onChange?.(val as unknown as ChangeEvent<HTMLSelectElement>)}>
-                <SelectTrigger className='h-full text-slate-400'>
+            <Select onValueChange={(val) => setValue?.(props.name as Path<FieldValues>, val)}>
+                <SelectTrigger>
                     <SelectValue placeholder={placeholder || "Select..."} />
                 </SelectTrigger>
                 <SelectContent>
@@ -122,7 +125,7 @@ export default function FormControl({
                     required: props.required && 'This field is required',
                     ...registerOptions,
                 })}
-                className={`border rounded-md p-2 ${error ? 'border-red-600' : 'border-[#CBD5E1]'} w-full`}
+                className={`border rounded-md p-2 outline-none ${error ? 'border-red-600' : 'border-[#CBD5E1]'} w-full`}
             />
         );
     }

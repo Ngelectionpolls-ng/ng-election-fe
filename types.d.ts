@@ -5,6 +5,8 @@ export interface DashboardLayoutProps {
 export interface IsCollapsedProps {
   isCollapsed: boolean;
   setIsCollapsed: (value: boolean | ((prevState: boolean) => boolean)) => void;
+  showSidebar?: boolean;
+  setShowSidebar: (value: boolean | ((prevState: boolean) => boolean)) => void;
 }
 
 export type NewsDetails = {
