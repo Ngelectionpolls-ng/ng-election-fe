@@ -1,18 +1,23 @@
 import FormControl from '@/components/common/FormControl';
 import { Button } from '@/components/ui/button';
-// import type { InputResult } from '@/types';
 import { partyArr } from '@/utils/data/DummyObjects';
-import React, { useState } from 'react';
+import React from 'react';
 import {
+  FieldErrors,
   FieldValues,
-  useForm,
+  Controller,
   UseFormHandleSubmit,
   UseFormRegister,
+  UseFormSetValue,
+  Control,
 } from 'react-hook-form';
 
 interface InputResultProps {
   isValid: boolean;
+  errors: FieldErrors<FieldValues>;
+  control: Control<FieldValues, any>
   register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
   setFormStep: React.Dispatch<React.SetStateAction<1 | 2 | 3>>;
   setFormData: React.Dispatch<React.SetStateAction<FieldValues[]>>;
@@ -26,13 +31,14 @@ export default function InputResult({ props }: { props: InputResultProps }) {
     return undefined;
   };
 
-  const [party, setParty] = useState<string>('');
+  // const [party, setParty] = useState<string>('');
 
   // Form submission handler
   const onSubmit = (data: FieldValues) => {
-    props.setFormStep(2);
-    props.setFormData([data]);
-    console.log('Form submitted successfully:', data, party);
+    if (props.isValid) {
+      props.setFormData((prev) => [...prev, data]);
+      props.setFormStep(2);
+    }
   };
 
   // Log any errors during the form validation
@@ -44,71 +50,124 @@ export default function InputResult({ props }: { props: InputResultProps }) {
     <form onSubmit={props.handleSubmit(onSubmit, onError)}>
       <div className="flex flex-col gap-10">
         <div className="grid grid-cols-2 gap-y-4 gap-x-6">
-          <FormControl
-            as="input"
-            type="number"
+          <Controller
             name="registeredVoters"
-            register={props.register}
-            placeholder="No of Registered Voters"
+            control={props.control}
+            rules={{ required: "'Registered Voters is required" }}
+            render={({ field }) => (
+              <FormControl
+                as="input"
+                type="number"
+                {...field}
+                placeholder="No of Registered Voters"
+                error={getErrorMessage(props.errors.registeredVoters)}
+              />
+            )}
           />
-          <FormControl
-            as="input"
-            type="number"
+          <Controller
             name="accreditedVoters"
-            register={props.register}
-            placeholder="No of Accredited Voters"
+            control={props.control}
+            rules={{ required: 'Accredited Voters is required' }}
+            render={({ field }) => (
+              <FormControl
+                as="input"
+                type="number"
+                {...field}
+                placeholder="No of Accredited Voters"
+                error={getErrorMessage(props.errors.accreditedVoters)}
+              />
+            )}
           />
-          <FormControl
-            as="input"
-            type="number"
-            name="rejectedVotes"
-            register={props.register}
-            placeholder="No of Rejected Votes"
-          />
-          <FormControl
-            as="input"
-            type="number"
+          <Controller
             name="spoiledVotes"
-            register={props.register}
-            placeholder="No of Spoiled Votes"
+            control={props.control}
+            rules={{ required: 'Spoiled Votes is required' }}
+            render={({ field }) => (
+              <FormControl
+                as="input"
+                type="number"
+                {...field}
+                placeholder="No of Spoiled Votes"
+                error={getErrorMessage(props.errors.spoiledVotes)}
+              />
+            )}
           />
-          <FormControl
-            as="input"
-            type="number"
+          <Controller
             name="validVotes"
-            register={props.register}
-            placeholder="No of Valid Votes"
+            control={props.control}
+            rules={{ required: 'Valid Votes is required' }}
+            render={({ field }) => (
+              <FormControl
+                as="input"
+                type="number"
+                {...field}
+                placeholder="No of Valid Votes"
+                error={getErrorMessage(props.errors.validVotes)}
+              />
+            )}
           />
-          <FormControl
-            as="input"
-            type="number"
-            name="unusedBallotPapers"
-            register={props.register}
-            placeholder="No of Unused Ballot Papers"
+          <Controller
+            name="invalidVotes"
+            control={props.control}
+            rules={{ required: 'Invalid Votes is required' }}
+            render={({ field }) => (
+              <FormControl
+                as="input"
+                type="number"
+                {...field}
+                placeholder="No of Invalid Votes"
+                error={getErrorMessage(props.errors.invalidVotes)}
+              />
+            )}
           />
-          <FormControl
-              as="select"
-              options={partyArr}
-              className=""
-              value={party ? party : ''}
-              // {...register('politicalParty', { required: 'politicalParty is required' })}
-              name="politicalParty"
-              registerOptions={{onChange: (e) => setParty(e.target.value)}}
-              // labelText='Political Party'
-              // value={}
-              register={props.register}
-              placeholder="Political Party"
-            />
-          <FormControl
-            as="input"
-            type="number"
+          <Controller
+            name="totalVotes"
+            control={props.control}
+            rules={{ required: 'Total Votes is required' }}
+            render={({ field }) => (
+              <FormControl
+                as="input"
+                type="number"
+                {...field}
+                placeholder="Total Votes"
+                error={getErrorMessage(props.errors.totalVotes)}
+              />
+            )}
+          />
+          <Controller
+            name="party"
+            control={props.control}
+            rules={{ required: 'Party is required' }}
+            render={({ field }) => (
+              <FormControl
+                as="select"
+                {...field}
+                options={partyArr}
+                className='h-full text-slate-400'
+                placeholder="Select Party"
+                setValue={props.setValue}
+                error={getErrorMessage(props.errors.party)}
+              />
+            )}
+          />
+          <Controller
             name="votesAllocated"
-            register={props.register}
-            placeholder="No of Unused Ballot Papers"
+            control={props.control}
+            rules={{ required: 'Votes Allocated is required' }}
+            render={({ field }) => (
+              <FormControl
+                as="input"
+                type="number"
+                {...field}
+                placeholder="No of Unused Ballot Papers"
+                error={getErrorMessage(props.errors.votesAllocated)}
+              />
+            )}
           />
         </div>
         <Button
-          // disabled={props.isValid}
+          type="submit"
+          disabled={!props.isValid}
           className="rounded-md mx-auto w-[14rem]"
         >
           Next

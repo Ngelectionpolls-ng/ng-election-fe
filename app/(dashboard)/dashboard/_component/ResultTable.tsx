@@ -31,7 +31,7 @@ export default function ResultTable({ props }: { props: ResultTableProps }) {
           <span>Leading Candidates</span>
           <span>Accumulated Votes</span>
         </div>
-        {props.data.map((res, id) => (
+        {props.formData.map((res, id) => (
           <div key={id} className="flex gap-4 items-center relative">
             <div className="flex gap-2 items-center">
               <div className="rounded-full relative overflow-hidden w-8 h-8">
@@ -45,7 +45,7 @@ export default function ResultTable({ props }: { props: ResultTableProps }) {
               </div>
               <div className="flex flex-col text-[12px] min-w-[3rem] gap-1">
                 <span>{res.contestantName}</span>
-                <span>{res.partyName}</span>
+                <span>{res.party}</span>
               </div>
             </div>
             <ProgressDemo />

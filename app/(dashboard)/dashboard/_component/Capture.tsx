@@ -44,7 +44,7 @@ export default function Capture() {
   const [videoTimer, setVideoTimer] = useState<string | null>(null); // Timer for recording duration
   const [formStep, setFormStep] = useState<1 | 2 | 3 >(1);
   const [formData, setFormData] = useState<FieldValues[]>([])
-  console.log(formData)
+
   // Function to update dimensions dynamically based on the screen size
   const updateDimensions = () => {
     setDimensions({ width: window.innerWidth, height: window.innerHeight });
@@ -154,6 +154,14 @@ export default function Capture() {
       }
     }
   };
+  
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    formState: { errors, isValid },
+    register,
+  } = useForm<FieldValues>({ mode: 'onChange' });
 
   const CameraProps = {
     postMode, // Required by PictureAndVideoBtn
@@ -177,14 +185,7 @@ export default function Capture() {
     setToggle,
   };
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors, isValid },
-    register,
-  } = useForm<FieldValues>({ mode: 'onChange' });
-  
-  const resProps = {data, isValid, formData, register, setFormStep, setFormData, handleSubmit}
+  const resProps = {data, isValid, errors, control, formData, setValue, register, setFormStep, setFormData, handleSubmit}
 
   return (
     <>
