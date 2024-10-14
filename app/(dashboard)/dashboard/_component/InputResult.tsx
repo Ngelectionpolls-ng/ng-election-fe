@@ -31,8 +31,6 @@ export default function InputResult({ props }: { props: InputResultProps }) {
     return undefined;
   };
 
-  // const [party, setParty] = useState<string>('');
-
   // Form submission handler
   const onSubmit = (data: FieldValues) => {
     if (props.isValid) {
