@@ -31,7 +31,7 @@ export default function InputResult({ props }: { props: InputResultProps }) {
     return undefined;
   };
 
-  // const [party, setParty] = useState<string>('');
+  const { register } = props;
 
   // Form submission handler
   const onSubmit = (data: FieldValues) => {
@@ -45,7 +45,6 @@ export default function InputResult({ props }: { props: InputResultProps }) {
   const onError = (errors: any) => {
     console.log('Form validation failed with errors:', errors);
   };
-  const register = props.register;
   return (
     <form onSubmit={props.handleSubmit(onSubmit, onError)}>
       <div className="flex flex-col gap-10">
