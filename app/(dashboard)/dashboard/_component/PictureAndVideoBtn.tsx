@@ -22,17 +22,14 @@ interface ControlProps {
 }
 
 export default function PictureAndVideoBtn({props}: {props: ControlProps}) {
-  const { webcamRef, setCapturedImage } = props;
-
   const capture = useCallback(() => {
-    const imageSrc = webcamRef.current?.getScreenshot();
+    const imageSrc = props.webcamRef.current?.getScreenshot();
     if (imageSrc) {
       const blob = base64ToBlob(imageSrc);
       const objectURL = URL.createObjectURL(blob);
-      setCapturedImage(objectURL); // Store the object URL instead of base64 string
+      props.setCapturedImage(objectURL); // Store the object URL instead of base64 string
     }
-  }, [webcamRef, setCapturedImage]);
-  
+  }, [props.webcamRef]);
 
   const base64ToBlob = (base64: string) => {
     const byteString = atob(base64.split(',')[1]);
