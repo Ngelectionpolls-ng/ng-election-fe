@@ -98,7 +98,7 @@ export default function Capture() {
         mediaStream.getTracks().forEach((track) => track.stop());
       }
     };
-  }, [postMode, facingMode]); 
+  }, [postMode, facingMode, mediaStream]); 
 
   const switchCamera = () => {
     setFacingMode((prevMode) =>
