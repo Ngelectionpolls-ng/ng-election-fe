@@ -76,11 +76,11 @@ export default function FormControl({
     const notice = props.required ? '*' : '';
 
     if (isSelect(as, props)) {
-        const { options, placeholder } = props;
+        const { options, placeholder, className } = props;
 
         content = (
             <Select onValueChange={(val) => setValue?.(props.name as Path<FieldValues>, val)}>
-                <SelectTrigger>
+                <SelectTrigger className={className}>
                     <SelectValue placeholder={placeholder || "Select..."} />
                 </SelectTrigger>
                 <SelectContent>

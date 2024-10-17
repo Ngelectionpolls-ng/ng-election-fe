@@ -4,16 +4,15 @@ import { SquareChevronLeft, CameraIcon, Upload, Play } from 'lucide-react'
 import React, { Dispatch, useCallback } from 'react'
 import VideoControl from './VideoControl'
 import Webcam from 'react-webcam'
-import { set } from 'react-hook-form'
 
 interface ControlProps {
-  camera: boolean;
   recordedChunks: Blob[];
   capturedImage: string | null;
   mediaStream: MediaStream | null;
-  setMediaStream: Dispatch<React.SetStateAction<MediaStream | null>>;
   webcamRef: React.RefObject<Webcam>;
-  setCamera: Dispatch<React.SetStateAction<boolean>>;
+  postMode: 'camera' | 'inputResult' | 'post' | 'nil';
+  setMediaStream: Dispatch<React.SetStateAction<MediaStream | null>>;
+  setPostMode: Dispatch<React.SetStateAction<'camera' | 'inputResult' | 'post' | 'nil'>>;
   setCapturedImage: Dispatch<React.SetStateAction<string | null>>;
   handleUpload: (mediaType: 'image' | 'video') => Promise<void>;
   setPlaybackURL: Dispatch<React.SetStateAction<string | null>>;
@@ -23,14 +22,17 @@ interface ControlProps {
 }
 
 export default function PictureAndVideoBtn({props}: {props: ControlProps}) {
+  const { webcamRef, setCapturedImage } = props;
+
   const capture = useCallback(() => {
-    const imageSrc = props.webcamRef.current?.getScreenshot();
+    const imageSrc = webcamRef.current?.getScreenshot();
     if (imageSrc) {
       const blob = base64ToBlob(imageSrc);
       const objectURL = URL.createObjectURL(blob);
-      props.setCapturedImage(objectURL); // Store the object URL instead of base64 string
+      setCapturedImage(objectURL); // Store the object URL instead of base64 string
     }
-  }, [props.webcamRef]);
+  }, [webcamRef, setCapturedImage]);
+  
 
   const base64ToBlob = (base64: string) => {
     const byteString = atob(base64.split(',')[1]);
@@ -54,7 +56,7 @@ export default function PictureAndVideoBtn({props}: {props: ControlProps}) {
   const stopWebcamStream = () => {
     if (props.webcamRef.current?.stream) {
       const stream = props.webcamRef.current.stream;
-      stream.getTracks().forEach((track) => track.stop()); // Stop all tracks (video and audio)
+      stream.getTracks().forEach((track) => track.stop());
     }
     if (props.mediaStream) {
       props.mediaStream.getTracks().forEach((track) => {
@@ -62,13 +64,13 @@ export default function PictureAndVideoBtn({props}: {props: ControlProps}) {
       });
     }
     props.setMediaStream(null); // Reset media stream
-    props.setCamera(false); // Set camera off state
+    props.setPostMode('nil'); // Set postMode off state
   };
   
   return (
     <div
     className={`absolute bottom-0 w-full justify-center items-center flex-row flex gap-4 z-10
-      ${props.camera && 'py-6 px-2'}`}
+      ${props.postMode && 'py-6 px-2'}`}
   >
     <div
       className="bg-white flex justify-center items-center rounded-full w-16 h-16 text-black-500 text-2xl"

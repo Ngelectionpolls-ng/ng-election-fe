@@ -32,8 +32,8 @@ export default function Activity({ info, id }: NewsProps) {
     return text;
   };
   return (
-    <Link href={`/dashboard/activity/${id}`} className="flex gap-4">
-      <Image src={info.src} alt="img" className="max-w-32 md:max-w-52" />
+    <Link href={`/dashboard/activity/${id}`} className="flex flex-col sm:flex-row gap-4">
+      <Image src={info.src} alt="img" className="sm:max-w-52" />
       <div className="flex flex-col justify-center gap-1">
         <span className="text-xs">
           {info.poolingUnit}, {info.localGovt}, {info.state}
