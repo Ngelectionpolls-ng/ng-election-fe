@@ -1,34 +1,25 @@
 'use client';
 import React from 'react';
-import { TrendIcon } from '@/public/assets/icons';
 import { Undo2 } from 'lucide-react';
-import Camera from '@/components/common/Camera';
 import { CameraIcon } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import CameraFeatures from './CameraFeatures';
 import PictureAndVideoBtn from './PictureAndVideoBtn';
 import Webcam from 'react-webcam';
 import CIResultButtons from './CIResultButtons';
-import FormControl from '@/components/common/FormControl';
-import { Button } from '@/components/ui/button';
-import { Controller, FieldValues, useForm } from 'react-hook-form';
-import { partyArr, resultData as data } from '@/utils/data/DummyObjects';
+import { FieldValues, useForm } from 'react-hook-form';
+import { resultData as data } from '@/utils/data/DummyObjects';
 import  {
   Dialog,
-  DialogPortal,
-  DialogOverlay,
-  DialogClose,
-  DialogTrigger,
   DialogContent,
   DialogHeader,
-  DialogFooter,
   DialogTitle,
-  DialogDescription,
 } from '@/components/ui/dialog';
 import ResultTable from './ResultTable';
 import Results from './Results';
 import InputResult from './InputResult';
 import PostReport from './PostReport';
+import { toast } from 'sonner';
 
 export default function Capture() {
   const [toggle, setToggle] = useState(false);
@@ -144,10 +135,12 @@ export default function Capture() {
           method: 'POST',
           body: formData,
         });
-        if (response.ok) {
-          console.log(`${mediaType} upload successful`);
+        if (response.ok) { 
+          toast.success('Upload successful'); 
+          // console.log(`${mediaType} upload successful`);
         } else {
-          console.log(`${mediaType} upload failed`);
+          // console.log(`${mediaType} upload failed`);
+          toast.error('Upload failed');
         }
       } catch (error) {
         console.error(`Error uploading ${mediaType}:`, error);

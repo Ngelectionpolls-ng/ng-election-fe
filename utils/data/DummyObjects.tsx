@@ -1,4 +1,5 @@
 import newsImg from '@/public/assets/images/bg-2.png' 
+import { newsReportImg } from '@/public/assets/images/home';
 
 export const dummyNewsArr = [
   {
@@ -7,6 +8,7 @@ export const dummyNewsArr = [
     poolingUnit: 'poolingUnit',
     localGovt: 'localGovt',
     state: 'state',
+    impressions: 40,
     title: 'Protest is ongoing. No Labour Party supporter would be allowed to vote in this ward.',
     status: 'status',
     createdAt: "2023-02-01T18:57:48.921Z",
@@ -17,6 +19,7 @@ export const dummyNewsArr = [
     poolingUnit: 'poolingUnit',
     localGovt: 'localGovt',
     state: 'state',
+    impressions: 10,
     title: 'Protest is ongoing. No Labour Party supporter would be allowed to vote in this ward.',
     status: 'status',
     createdAt: "2023-08-17T18:57:48.921Z",
@@ -27,6 +30,7 @@ export const dummyNewsArr = [
     poolingUnit: 'poolingUnit',
     localGovt: 'localGovt',
     state: 'state',
+    impressions: 4,
     title: 'Protest is ongoing. No Labour Party supporter would be allowed to vote in this ward.',
     status: 'status',
     createdAt: "2023-05-27T18:57:48.921Z",
@@ -37,6 +41,7 @@ export const dummyNewsArr = [
     poolingUnit: 'poolingUnit',
     localGovt: 'localGovt',
     state: 'state',
+    impressions: 40,
     title: 'Protest is ongoing. No Labour Party supporter would be allowed to vote in this ward.',
     status: 'status',
     createdAt: "2023-04-10T18:57:48.921Z",
@@ -47,6 +52,7 @@ export const dummyNewsArr = [
     poolingUnit: 'poolingUnit',
     localGovt: 'localGovt',
     state: 'state',
+    impressions: 40,
     title: 'Protest is ongoing. No Labour Party supporter would be allowed to vote in this ward.',
     status: 'status',
     createdAt: "2024-09-12T12:33:48.921Z",
@@ -57,6 +63,7 @@ export const dummyNewsArr = [
     poolingUnit: 'poolingUnit',
     localGovt: 'localGovt',
     state: 'state',
+    impressions: 40,
     title: 'Protest is ongoing. No Labour Party supporter would be allowed to vote in this ward.',
     status: 'status',
     createdAt: "2024-09-13T12:33:48.921Z",
@@ -67,6 +74,7 @@ export const dummyNewsArr = [
     poolingUnit: 'poolingUnit',
     localGovt: 'localGovt',
     state: 'state',
+    impressions: 40,
     title: 'Protest is ongoing. No Labour Party supporter would be allowed to vote in this ward.',
     status: 'status',
     createdAt: "2024-09-13T11:33:48.921Z",
@@ -89,22 +97,57 @@ export const partyArr = [
 export const resultData = [
   {
     contestantName:'foo',
-    partyName:'PDP',
-    votesNo:23,
+    party:'PDP',
+    votesNo:5000,
+    image: newsReportImg,
   },
   {
     contestantName:'foo',
-    partyName:'PDP',
-    votesNo:23,
+    party:'PDP',
+    votesNo:4000,
+    image: newsReportImg,
   },
   {
     contestantName:'foo',
-    partyName:'PDP',
-    votesNo:23,
+    party:'PDP',
+    votesNo:2000,
+    image: newsReportImg,
   },
   {
     contestantName:'foo',
-    partyName:'PDP',
-    votesNo:23,
+    party:'PDP',
+    votesNo:4,
+    image: newsReportImg,
+  }
+]
+
+export const resultData2 = [
+  {
+    contestantName:'foo',
+    party:'PDP',
+    votesNo:23000,
+    image: newsReportImg,
+    progress: { percent: 80, setPercent: () => {} },
+  },
+  {
+    contestantName:'foo',
+    party:'PDP',
+    votesNo:6423,
+    image: newsReportImg,
+    progress: { percent: 60, setPercent: () => {} },
+  },
+  {
+    contestantName:'foo',
+    party:'PDP',
+    votesNo:2333,
+    image: newsReportImg,
+    progress: { percent: 30, setPercent: () => {} },
+  },
+  {
+    contestantName:'foo',
+    party:'PDP',
+    votesNo:1023,
+    image: newsReportImg,
+    progress: { percent: 12, setPercent: () => {} },
   }
 ]
