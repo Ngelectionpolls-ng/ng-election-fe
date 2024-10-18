@@ -8,7 +8,7 @@ import { FieldValues } from 'react-hook-form';
 interface ResultTableProps {
   data: {
     contestantName: string;
-    partyName: string;
+    party: string;
     votesNo: number;
   }[];
   formData: FieldValues[];
@@ -48,7 +48,9 @@ export default function ResultTable({ props }: { props: ResultTableProps }) {
                 <span>{res.party}</span>
               </div>
             </div>
-            <ProgressDemo />
+            <ProgressDemo props={
+              { percent: res.votesNo, setPercent: () => {} }
+            } />
             <span className="font-bold text-[12px]">{res.votesNo}</span>
           </div>
         ))}
