@@ -13,7 +13,7 @@ pipeline {
     stage('Deploy') {
       agent any
       steps {
-        sh 'docker run -p 3000:3000 -d -name ng-polls-frontend --rm ng-polls-frontend'
+        sh 'docker run -p 3000:3000 -d --name ng-polls-frontend --rm ng-polls-frontend'
       }
     }
   }
