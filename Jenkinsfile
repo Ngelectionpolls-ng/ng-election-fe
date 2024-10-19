@@ -6,6 +6,8 @@ pipeline {
     stage('Docker build') {  
       agent any
       steps {
+        sh 'cp ~/ng-polls-frontend/.env "$PWD"'
+        sh 'ls -al'
         sh 'docker build -t ng-polls-frontend .'
       }
     }
