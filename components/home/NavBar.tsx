@@ -15,25 +15,82 @@ function NavBar() {
                     <NavigationMenuItem>
                         <NavigationMenuTrigger>Our Mission</NavigationMenuTrigger>
                         <NavigationMenuContent>
-                            <NavigationMenuLink>Link</NavigationMenuLink>
+                            <NavigationMenuLink>
+                                <ul className="w-52 p-4 rounded shadow-md flex flex-col space-y-4 text-green-900">
+                                    <li className="text-md cursor-pointer hover:font-bold">
+                                        About Us
+                                    </li>
+                                    <li className="text-md cursor-pointer hover:font-bold">
+                                        Mission Statement
+                                    </li>
+                                    <li className="text-md cursor-pointer hover:font-bold">
+                                        Methodology
+                                    </li>
+                                    <li className="text-md cursor-pointer hover:font-bold">
+                                        Initiative
+                                    </li>
+                                </ul>
+                            </NavigationMenuLink>
                         </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <NavigationMenuTrigger>Election Results</NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                            <NavigationMenuLink>Link</NavigationMenuLink>
-                        </NavigationMenuContent>
+                            <NavigationMenuContent>
+                                <NavigationMenuLink>
+                                    <ul className="w-52 p-4 rounded shadow-md flex flex-col space-y-4 text-green-900">
+                                        <li className="text-md cursor-pointer hover:font-bold">
+                                            Presidential
+                                        </li>
+                                        <li className="text-md cursor-pointer hover:font-bold">
+                                            Gubernotorial
+                                        </li>
+                                        <li className="text-md cursor-pointer hover:font-bold">
+                                            House of Assembly
+                                        </li>
+                                        <li className="text-md cursor-pointer hover:font-bold">
+                                            Local Government
+                                        </li>
+                                        <li className="text-md cursor-pointer hover:font-bold">
+                                            Off-cycle Elections
+                                        </li>
+                                    </ul>
+                                </NavigationMenuLink>
+                            </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <NavigationMenuTrigger>Eye witness</NavigationMenuTrigger>
                         <NavigationMenuContent>
-                            <NavigationMenuLink>Link</NavigationMenuLink>
+                            <NavigationMenuLink>
+                                <ul className="w-52 p-4 rounded shadow-md flex flex-col space-y-4 text-green-900">
+                                    <li className="text-md cursor-pointer hover:font-bold">
+                                        Objectives
+                                    </li>
+                                    <li className="text-md cursor-pointer hover:font-bold">
+                                        How to Volunteer
+                                    </li>
+                                    <li className="text-md cursor-pointer hover:font-bold">
+                                        Available Polling Units
+                                    </li>
+                                </ul>
+                            </NavigationMenuLink>
                         </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
                         <NavigationMenuContent>
-                            <NavigationMenuLink>Link</NavigationMenuLink>
+                            <NavigationMenuLink>
+                                <ul className="w-52 p-4 rounded shadow-md flex flex-col space-y-4 text-green-900">
+                                    <li className="text-md cursor-pointer hover:font-bold">
+                                        Publications
+                                    </li>
+                                    <li className="text-md cursor-pointer hover:font-bold">
+                                        Election Updates
+                                    </li>
+                                    <li className="text-md cursor-pointer hover:font-bold">
+                                        Find Polling Unit
+                                    </li>
+                                </ul>
+                            </NavigationMenuLink>
                         </NavigationMenuContent>
                     </NavigationMenuItem>
                     <div className='flex ml-7 gap-3'>

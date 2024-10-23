@@ -1,0 +1,3250 @@
+@import"https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,500&display=swap";body,html {
+    padding: 0;
+    margin: 0;
+    font-family: Roboto,sans-serif;
+    background: #f6f6f6;
+    user-select: none
+}
+
+a {
+    color: inherit;
+    text-decoration: none
+}
+
+button {
+    border: none;
+    outline: none
+}
+
+.hoverText text * {
+    fill: #fff!important
+}
+
+#preloader {
+    margin-left: 20px
+}
+
+@media screen and (max-width: 1200px) {
+    #preloader {
+        margin-left:17px
+    }
+}
+
+@media screen and (max-width: 520px) {
+    #preloader {
+        margin-left:14px
+    }
+}
+
+#preloader #spinnerIcon {
+    width: 40px
+}
+
+@media screen and (max-width: 1350px) {
+    #preloader #spinnerIcon {
+        width:32px
+    }
+}
+
+@media screen and (max-width: 980px) {
+    #preloader #spinnerIcon {
+        width:26px
+    }
+}
+
+@media screen and (max-width: 786px) {
+    #preloader #spinnerIcon {
+        width:22px
+    }
+}
+
+@media screen and (max-width: 520px) {
+    #preloader #spinnerIcon {
+        width:18px
+    }
+}
+
+.offCycleStyleChange {
+    margin-top: -100px;
+    margin-bottom: -100px
+}
+
+@media screen and (max-width: 786px) {
+    .offCycleStyleChange {
+        margin-top:-60px;
+        margin-bottom: -60px
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .offCycleStyleChange {
+        margin-top:-35px;
+        margin-bottom: -35px
+    }
+}
+
+#container,#containerOffCycle {
+    width: 100%;
+    min-height: 100vh
+}
+
+#container main,#containerOffCycle main {
+    min-height: 450px;
+    width: 92%;
+    margin: 120px auto 0;
+    padding: 20px 4% 100px
+}
+
+@media screen and (max-width: 1100px) {
+    #container main,#containerOffCycle main {
+        padding:10px 2%;
+        width: 96%
+    }
+}
+
+@media screen and (max-width: 1350px) {
+    #container main,#containerOffCycle main {
+        padding-top:14px;
+        padding-bottom: 80px
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #container main,#containerOffCycle main {
+        width:92%;
+        min-height: 350px;
+        margin-top: 110px
+    }
+}
+
+@media screen and (max-width: 980px) {
+    #container main,#containerOffCycle main {
+        width:94%;
+        margin-top: 105px
+    }
+}
+
+@media screen and (max-width: 786px) {
+    #container main,#containerOffCycle main {
+        width:96%;
+        padding-top: 10px;
+        padding-bottom: 50px;
+        min-height: 300px
+    }
+}
+
+@media screen and (max-width: 520px) {
+    #container main,#containerOffCycle main {
+        width:98%;
+        min-height: 250px;
+        padding-left: 1%;
+        padding-right: 1%
+    }
+}
+
+#container main #page404,#containerOffCycle main #page404 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 450px
+}
+
+#container main #page404 h1,#container main #page404 p,#containerOffCycle main #page404 h1,#containerOffCycle main #page404 p {
+    color: #003a7d;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    width: 90%;
+    text-align: center
+}
+
+#container main #page404 h1,#containerOffCycle main #page404 h1 {
+    font-weight: bolder;
+    font-size: 90px
+}
+
+@media screen and (max-width: 1100px) {
+    #container main #page404 h1,#containerOffCycle main #page404 h1 {
+        font-size:80px
+    }
+}
+
+@media screen and (max-width: 980px) {
+    #container main #page404,#containerOffCycle main #page404 {
+        min-height:350px
+    }
+
+    #container main #page404 h1,#container main #page404 p,#containerOffCycle main #page404 h1,#containerOffCycle main #page404 p {
+        font-size: 16px
+    }
+
+    #container main #page404 h1,#containerOffCycle main #page404 h1 {
+        font-size: 70px
+    }
+}
+
+@media screen and (max-width: 786px) {
+    #container main #page404,#containerOffCycle main #page404 {
+        min-height:250px
+    }
+
+    #container main #page404 h1,#containerOffCycle main #page404 h1 {
+        font-size: 45px
+    }
+}
+
+@media screen and (max-width: 420px) {
+    #container main #page404,#containerOffCycle main #page404 {
+        min-height:200px
+    }
+
+    #container main #page404 h1,#container main #page404 p,#containerOffCycle main #page404 h1,#containerOffCycle main #page404 p {
+        font-size: 14px
+    }
+
+    #container main #page404 h1,#containerOffCycle main #page404 h1 {
+        font-size: 35px
+    }
+}
+
+#containerOffCycle {
+    background: #fff
+}
+
+#containerOffCycle main {
+    margin-top: 109px;
+    max-width: 100%
+}
+
+@media screen and (max-width: 1200px) {
+    #containerOffCycle main {
+        margin-top:104px
+    }
+}
+
+@media screen and (max-width: 980px) {
+    #containerOffCycle main {
+        margin-top:89px
+    }
+}
+
+@media screen and (max-width: 786px) {
+    #containerOffCycle main {
+        margin-top:90px
+    }
+}
+
+::-webkit-scrollbar {
+    width: 5px
+}
+
+::-webkit-scrollbar-track {
+    background: #e7e7e7
+}
+
+::-webkit-scrollbar-thumb {
+    background: silver;
+    border-radius: 20px;
+    background-clip: content-box
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #003a7d;
+    background: #9b9b9b
+}
+
+#mapFrame .cls-1 {
+    stroke: #fff;
+    stroke-miterlimit: 10
+}
+
+#mapFrame .cls-2 {
+    font-size: 8px
+}
+
+#mapFrame .cls-17,#mapFrame .cls-2,#mapFrame .cls-50 {
+    fill: #fff;
+    font-family: Poppins
+}
+
+#mapFrame .cls-3 {
+    letter-spacing: -.09em
+}
+
+#mapFrame .cls-4 {
+    letter-spacing: .05em
+}
+
+#mapFrame .cls-5,#mapFrame .cls-6 {
+    letter-spacing: .06em
+}
+
+#mapFrame .cls-7 {
+    letter-spacing: .11em
+}
+
+#mapFrame .cls-8 {
+    letter-spacing: .04em
+}
+
+#mapFrame .cls-9 {
+    letter-spacing: .06em
+}
+
+#mapFrame .cls-10 {
+    letter-spacing: 0
+}
+
+#mapFrame .cls-11 {
+    letter-spacing: -.13em
+}
+
+#mapFrame .cls-12 {
+    letter-spacing: .02em
+}
+
+#mapFrame .cls-13 {
+    letter-spacing: .01em
+}
+
+#mapFrame .cls-14 {
+    letter-spacing: -.1em
+}
+
+#mapFrame .cls-15 {
+    letter-spacing: .06em
+}
+
+#mapFrame .cls-16 {
+    letter-spacing: .11em
+}
+
+#mapFrame .cls-17 {
+    font-size: 7px
+}
+
+#mapFrame .cls-18 {
+    letter-spacing: .02em
+}
+
+#mapFrame .cls-19 {
+    letter-spacing: -.05em
+}
+
+#mapFrame .cls-20 {
+    letter-spacing: .04em
+}
+
+#mapFrame .cls-21 {
+    letter-spacing: .01em
+}
+
+#mapFrame .cls-22 {
+    letter-spacing: .06em
+}
+
+#mapFrame .cls-23 {
+    letter-spacing: .02em
+}
+
+#mapFrame .cls-24 {
+    letter-spacing: .05em
+}
+
+#mapFrame .cls-25 {
+    letter-spacing: .12em
+}
+
+#mapFrame .cls-26 {
+    letter-spacing: .03em
+}
+
+#mapFrame .cls-27,#mapFrame .cls-28 {
+    letter-spacing: -.06em
+}
+
+#mapFrame .cls-29 {
+    letter-spacing: .05em
+}
+
+#mapFrame .cls-30 {
+    letter-spacing: .02em
+}
+
+#mapFrame .cls-31 {
+    letter-spacing: -.03em
+}
+
+#mapFrame .cls-32,#mapFrame .cls-33 {
+    letter-spacing: -.02em
+}
+
+#mapFrame .cls-34 {
+    letter-spacing: -.03em
+}
+
+#mapFrame .cls-35 {
+    letter-spacing: .06em
+}
+
+#mapFrame .cls-36 {
+    letter-spacing: .04em
+}
+
+#mapFrame .cls-37 {
+    letter-spacing: .13em
+}
+
+#mapFrame .cls-38 {
+    letter-spacing: .01em
+}
+
+#mapFrame .cls-39 {
+    letter-spacing: .05em
+}
+
+#mapFrame .cls-40 {
+    letter-spacing: .12em
+}
+
+#mapFrame .cls-41 {
+    letter-spacing: .1em
+}
+
+#mapFrame .cls-42 {
+    letter-spacing: -.05em
+}
+
+#mapFrame .cls-43 {
+    letter-spacing: .02em
+}
+
+#mapFrame .cls-44 {
+    letter-spacing: .03em
+}
+
+#mapFrame .cls-45 {
+    letter-spacing: -.06em
+}
+
+#mapFrame .cls-46 {
+    letter-spacing: .04em
+}
+
+#mapFrame .cls-47 {
+    letter-spacing: .05em
+}
+
+#mapFrame .cls-48 {
+    letter-spacing: .03em
+}
+
+#mapFrame .cls-49 {
+    letter-spacing: .1em
+}
+
+#mapFrame .cls-50 {
+    font-size: 8px
+}
+
+#mapFrame .cls-51 {
+    letter-spacing: -.01em
+}
+
+#mapFrame .cls-52 {
+    letter-spacing: .03em
+}
+
+#mapFrame .cls-53 {
+    letter-spacing: .02em
+}
+
+#mapFrame .cls-54 {
+    letter-spacing: -.03em
+}
+
+#mapFrame .cls-55 {
+    letter-spacing: -.18em
+}
+
+#mapFrame .cls-56 {
+    letter-spacing: .01em
+}
+
+#mapFrame .cls-57 {
+    letter-spacing: -.01em
+}
+
+#mapFrame .cls-58 {
+    letter-spacing: .06em
+}
+
+#mapFrame .cls-59 {
+    letter-spacing: .05em
+}
+
+#mapFrame .cls-60 {
+    letter-spacing: -.01em
+}
+
+#mapFrame .cls-61 {
+    letter-spacing: -.03em
+}
+
+#mapFrame g,#mapFrame g text,#mapFrame g text t-span {
+    cursor: pointer
+}
+
+#senatorialMapFrame .cls-1 {
+    fill: #fff
+}
+
+#senatorialMapFrame .cls-2,#senatorialMapFrame .cls-4 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#senatorialMapFrame .cls-2 {
+    stroke-miterlimit: 10
+}
+
+#senatorialMapFrame .cls-3 {
+    mask: url(#mask)
+}
+
+#senatorialMapFrame .cls-21,#senatorialMapFrame .cls-5 {
+    font-size: 3.59px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#senatorialMapFrame .cls-6 {
+    fill: #737373
+}
+
+#senatorialMapFrame .cls-7 {
+    letter-spacing: -.01em
+}
+
+#senatorialMapFrame .cls-8 {
+    mask: url(#mask-2)
+}
+
+#senatorialMapFrame .cls-9 {
+    mask: url(#mask-3)
+}
+
+#senatorialMapFrame .cls-10 {
+    mask: url(#mask-4)
+}
+
+#senatorialMapFrame .cls-11 {
+    mask: url(#mask-5)
+}
+
+#senatorialMapFrame .cls-12 {
+    mask: url(#mask-6)
+}
+
+#senatorialMapFrame .cls-13 {
+    letter-spacing: -.03em
+}
+
+#senatorialMapFrame .cls-14 {
+    mask: url(#mask-7)
+}
+
+#senatorialMapFrame .cls-15 {
+    mask: url(#mask-8)
+}
+
+#senatorialMapFrame .cls-16 {
+    mask: url(#mask-9)
+}
+
+#senatorialMapFrame .cls-17 {
+    mask: url(#mask-10)
+}
+
+#senatorialMapFrame .cls-18 {
+    letter-spacing: -.01em
+}
+
+#senatorialMapFrame .cls-19 {
+    letter-spacing: -.02em
+}
+
+#senatorialMapFrame .cls-20 {
+    mask: url(#mask-11)
+}
+
+#senatorialMapFrame .cls-21 {
+    letter-spacing: -.03em
+}
+
+#senatorialMapFrame .cls-22 {
+    letter-spacing: 0
+}
+
+#senatorialMapFrame .cls-23 {
+    mask: url(#mask-12)
+}
+
+#senatorialMapFrame .cls-24 {
+    letter-spacing: -.01em
+}
+
+#senatorialMapFrame .cls-25 {
+    mask: url(#mask-13)
+}
+
+#senatorialMapFrame .cls-26 {
+    mask: url(#mask-14)
+}
+
+#senatorialMapFrame .cls-27 {
+    mask: url(#mask-15)
+}
+
+#senatorialMapFrame .cls-28 {
+    letter-spacing: -.01em
+}
+
+#senatorialMapFrame .cls-29 {
+    mask: url(#mask-16)
+}
+
+#senatorialMapFrame .cls-30 {
+    mask: url(#mask-17)
+}
+
+#senatorialMapFrame .cls-31 {
+    mask: url(#mask-18)
+}
+
+#senatorialMapFrame .cls-32 {
+    mask: url(#mask-19)
+}
+
+#senatorialMapFrame .cls-33 {
+    letter-spacing: -.04em
+}
+
+#senatorialMapFrame .cls-34 {
+    mask: url(#mask-20)
+}
+
+#senatorialMapFrame .cls-35 {
+    mask: url(#mask-21)
+}
+
+#senatorialMapFrame .cls-36,#senatorialMapFrame .cls-37 {
+    letter-spacing: -.01em
+}
+
+#senatorialMapFrame .cls-38 {
+    mask: url(#mask-22)
+}
+
+#senatorialMapFrame .cls-39 {
+    mask: url(#mask-23)
+}
+
+#senatorialMapFrame .cls-40 {
+    letter-spacing: -.01em
+}
+
+#senatorialMapFrame .cls-41 {
+    mask: url(#mask-24)
+}
+
+#senatorialMapFrame .cls-42 {
+    mask: url(#mask-25)
+}
+
+#senatorialMapFrame .cls-43 {
+    mask: url(#mask-26)
+}
+
+#senatorialMapFrame .cls-44 {
+    letter-spacing: -.01em
+}
+
+#repMapFrame .cls-1 {
+    fill: #fff
+}
+
+#repMapFrame .cls-2,#repMapFrame .cls-3 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#repMapFrame .cls-2 {
+    stroke-miterlimit: 10
+}
+
+#repMapFrame .cls-10,#repMapFrame .cls-4,#repMapFrame .cls-6,#repMapFrame .cls-9 {
+    font-size: 3.41px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#repMapFrame .cls-5 {
+    fill: #737373
+}
+
+#repMapFrame .cls-6 {
+    letter-spacing: -.01em
+}
+
+#repMapFrame .cls-7 {
+    letter-spacing: 0
+}
+
+#repMapFrame .cls-8 {
+    mask: url(#mask)
+}
+
+#repMapFrame .cls-9 {
+    letter-spacing: -.03em
+}
+
+#repMapFrame .cls-10 {
+    letter-spacing: -.01em
+}
+
+#repMapFrame .cls-11 {
+    letter-spacing: 0
+}
+
+#repMapFrame .cls-12 {
+    letter-spacing: -.02em
+}
+
+#repMapFrame .cls-13 {
+    letter-spacing: -.03em
+}
+
+#repMapFrame .cls-14,#repMapFrame .cls-15 {
+    letter-spacing: -.01em
+}
+
+#repMapFrame .cls-16 {
+    mask: url(#mask-2)
+}
+
+#repMapFrame .cls-17 {
+    letter-spacing: -.04em
+}
+
+#repMapFrame .cls-18,#repMapFrame .cls-19,#repMapFrame .cls-20 {
+    letter-spacing: -.01em
+}
+
+#district_abia .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#district_abia .cls-2 {
+    fill: #737373
+}
+
+#district_abia .cls-3 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_abia .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#state_abia .cls-2 {
+    fill: #737373
+}
+
+#state_abia .cls-3 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_adamawa .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_adamawa .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_adamawa .cls-3 {
+    fill: #737373
+}
+
+#state_akwaIbom .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_akwaIbom .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_akwaIbom .cls-3 {
+    fill: #737373
+}
+
+#state_anambra .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#state_anambra .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_anambra .cls-3 {
+    letter-spacing: -.02em
+}
+
+#state_anambra .cls-4 {
+    fill: #737373
+}
+
+#state_bauchi .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_bauchi .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_bauchi .cls-3 {
+    fill: #737373
+}
+
+#state_bayelsa .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_bayelsa .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_bayelsa .cls-3,#state_bayelsa .cls-4 {
+    letter-spacing: -.01em
+}
+
+#state_bayelsa .cls-5 {
+    fill: #737373
+}
+
+#state_benue .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_benue .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_benue .cls-3 {
+    fill: #737373
+}
+
+#state_borno .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_borno .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_borno .cls-3 {
+    fill: #737373
+}
+
+#state_crossRiver .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_crossRiver .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_crossRiver .cls-3,#state_crossRiver .cls-4 {
+    letter-spacing: -.01em
+}
+
+#state_crossRiver .cls-5 {
+    fill: #737373
+}
+
+#state_delta .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_delta .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_delta .cls-3 {
+    fill: #737373
+}
+
+#state_ebonyi .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#state_ebonyi .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_ebonyi .cls-3 {
+    fill: #737373
+}
+
+#state_edo .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_edo .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_edo .cls-3 {
+    letter-spacing: -.01em
+}
+
+#state_edo .cls-4 {
+    fill: #737373
+}
+
+#state_ekiti .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#state_ekiti .cls-2 {
+    fill: #737373
+}
+
+#state_ekiti .cls-3 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_enugu .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#state_enugu .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_enugu .cls-3 {
+    fill: #737373
+}
+
+#state_gombe .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#state_gombe .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_gombe .cls-3 {
+    fill: #737373
+}
+
+#state_imo .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#state_imo .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_imo .cls-3 {
+    fill: #737373
+}
+
+#state_jigawa .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_jigawa .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_jigawa .cls-3 {
+    fill: #737373
+}
+
+#state_kaduna .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_kaduna .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_kaduna .cls-3 {
+    fill: #737373
+}
+
+#state_kano .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_kano .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_kano .cls-3 {
+    fill: #737373
+}
+
+#state_katsina .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_katsina .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_katsina .cls-3 {
+    fill: #737373
+}
+
+#state_kebbi .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_kebbi .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_kebbi .cls-3 {
+    letter-spacing: -.01em
+}
+
+#state_kebbi .cls-4 {
+    fill: #737373
+}
+
+#state_kogi .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_kogi .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_kogi .cls-3 {
+    letter-spacing: -.01em
+}
+
+#state_kogi .cls-4 {
+    fill: #737373
+}
+
+#state_kwara .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_kwara .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_kwara .cls-3 {
+    letter-spacing: -.03em
+}
+
+#state_kwara .cls-4 {
+    fill: #737373
+}
+
+#state_lagos .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#state_lagos .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_lagos .cls-3 {
+    fill: #737373
+}
+
+#state_nasarawa .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_nasarawa .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_nasarawa .cls-3 {
+    fill: #737373
+}
+
+#state_niger .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_niger .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_niger .cls-3 {
+    fill: #737373
+}
+
+#state_ogun .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_ogun .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_ogun .cls-3 {
+    fill: #737373
+}
+
+#state_ondo .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_ondo .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_ondo .cls-3 {
+    fill: #737373
+}
+
+#state_osun .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#state_osun .cls-2 {
+    fill: #737373
+}
+
+#state_osun .cls-3 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_oyo .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_oyo .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_oyo .cls-3 {
+    letter-spacing: -.01em
+}
+
+#state_oyo .cls-4 {
+    fill: #737373
+}
+
+#state_plateau .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_plateau .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_plateau .cls-3 {
+    fill: #737373
+}
+
+#state_rivers .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_rivers .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_rivers .cls-3 {
+    letter-spacing: -.01em
+}
+
+#state_rivers .cls-4 {
+    fill: #737373
+}
+
+#state_sokoto .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_sokoto .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_sokoto .cls-3 {
+    fill: #737373
+}
+
+#state_taraba .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_taraba .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_taraba .cls-3 {
+    letter-spacing: -.04em
+}
+
+#state_taraba .cls-4 {
+    fill: #737373
+}
+
+#state_yobe .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_yobe .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_yobe .cls-3 {
+    letter-spacing: -.03em
+}
+
+#state_yobe .cls-4 {
+    fill: #737373
+}
+
+#state_zamfara .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#state_zamfara .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_zamfara .cls-3 {
+    fill: #737373
+}
+
+#state_fct .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#state_fct .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#state_fct .cls-3 {
+    letter-spacing: -.01em
+}
+
+#state_fct .cls-4 {
+    fill: #737373
+}
+
+#district_adamawa .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_adamawa .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_adamawa .cls-3 {
+    fill: #737373
+}
+
+#district_akwaIbom .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_akwaIbom .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_akwaIbom .cls-3 {
+    fill: #737373
+}
+
+#district_anambra .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#district_anambra .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_anambra .cls-3 {
+    letter-spacing: -.02em
+}
+
+#district_anambra .cls-4 {
+    fill: #737373
+}
+
+#district_bauchi .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_bauchi .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_bauchi .cls-3 {
+    fill: #737373
+}
+
+#district_bayelsa .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_bayelsa .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_bayelsa .cls-3,#district_bayelsa .cls-4 {
+    letter-spacing: -.01em
+}
+
+#district_bayelsa .cls-5 {
+    fill: #737373
+}
+
+#district_benue .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_benue .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_benue .cls-3 {
+    fill: #737373
+}
+
+#district_borno .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_borno .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_borno .cls-3 {
+    fill: #737373
+}
+
+#district_crossRiver .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_crossRiver .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_crossRiver .cls-3,#district_crossRiver .cls-4 {
+    letter-spacing: -.01em
+}
+
+#district_crossRiver .cls-5 {
+    fill: #737373
+}
+
+#district_delta .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_delta .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_delta .cls-3 {
+    fill: #737373
+}
+
+#district_ebonyi .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#district_ebonyi .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_ebonyi .cls-3 {
+    fill: #737373
+}
+
+#district_edo .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_edo .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_edo .cls-3 {
+    letter-spacing: -.01em
+}
+
+#district_edo .cls-4 {
+    fill: #737373
+}
+
+#district_ekiti .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#district_ekiti .cls-2 {
+    fill: #737373
+}
+
+#district_ekiti .cls-3 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_enugu .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#district_enugu .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_enugu .cls-3 {
+    fill: #737373
+}
+
+#district_gombe .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#district_gombe .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_gombe .cls-3 {
+    fill: #737373
+}
+
+#district_imo .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#district_imo .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_imo .cls-3 {
+    fill: #737373
+}
+
+#district_jigawa .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_jigawa .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_jigawa .cls-3 {
+    fill: #737373
+}
+
+#district_kaduna .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_kaduna .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_kaduna .cls-3 {
+    fill: #737373
+}
+
+#district_kano .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_kano .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_kano .cls-3 {
+    fill: #737373
+}
+
+#district_katsina .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_katsina .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_katsina .cls-3 {
+    fill: #737373
+}
+
+#district_kebbi .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_kebbi .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_kebbi .cls-3 {
+    letter-spacing: -.01em
+}
+
+#district_kebbi .cls-4 {
+    fill: #737373
+}
+
+#district_kogi .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_kogi .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_kogi .cls-3 {
+    letter-spacing: -.01em
+}
+
+#district_kogi .cls-4 {
+    fill: #737373
+}
+
+#district_kwara .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_kwara .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_kwara .cls-3 {
+    letter-spacing: -.03em
+}
+
+#district_kwara .cls-4 {
+    fill: #737373
+}
+
+#district_lagos .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#district_lagos .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_lagos .cls-3 {
+    fill: #737373
+}
+
+#district_nasarawa .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_nasarawa .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_nasarawa .cls-3 {
+    fill: #737373
+}
+
+#district_niger .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_niger .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_niger .cls-3 {
+    fill: #737373
+}
+
+#district_ogun .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_ogun .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_ogun .cls-3 {
+    fill: #737373
+}
+
+#district_ondo .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_ondo .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_ondo .cls-3 {
+    fill: #737373
+}
+
+#district_osun .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#district_osun .cls-2 {
+    fill: #737373
+}
+
+#district_osun .cls-3 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_oyo .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_oyo .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_oyo .cls-3 {
+    letter-spacing: -.01em
+}
+
+#district_oyo .cls-4 {
+    fill: #737373
+}
+
+#district_plateau .cls-1 {
+    fill: #fff
+}
+
+#district_plateau .cls-2,#district_plateau .cls-4 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#district_plateau .cls-2 {
+    stroke-miterlimit: 10
+}
+
+#district_plateau .cls-3 {
+    mask: url(#mask)
+}
+
+#district_plateau .cls-5 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_plateau .cls-6 {
+    fill: #737373
+}
+
+#district_rivers .cls-1 {
+    fill: #fff
+}
+
+#district_rivers .cls-2,#district_rivers .cls-4 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#district_rivers .cls-2 {
+    stroke-miterlimit: 10
+}
+
+#district_rivers .cls-3 {
+    mask: url(#mask)
+}
+
+#district_rivers .cls-5 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_rivers .cls-6 {
+    letter-spacing: -.01em
+}
+
+#district_rivers .cls-7 {
+    fill: #737373
+}
+
+#district_taraba .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_taraba .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_taraba .cls-3 {
+    letter-spacing: -.04em
+}
+
+#district_taraba .cls-4 {
+    fill: #737373
+}
+
+#district_yobe .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_yobe .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_yobe .cls-3 {
+    letter-spacing: -.03em
+}
+
+#district_yobe .cls-4 {
+    fill: #737373
+}
+
+#district_zamfara .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-miterlimit: 10;
+    stroke-width: .25px
+}
+
+#district_zamfara .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_zamfara .cls-3 {
+    fill: #737373
+}
+
+#district_fct .cls-1 {
+    fill: #f7f7f4;
+    stroke: #737373;
+    stroke-width: .25px
+}
+
+#district_fct .cls-2 {
+    font-size: 6px;
+    fill: #203e7a;
+    font-family: Roboto-Bold,Roboto;
+    font-weight: 700
+}
+
+#district_fct .cls-3 {
+    letter-spacing: -.01em
+}
+
+#district_fct .cls-4 {
+    fill: #737373
+}
+
+#anambra .cls-1 {
+    stroke: #fff
+}
+
+#anambra .cls-1,#anambra .cls-34 {
+    stroke-miterlimit: 10
+}
+
+#anambra .cls-2,#anambra .cls-32 {
+    font-size: 8px
+}
+
+#anambra .cls-10,#anambra .cls-17,#anambra .cls-2,#anambra .cls-24,#anambra .cls-35 {
+    fill: #fff
+}
+
+#anambra .cls-10,#anambra .cls-17,#anambra .cls-2,#anambra .cls-24,#anambra .cls-32 {
+    font-family: Athletics-Regular,Athletics
+}
+
+#anambra .cls-3 {
+    letter-spacing: -.02em
+}
+
+#anambra .cls-4 {
+    letter-spacing: 0
+}
+
+#anambra .cls-5 {
+    letter-spacing: -.01em
+}
+
+#anambra .cls-6 {
+    letter-spacing: -.02em
+}
+
+#anambra .cls-7 {
+    letter-spacing: -.01em
+}
+
+#anambra .cls-8 {
+    letter-spacing: -.05em
+}
+
+#anambra .cls-9 {
+    letter-spacing: 0
+}
+
+#anambra .cls-10 {
+    font-size: 22px
+}
+
+#anambra .cls-11 {
+    letter-spacing: 0
+}
+
+#anambra .cls-12 {
+    letter-spacing: -.06em
+}
+
+#anambra .cls-13 {
+    letter-spacing: -.02em
+}
+
+#anambra .cls-14 {
+    letter-spacing: 0
+}
+
+#anambra .cls-15 {
+    letter-spacing: .02em
+}
+
+#anambra .cls-16 {
+    letter-spacing: -.01em
+}
+
+#anambra .cls-17 {
+    font-size: 8px
+}
+
+#anambra .cls-18 {
+    letter-spacing: -.01em
+}
+
+#anambra .cls-19 {
+    letter-spacing: 0
+}
+
+#anambra .cls-20 {
+    letter-spacing: -.01em
+}
+
+#anambra .cls-21 {
+    letter-spacing: .02em
+}
+
+#anambra .cls-22 {
+    letter-spacing: -.01em
+}
+
+#anambra .cls-23 {
+    letter-spacing: -.03em
+}
+
+#anambra .cls-24 {
+    font-size: 8px
+}
+
+#anambra .cls-25 {
+    letter-spacing: 0
+}
+
+#anambra .cls-26 {
+    letter-spacing: -.01em
+}
+
+#anambra .cls-27 {
+    letter-spacing: 0
+}
+
+#anambra .cls-28,#anambra .cls-29,#anambra .cls-30 {
+    letter-spacing: -.01em
+}
+
+#anambra .cls-31,#anambra .cls-33 {
+    letter-spacing: 0
+}
+
+#anambra .cls-34 {
+    fill: none;
+    stroke: #8e8e8e
+}
+
+#anambra .cls-36 {
+    letter-spacing: -.04em
+}
+
+#anambra .cls-37 {
+    letter-spacing: 0
+}
+
+#anambra .cls-38 {
+    letter-spacing: -.01em
+}
+
+#edo .cls-1 {
+    stroke: #fff
+}
+
+#edo .cls-1,#edo .cls-41 {
+    stroke-miterlimit: 10
+}
+
+#edo .cls-13,#edo .cls-19,#edo .cls-2,#edo .cls-28,#edo .cls-38,#edo .cls-6 {
+    isolation: isolate;
+    font-family: Athletics-Regular,Athletics
+}
+
+#edo .cls-2,#edo .cls-38,#edo .cls-6 {
+    font-size: 8px
+}
+
+#edo .cls-13,#edo .cls-19,#edo .cls-2,#edo .cls-28,#edo .cls-42,#edo .cls-6 {
+    fill: #fff
+}
+
+#edo .cls-3 {
+    letter-spacing: -.03em
+}
+
+#edo .cls-4 {
+    letter-spacing: .01em
+}
+
+#edo .cls-5,#edo .cls-6 {
+    letter-spacing: -.02em
+}
+
+#edo .cls-7,#edo .cls-8,#edo .cls-9 {
+    letter-spacing: 0
+}
+
+#edo .cls-10 {
+    letter-spacing: .02em
+}
+
+#edo .cls-11 {
+    letter-spacing: -.02em
+}
+
+#edo .cls-12 {
+    letter-spacing: -.01em
+}
+
+#edo .cls-13 {
+    font-size: 20.87px
+}
+
+#edo .cls-14 {
+    letter-spacing: -.01em
+}
+
+#edo .cls-15 {
+    letter-spacing: 0
+}
+
+#edo .cls-16 {
+    letter-spacing: -.05em
+}
+
+#edo .cls-17 {
+    letter-spacing: 0
+}
+
+#edo .cls-18 {
+    letter-spacing: -.01em
+}
+
+#edo .cls-19 {
+    font-size: 22.37px
+}
+
+#edo .cls-20,#edo .cls-21 {
+    letter-spacing: 0
+}
+
+#edo .cls-22 {
+    letter-spacing: -.04em
+}
+
+#edo .cls-23 {
+    letter-spacing: -.01em
+}
+
+#edo .cls-24 {
+    letter-spacing: -.02em
+}
+
+#edo .cls-25 {
+    letter-spacing: -.01em
+}
+
+#edo .cls-26 {
+    letter-spacing: -.05em
+}
+
+#edo .cls-27 {
+    letter-spacing: 0
+}
+
+#edo .cls-28 {
+    font-size: 23px;
+    letter-spacing: -.01em
+}
+
+#edo .cls-29 {
+    letter-spacing: 0
+}
+
+#edo .cls-30,#edo .cls-31,#edo .cls-32 {
+    letter-spacing: -.01em
+}
+
+#edo .cls-33,#edo .cls-34,#edo .cls-35 {
+    letter-spacing: 0
+}
+
+#edo .cls-36,#edo .cls-37 {
+    letter-spacing: -.02em
+}
+
+#edo .cls-39,#edo .cls-40 {
+    letter-spacing: -.01em
+}
+
+#edo .cls-41 {
+    fill: none;
+    stroke: #8c8585
+}
+
+#edo .cls-43 {
+    letter-spacing: 0
+}
+
+#edo .cls-44 {
+    letter-spacing: -.02em
+}
+
+#ekiti .cls-1 {
+    stroke: #fff;
+    stroke-miterlimit: 10
+}
+
+#ekiti .cls-13,#ekiti .cls-2,#ekiti .cls-22,#ekiti .cls-26,#ekiti .cls-9 {
+    isolation: isolate
+}
+
+#ekiti .cls-13,#ekiti .cls-2,#ekiti .cls-22,#ekiti .cls-26,#ekiti .cls-7,#ekiti .cls-9 {
+    font-size: 8px;
+    fill: #fff
+}
+
+#ekiti .cls-13,#ekiti .cls-2,#ekiti .cls-22,#ekiti .cls-7,#ekiti .cls-9 {
+    font-family: Athletics-Regular,Athletics
+}
+
+#ekiti .cls-3 {
+    letter-spacing: -.02em
+}
+
+#ekiti .cls-4 {
+    letter-spacing: .01em
+}
+
+#ekiti .cls-5,#ekiti .cls-6 {
+    letter-spacing: 0
+}
+
+#ekiti .cls-8 {
+    letter-spacing: -.03em
+}
+
+#ekiti .cls-18,#ekiti .cls-9 {
+    letter-spacing: -.01em
+}
+
+#ekiti .cls-10 {
+    letter-spacing: 0
+}
+
+#ekiti .cls-11 {
+    letter-spacing: -.03em
+}
+
+#ekiti .cls-12 {
+    letter-spacing: 0
+}
+
+#ekiti .cls-13,#ekiti .cls-16 {
+    letter-spacing: -.02em
+}
+
+#ekiti .cls-14 {
+    letter-spacing: -.06em
+}
+
+#ekiti .cls-15 {
+    letter-spacing: 0
+}
+
+#ekiti .cls-17,#ekiti .cls-19 {
+    letter-spacing: -.01em
+}
+
+#ekiti .cls-20 {
+    letter-spacing: -.05em
+}
+
+#ekiti .cls-21,#ekiti .cls-22 {
+    letter-spacing: 0
+}
+
+#ekiti .cls-23 {
+    letter-spacing: -.01em
+}
+
+#ekiti .cls-24 {
+    letter-spacing: 0
+}
+
+#ekiti .cls-25 {
+    letter-spacing: -.06em
+}
+
+#ekiti .cls-26 {
+    font-family: Athletics-Regular,Athletics
+}
+
+#ekiti .cls-27 {
+    letter-spacing: .01em
+}
+
+#ekiti .cls-28 {
+    letter-spacing: -.01em
+}
+
+#imo .cls-1,#imo .cls-40 {
+    stroke: #fff
+}
+
+#imo .cls-1,#imo .cls-39,#imo .cls-40,#imo .cls-41 {
+    stroke-miterlimit: 10
+}
+
+#imo .cls-19,#imo .cls-2,#imo .cls-27,#imo .cls-3,#imo .cls-34,#imo .cls-37,#imo .cls-6 {
+    isolation: isolate
+}
+
+#imo .cls-27,#imo .cls-3,#imo .cls-34,#imo .cls-37 {
+    font-size: 8px
+}
+
+#imo .cls-19,#imo .cls-27,#imo .cls-3,#imo .cls-34,#imo .cls-40,#imo .cls-6 {
+    fill: #fff
+}
+
+#imo .cls-19,#imo .cls-27,#imo .cls-3,#imo .cls-34,#imo .cls-37,#imo .cls-6 {
+    font-family: Athletics-Regular,Athletics
+}
+
+#imo .cls-4,#imo .cls-5 {
+    letter-spacing: 0
+}
+
+#imo .cls-6 {
+    font-size: 8px
+}
+
+#imo .cls-7 {
+    letter-spacing: 0
+}
+
+#imo .cls-8 {
+    letter-spacing: -.02em
+}
+
+#imo .cls-10,#imo .cls-9 {
+    letter-spacing: 0
+}
+
+#imo .cls-11 {
+    letter-spacing: -.01em
+}
+
+#imo .cls-12 {
+    letter-spacing: 0
+}
+
+#imo .cls-13 {
+    letter-spacing: .02em
+}
+
+#imo .cls-14 {
+    letter-spacing: -.03em
+}
+
+#imo .cls-15,#imo .cls-16,#imo .cls-17 {
+    letter-spacing: 0
+}
+
+#imo .cls-18 {
+    letter-spacing: -.01em
+}
+
+#imo .cls-19 {
+    font-size: 8px
+}
+
+#imo .cls-20 {
+    letter-spacing: -.01em
+}
+
+#imo .cls-21 {
+    letter-spacing: -.02em
+}
+
+#imo .cls-22,#imo .cls-23 {
+    letter-spacing: -.01em
+}
+
+#imo .cls-24 {
+    letter-spacing: 0
+}
+
+#imo .cls-25,#imo .cls-26 {
+    letter-spacing: -.02em
+}
+
+#imo .cls-27,#imo .cls-28 {
+    letter-spacing: -.01em
+}
+
+#imo .cls-29 {
+    letter-spacing: 0
+}
+
+#imo .cls-30 {
+    letter-spacing: -.02em
+}
+
+#imo .cls-31 {
+    letter-spacing: -.01em
+}
+
+#imo .cls-32 {
+    letter-spacing: -.05em
+}
+
+#imo .cls-33 {
+    letter-spacing: -.01em
+}
+
+#imo .cls-34,#imo .cls-38 {
+    letter-spacing: 0
+}
+
+#imo .cls-35 {
+    letter-spacing: -.05em
+}
+
+#imo .cls-36 {
+    letter-spacing: 0
+}
+
+#imo .cls-39,#imo .cls-41 {
+    fill: none
+}
+
+#imo .cls-39 {
+    stroke: #7f7f7f
+}
+
+#imo .cls-41 {
+    stroke: #d3d3d3
+}
+
+#kogi .cls-1 {
+    stroke: #fff
+}
+
+#kogi .cls-1,#kogi .cls-30 {
+    stroke-miterlimit: 10
+}
+
+#kogi .cls-2,#kogi .cls-29,#kogi .cls-32 {
+    font-size: 8px
+}
+
+#kogi .cls-2,#kogi .cls-24,#kogi .cls-31 {
+    fill: #fff
+}
+
+#kogi .cls-2,#kogi .cls-24,#kogi .cls-29,#kogi .cls-32 {
+    font-family: Athletics-Regular,Athletics
+}
+
+#kogi .cls-3 {
+    letter-spacing: -.02em
+}
+
+#kogi .cls-4 {
+    letter-spacing: -.01em
+}
+
+#kogi .cls-5,#kogi .cls-6,#kogi .cls-7,#kogi .cls-8 {
+    letter-spacing: 0
+}
+
+#kogi .cls-10,#kogi .cls-29,#kogi .cls-9 {
+    letter-spacing: -.01em
+}
+
+#kogi .cls-11 {
+    letter-spacing: -.02em
+}
+
+#kogi .cls-12 {
+    letter-spacing: 0
+}
+
+#kogi .cls-13 {
+    letter-spacing: -.02em
+}
+
+#kogi .cls-14 {
+    letter-spacing: -.04em
+}
+
+#kogi .cls-15 {
+    letter-spacing: -.02em
+}
+
+#kogi .cls-16 {
+    letter-spacing: -.03em
+}
+
+#kogi .cls-17 {
+    letter-spacing: -.04em
+}
+
+#kogi .cls-18 {
+    letter-spacing: -.02em
+}
+
+#kogi .cls-19 {
+    letter-spacing: -.01em
+}
+
+#kogi .cls-20 {
+    letter-spacing: 0
+}
+
+#kogi .cls-21 {
+    letter-spacing: -.01em
+}
+
+#kogi .cls-22 {
+    letter-spacing: -.13em
+}
+
+#kogi .cls-23 {
+    letter-spacing: -.02em
+}
+
+#kogi .cls-24 {
+    font-size: 26.78px
+}
+
+#kogi .cls-25 {
+    letter-spacing: -.13em
+}
+
+#kogi .cls-26 {
+    letter-spacing: -.05em
+}
+
+#kogi .cls-27 {
+    letter-spacing: 0
+}
+
+#kogi .cls-28 {
+    letter-spacing: -.01em
+}
+
+#kogi .cls-30 {
+    fill: none;
+    stroke: #6b6b6b
+}
+
+#ondo .cls-1 {
+    stroke: #fff;
+    stroke-miterlimit: 10
+}
+
+#ondo .cls-2,#ondo .cls-24 {
+    font-size: 8px
+}
+
+#ondo .cls-10,#ondo .cls-16,#ondo .cls-19,#ondo .cls-2,#ondo .cls-24 {
+    fill: #fff;
+    font-family: Athletics-Regular,Athletics
+}
+
+#ondo .cls-3,#ondo .cls-4 {
+    letter-spacing: -.04em
+}
+
+#ondo .cls-5 {
+    letter-spacing: .02em
+}
+
+#ondo .cls-6 {
+    letter-spacing: -.01em
+}
+
+#ondo .cls-7 {
+    letter-spacing: -.04em
+}
+
+#ondo .cls-8 {
+    letter-spacing: -.01em
+}
+
+#ondo .cls-9 {
+    letter-spacing: 0
+}
+
+#ondo .cls-10 {
+    font-size: 20.55px
+}
+
+#ondo .cls-11 {
+    letter-spacing: -.01em
+}
+
+#ondo .cls-12 {
+    letter-spacing: .02em
+}
+
+#ondo .cls-13,#ondo .cls-14 {
+    letter-spacing: 0
+}
+
+#ondo .cls-15 {
+    letter-spacing: -.01em
+}
+
+#ondo .cls-16 {
+    font-size: 22px
+}
+
+#ondo .cls-17 {
+    letter-spacing: -.06em
+}
+
+#ondo .cls-18 {
+    letter-spacing: 0
+}
+
+#ondo .cls-19 {
+    font-size: 23.04px
+}
+
+#ondo .cls-20 {
+    letter-spacing: .01em
+}
+
+#ondo .cls-21 {
+    font-size: 12.9px
+}
+
+#ondo .cls-22 {
+    letter-spacing: -.03em
+}
+
+#ondo .cls-23,#ondo .cls-24 {
+    letter-spacing: -.01em
+}
+
+#ondo .cls-25 {
+    letter-spacing: 0
+}
+
+#ondo .cls-26 {
+    letter-spacing: .01em
+}
+
+#ondo .cls-27 {
+    letter-spacing: -.01em
+}
+
+#ondo .cls-28 {
+    letter-spacing: -.02em
+}
+
+#ondo .cls-29,#ondo .cls-30 {
+    letter-spacing: -.01em
+}
+
+#ondo .cls-31 {
+    letter-spacing: -.05em
+}
+
+#ondo .cls-32 {
+    letter-spacing: 0
+}
+
+#ondo .cls-33,#ondo .cls-34 {
+    letter-spacing: -.01em
+}
+
+#ondo .cls-35 {
+    letter-spacing: 0
+}
+
+#osun .cls-1 {
+    stroke: #fff;
+    stroke-miterlimit: 10
+}
+
+#osun .cls-2,#osun .cls-42,#osun .cls-47 {
+    font-size: 8px
+}
+
+#osun .cls-14,#osun .cls-2,#osun .cls-35,#osun .cls-42,#osun .cls-47,#osun .cls-48 {
+    fill: #fff;
+    font-family: Athletics-Regular,Athletics
+}
+
+#osun .cls-3 {
+    letter-spacing: -.05em
+}
+
+#osun .cls-4,#osun .cls-5 {
+    letter-spacing: 0
+}
+
+#osun .cls-6 {
+    letter-spacing: -.02em
+}
+
+#osun .cls-7,#osun .cls-8,#osun .cls-9 {
+    letter-spacing: 0
+}
+
+#osun .cls-10 {
+    letter-spacing: -.02em
+}
+
+#osun .cls-11,#osun .cls-12 {
+    letter-spacing: -.01em
+}
+
+#osun .cls-13 {
+    letter-spacing: -.05em
+}
+
+#osun .cls-14 {
+    font-size: 29px
+}
+
+#osun .cls-15,#osun .cls-16 {
+    letter-spacing: -.02em
+}
+
+#osun .cls-17 {
+    letter-spacing: -.01em
+}
+
+#osun .cls-18 {
+    letter-spacing: .02em
+}
+
+#osun .cls-19,#osun .cls-20,#osun .cls-21 {
+    font-size: 8px
+}
+
+#osun .cls-19,#osun .cls-20,#osun .cls-22,#osun .cls-42 {
+    letter-spacing: 0
+}
+
+#osun .cls-23 {
+    letter-spacing: -.06em
+}
+
+#osun .cls-24 {
+    font-size: 18px
+}
+
+#osun .cls-25 {
+    letter-spacing: -.01em
+}
+
+#osun .cls-26 {
+    letter-spacing: -.02em
+}
+
+#osun .cls-27 {
+    letter-spacing: -.01em
+}
+
+#osun .cls-28,#osun .cls-29,#osun .cls-30,#osun .cls-31 {
+    font-size: 21px
+}
+
+#osun .cls-28 {
+    letter-spacing: -.02em
+}
+
+#osun .cls-29 {
+    letter-spacing: 0
+}
+
+#osun .cls-30 {
+    letter-spacing: -.01em
+}
+
+#osun .cls-32 {
+    letter-spacing: 0
+}
+
+#osun .cls-33 {
+    letter-spacing: -.01em
+}
+
+#osun .cls-34 {
+    letter-spacing: .02em
+}
+
+#osun .cls-35 {
+    font-size: 25px
+}
+
+#osun .cls-36 {
+    letter-spacing: 0
+}
+
+#osun .cls-37 {
+    letter-spacing: -.01em
+}
+
+#osun .cls-38,#osun .cls-39 {
+    letter-spacing: 0
+}
+
+#osun .cls-40 {
+    letter-spacing: -.01em
+}
+
+#osun .cls-41 {
+    letter-spacing: -.02em
+}
+
+#osun .cls-43 {
+    letter-spacing: 0
+}
+
+#osun .cls-44 {
+    letter-spacing: -.02em
+}
+
+#osun .cls-45,#osun .cls-46 {
+    letter-spacing: 0
+}
+
+#osun .cls-47 {
+    letter-spacing: -.01em
+}
+
+#osun .cls-48 {
+    font-size: 20.28px
+}
+
+#osun .cls-49 {
+    letter-spacing: -.01em
+}
+
+#osun .cls-50 {
+    letter-spacing: 0
+}
+
+#offCycle {
+    width: 100%
+}
+
+#offCycle #bayelsa .cls-1 {
+    letter-spacing: .02em
+}
+
+#offCycle #bayelsa .cls-1,#offCycle #bayelsa .cls-10,#offCycle #bayelsa .cls-11,#offCycle #bayelsa .cls-12,#offCycle #bayelsa .cls-13,#offCycle #bayelsa .cls-14,#offCycle #bayelsa .cls-15,#offCycle #bayelsa .cls-2,#offCycle #bayelsa .cls-3,#offCycle #bayelsa .cls-4,#offCycle #bayelsa .cls-5,#offCycle #bayelsa .cls-6,#offCycle #bayelsa .cls-7,#offCycle #bayelsa .cls-8,#offCycle #bayelsa .cls-9 {
+    isolation: isolate
+}
+
+#offCycle #bayelsa .cls-1,#offCycle #bayelsa .cls-10,#offCycle #bayelsa .cls-11,#offCycle #bayelsa .cls-12,#offCycle #bayelsa .cls-13,#offCycle #bayelsa .cls-14,#offCycle #bayelsa .cls-15,#offCycle #bayelsa .cls-2,#offCycle #bayelsa .cls-3,#offCycle #bayelsa .cls-4,#offCycle #bayelsa .cls-6,#offCycle #bayelsa .cls-7,#offCycle #bayelsa .cls-8,#offCycle #bayelsa .cls-9 {
+    fill: #fff;
+    font-family: Athletics-Regular,Athletics
+}
+
+#offCycle #bayelsa .cls-1,#offCycle #bayelsa .cls-13,#offCycle #bayelsa .cls-14,#offCycle #bayelsa .cls-15,#offCycle #bayelsa .cls-2,#offCycle #bayelsa .cls-3 {
+    font-size: 33px
+}
+
+#offCycle #bayelsa .cls-2 {
+    letter-spacing: -.03em
+}
+
+#offCycle #bayelsa .cls-3 {
+    letter-spacing: 0
+}
+
+#offCycle #bayelsa .cls-4 {
+    letter-spacing: -.02em
+}
+
+#offCycle #bayelsa .cls-4,#offCycle #bayelsa .cls-6,#offCycle #bayelsa .cls-8 {
+    font-size: 22.09px
+}
+
+#offCycle #bayelsa .cls-6,#offCycle #bayelsa .cls-7 {
+    letter-spacing: 0
+}
+
+#offCycle #bayelsa .cls-11,#offCycle #bayelsa .cls-7,#offCycle #bayelsa .cls-9 {
+    font-size: 30.13px
+}
+
+#offCycle #bayelsa .cls-9 {
+    letter-spacing: -.04em
+}
+
+#offCycle #bayelsa .cls-16 {
+    stroke: #fff;
+    stroke-miterlimit: 10
+}
+
+#offCycle #bayelsa .cls-10 {
+    letter-spacing: -.13em
+}
+
+#offCycle #bayelsa .cls-10,#offCycle #bayelsa .cls-12 {
+    font-size: 33.14px
+}
+
+#offCycle #bayelsa .cls-13 {
+    letter-spacing: 0
+}
+
+#offCycle #bayelsa .cls-14 {
+    letter-spacing: -.02em
+}
+
+#offCycle #imo .cls-1,#offCycle #imo .cls-10,#offCycle #imo .cls-11,#offCycle #imo .cls-12,#offCycle #imo .cls-2,#offCycle #imo .cls-3,#offCycle #imo .cls-4,#offCycle #imo .cls-5,#offCycle #imo .cls-6,#offCycle #imo .cls-7,#offCycle #imo .cls-8,#offCycle #imo .cls-9 {
+    isolation: isolate
+}
+
+#offCycle #imo .cls-1,#offCycle #imo .cls-10,#offCycle #imo .cls-11,#offCycle #imo .cls-12,#offCycle #imo .cls-2,#offCycle #imo .cls-3,#offCycle #imo .cls-5,#offCycle #imo .cls-6,#offCycle #imo .cls-7,#offCycle #imo .cls-8,#offCycle #imo .cls-9 {
+    font-family: Athletics-Regular,Athletics
+}
+
+#offCycle #imo .cls-1,#offCycle #imo .cls-10,#offCycle #imo .cls-11,#offCycle #imo .cls-12,#offCycle #imo .cls-13,#offCycle #imo .cls-2,#offCycle #imo .cls-3,#offCycle #imo .cls-6,#offCycle #imo .cls-7,#offCycle #imo .cls-8 {
+    fill: #fff
+}
+
+#offCycle #imo .cls-1,#offCycle #imo .cls-11 {
+    font-size: 21.78px
+}
+
+#offCycle #imo .cls-2 {
+    letter-spacing: -.01em
+}
+
+#offCycle #imo .cls-10,#offCycle #imo .cls-12,#offCycle #imo .cls-2,#offCycle #imo .cls-3,#offCycle #imo .cls-5,#offCycle #imo .cls-6,#offCycle #imo .cls-7,#offCycle #imo .cls-8,#offCycle #imo .cls-9 {
+    font-size: 24px
+}
+
+#offCycle #imo .cls-3 {
+    letter-spacing: -.05em
+}
+
+#offCycle #imo .cls-5,#offCycle #imo .cls-8 {
+    letter-spacing: -.02em
+}
+
+#offCycle #imo .cls-6 {
+    letter-spacing: -.03em
+}
+
+#offCycle #imo .cls-7 {
+    letter-spacing: .02em
+}
+
+#offCycle #imo .cls-14 {
+    stroke: #7f7f7f
+}
+
+#offCycle #imo .cls-13,#offCycle #imo .cls-14,#offCycle #imo .cls-15,#offCycle #imo .cls-16 {
+    stroke-miterlimit: 10
+}
+
+#offCycle #imo .cls-14,#offCycle #imo .cls-16 {
+    fill: none
+}
+
+#offCycle #imo .cls-10 {
+    letter-spacing: 0
+}
+
+#offCycle #imo .cls-13,#offCycle #imo .cls-15 {
+    stroke: #fff
+}
+
+#offCycle #imo .cls-11 {
+    letter-spacing: -.02em
+}
+
+#offCycle #imo .cls-16 {
+    stroke: #d3d3d3
+}
+
+#mapFrame g {
+    cursor: pointer;
+}
+
+#mapFrame .info-box {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    z-index: 10;
+}
+#mapFrame g:hover {
+    filter: brightness(0.6) !important
+}
+
+#mapFrame g:hover .info-box {
+    display: block !important;
+}
