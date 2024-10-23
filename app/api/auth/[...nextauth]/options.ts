@@ -3,7 +3,7 @@ import axios from "axios";
 import { NextAuthOptions, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import { Account, Profile } from "next-auth";
-import { CustomUser } from '@/types';
+import { CustomUser } from '@/types/types';
 
 export const options: NextAuthOptions = {
   providers: [

@@ -2,7 +2,7 @@ import Image from "next/image"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import { profileAvatar } from "@/public/assets/images"
 import { bellIcon, cloudIcon } from "@/public/assets/icons"
-import { DropDownProps } from "@/types"
+import { DropDownProps } from "@/types/types"
 import Svg from "../common/Svg"
 
 function ProfileDropDown({ notifications }: DropDownProps) {

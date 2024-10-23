@@ -1,6 +1,6 @@
 "use client"
 import { logoutIcon } from "@/public/assets/icons";
-import { IsCollapsedProps } from "@/types";
+import { IsCollapsedProps } from "@/types/types";
 import { ChevronLeft, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

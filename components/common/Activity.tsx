@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { dateHandler } from '../../utils/functions/FunctionUtils';
-import { NewsDetails } from '@/types';
+import { NewsDetails } from '@/types/types';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 

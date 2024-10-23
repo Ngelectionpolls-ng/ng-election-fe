@@ -1,4 +1,4 @@
-import { IsCollapsedProps } from "@/types"
+import { IsCollapsedProps } from "@/types/types"
 import ProfileDropDown from "./ProfileDropDown"
 import Svg from "../common/Svg"
 import { hamburgerIcon } from "@/public/assets/icons"

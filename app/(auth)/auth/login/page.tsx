@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import { signIn } from "next-auth/react";
 import { toast } from 'sonner';
 import { MoonLoader } from 'react-spinners'
-import { OnSubmitProps } from '@/types';
+import { OnSubmitProps } from '@/types/types';
 
 function Login() {
     const router = useRouter();
