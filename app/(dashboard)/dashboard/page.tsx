@@ -6,14 +6,8 @@ import {
 } from '@/utils/data/DummyObjects';
 import CollapsibleComponent from '@/components/ui/collapsible';
 import Activities from './_component/Activities';
-import { Key, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import FormControl from '@/components/common/FormControl';
-import Image from 'next/image';
-import { newsReportImg } from '@/public/assets/images/home';
-import ProgressDemo from '@/components/ui/Progress';
-import { Clock5, ChartNoAxesColumn } from 'lucide-react';
-import { Heart } from 'lucide-react';
-import { Share2 } from 'lucide-react';
 import { CandidateInfo } from './_component/CandidateInfo';
 import ElectionInfo from './_component/ElectionInfo';
 import {
@@ -26,6 +20,7 @@ import {
 } from '@/components/ui/carousel';
 import EyewitnessUpdates from './_component/EyewitnessUpdates';
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const [dashboard, setDashboard] = useState<
@@ -33,10 +28,10 @@ export default function Page() {
   >('subscriber');
 
   const electionProps = {
-    TotalAccredictedVoters: 500,
-    TotalVotesCount: 500,
-    TotalValidVotes: 500,
-    TotalRejectedVotes: 500,
+    totalAccredictedVoters: 500,
+    totalVotesCount: 500,
+    totalValidVotes: 500,
+    totalRejectedVotes: 500,
   };
 
   // State for "Other Candidates" carousel
@@ -71,6 +66,8 @@ export default function Page() {
     }
   }, [eyewitnessApi]);
 
+  const router = useRouter();
+
   return (
     <section className="grid gap-10 p-4">
       {dashboard === 'eyewitness' && (
@@ -94,7 +91,7 @@ export default function Page() {
 
       {dashboard === 'subscriber' && (
         <div className="relative w-full overflow-hidden">
-          <div className="grid gap-2 shadow-sm p-3 rounded-md">
+          <div className="grid gap-2 shadow-sm m-1 p-3 rounded-md">
             <div className="flex justify-between">
               <FormControl
                 as="select"
@@ -116,12 +113,7 @@ export default function Page() {
 
           {/* Other Candidates Carousel */}
           <div className="p-3 grid gap-2 relative overflow-hidden">
-            <div className="flex justify-between items-center w-full">
-              <span>Other Candidates</span>
-              <Button variant={'outline'} className="max-w-max text-[10px] md:text-sm text-green-900">
-                View All Candidates
-              </Button>
-            </div>
+            <span>Other Candidates</span>
             <div className="w-full relative overflow-hidden">
               <Carousel id="candidatesApi" setApi={setOtherCandidatesApi}>
                 <CarouselContent className="p-1">
@@ -130,7 +122,7 @@ export default function Page() {
                       key={index}
                       className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                     >
-                      <CandidateInfo props={res} />
+                      <CandidateInfo className='shadow-md' props={res} />
                     </CarouselItem>
                   ))}
                 </CarouselContent>
@@ -149,7 +141,9 @@ export default function Page() {
               <span>
                 Recent Updates of Eyewitness Report from all Polling Units
               </span>
-              <Button variant={'outline'} className="max-w-max text-[10px] md:text-sm text-green-900">
+              <Button variant={'outline'} className="max-w-max text-[10px] md:text-sm text-green-900"
+                onClick={() => router.push('/dashboard/eyewitness-report')}
+              >
                 View More
               </Button>
             </div>
@@ -159,7 +153,7 @@ export default function Page() {
                   {dummyNewsArr.map((res, index) => (
                     <CarouselItem
                       key={index}
-                      className="basis-full sm:basis-1/2 md:basis-1/2"
+                      className="basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
                     >
                       <EyewitnessUpdates props={res} />
                     </CarouselItem>
