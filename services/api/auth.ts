@@ -4,8 +4,10 @@ import {
   PASSWORD_RESET_LINK,
   RESEND_OTP,
   RESET_PASSWORD,
+  UPDATE_SUBSCRIBER_PASSWORD,
   VERIFY_REGISTRATION,
   VERIFY_RESET_TOKEN,
+  VERIFY_SUBSCRIBER_EMAIL,
   VERIFY_TOKENS,
 } from "../endpoints";
 import { instance } from "../instance";
@@ -31,6 +33,10 @@ export interface ResetPasswordPayload {
   id: string | null;
   newPassword: string;
 }
+export interface UpdateSubscriberPasswordPayload {
+  email: string | null;
+  newPassword: string;
+}
 
 export const createAccount = (payload: CreateAccountPayload) => {
   const { accountType, ...rest } = payload;
@@ -53,8 +59,16 @@ export const resendOTP = (payload: ResendOTPPayload) =>
 export const passwordResetLink = (payload: PasswordResetLinkPayload) =>
   instance.post(PASSWORD_RESET_LINK, payload);
 
-export const verifyResetPasswordToken = (payload: VerifyResetPasswordTokenPayload) =>
-  instance.post(VERIFY_RESET_TOKEN, payload);
+export const verifyResetPasswordToken = (
+  payload: VerifyResetPasswordTokenPayload
+) => instance.post(VERIFY_RESET_TOKEN, payload);
 
 export const resetPassword = (payload: ResetPasswordPayload) =>
   instance.post(RESET_PASSWORD, payload);
+
+export const updateSubscriberPassword = (
+  payload: UpdateSubscriberPasswordPayload
+) => instance.patch(UPDATE_SUBSCRIBER_PASSWORD, payload);
+
+export const verifySubscriber = (payload: object) =>
+  instance.post(VERIFY_SUBSCRIBER_EMAIL, payload);

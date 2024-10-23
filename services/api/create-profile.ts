@@ -16,5 +16,5 @@ export interface CreateProfilePayload {
 
 export const createProfile = (payload: CreateProfilePayload) => {
   const { accountType, ...rest } = payload;
-  return instance.post(CREATE_PROFILE(accountType), rest);
+  return instance.patch(CREATE_PROFILE(accountType), rest);
 };

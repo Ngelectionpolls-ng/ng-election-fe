@@ -13,5 +13,9 @@ export const PASSWORD_RESET_LINK = "/auth/forgot-password";
 export const VERIFY_RESET_TOKEN = "/auth/reset-password/verify";
 export const RESET_PASSWORD = "/auth/reset-password";
 
+// SUBSCRIBER'S AUTH
+export const VERIFY_SUBSCRIBER_EMAIL = "/auth/subscriber/verify-email";
+export const UPDATE_SUBSCRIBER_PASSWORD = "/auth/subscriber/update-password";
+
 // CREATE PROFILE
 export const CREATE_PROFILE = (accountType: string) => `/${accountType}`;
