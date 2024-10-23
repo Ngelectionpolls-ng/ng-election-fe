@@ -19,11 +19,14 @@ import {
 
 type FormControlElement = 'input' | 'select' | 'textarea';
 type InputProps = React.ComponentPropsWithoutRef<'input'>;
-type SelectProps = {
-    options: { value: string; label: string }[];
+type SelectProps<T = any> = {
+    options: T[];
+    getOptionValue: (item: T) => string;
+    getOptionLabel: (item: T) => string;
     placeholder?: string;
     value?: string;
-} & React.ComponentPropsWithoutRef<'select'>;
+} & Omit<React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>, "ref">;
+
 type TextAreaProps = React.ComponentPropsWithoutRef<'textarea'>;
 export type Register = UseFormRegister<FieldValues>;
 
@@ -44,7 +47,7 @@ type ControlProps = (
     setValue?: UseFormSetValue<FieldValues>; // Only needed for 'select'
 };
 
-function isSelect(as: FormControlElement, props: unknown): props is SelectProps {
+function isSelect<T>(as: FormControlElement, props: unknown): props is SelectProps<T> {
     return as === 'select';
 }
 
@@ -52,7 +55,7 @@ function isInput(as: FormControlElement, props: unknown): props is InputProps {
     return as === 'input';
 }
 
-export default function FormControl({
+export default function FormControl<T>({
     as,
     icon,
     error,
@@ -63,9 +66,9 @@ export default function FormControl({
     registerOptions,
     onContainerFocus,
     register = (() => ({})) as unknown as Register,
-    setValue, // Only needed for 'select'
+    setValue,
     ...props
-}: ControlProps) {
+}: ControlProps & { getOptionValue?: (item: T) => string; getOptionLabel?: (item: T) => string; }) {
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -76,17 +79,17 @@ export default function FormControl({
     const notice = props.required ? '*' : '';
 
     if (isSelect(as, props)) {
-        const { options, placeholder, className } = props;
+        const { options, placeholder, className, getOptionValue, getOptionLabel } = props as SelectProps<T>;
 
         content = (
             <Select onValueChange={(val) => setValue?.(props.name as Path<FieldValues>, val)}>
                 <SelectTrigger className={className}>
-                    <SelectValue placeholder={placeholder || "Select..."} />
+                    <SelectValue placeholder={placeholder || 'Select...'} />
                 </SelectTrigger>
                 <SelectContent>
                     {options.map((option) => (
-                        <SelectItem key={option.value} value={option.value}>
-                            {option.label}
+                        <SelectItem key={getOptionValue!(option)} value={getOptionValue!(option)}>
+                            {getOptionLabel!(option)}
                         </SelectItem>
                     ))}
                 </SelectContent>
@@ -104,8 +107,7 @@ export default function FormControl({
                         required: props.required && 'This field is required',
                         ...registerOptions,
                     })}
-                    className={`${error ? 'border-red-600' : 'border-[#CBD5E1]'
-                        } border rounded-md h-12 outline-none px-4 text-neutral-dark-2 w-full pr-10 font-light`}
+                    className={`${error ? 'border-red-600' : 'border-[#CBD5E1]'} border rounded-md h-12 outline-none px-4 text-neutral-dark-2 w-full pr-10 font-light`}
                 />
                 {props.type === 'password' && (
                     <span
@@ -131,10 +133,7 @@ export default function FormControl({
     }
 
     return (
-        <div
-            onFocus={onContainerFocus}
-            className={`flex flex-col gap-1 ${containerClass}`}
-        >
+        <div onFocus={onContainerFocus} className={`flex flex-col gap-1 ${containerClass}`}>
             {labelText && (
                 <div className="w-full flex justify-between">
                     <label htmlFor={props.name}>
@@ -152,3 +151,4 @@ export default function FormControl({
         </div>
     );
 }
+
