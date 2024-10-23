@@ -7,12 +7,12 @@ function Hero() {
     return (
         <div className='relative bg-[#F2F2F2] flex flex-col items-center'>
             <Map />
-            <div className='absolute left-[80px] top-[80px] w-[370px]'>
-                <div className='bg-white p-4 border-b-2 border-primary shadow-md'>
-                    <h3 className='font-bold text-3xl'>NG ELECTIONS</h3>
-                    <p>Nigerian election results</p>
+            <div className='absolute left-[80px] top-[80px] w-[280px]'>
+                <div className='bg-white p-2 border-b-2 border-primary shadow-md'>
+                    <h3 className='font-bold text-2xl'>NG ELECTIONS</h3>
+                    <p className="text-md">Nigerian election results</p>
                 </div>
-                <div className='h-[44px] bg-white border-l-2 mt-[11px] border-[#A5E2AC] text-sm flex items-center px-4 shadow-md'>
+                <div className='h-[44px] bg-white border-l-2 mt-[11px] border-[#A5E2AC] text-sm flex items-center px-2 shadow-md'>
                     Click on a state to view election and report details
                 </div>
             </div>
