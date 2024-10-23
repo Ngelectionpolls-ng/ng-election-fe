@@ -2,8 +2,11 @@
 import { dummyNewsArr } from '@/utils/data/DummyObjects';
 import CollapsibleComponent from '@/components/ui/collapsible';
 import Activities from './_component/Activities';
+import { useSession } from 'next-auth/react';
 
 export default function Page() {
+  const { data } = useSession()
+  console.log(data)
   return (
     <section className="grid gap-10 p-4">
       <CollapsibleComponent header="Capture Results">

@@ -3,14 +3,21 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 import FormControl from '@/components/common/FormControl';
-import AuthLayout from '../_component/authLayout';
 import useCreateProfile from '@/hooks/mutations/auth/useCreateProfile';
 import { ageOption, occupationOption, sexOption, stateOption } from '@/utils/data/createProfileData';
 import { CreateProfilePayload } from '@/services/api/create-profile';
+import { MoonLoader } from 'react-spinners';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
+import AuthLayout from '@/app/(auth)/auth/_component/authLayout';
+import { useSession } from 'next-auth/react';
 
 function CreateProfile() {
     const { register, handleSubmit, control, formState: { errors }, setValue } = useForm<FieldValues>({ mode: "onChange" });
-    const { mutate } = useCreateProfile()
+    const router = useRouter();
+    const { mutate, isPending } = useCreateProfile();
+    const { data } = useSession()
+    console.log(data)
 
     const headerTitle = 'Electoral agent profile';
     const headerSubTitle = '';
@@ -28,13 +35,15 @@ function CreateProfile() {
             occupation: data.occupation,
             phoneNumber: data.phoneNumber
         };
+        console.log(payload)
 
         mutate(payload, {
             onSuccess: (response) => {
-                console.log('Profile created successfully:', response);
+                toast.success(response.data.message);
+                router.push("/dashboard")
             },
-            onError: (error) => {
-                console.error('Error creating profile:', error);
+            onError: (error: any) => {
+                toast.error(error.response.data.message);
             }
         });
     };
@@ -145,7 +154,9 @@ function CreateProfile() {
                             />
                         )}
                     />
-                    <Button type='submit'>Proceed to login</Button>
+                    <Button type='submit' disabled={isPending}>
+                        {isPending ? (<MoonLoader color='white' size={18} />) : "Continue to dashboard"}
+                    </Button>
                 </div>
             </form>
         </AuthLayout>

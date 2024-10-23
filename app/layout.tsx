@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "sonner";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+import { QueryClient } from "@tanstack/react-query";
 import AuthProvider from "./providers/AuthProvider";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "Eyewitness Report Portal",
@@ -19,9 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+          <AuthProvider>
+            {children}
+          </AuthProvider>
       </body>
       <Toaster position="top-right" />
     </html>
