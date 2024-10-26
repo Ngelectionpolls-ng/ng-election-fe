@@ -4,9 +4,9 @@ import State from '../common/State';
 
 export default function Map(){
 
-    function hover(e){
-        console.log(`x: ${e.screenX}; y: ${e.screenY}`);
-    }
+    // function hover(e){
+    //     console.log(`x: ${e.screenX}; y: ${e.screenY}`);
+    // }
     
     return (
         <div className="electon_mapContainer__Twfii w-full pt-28" >
