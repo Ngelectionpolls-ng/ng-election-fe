@@ -17,10 +17,10 @@ function Hero() {
                 </div>
                 <div className="md:absolute bottom-4 md:left-[80px]">
                     <div className='flex items-center gap-4'>
-                        <div className='flex items-center gap-2'><div className='size-4 bg-primary'></div>Past elections</div>
-                        <div className='flex items-center gap-2'><div className='size-4 bg-orange-400'></div>Upcoming elections</div>
+                        <div className='flex items-center gap-2 text-sm'><div className='size-4 bg-primary'></div>Past elections</div>
+                        <div className='flex items-center gap-2 text-sm'><div className='size-4 bg-orange-400'></div>Upcoming elections</div>
                     </div>
-                    <div className='flex items-center gap-2'><div className='size-4 bg-primary'></div>Past elections</div>
+                    <div className='flex items-center gap-2 text-sm'><div className='size-4 bg-primary'></div>Past elections</div>
                 </div>
             </div>
         </div>
