@@ -10,14 +10,16 @@ import { MoonLoader } from 'react-spinners';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import AuthLayout from '@/app/(auth)/auth/_component/authLayout';
-import { useSession } from 'next-auth/react';
+import useFetchStates from '@/hooks/queries/statesData/useFetchStates';
+import useFetchLGAs from '@/hooks/queries/statesData/useFetchLGAs';
 
 function CreateProfile() {
     const { register, handleSubmit, control, formState: { errors }, setValue } = useForm<FieldValues>({ mode: "onChange" });
     const router = useRouter();
     const { mutate, isPending } = useCreateProfile();
-    const { data } = useSession()
-    console.log(data)
+    const { data: statesData } = useFetchStates();
+    const { data: LGAData } = useFetchLGAs();
+    console.log('LGAs:', LGAData?.data?.data)
 
     const headerTitle = 'Electoral agent profile';
     const headerSubTitle = '';
@@ -48,26 +50,28 @@ function CreateProfile() {
         });
     };
 
-
-
     return (
         <AuthLayout headerTitle={headerTitle} headerSubTitle={headerSubTitle} bgImg='login-bg.png'>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='flex flex-col gap-6 mt-6'>
                     <FormControl
                         as="select"
-                        inputStyle
-                        options={stateOption}
-                        labelText='State'
+                        options={statesData?.data?.data?.states || []}
+                        getOptionValue={(item) => item.id.toString()}
+                        getOptionLabel={(item) => item.name}
+                        labelText="State"
                         placeholder="Select state"
                         error={typeof errors.stateId?.message === 'string' ? errors.stateId.message : undefined}
                         {...register('stateId', { required: 'State is required' })}
                         setValue={setValue}
                     />
+
                     <FormControl
                         as="select"
                         inputStyle
-                        options={stateOption}
+                        options={statesData?.data?.data?.states || []}
+                        getOptionValue={(item) => item.id.toString()}
+                        getOptionLabel={(item) => item.name}
                         labelText='L.G.A'
                         placeholder="Select L.G.A"
                         error={typeof errors.LGAId?.message === 'string' ? errors.LGAId.message : undefined}
@@ -77,7 +81,9 @@ function CreateProfile() {
                     <FormControl
                         as="select"
                         inputStyle
-                        options={stateOption}
+                        options={statesData?.data?.data?.states || []}
+                        getOptionValue={(item) => item.id.toString()}
+                        getOptionLabel={(item) => item.name}
                         labelText='Electoral ward'
                         placeholder="Select Electoral ward"
                         error={typeof errors.wardId?.message === 'string' ? errors.wardId.message : undefined}
@@ -87,7 +93,9 @@ function CreateProfile() {
                     <FormControl
                         as="select"
                         inputStyle
-                        options={stateOption}
+                        options={statesData?.data?.data?.states || []}
+                        getOptionValue={(item) => item.id.toString()}
+                        getOptionLabel={(item) => item.name}
                         labelText='Polling unit'
                         placeholder="Select Polling unit"
                         error={typeof errors.pollingUnitId?.message === 'string' ? errors.pollingUnitId.message : undefined}
@@ -97,7 +105,9 @@ function CreateProfile() {
                     <FormControl
                         as="select"
                         inputStyle
-                        options={stateOption}
+                        options={statesData?.data?.data?.states || []}
+                        getOptionValue={(item) => item.id.toString()}
+                        getOptionLabel={(item) => item.name}
                         labelText='Political party'
                         placeholder="Select Political party"
                         error={typeof errors.politicalPartyId?.message === 'string' ? errors.politicalPartyId.message : undefined}
@@ -108,6 +118,8 @@ function CreateProfile() {
                         as="select"
                         inputStyle
                         options={ageOption}
+                        getOptionValue={(item) => item.value}
+                        getOptionLabel={(item) => item.label}
                         labelText='Age range'
                         placeholder="Select Age range"
                         error={typeof errors.ageRange?.message === 'string' ? errors.ageRange.message : undefined}
@@ -118,6 +130,8 @@ function CreateProfile() {
                         as="select"
                         inputStyle
                         options={sexOption}
+                        getOptionValue={(item) => item.value}
+                        getOptionLabel={(item) => item.label}
                         labelText='Sex'
                         placeholder="Select Sex"
                         error={typeof errors.sex?.message === 'string' ? errors.sex.message : undefined}
@@ -128,6 +142,8 @@ function CreateProfile() {
                         as="select"
                         inputStyle
                         options={occupationOption}
+                        getOptionValue={(item) => item.value}
+                        getOptionLabel={(item) => item.label}
                         labelText='Occupation'
                         placeholder="Select Occupation"
                         error={typeof errors.occupation?.message === 'string' ? errors.occupation.message : undefined}
