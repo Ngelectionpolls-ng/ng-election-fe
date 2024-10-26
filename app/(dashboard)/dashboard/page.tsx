@@ -28,6 +28,7 @@ export default function Page() {
   >('subscriber');
 
   const electionProps = {
+    totalRegisteredVoters: 500,
     totalAccredictedVoters: 500,
     totalVotesCount: 500,
     totalValidVotes: 500,

@@ -2,6 +2,7 @@
 
 export interface ElectionInfoProps {
   totalAccredictedVoters: number;
+  totalRegisteredVoters: number;
   totalVotesCount: number;
   totalValidVotes: number;
   totalRejectedVotes: number;
@@ -9,7 +10,11 @@ export interface ElectionInfoProps {
 
 export default function ElectionInfo({props}: {props: ElectionInfoProps}) {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 w-full">
+    <div className="grid grid-cols-2 md:grid-cols-5 w-full">
+      <div className="flex flex-col text-[10px]">
+        <span>Total Registered Voters</span>
+        <span className="text-primary font-black">{props.totalRegisteredVoters}</span>
+      </div>
       <div className="flex flex-col text-[10px]">
         <span>Total Accredicted Voters</span>
         <span className="text-primary font-black">{props.totalAccredictedVoters}</span>

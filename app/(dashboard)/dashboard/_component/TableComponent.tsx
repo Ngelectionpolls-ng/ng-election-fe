@@ -168,6 +168,9 @@ export default function TableComponent({
   };
 
   const [hover, setHover] = useState(-1);
+  const handleHover = (id: number) => {
+    setHover((prev) => (prev === id ? -1 : id));
+  }
 
   return (
     <table className="w-full border-collapse rounded-md">
@@ -199,8 +202,8 @@ export default function TableComponent({
                   row.original.report as 'Successful' | 'Issue' | 'Pending',
                 )
               } text-center relative cursor-pointer`}
-              onMouseEnter={() => setHover(id)}
-              onMouseLeave={() => setHover(-1)}
+              onMouseEnter={() => handleHover(id)}
+              onMouseLeave={() => handleHover(id)}
               onClick={() => {
                 setHover((prev) => (prev === id ? -1 : id));
                 onClick && onClick();
@@ -222,9 +225,18 @@ export default function TableComponent({
                 </td>
               ))}
             </tr>
-            {hover === id && electionInfo && (
-              <LgaResults arr={arr} hover issues={issues} />
-            )}
+            <LgaResults
+              arr={arr}
+              onMouseEnter={() => handleHover(id)}
+              onMouseLeave={() => handleHover(id)}
+              issues={issues}
+              className={`absolute mx-10 w-[80%] transition-all duration-300
+                  ${
+                    hover === id && electionInfo
+                      ? 'max-h-max overflow-auto z-10 opacity-100'
+                      : 'z-[-10] max-h-0 overflow-hidden opacity-0'
+                  }`}
+            />
           </React.Fragment>
         ))}
       </tbody>

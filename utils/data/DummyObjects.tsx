@@ -162,6 +162,7 @@ export const resultData2 = [
 export const pullingUnitData = [
   {
     electionInfo: {
+      totalRegisteredVoters: 500,
       totalAccredictedVoters: 500,
       totalVotesCount: 500,
       totalValidVotes: 500,
