@@ -8,108 +8,234 @@ import Svg from '../common/Svg'
 
 function NavBar() {
     return (
-        <div className='w-full flex justify-between border-b-[1.5px] border-black px-8 pb-7'>
-            <Image src={"/ng-election-logo.svg"} width={250} height={50} alt='NG Election logo' className='w-[140px] h-auto' />
-            <NavigationMenu className="hidden lg:block">
-                <NavigationMenuList>
-                    <NavigationMenuItem>
-                        <NavigationMenuTrigger>Our Mission</NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                            <NavigationMenuLink>
-                                <ul className="w-52 p-4 rounded shadow-md flex flex-col space-y-4 text-green-900">
-                                    <li className="text-md cursor-pointer hover:font-bold">
-                                        About Us
-                                    </li>
-                                    <li className="text-md cursor-pointer hover:font-bold">
-                                        Mission Statement
-                                    </li>
-                                    <li className="text-md cursor-pointer hover:font-bold">
-                                        Methodology
-                                    </li>
-                                    <li className="text-md cursor-pointer hover:font-bold">
-                                        Initiative
-                                    </li>
-                                </ul>
-                            </NavigationMenuLink>
-                        </NavigationMenuContent>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                        <NavigationMenuTrigger>Election Results</NavigationMenuTrigger>
-                            <NavigationMenuContent>
-                                <NavigationMenuLink>
-                                    <ul className="w-52 p-4 rounded shadow-md flex flex-col space-y-4 text-green-900">
-                                        <li className="text-md cursor-pointer hover:font-bold">
-                                            Presidential
-                                        </li>
-                                        <li className="text-md cursor-pointer hover:font-bold">
-                                            Gubernotorial
-                                        </li>
-                                        <li className="text-md cursor-pointer hover:font-bold">
-                                            House of Assembly
-                                        </li>
-                                        <li className="text-md cursor-pointer hover:font-bold">
-                                            Local Government
-                                        </li>
-                                        <li className="text-md cursor-pointer hover:font-bold">
-                                            Off-cycle Elections
-                                        </li>
-                                    </ul>
-                                </NavigationMenuLink>
-                            </NavigationMenuContent>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                        <NavigationMenuTrigger>Eye witness</NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                            <NavigationMenuLink>
-                                <ul className="w-52 p-4 rounded shadow-md flex flex-col space-y-4 text-green-900">
-                                    <li className="text-md cursor-pointer hover:font-bold">
-                                        Objectives
-                                    </li>
-                                    <li className="text-md cursor-pointer hover:font-bold">
-                                        How to Volunteer
-                                    </li>
-                                    <li className="text-md cursor-pointer hover:font-bold">
-                                        Available Polling Units
-                                    </li>
-                                </ul>
-                            </NavigationMenuLink>
-                        </NavigationMenuContent>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                        <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                            <NavigationMenuLink>
-                                <ul className="w-52 p-4 rounded shadow-md flex flex-col space-y-4 text-green-900">
-                                    <li className="text-md cursor-pointer hover:font-bold">
-                                        Publications
-                                    </li>
-                                    <li className="text-md cursor-pointer hover:font-bold">
-                                        Election Updates
-                                    </li>
-                                    <li className="text-md cursor-pointer hover:font-bold">
-                                        Find Polling Unit
-                                    </li>
-                                </ul>
-                            </NavigationMenuLink>
-                        </NavigationMenuContent>
-                    </NavigationMenuItem>
-                    <div className='flex ml-7 gap-3'>
-                        <NavigationMenuItem>
-                            <Link href="/auth/login" legacyBehavior passHref>
-                                <Button className='bg-primary min-w-[128px] text-sm text-white font-bold uppercase rounded-none border border-primary hover:bg-transparent hover:text-black-500 animate-in transition-colors'>Login</Button>
-                            </Link>
-                        </NavigationMenuItem>
-                        <NavigationMenuItem>
-                            <Link href="/docs" legacyBehavior passHref>
-                                <Button className='bg-transparent text-black-500 font-bold uppercase rounded-none border border-primary hover:bg-primary hover:text-white animate-in transition-colors'>Join us now</Button>
-                            </Link>
-                        </NavigationMenuItem>
-                    </div>
 
-                </NavigationMenuList>
-            </NavigationMenu>
-            <Svg width={"29px"} height={'18px'} SvgIcon={hamburgerIcon} className='lg:hidden' />
-        </div>
+        <nav className="bg-gray-50 border-gray-200 dark:bg-gray-900 dark:border-gray-700 shadow-xl border-b border-b-green-900 fixed z-10 w-full">
+            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+                    <Image src={"/Nigelctionpolls 4.svg"} width={250} height={50} alt='NG Election logo' className='w-[140px] h-auto' />               
+                </Link>
+                <button data-collapse-toggle="navbar-dropdown" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-dropdown" aria-expanded="false">
+                    <span className="sr-only">Open main menu</span>
+                    <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                    </svg>
+                </button>
+                <div className="hidden w-full md:flex justify-right items-center md:w-auto" id="navbar-dropdown">
+                    <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:border-gray-700 items-center">
+                        
+                        <li className="group relative text-green-900 text-sm">
+                            <button data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 px-3 text-green-900 rounded font-normal md:hover:bg-transparent md:border-0 md:p-0 md:w-auto dark:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Our Mission 
+                                <svg className="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                </svg>
+                            </button>
+                            <div className="absolute bg-white z-10 hidden group-hover:block font-normal divide-y divide-gray-100 rounded-lg shadow w-52 dark:bg-gray-700 dark:divide-gray-600">
+                                <ul className="p-4 text-sm text-green-900 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                                    <li>
+                                        <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">About Us</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mission Statement</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Methodology</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Initiatives</Link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li className="group relative text-green-900 text-sm">
+                            <button data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 px-3 text-green-900 rounded font-normal md:hover:bg-transparent md:border-0 md:p-0 md:w-auto dark:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Election Results 
+                                <svg className="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                </svg>
+                            </button>
+                            <div className="absolute bg-white z-10 hidden group-hover:block font-normal divide-y divide-gray-100 rounded-lg shadow w-52 dark:bg-gray-700 dark:divide-gray-600">
+                                <ul className="p-4 text-sm text-green-900 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                                    <li>
+                                        <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Presidential</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Gubernotorial</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">House of Assembly</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Local Government</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Off-cycle Elections</Link>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                        </li>
+
+                        <li className="group relative text-green-900 text-sm">
+                            <button data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 px-3 text-green-900 rounded font-normal md:hover:bg-transparent md:border-0 md:p-0 md:w-auto dark:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Eyewitness 
+                                <svg className="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                </svg>
+                            </button>
+                            <div className="absolute bg-white z-10 hidden group-hover:block font-normal divide-y divide-gray-100 rounded-lg shadow w-52 dark:bg-gray-700 dark:divide-gray-600">
+                                <ul className="p-4 text-sm text-green-900 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                                    <li>
+                                        <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Objectives</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">How to Volunteer</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Available Polling Units</Link>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                        </li>
+
+                        <li className="group relative text-green-900 text-sm">
+                            <button data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 px-3 text-green-900 rounded font-normal md:hover:bg-transparent md:border-0 md:p-0 md:w-auto dark:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Resources 
+                                <svg className="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                </svg>
+                            </button>
+                            <div className="absolute bg-white z-10 hidden group-hover:block font-normal divide-y divide-gray-100 rounded-lg shadow w-52 dark:bg-gray-700 dark:divide-gray-600">
+                                <ul className="p-4 text-sm text-green-900 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                                    <li>
+                                        <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Publications</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Election Updates</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Find Polling Unit</Link>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                        </li>
+                        
+                        <li>
+                            <Link href="#" className="block py-2 px-3 text-green-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0  md:p-0 dark:text-white  dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-sm">Contact Us</Link>
+                        </li>
+
+                        <Link href="/auth/login">
+                            <button className='bg-primary w-[128px] text-sm text-white font-bold uppercase rounded-none border border-primary hover:bg-transparent hover:text-black-500 py-3'>Login</button>
+                        </Link>
+                        <Link href="/docs" >
+                            <button className='bg-transparent text-black-500 font-bold uppercase rounded-none border border-primary hover:bg-primary hover:text-white text-sm py-3 px-2'>Join us now</button>
+                        </Link>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        // <div className='w-full flex justify-between border-b border-b-green-900 px-8 py-4 shadow-xl fixed z-10 bg-[#F2F2F2]'>
+        //     <Image src={"/Nigelctionpolls 4.svg"} width={250} height={50} alt='NG Election logo' className='w-[140px] h-auto' />
+        //     <NavigationMenu className="hidden lg:block">
+        //         <NavigationMenuList>
+        //             <NavigationMenuItem>
+        //                 <NavigationMenuTrigger>Our Mission</NavigationMenuTrigger>
+        //                 <NavigationMenuContent>
+        //                     <NavigationMenuLink>
+        //                         <ul className="w-52 p-4 rounded shadow-md flex flex-col space-y-4 text-green-900">
+        //                             <li className="text-md cursor-pointer hover:font-bold">
+        //                                 About Us
+        //                             </li>
+        //                             <li className="text-md cursor-pointer hover:font-bold">
+        //                                 Mission Statement
+        //                             </li>
+        //                             <li className="text-md cursor-pointer hover:font-bold">
+        //                                 Methodology
+        //                             </li>
+        //                             <li className="text-md cursor-pointer hover:font-bold">
+        //                                 Initiative
+        //                             </li>
+        //                         </ul>
+        //                     </NavigationMenuLink>
+        //                 </NavigationMenuContent>
+        //             </NavigationMenuItem>
+        //             <NavigationMenuItem>
+        //                 <NavigationMenuTrigger>Election Results</NavigationMenuTrigger>
+        //                     <NavigationMenuContent>
+        //                         <NavigationMenuLink>
+        //                             <ul className="w-52 p-4 rounded shadow-md flex flex-col space-y-4 text-green-900">
+        //                                 <li className="text-md cursor-pointer hover:font-bold">
+        //                                     Presidential
+        //                                 </li>
+        //                                 <li className="text-md cursor-pointer hover:font-bold">
+        //                                     Gubernotorial
+        //                                 </li>
+        //                                 <li className="text-md cursor-pointer hover:font-bold">
+        //                                     House of Assembly
+        //                                 </li>
+        //                                 <li className="text-md cursor-pointer hover:font-bold">
+        //                                     Local Government
+        //                                 </li>
+        //                                 <li className="text-md cursor-pointer hover:font-bold">
+        //                                     Off-cycle Elections
+        //                                 </li>
+        //                             </ul>
+        //                         </NavigationMenuLink>
+        //                     </NavigationMenuContent>
+        //             </NavigationMenuItem>
+        //             <NavigationMenuItem>
+        //                 <NavigationMenuTrigger>Eye witness</NavigationMenuTrigger>
+        //                 <NavigationMenuContent>
+        //                     <NavigationMenuLink>
+        //                         <ul className="w-52 p-4 rounded shadow-md flex flex-col space-y-4 text-green-900">
+        //                             <li className="text-md cursor-pointer hover:font-bold">
+        //                                 Objectives
+        //                             </li>
+        //                             <li className="text-md cursor-pointer hover:font-bold">
+        //                                 How to Volunteer
+        //                             </li>
+        //                             <li className="text-md cursor-pointer hover:font-bold">
+        //                                 Available Polling Units
+        //                             </li>
+        //                         </ul>
+        //                     </NavigationMenuLink>
+        //                 </NavigationMenuContent>
+        //             </NavigationMenuItem>
+        //             <NavigationMenuItem>
+        //                 <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
+        //                 <NavigationMenuContent>
+        //                     <NavigationMenuLink>
+        //                         <ul className="w-52 p-4 rounded shadow-md flex flex-col space-y-4 text-green-900">
+        //                             <li className="text-md cursor-pointer hover:font-bold">
+        //                                 Publications
+        //                             </li>
+        //                             <li className="text-md cursor-pointer hover:font-bold">
+        //                                 Election Updates
+        //                             </li>
+        //                             <li className="text-md cursor-pointer hover:font-bold">
+        //                                 Find Polling Unit
+        //                             </li>
+        //                         </ul>
+        //                     </NavigationMenuLink>
+        //                 </NavigationMenuContent>
+        //             </NavigationMenuItem>
+        //             <div className='flex ml-7 gap-3'>
+        //                 <NavigationMenuItem>
+        //                     <Link href="/auth/login" legacyBehavior passHref>
+        //                         <Button className='bg-primary min-w-[128px] text-sm text-white font-bold uppercase rounded-none border border-primary hover:bg-transparent hover:text-black-500 animate-in transition-colors'>Login</Button>
+        //                     </Link>
+        //                 </NavigationMenuItem>
+        //                 <NavigationMenuItem>
+        //                     <Link href="/docs" legacyBehavior passHref>
+        //                         <Button className='bg-transparent text-black-500 font-bold uppercase rounded-none border border-primary hover:bg-primary hover:text-white animate-in transition-colors'>Join us now</Button>
+        //                     </Link>
+        //                 </NavigationMenuItem>
+        //             </div>
+
+        //         </NavigationMenuList>
+        //     </NavigationMenu>
+        //     <Svg width={"29px"} height={'18px'} SvgIcon={hamburgerIcon} className='lg:hidden' />
+        // </div>
+        
     )
 }
 
