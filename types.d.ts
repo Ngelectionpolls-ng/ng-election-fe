@@ -5,6 +5,8 @@ export interface DashboardLayoutProps {
 export interface IsCollapsedProps {
   isCollapsed: boolean;
   setIsCollapsed: (value: boolean | ((prevState: boolean) => boolean)) => void;
+  showSidebar?: boolean;
+  setShowSidebar: (value: boolean | ((prevState: boolean) => boolean)) => void;
 }
 
 export type NewsDetails = {
@@ -25,4 +27,27 @@ export interface NotificationItem {
 
 export type DropDownProps = {
   notifications: NotificationItem[]
+};
+
+export interface OnSubmitProps {
+  email: string;
+  password: string;
+}
+
+interface CustomUser {
+  id: string;
+  name: string;
+  email: string;
+  token: string;
+}
+
+export type InputResult = {
+  registeredVoters: string;
+  accreditedVoters: string;
+  rejectedVotes: string;
+  spoiledVotes: string;
+  validVotes: string;
+  unusedBallotPapers: string;
+  politicalParty: string;
+  votesAllocated: string;
 };

@@ -8,8 +8,11 @@ export { default as hamburgerIcon } from "./hambuger-icon.svg";
 export { default as TrendIcon } from "./trending-up.svg";
 export { default as CameraIcon } from "./camera.svg";
 export { default as DownloadIcon } from "./downloadIcon.svg";
-export { default as ShareIcon} from "./shareIcon.svg";
-export { default as googleIcon} from "./google-icon.svg";
+export { default as ShareIcon } from "./shareIcon.svg";
+export { default as ResultIcon } from "./file-text.svg";
+export { default as ElectionMaterialIcon } from "./trello.svg";
+export { default as VideoIcon } from "./video.svg";
+export { default as googleIcon } from "./google-icon.svg";
 
 //DASHBOARD SIDEBAR
 export { default as houseIcon } from "./house-icon.svg";

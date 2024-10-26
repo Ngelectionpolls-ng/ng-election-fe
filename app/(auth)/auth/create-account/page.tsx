@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import AuthLayout from '../_component/authLayout';
 import FormControl from '@/components/common/FormControl';
 import { Button } from '@/components/ui/button';
@@ -7,15 +8,44 @@ import { ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 import GoogleAuthSection from './_GoogleAuthSection';
+import useCreateAccount from '@/hooks/mutations/auth/useCreateAccount';
+import { MoonLoader } from "react-spinners";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { ResendOTPPayload } from "@/services/api/auth";
+import useResendOTP from "@/hooks/mutations/auth/useResendOTP";
 
-function Page() {
-    const headerTitle = 'Sign up';
-    const headerSubTitle = 'Create an account to get started with us.';
+function CreateAccount() {
+    const [selectedTab, setSelectedTab] = useState<string>('iWitness');
+    const [confirmationParam, setConfirmationParam] = useState<string>("");
+    const [headerTitle, setHeaderTitle] = useState<string>('Sign up');
+    const [headerSubTitle, setHeaderSubTitle] = useState<string>('Create an account to get started with us.');
+    const [email, setEmail] = useState<string>('your email');
 
-    // Initialize useForm hook
+    const router = useRouter();
+
     const { control, handleSubmit, formState: { errors } } = useForm<FieldValues>({ mode: "onChange" });
 
-    // Helper function to retrieve error messages
+    const { mutate, isPending } = useCreateAccount();
+    const { mutate: mutateResendOTP } = useResendOTP();
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams(window.location.search);
+        const confirmation = searchParams.get("confirmation");
+
+        if (confirmation === "pending") {
+            setConfirmationParam(confirmation);
+        }
+    }, [confirmationParam]);
+
+
+    useEffect(() => {
+        if (confirmationParam === "pending") {
+            setHeaderTitle('')
+            setHeaderSubTitle('')
+        }
+    }, [confirmationParam])
+
     const getErrorMessage = (error: any): string | undefined => {
         if (!error) return undefined;
         if (typeof error === 'string') return error;
@@ -23,172 +53,214 @@ function Page() {
         return undefined;
     };
 
-    // Form submission handler
     const onSubmit = (data: FieldValues) => {
-        console.log("Form submitted successfully:", data);
+        let accountType = selectedTab;
+
+        if (selectedTab === "iWitness") {
+            accountType = "iwitness";
+        } else if (selectedTab === "pollingUnitAgent") {
+            accountType = "agent";
+        }
+
+        const payload = {
+            accountType,
+            redirectUrl: "/auth/verify-account",
+            ...data,
+        };
+        mutate(payload, {
+            onSuccess: (response) => {
+                toast.success(response?.data?.message)
+                setEmail(data.email)
+                router.push("?confirmation=pending")
+                setConfirmationParam("pending");
+            },
+            onError: (error: any) => {
+                toast.error(error?.response?.data?.message)
+            },
+        });
     };
 
-    // Log any errors during the form validation
-    const onError = (errors: any) => {
-        console.log("Form validation failed with errors:", errors);
+    // Function to resend OTP
+    const handleResendOTP = () => {
+        const payload: ResendOTPPayload = {
+            email: email,
+            channel: "registration",
+            redirectUrl: "/auth/verify-account",
+        };
+        mutateResendOTP(payload, {
+            onSuccess: (response) => {
+                toast.success(response.data.message);
+            },
+            onError: (error: any) => {
+                toast.error(error.response.data.message[0]);
+            }
+        });
     };
 
     return (
         <AuthLayout headerTitle={headerTitle} headerSubTitle={headerSubTitle} bgImg='auth-bg-img.png'>
-            <div className="mt-4">
-                <Tabs defaultValue="eyewitness" className="w-full">
-                    <TabsList>
-                        <TabsTrigger value="eyewitness">Eyewitness</TabsTrigger>
-                        <TabsTrigger value="pollingAgent">Polling Unit Agent</TabsTrigger>
-                    </TabsList>
-                    <TabsContent value="eyewitness">
-                        {/* Form for Eyewitness */}
-                        <GoogleAuthSection />
-                        <form onSubmit={handleSubmit(onSubmit, onError)}>
-                            <div className='flex flex-col gap-6 mt-6'>
-                                {/* Name input */}
-                                <Controller
-                                    name="name"
-                                    control={control}
-                                    rules={{ required: "Name is required" }}
-                                    render={({ field }) => (
-                                        <FormControl
-                                            as='input'
-                                            labelText='Name'
-                                            placeholder='Enter full name'
-                                            {...field}
-                                            error={getErrorMessage(errors.name)}
-                                        />
-                                    )}
-                                />
-                                {/* Email input */}
-                                <Controller
-                                    name="email"
-                                    control={control}
-                                    rules={{
-                                        required: "Email is required",
-                                        pattern: {
-                                            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                                            message: "Please enter a valid email address",
-                                        }
-                                    }}
-                                    render={({ field }) => (
-                                        <FormControl
-                                            as='input'
-                                            labelText='Email Address'
-                                            placeholder='Enter your email address'
-                                            type='email'
-                                            {...field}
-                                            error={getErrorMessage(errors.email)}
-                                        />
-                                    )}
-                                />
-                                {/* Password input */}
-                                <Controller
-                                    name="password"
-                                    control={control}
-                                    rules={{ required: "Password is required", minLength: { value: 8, message: "Password must be at least 8 characters" } }}
-                                    render={({ field }) => (
-                                        <FormControl
-                                            as='input'
-                                            labelText='Password'
-                                            placeholder='Enter your password'
-                                            type='password'
-                                            {...field}
-                                            error={getErrorMessage(errors.password)}
-                                        />
-                                    )}
-                                />
-                                {/* Submit button */}
-                                <Button type='submit'>Create Account</Button>
-                            </div>
-                            <div className='flex justify-center text-sm mt-4 font-light'>
-                                <p>Have an account? {" "}</p>
-                                <Link href={"/auth/login"} className='font-bold hover:opacity-80 ml-1'>Login</Link>
-                            </div>
-                            <div className='flex items-center gap-1 font-light text-sm mt-4'>
-                                <ShieldCheck size={16} strokeWidth={1.5} />
-                                <p>By logging in, you agree to the
-                                    <Link href={"#"} className='font-bold'> Terms of Service </Link>
-                                    and
-                                    <Link href={"#"} className='font-bold'> Privacy Policy</Link>
-                                </p>
-                            </div>
-                        </form>
-                    </TabsContent>
-                    <TabsContent value="pollingAgent">
-                        {/* Form for Polling Agent */}
-                        <GoogleAuthSection />
-                        <form onSubmit={handleSubmit(onSubmit, onError)}>
-                            <div className='flex flex-col gap-6 mt-6'>
-                                {/* Name input */}
-                                <Controller
-                                    name="name"
-                                    control={control}
-                                    rules={{ required: "Name is required" }}
-                                    render={({ field }) => (
-                                        <FormControl
-                                            as='input'
-                                            labelText='Name'
-                                            placeholder='Enter full name'
-                                            {...field}
-                                            error={getErrorMessage(errors.name)}
-                                        />
-                                    )}
-                                />
-                                {/* Email input */}
-                                <Controller
-                                    name="email"
-                                    control={control}
-                                    rules={{ required: "Email is required" }}
-                                    render={({ field }) => (
-                                        <FormControl
-                                            as='input'
-                                            labelText='Email Address'
-                                            placeholder='Enter your email address'
-                                            type='email'
-                                            {...field}
-                                            error={getErrorMessage(errors.email)}
-                                        />
-                                    )}
-                                />
-                                {/* Password input */}
-                                <Controller
-                                    name="password"
-                                    control={control}
-                                    rules={{ required: "Password is required", minLength: { value: 8, message: "Password must be at least 8 characters" } }}
-                                    render={({ field }) => (
-                                        <FormControl
-                                            as='input'
-                                            labelText='Password'
-                                            placeholder='Enter your password'
-                                            type='password'
-                                            {...field}
-                                            error={getErrorMessage(errors.password)}
-                                        />
-                                    )}
-                                />
-                                {/* Submit button */}
-                                <Button type='submit'>Create Account</Button>
-                            </div>
-                            <div className='flex justify-center text-sm mt-4 font-light'>
-                                <p>Have an account? {" "}</p>
-                                <Link href={"/auth/login"} className='font-bold hover:opacity-80 ml-1'>Login</Link>
-                            </div>
-                            <div className='flex items-center gap-1 font-light text-sm mt-4'>
-                                <ShieldCheck size={16} strokeWidth={1.5} />
-                                <p>By logging in, you agree to the
-                                    <Link href={"#"} className='font-bold'> Terms of Service </Link>
-                                    and
-                                    <Link href={"#"} className='font-bold'> Privacy Policy</Link>
-                                </p>
-                            </div>
-                        </form>
-                    </TabsContent>
-                </Tabs>
-            </div>
+            {confirmationParam === "pending" ? (
+                <div>
+                    <div>
+                        <h2 className='text-black-500 text-[28px] text-center font-semibold leading-[120%] mb-1'>You’re almost finished</h2>
+                        <p className="text-center">We just sent an email to <span className="text-[#4649E5] font-bold">{email}</span> containing an activation link and a code. Click on the link and enter the code to finish setting up your account.</p>
+                    </div>
+                    <div className="bg-gray-600 w-3/4 h-px mx-auto my-6"></div>
+                    <div className='flex justify-center text-sm mt-4 font-light'>
+                        <p>Didn’t get a code?</p>
+                        <button type="button" onClick={handleResendOTP} className='font-bold hover:opacity-80 ml-1'>
+                            Click to Resend
+                        </button>
+                    </div>
+                </div>
+            ) : (
+                <div className="mt-4">
+                    <Tabs value={selectedTab} onValueChange={setSelectedTab} className="w-full">
+                        <TabsList>
+                            <TabsTrigger value="iWitness">Eyewitness</TabsTrigger>
+                            <TabsTrigger value="pollingUnitAgent">Polling Unit Agent</TabsTrigger>
+                        </TabsList>
+
+                        <TabsContent value="iWitness">
+                            <GoogleAuthSection role={selectedTab} />
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                <div className='flex flex-col gap-6 mt-6'>
+                                    <Controller
+                                        name="name"
+                                        control={control}
+                                        rules={{ required: "Name is required" }}
+                                        render={({ field }) => (
+                                            <FormControl
+                                                as='input'
+                                                labelText='Name'
+                                                placeholder='Enter full name'
+                                                {...field}
+                                                error={getErrorMessage(errors.name)}
+                                            />
+                                        )}
+                                    />
+                                    <Controller
+                                        name="email"
+                                        control={control}
+                                        rules={{
+                                            required: "Email is required",
+                                            pattern: {
+                                                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                                message: "Please enter a valid email address",
+                                            }
+                                        }}
+                                        render={({ field }) => (
+                                            <FormControl
+                                                as='input'
+                                                labelText='Email Address'
+                                                placeholder='Enter your email address'
+                                                type='email'
+                                                {...field}
+                                                error={getErrorMessage(errors.email)}
+                                            />
+                                        )}
+                                    />
+                                    <Controller
+                                        name="password"
+                                        control={control}
+                                        rules={{ required: "Password is required", minLength: { value: 8, message: "Password must be at least 8 characters" } }}
+                                        render={({ field }) => (
+                                            <FormControl
+                                                as='input'
+                                                labelText='Password'
+                                                placeholder='Enter your password'
+                                                type='password'
+                                                {...field}
+                                                error={getErrorMessage(errors.password)}
+                                            />
+                                        )}
+                                    />
+                                    <Button type='submit'>{isPending ? <MoonLoader color='white' size={18} /> : "Create Account"}</Button>
+                                </div>
+                                <div className='flex justify-center text-sm mt-4 font-light'>
+                                    <p>Have an account? {" "}</p>
+                                    <Link href={"/auth/login"} className='font-bold hover:opacity-80 ml-1'>Login</Link>
+                                </div>
+                                <div className='flex items-center gap-1 font-light text-sm mt-4'>
+                                    <ShieldCheck size={16} strokeWidth={1.5} />
+                                    <p>By logging in, you agree to the
+                                        <Link href={"#"} className='font-bold'> Terms of Service </Link>
+                                        and
+                                        <Link href={"#"} className='font-bold'> Privacy Policy</Link>
+                                    </p>
+                                </div>
+                            </form>
+                        </TabsContent>
+
+                        <TabsContent value="pollingUnitAgent">
+                            <GoogleAuthSection role={selectedTab} />
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                <div className='flex flex-col gap-6 mt-6'>
+                                    <Controller
+                                        name="name"
+                                        control={control}
+                                        rules={{ required: "Name is required" }}
+                                        render={({ field }) => (
+                                            <FormControl
+                                                as='input'
+                                                labelText='Name'
+                                                placeholder='Enter full name'
+                                                {...field}
+                                                error={getErrorMessage(errors.name)}
+                                            />
+                                        )}
+                                    />
+                                    <Controller
+                                        name="email"
+                                        control={control}
+                                        rules={{ required: "Email is required" }}
+                                        render={({ field }) => (
+                                            <FormControl
+                                                as='input'
+                                                labelText='Email Address'
+                                                placeholder='Enter your email address'
+                                                type='email'
+                                                {...field}
+                                                error={getErrorMessage(errors.email)}
+                                            />
+                                        )}
+                                    />
+                                    <Controller
+                                        name="password"
+                                        control={control}
+                                        rules={{ required: "Password is required", minLength: { value: 8, message: "Password must be at least 8 characters" } }}
+                                        render={({ field }) => (
+                                            <FormControl
+                                                as='input'
+                                                labelText='Password'
+                                                placeholder='Enter your password'
+                                                type='password'
+                                                {...field}
+                                                error={getErrorMessage(errors.password)}
+                                            />
+                                        )}
+                                    />
+                                    <Button type='submit'>{isPending ? <MoonLoader color='white' size={18} /> : "Create Account"}</Button>
+                                </div>
+                                <div className='flex justify-center text-sm mt-4 font-light'>
+                                    <p>Have an account? {" "}</p>
+                                    <Link href={"/auth/login"} className='font-bold hover:opacity-80 ml-1'>Login</Link>
+                                </div>
+                                <div className='flex items-center gap-1 font-light text-sm mt-4'>
+                                    <ShieldCheck size={16} strokeWidth={1.5} />
+                                    <p>By logging in, you agree to the
+                                        <Link href={"#"} className='font-bold'> Terms of Service </Link>
+                                        and
+                                        <Link href={"#"} className='font-bold'> Privacy Policy</Link>
+                                    </p>
+                                </div>
+                            </form>
+                        </TabsContent>
+                    </Tabs>
+                </div>
+            )}
         </AuthLayout>
     );
 }
 
-export default Page;
+export default CreateAccount;
