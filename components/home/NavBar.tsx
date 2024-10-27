@@ -1,11 +1,12 @@
 import React from 'react'
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from '../ui/navigation-menu'
+import { NavigationMenuItem } from '../ui/navigation-menu'
 import { Button } from '../ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
 import { hamburgerIcon } from '@/public/assets/icons'
 import Svg from '../common/Svg'
 import NavContent from './NavContent'
+import SubscriptionModal from './SubscriptionModal'
 
 function NavBar() {
     const ourMissionOptions = ["About Us", "Mission Statement", "Methodology", "Initiatives"];
@@ -38,6 +39,7 @@ function NavBar() {
                     </NavigationMenuItem>
                 </div>
             </div>
+            <SubscriptionModal />
 
             <Svg width={"29px"} height={'18px'} SvgIcon={hamburgerIcon} className='lg:hidden' />
         </div>

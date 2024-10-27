@@ -17,7 +17,7 @@ function NavContent({ navHeading, navLinkOption }: NavContentProp) {
                         <NavigationMenuLink className='min-w-[200px] flex flex-col py-4 text-primary font-medium'>
                             {navLinkOption.map((link, idx) => {
                                 return (
-                                    <Link href={'#'} className='py-2 px-4 hover:bg-slate-100' key={idx}>{link}</Link>
+                                    <Link href={'#'} className='py-2 px-4 text-sm hover:bg-slate-100' key={idx}>{link}</Link>
                                 )
                             })}
                         </NavigationMenuLink>
