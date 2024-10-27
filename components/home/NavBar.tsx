@@ -124,117 +124,15 @@ function NavBar() {
                         </li>
 
                         <Link href="/auth/login">
-                            <button className='bg-primary w-[128px] text-sm text-white font-bold uppercase rounded-none border border-primary hover:bg-transparent hover:text-black-500 py-3'>Login</button>
+                            <button className='bg-primary w-[128px] text-sm text-white font-bold uppercase  border border-primary hover:bg-transparent hover:text-green-900 py-3 rounded-xl'>Login</button>
                         </Link>
                         <Link href="/docs" >
-                            <button className='bg-transparent text-black-500 font-bold uppercase rounded-none border border-primary hover:bg-primary hover:text-white text-sm py-3 px-2'>Join us now</button>
+                            <button className='bg-transparent text-green-900 font-bold uppercase border border-primary hover:bg-primary hover:text-white text-sm py-3 px-3 rounded-xl'>Join us now</button>
                         </Link>
                     </ul>
                 </div>
             </div>
         </nav>
-        // <div className='w-full flex justify-between border-b border-b-green-900 px-8 py-4 shadow-xl fixed z-10 bg-[#F2F2F2]'>
-        //     <Image src={"/Nigelctionpolls 4.svg"} width={250} height={50} alt='NG Election logo' className='w-[140px] h-auto' />
-        //     <NavigationMenu className="hidden lg:block">
-        //         <NavigationMenuList>
-        //             <NavigationMenuItem>
-        //                 <NavigationMenuTrigger>Our Mission</NavigationMenuTrigger>
-        //                 <NavigationMenuContent>
-        //                     <NavigationMenuLink>
-        //                         <ul className="w-52 p-4 rounded shadow-md flex flex-col space-y-4 text-green-900">
-        //                             <li className="text-md cursor-pointer hover:font-bold">
-        //                                 About Us
-        //                             </li>
-        //                             <li className="text-md cursor-pointer hover:font-bold">
-        //                                 Mission Statement
-        //                             </li>
-        //                             <li className="text-md cursor-pointer hover:font-bold">
-        //                                 Methodology
-        //                             </li>
-        //                             <li className="text-md cursor-pointer hover:font-bold">
-        //                                 Initiative
-        //                             </li>
-        //                         </ul>
-        //                     </NavigationMenuLink>
-        //                 </NavigationMenuContent>
-        //             </NavigationMenuItem>
-        //             <NavigationMenuItem>
-        //                 <NavigationMenuTrigger>Election Results</NavigationMenuTrigger>
-        //                     <NavigationMenuContent>
-        //                         <NavigationMenuLink>
-        //                             <ul className="w-52 p-4 rounded shadow-md flex flex-col space-y-4 text-green-900">
-        //                                 <li className="text-md cursor-pointer hover:font-bold">
-        //                                     Presidential
-        //                                 </li>
-        //                                 <li className="text-md cursor-pointer hover:font-bold">
-        //                                     Gubernotorial
-        //                                 </li>
-        //                                 <li className="text-md cursor-pointer hover:font-bold">
-        //                                     House of Assembly
-        //                                 </li>
-        //                                 <li className="text-md cursor-pointer hover:font-bold">
-        //                                     Local Government
-        //                                 </li>
-        //                                 <li className="text-md cursor-pointer hover:font-bold">
-        //                                     Off-cycle Elections
-        //                                 </li>
-        //                             </ul>
-        //                         </NavigationMenuLink>
-        //                     </NavigationMenuContent>
-        //             </NavigationMenuItem>
-        //             <NavigationMenuItem>
-        //                 <NavigationMenuTrigger>Eye witness</NavigationMenuTrigger>
-        //                 <NavigationMenuContent>
-        //                     <NavigationMenuLink>
-        //                         <ul className="w-52 p-4 rounded shadow-md flex flex-col space-y-4 text-green-900">
-        //                             <li className="text-md cursor-pointer hover:font-bold">
-        //                                 Objectives
-        //                             </li>
-        //                             <li className="text-md cursor-pointer hover:font-bold">
-        //                                 How to Volunteer
-        //                             </li>
-        //                             <li className="text-md cursor-pointer hover:font-bold">
-        //                                 Available Polling Units
-        //                             </li>
-        //                         </ul>
-        //                     </NavigationMenuLink>
-        //                 </NavigationMenuContent>
-        //             </NavigationMenuItem>
-        //             <NavigationMenuItem>
-        //                 <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
-        //                 <NavigationMenuContent>
-        //                     <NavigationMenuLink>
-        //                         <ul className="w-52 p-4 rounded shadow-md flex flex-col space-y-4 text-green-900">
-        //                             <li className="text-md cursor-pointer hover:font-bold">
-        //                                 Publications
-        //                             </li>
-        //                             <li className="text-md cursor-pointer hover:font-bold">
-        //                                 Election Updates
-        //                             </li>
-        //                             <li className="text-md cursor-pointer hover:font-bold">
-        //                                 Find Polling Unit
-        //                             </li>
-        //                         </ul>
-        //                     </NavigationMenuLink>
-        //                 </NavigationMenuContent>
-        //             </NavigationMenuItem>
-        //             <div className='flex ml-7 gap-3'>
-        //                 <NavigationMenuItem>
-        //                     <Link href="/auth/login" legacyBehavior passHref>
-        //                         <Button className='bg-primary min-w-[128px] text-sm text-white font-bold uppercase rounded-none border border-primary hover:bg-transparent hover:text-black-500 animate-in transition-colors'>Login</Button>
-        //                     </Link>
-        //                 </NavigationMenuItem>
-        //                 <NavigationMenuItem>
-        //                     <Link href="/docs" legacyBehavior passHref>
-        //                         <Button className='bg-transparent text-black-500 font-bold uppercase rounded-none border border-primary hover:bg-primary hover:text-white animate-in transition-colors'>Join us now</Button>
-        //                     </Link>
-        //                 </NavigationMenuItem>
-        //             </div>
-
-        //         </NavigationMenuList>
-        //     </NavigationMenu>
-        //     <Svg width={"29px"} height={'18px'} SvgIcon={hamburgerIcon} className='lg:hidden' />
-        // </div>
         
     )
 }

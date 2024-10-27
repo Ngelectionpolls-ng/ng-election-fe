@@ -8,7 +8,7 @@ function Hero() {
                 <Map />
                 <div className='absolute left-[80px] top-[200px] w-[300px] hidden md:block'>
                     <div className='bg-white p-2 border-b-2 border-primary shadow-md'>
-                        <h3 className='font-bold text-lg'>NG ELECTIONS</h3>
+                        <h3 className='font-bold text-lg'>PRESIDENTIAL ELECTIONS</h3>
                         <p className="text-sm">Nigerian election results</p>
                     </div>
                     <div className='bg-white border-l-2 mt-2 border-[#A5E2AC] text-sm flex items-center p-2 shadow-md'>
@@ -19,8 +19,7 @@ function Hero() {
                     <div className='flex items-center gap-4'>
                         <div className='flex items-center gap-2 text-sm'><div className='size-4 bg-primary'></div>Past elections</div>
                         <div className='flex items-center gap-2 text-sm'><div className='size-4 bg-orange-400'></div>Upcoming elections</div>
-                    </div>
-                    <div className='flex items-center gap-2 text-sm'><div className='size-4 bg-primary'></div>Past elections</div>
+                    </div>                    
                 </div>
             </div>
         </div>
