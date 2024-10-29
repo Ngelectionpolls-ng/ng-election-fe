@@ -1,8 +1,10 @@
+'use client';
+
 import ProgressDemo from '@/components/ui/Progress';
 import Image, { StaticImageData } from 'next/image';
 import React, { useEffect, useState } from 'react';
 
-type ElectionProps = {
+export type ElectionProps = {
   contestantName: string;
   party: string;
   votesNo: number;
@@ -10,11 +12,11 @@ type ElectionProps = {
   progress?: {
     percent: number;
     className?: string;
-    setPercent: React.Dispatch<React.SetStateAction<number>>;
+    setPercent?: React.Dispatch<React.SetStateAction<number>>;
   };
 };
 
-export const CandidateInfo = ({ props }: { props: ElectionProps }) => {
+export const CandidateInfo = ({ props, className }: { props: ElectionProps, className?: string }) => {
   const [mediaQuery, setMediaQuery] = useState<boolean>(false);
 
   useEffect(() => {
@@ -33,21 +35,23 @@ export const CandidateInfo = ({ props }: { props: ElectionProps }) => {
   return (
     <div
       className={`flex gap-4 items-center relative
-      ${!props.progress ? 'shadow-md p-3 rounded-md' : ''}
+      ${!props.progress ? 'p-4 rounded-md' : ''}
         ${props.progress && mediaQuery ? 'h-20 justify-between' : ''}
+        ${className}
+        
     `}
     >
       <div className="flex gap-2 items-center">
         <div
-          className={`rounded-full relative overflow-hidden w-10 h-10
-          ${!props.progress ? 'w-14 h-14' : 'w-10 h-10'}
+          className={`rounded-full relative overflow-hidden w-14 h-14
+          
         `}
         >
           <Image
             src={props.image}
             alt=""
-            height={300}
-            width={300}
+            height={500}
+            width={500}
             className="absolute left-0 top-0 h-full w-full"
           />
         </div>
@@ -55,12 +59,12 @@ export const CandidateInfo = ({ props }: { props: ElectionProps }) => {
           <span>{props.contestantName}</span>
           <span>{props.party}</span>
           {!props.progress && (
-            <span className="font-bold text-[12px]">{props.votesNo}</span>
+            <span className="font-bold text-primary text-[12px]">{props.votesNo}</span>
           )}
         </div>
       </div>
       {props.progress && (
-        <div className={`w-full ${mediaQuery ? 'absolute bottom-0' : ''}`}>
+        <div className={`w-full ${mediaQuery ? 'absolute bottom-[-1rem]' : ''}`}>
           <ProgressDemo
           props={props.progress}
         />
