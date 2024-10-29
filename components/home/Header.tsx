@@ -3,7 +3,7 @@ import NavBar from './NavBar'
 
 function Header() {
     return (
-        <header className='py-8 w-full'>
+        <header className='w-full'>
             <NavBar />
             <Hero />
         </header>
