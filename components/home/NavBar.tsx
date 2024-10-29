@@ -132,7 +132,7 @@ function NavBar() {
                         <Link href="/auth/login">
                             <button className='bg-primary w-[128px] text-sm text-white font-bold uppercase  border border-primary hover:bg-transparent hover:text-green-900 py-3 rounded-lg'>Login</button>
                         </Link>
-                        <Link href="/auth/create-account" >
+                        <Link href="/docs" >
                             <button className='bg-transparent text-green-900 font-bold uppercase border border-primary hover:bg-primary hover:text-white text-sm py-3 px-3 rounded-lg'>Join us now</button>
                         </Link>
                     </ul>
