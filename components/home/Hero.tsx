@@ -1,28 +1,29 @@
-import { map } from '@/public/assets/images/home'
-import Image from 'next/image'
+import Map from '@/components/home/Map';
 import React from 'react'
 
 function Hero() {
     return (
-        <div className='relative bg-[#F2F2F2] flex flex-col items-center'>
-            <Image src={map} width={1500} height={1500} alt='Map of Nigeria' className='w-[75%] h-auto' />
-            <div className='absolute left-[80px] top-[80px] w-[370px]'>
-                <div className='bg-white px-4 py-5 border-b-2 border-primary'>
-                    <h3 className='font-bold text-3xl'>NG ELECTIONS</h3>
-                    <p>Nigerian election results</p>
+        <div className="" style={{backgroundColor: "rgba(0,0,0,.3)"}}>
+            <div className='relative bg-[#F2F2F2] flex flex-col items-center' style={{backgroundImage: `url('${process.env.NEXT_PUBLIC_FRONTEND_URL}/assets/images/home/background.jpeg')`, backgroundSize: "cover", backgroundRepeat: 'no-repeat'}}>
+                <Map />
+                <div className='absolute left-[80px] top-[200px] w-[300px] hidden md:block'>
+                    <div className='bg-white p-2 border-b-2 border-primary shadow-md'>
+                        <h3 className='font-bold text-lg'>PRESIDENTIAL ELECTIONS</h3>
+                        <p className="text-sm">Nigerian election results</p>
+                    </div>
+                    <div className='bg-white border-l-2 mt-2 border-[#A5E2AC] text-sm flex items-center p-2 shadow-md'>
+                        Click on a state to view election and report details
+                    </div>
                 </div>
-                <div className='h-[49px] bg-white border-l-2 mt-[11px] border-[#A5E2AC] text-sm flex items-center px-4'>
-                    Click on a state to view election and report details
+                <div className="md:absolute bottom-4 md:left-[80px]">
+                    <div className='flex items-center gap-4'>
+                        <div className='flex items-center gap-2 text-sm'><div className='size-4 bg-primary'></div>Past elections</div>
+                        <div className='flex items-center gap-2 text-sm'><div className='size-4 bg-orange-400'></div>Upcoming elections</div>
+                    </div>                    
                 </div>
-            </div>
-            <div>
-                <div className='flex items-center gap-4'>
-                <div className='flex items-center gap-2'><div className='size-5 bg-primary'></div>Past elections</div>
-                <div className='flex items-center gap-2'><div className='size-5 bg-primary'></div>Upcoming elections</div>
-                </div>
-                <div className='flex items-center gap-2'><div className='size-5 bg-primary'></div>Past elections</div>
             </div>
         </div>
+        
     )
 }
 
