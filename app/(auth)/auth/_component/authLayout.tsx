@@ -1,3 +1,4 @@
+import Link from '@/node_modules/next/link';
 import Image from 'next/image';
 import React, { ReactNode } from 'react'
 
@@ -15,9 +16,11 @@ function AuthLayout({ children, passwordResetConfirmation, verifyEmailConfirmati
         <section className='bg-white py-9 pl-6 2xl:pl-20 pr-6 xl:pl-10 2x:pr-[34px] flex gap-7 xl:gap-[120px] sm:flex-row-reverse xl:flex-row justify-between min-h-screen text-neutral-dark-2'>
             <div className='relative flex md:items-center md:w-[90%] pt-[120px] md:pt-0'>
                 <div className='md:w-[80%]'>
-                    <div className='absolute left-[30%] top-5 flex justify-center'>
-                        <Image src={"/ng-election-logo-5.png"} width={145} height={100} alt="" />
-                    </div>
+                    <Link href="/">
+                        <div className='absolute left-[30%] top-5 flex justify-center'>
+                            <Image src={"/ng-election-logo-5.png"} width={145} height={100} alt="" />
+                        </div>
+                    </Link>
                     <div className='h-5 w-full'></div>
                     <div className='mt-20'>
                         <h2 className='text-black-500 text-[28px] text-center font-semibold leading-[120%] mb-1'>{`${passwordResetConfirmation ? "Successful Password reset!" : verifyEmailConfirmation ? "Your email has been verified successfully" : headerTitle}`}</h2>
