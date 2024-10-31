@@ -20,12 +20,12 @@ type LgaResultProps = {
 
 export default function LgaResults({ arr, issues, link, className, ...props }: LgaResultProps) {
   return (
-    <Link {...props} className={`p-4 flex flex-col bg-white shadow-md rounded-md gap-3 border 
+    <Link {...props} className={`p-4 flex flex-col bg-white shadow-md rounded-md gap-10 border 
       ${className}
       `}
       href={link || '.'}
     >
-      {!issues && (
+      
         <div className="flex justify-between">
           <h2 className="font-bold">LGA</h2>
           <div className="flex gap-1 flex-col sm:gap-10 sm:flex-row">
@@ -33,17 +33,17 @@ export default function LgaResults({ arr, issues, link, className, ...props }: L
             <Status stat={false} text={'election status'} />
           </div>
         </div>
-      )}
-      <ElectionInfo props={pullingUnitData[0].electionInfo} />
+      
       <div className="grid gap-4 sm:grid-cols-3">
         {arr?.map((item, id) => (
           <CandidateInfo
             key={id}
             className="border border-green-200"
             props={item}
-          />
-        ))}
+            />
+          ))}
       </div>
+      <ElectionInfo props={pullingUnitData[0].electionInfo} />
       {issues && (
         <div className='flex flex-col gap-4'>
           <h2 className="font-bold">Issues Reported in this polling unit</h2>

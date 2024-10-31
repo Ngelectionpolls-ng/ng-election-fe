@@ -26,3 +26,7 @@ export const dateHandler = (dateStr: string | undefined, pathname?: string | und
     return date.toLocaleDateString(undefined, options);
   }
 };
+
+export const formatWithCommas = (value: string | number) => {
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
