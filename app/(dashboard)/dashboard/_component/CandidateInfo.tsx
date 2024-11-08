@@ -63,7 +63,7 @@ export const CandidateInfo = ({ props, className, classStyle }: { props: Electio
         </div>
       </div>
       {props.progress && (
-        <div className={`w-full ${mediaQuery ? 'absolute bottom-[-1.4rem]' : ''}`}>
+        <div className={`w-full ${mediaQuery ? 'absolute bottom-[-0.8rem]' : ''}`}>
           <ProgressDemo
             className={classStyle}
             props={props.progress}

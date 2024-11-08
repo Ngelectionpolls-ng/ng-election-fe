@@ -12,7 +12,7 @@ export default function TimeStamp({ time }: Props) {
   }
 
   return (
-    <h2 className={`w-max mx-auto px-4 py-1 text-current rounded-2xl ${colorState(time)}`}>
+    <h2 className={`w-max mx-auto px-4 cursor-pointer py-1 text-current rounded-2xl ${colorState(time)}`}>
       {time}
     </h2>
   );
