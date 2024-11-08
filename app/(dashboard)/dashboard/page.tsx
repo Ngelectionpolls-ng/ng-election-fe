@@ -108,7 +108,7 @@ export default function Page() {
             <div className="flex mb-4 justify-between flex-wrap">
               <FormControl
                 as="select"
-                className="max-w-[200px] text-[12px] sm:text-base"
+                className="max-w-[200px] text-[8px] sm:text-base"
                 placeholder="Select election type"
                 options={[
                   { value: '1', label: 'presidential' },
@@ -122,15 +122,15 @@ export default function Page() {
               />
               <FormControl
                 as="select"
-                className="max-w-[200px] text-[12px] sm:text-base"
+                className="max-w-[200px] text-[8px] sm:text-base"
                 placeholder="Select election year"
                 options={[{ value: '1', label: '2014' }]}
                 // label="Select State"
               />
             </div>
-            <div className="flex justify-between mb-9 text-[15px]">
+            <div className="flex justify-between gap-10 mb-9 text-[15px]">
               <span>Leading Candidates</span>
-              <span>Accumulated Votes</span>
+              <span className='justify-end'>Accumulated Votes</span>
             </div>
             <div className="flex gap-6 flex-col mb-9">
               {resultData2.map((res, id) => (
@@ -141,7 +141,7 @@ export default function Page() {
           </div>
 
           {/* Other Candidates Carousel */}
-          <div className="p-3 grid gap-2 relative overflow-hidden">
+          <div className="p-3 grid gap-4 relative overflow-hidden">
             <span>Other Candidates</span>
             <div className="w-full relative overflow-hidden">
               <Carousel id="candidatesApi" setApi={setOtherCandidatesApi}>
@@ -151,7 +151,7 @@ export default function Page() {
                       key={index}
                       className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                     >
-                      <CandidateInfo className="shadow-md" props={res} />
+                      <CandidateInfo className="shadow-md rounded-md" props={res} />
                     </CarouselItem>
                   ))}
                 </CarouselContent>

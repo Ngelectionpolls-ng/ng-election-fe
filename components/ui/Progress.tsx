@@ -23,14 +23,14 @@ const ProgressDemo = ({ props, className }: { props?: ProgressProps, className?:
 
   return (
     <Progress.Root
-      className={`bg-slate-600 relative overflow-hidden rounded-full w-full h-7 translate-z-[0]`}
+      className={`bg-slate-600 relative overflow-hidden rounded-full w-full h-4 sm:h-7 translate-z-[0]`}
       value={percent}
     >
       <Progress.Indicator
         className={`${className} w-full h-full transition-all relative`}
         style={{ transform: `translateX(-${100 - (percent ?? 0)}%)` }}
       >
-        <span className='absolute right-2 top-2 text-[10px] text-white'>{percent}%</span>
+        <span className='absolute right-2 top-[4px] sm:top-2 text-[10px] text-white'>{percent}%</span>
       </Progress.Indicator>
     </Progress.Root>
   );
