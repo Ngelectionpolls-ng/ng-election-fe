@@ -9,6 +9,7 @@ import ElectionInfo, { ElectionInfoProps } from './ElectionInfo';
 import { CandidateInfo, ElectionProps } from './CandidateInfo';
 import { useRouter } from 'next/navigation';
 import LgaResults from './LgaResults';
+import { formatWithCommas } from '@/utils/functions/FunctionUtils';
 
 type TableComponentProps = {
   electionInfo?: ElectionInfoProps;
@@ -31,12 +32,18 @@ export default function TableComponent({
         accessorKey: 'wards',
       },
       {
-        header: 'Accumulated votes',
+        header: 'Registered Voters',
         accessorKey: 'votes',
+        cell: ({ getValue }: { getValue: () => string | number }) => (
+          <span>{formatWithCommas(getValue())}</span>
+        ),
       },
       {
-        header: 'Active voters',
+        header: 'Accredited Voters',
         accessorKey: 'counts',
+        cell: ({ getValue }: { getValue: () => string | number }) => (
+          <span>{formatWithCommas(getValue())}</span>
+        ),
       },
       {
         header: 'Status',
@@ -64,7 +71,7 @@ export default function TableComponent({
             }
           };
           return (
-            <div className="flex items-center justify-center">
+            <div className="flex items-center">
               <span
                 className={`w-3 h-3 rounded-full mr-2 ${getDotColor(
                   reportStatus,
@@ -85,7 +92,7 @@ export default function TableComponent({
       {
         wards: 'Idumota P / School (Umarha hr)',
         votes: '847 voters',
-        counts: '847 voters',
+        counts: '1847 voters',
         status: 'Completed',
         report: 'Issue',
       },
@@ -168,6 +175,9 @@ export default function TableComponent({
   };
 
   const [hover, setHover] = useState(-1);
+  const handleHover = (id: number) => {
+    setHover((prev) => (prev === id ? -1 : id));
+  }
 
   return (
     <table className="w-full border-collapse rounded-md">
@@ -177,7 +187,7 @@ export default function TableComponent({
             {headerGroup.headers.map((header) => (
               <th
                 key={header.id}
-                className="p-3 text-center font-bold text-gray-700"
+                className="p-3 text-left font-bold text-gray-700"
               >
                 {flexRender(
                   header.column.columnDef.header,
@@ -198,9 +208,9 @@ export default function TableComponent({
                 getRowStyle(
                   row.original.report as 'Successful' | 'Issue' | 'Pending',
                 )
-              } text-center relative cursor-pointer`}
-              onMouseEnter={() => setHover(id)}
-              onMouseLeave={() => setHover(-1)}
+              } relative cursor-pointer`}
+              onMouseEnter={() => handleHover(id)}
+              onMouseLeave={() => handleHover(id)}
               onClick={() => {
                 setHover((prev) => (prev === id ? -1 : id));
                 onClick && onClick();
@@ -209,7 +219,7 @@ export default function TableComponent({
               {row.getVisibleCells().map((cell, id) => (
                 <td
                   key={cell.id}
-                  className={`p-3 text-center border-b border-slate-300
+                  className={`p-3 border-b border-slate-300
                     ${id === 0 ? 'rounded-l-md' : ''}
                     ${
                       id === row.getVisibleCells().length - 1
@@ -222,9 +232,18 @@ export default function TableComponent({
                 </td>
               ))}
             </tr>
-            {hover === id && electionInfo && (
-              <LgaResults arr={arr} hover issues={issues} />
-            )}
+            <LgaResults
+              arr={arr}
+              onMouseEnter={() => handleHover(id)}
+              onMouseLeave={() => handleHover(id)}
+              issues={issues}
+              className={`absolute transition-all duration-300
+                  ${
+                    hover === id && electionInfo
+                      ? 'max-h-max overflow-auto z-10 opacity-100'
+                      : 'z-[-10] max-h-0 overflow-hidden opacity-0'
+                  }`}
+            />
           </React.Fragment>
         ))}
       </tbody>
