@@ -14,8 +14,7 @@ function JoinCommunitySection() {
                 <div className="flex justify-between items-center border-[1.5px] border-gray-400 rounded-b-md lg:rounded-bl-none lg:rounded-r-md w-full lg:w-1/2 px-8 pb-4">
                     <Link href={"#"} className="flex flex-col md:flex-row gap-3 w-full justify-between items-center cursor-pointer">
                         <div className="mt-4 lg:m-0">
-                            <h3 className="text-primary text-2xl font-bold underline">Join the community</h3>
-                            <p className="text-xl">Vote, report, elect</p>
+                            <h3 className="text-primary text-2xl font-bold underline">Join the Discussion</h3>
                         </div>
                         <div><ArrowRight color="#285D2D" size={22} strokeWidth={3} /></div>
                     </Link>

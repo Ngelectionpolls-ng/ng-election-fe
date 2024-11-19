@@ -3,6 +3,7 @@
 import React, {useEffect, useState} from 'react';
 import '@/public/css/c.css';
 import State from '../common/State';
+import ElectionResults from './ElectionResults';
 
 export default function Map(){
 
@@ -25,9 +26,9 @@ export default function Map(){
 
     
     return (
-        <div className="electon_mapContainer__Twfii w-full pt-28" >
-            <div className="map_mapWrapper__Xoo_W" style={{display: 'flex', justifyContent: 'center'}}>
-                <div id="trueMap" style={{maxWidth: '98%', overflow: 'hidden', width: 'fit-content'}}>
+        <div className="electon_mapContainer__Twfii w-full pt-28 " >
+            <div className="map_mapWrapper__Xoo_W relative" style={{display: 'flex', justifyContent: 'center'}}>
+                <div id="trueMap" style={{maxWidth: '100%', overflow: 'hidden', width: 'fit-content'}}>
                     <div className="map_mapCover__Zzbwd overflow-y-scroll relative">      
                         <div className={`p-4 rounded-lg bg-white absolute z-10 ${stateDetailsHidden ? 'hidden' : 'block'} top-${stateDetailsY} left-${stateDetailsX} w-[400px] shadow-black drop-shadow-2xl`}>
                             <div className="">PDP </div>
@@ -453,7 +454,12 @@ export default function Map(){
                         
                     </div>
                 </div>
+                <div className="absolute right-[620px] top-52">
+          <ElectionResults />
+        </div>
             </div>
+
+           
         </div>
     );
     
