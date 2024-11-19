@@ -5,7 +5,7 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion"
 import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { ChevronDownCircle } from "lucide-react"
+import { Plus } from "lucide-react"
 
 const Accordion = AccordionPrimitive.Root
 
@@ -35,7 +35,7 @@ const AccordionTrigger = React.forwardRef<
       {...props}
     >
       {children}
-      <ChevronDownCircle strokeWidth={1.5} className="size-6 shrink-0 transition-transform duration-200 text-gray-500" />
+      <Plus strokeWidth={1.5} className="size-6 shrink-0 transition-transform duration-200 text-gray-500" />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ))

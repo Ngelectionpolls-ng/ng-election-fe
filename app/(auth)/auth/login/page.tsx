@@ -53,7 +53,7 @@ function Login() {
     };
 
     const headerTitle = 'Login';
-    const headerSubTitle = 'Welcome back, you’ve been missed!';
+    const headerSubTitle = 'Create an account to get started with us.';
 
     const getErrorMessage = (error: any): string | undefined => {
         if (!error) return undefined;
@@ -63,9 +63,9 @@ function Login() {
     };
 
     return (
-        <AuthLayout headerTitle={headerTitle} headerSubTitle={headerSubTitle} bgImg='login-bg.png'>
-            <form onSubmit={handleSubmit(onSubmit)} className='w-full'>
-                <div className='flex flex-col gap-6 mt-6 w-full'>
+        <AuthLayout headerTitle={headerTitle} headerSubTitle={headerSubTitle} bgImg='loginImage.png'>
+            <form onSubmit={handleSubmit(onSubmit)} className='w-full border-red-500'>
+                <div className='flex flex-col gap-6 mt-6 w-full px-[10%]'>
                     <Controller
                         name="email"
                         control={control}
@@ -79,7 +79,7 @@ function Login() {
                         render={({ field }) => (
                             <FormControl
                                 as='input'
-                                labelText='Email Address'
+                                labelText='Email'
                                 placeholder='Enter your email address'
                                 type='email'
                                 {...field}
@@ -115,17 +115,17 @@ function Login() {
                         {isSubmitting ? (<MoonLoader color='white' size={18} />) : "Login"}
                     </Button>
                 </div>
-                <div className='flex justify-center text-sm mt-4 font-light'>
+                <div className='flex justify-center text-sm mt-4 font-light text-[#525252]'>
                     <p>Don&apos;t have an account?{" "}</p>
-                    <Link href={"/auth/create-account"} className='font-bold hover:opacity-80 ml-1'>
+                    <Link href={"/auth/create-account"} className='font-bold hover:opacity-80 ml-1 text-black'>
                         Create account
                     </Link>
                 </div>
-                <div className='flex items-center gap-1 font-light text-sm mt-4'>
+                <div className='flex items-center gap-1 font-light text-sm mt-4 text-[#525252]'>
                     <span className='size-4'>
                         <ShieldCheck size={16} strokeWidth={1.5} />
                     </span>
-                    <p>By logging in, you agree to our <Link href={"#"} className='font-bold'>Terms of Service</Link> and <Link href={"#"} className='font-bold'>Privacy Policy</Link></p>
+                    <p>By logging in, you agree to our <Link href={"#"} className='font-bold text-black'>Terms of Service</Link> and <Link href={"#"} className='font-bold text-black'>Privacy Policy</Link></p>
                 </div>
             </form>
         </AuthLayout>

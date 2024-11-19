@@ -14,7 +14,7 @@ export const options: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials): Promise<CustomUser | null> {
-        const baseUrl = process.env.NEXT_PUBLIC_BASEURL;
+        const baseUrl = process.env.NEXT_PUBLIC_BASEURL||'https://ng-election-backend-development.up.railway.app/api';
 
         if (!credentials?.email || !credentials?.password) {
           throw new Error(

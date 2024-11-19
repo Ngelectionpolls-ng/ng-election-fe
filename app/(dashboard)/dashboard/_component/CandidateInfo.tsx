@@ -1,6 +1,7 @@
 'use client';
 
 import ProgressDemo from '@/components/ui/Progress';
+import { formatWithCommas } from '@/utils/functions/FunctionUtils';
 import Image, { StaticImageData } from 'next/image';
 import React, { useEffect, useState } from 'react';
 
@@ -16,7 +17,7 @@ export type ElectionProps = {
   };
 };
 
-export const CandidateInfo = ({ props, className }: { props: ElectionProps, className?: string }) => {
+export const CandidateInfo = ({ props, className, classStyle }: { props: ElectionProps, className?: string, classStyle?: string }) => {
   const [mediaQuery, setMediaQuery] = useState<boolean>(false);
 
   useEffect(() => {
@@ -38,13 +39,11 @@ export const CandidateInfo = ({ props, className }: { props: ElectionProps, clas
       ${!props.progress ? 'p-4 rounded-md' : ''}
         ${props.progress && mediaQuery ? 'h-20 justify-between' : ''}
         ${className}
-        
     `}
     >
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2  items-center">
         <div
           className={`rounded-full relative overflow-hidden w-14 h-14
-          
         `}
         >
           <Image
@@ -55,23 +54,24 @@ export const CandidateInfo = ({ props, className }: { props: ElectionProps, clas
             className="absolute left-0 top-0 h-full w-full"
           />
         </div>
-        <div className="flex flex-col text-[12px] min-w-[3rem] gap-1">
+        <div className="flex flex-col min-w-[3rem] gap-1">
           <span>{props.contestantName}</span>
           <span>{props.party}</span>
           {!props.progress && (
-            <span className="font-bold text-primary text-[12px]">{props.votesNo}</span>
+            <span className="font-bold text-primary text-[12px]">{formatWithCommas(props.votesNo)} votes</span>
           )}
         </div>
       </div>
       {props.progress && (
-        <div className={`w-full ${mediaQuery ? 'absolute bottom-[-1rem]' : ''}`}>
+        <div className={`w-full ${mediaQuery ? 'absolute bottom-[-0.8rem]' : ''}`}>
           <ProgressDemo
-          props={props.progress}
-        />
+            className={classStyle}
+            props={props.progress}
+          />
         </div>
       )}
       {props.progress && (
-        <span className="font-bold text-[12px]">{props.votesNo}</span>
+        <span className={`font-bold ${mediaQuery ? '' : 'w-[12rem]'}`}>{formatWithCommas(props.votesNo)} votes</span>
       )}
     </div>
   );

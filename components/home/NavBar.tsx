@@ -15,7 +15,7 @@ function NavBar() {
     const resourcesOptions = ["Publications", "Elelction update", "Find polling unit"]
     return (
 
-        <nav className="bg-gray-50 border-gray-200 dark:bg-gray-900 dark:border-gray-700 shadow-xl border-b border-b-green-900 fixed z-10 w-full">
+        <nav className="bg-gray-50 border-gray-200 dark:bg-gray-900 dark:border-gray-700 shadow-xl border-b border-b-green-900 fixed z-20 w-full">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <Image src={"/Nigelctionpolls 4.svg"} width={250} height={50} alt='NG Election logo' className='w-[140px] h-auto' />

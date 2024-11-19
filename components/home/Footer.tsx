@@ -6,8 +6,8 @@ import Svg from "../common/Svg"
 
 function Footer() {
     return (
-        <footer className="bg-primary flex justify-center py-20 max-w-[1280px] px-4 lg:px-10 text-white">
-            <div className="w-full">
+        <footer className="bg-[#0A491C] flex justify-center py-20 max-w-full lg:px-10 text-white px-[10%]">
+            <div className="w-full px-[10%]">
                 <div className="flex items-center justify-center gap-2">
                     <div className="bg-white h-[1px] w-full"></div>
                     <div className="text-light-green font-bold flex gap-1">Nigeria<span className="text-white"> Election</span><span>Poll<sup className="text-white text-[8px] ml-[2px]">TM</sup></span> </div>
@@ -37,7 +37,7 @@ function Footer() {
                     </div>
                 </div>
                 <div className="flex flex-col justify-between items-center gap-8 md:flex-row md:px-7">
-                    <Image src={"/ng-election-logo-2.png"} className="w-[190px]" width={232} height={100} alt="" />
+                    <Image src={"/assets/images/footerImage.png"} className="w-[190px]" width={232} height={100} alt="" />
                     <div className="flex gap-4">
                         <div className="size-10 bg-white flex items-center justify-center rounded-full">
                             <Facebook color="#000" />

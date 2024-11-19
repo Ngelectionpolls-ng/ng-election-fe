@@ -58,7 +58,7 @@ function ResetPassword() {
 
     return (
         <AuthLayout headerTitle={headerTitle} headerSubTitle={headerSubTitle} bgImg='login-bg.png'>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form className='w-full border-red-600 min-w-[550px]' onSubmit={handleSubmit(onSubmit)}>
                 <div className='flex flex-col gap-6 mt-6'>
                     {/* New Password Field */}
                     <Controller
@@ -80,6 +80,7 @@ function ResetPassword() {
                         }}
                         render={({ field }) => (
                             <FormControl
+                            className='w-full'
                                 as='input'
                                 labelText='New Password'
                                 placeholder='Enter your new password'
@@ -100,6 +101,7 @@ function ResetPassword() {
                         }}
                         render={({ field }) => (
                             <FormControl
+                            className='w-full'
                                 as='input'
                                 labelText='Confirm New Password'
                                 placeholder='Confirm your new password'

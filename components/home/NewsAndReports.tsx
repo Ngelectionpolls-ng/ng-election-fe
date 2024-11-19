@@ -48,8 +48,8 @@ function NewsAndReports() {
             {newsAndReportContent.map((data) => {
               return (
                 <CarouselItem className="basis-11/12 md:basis-1/4 overflow-hidden" key={data.id}>
-                  <div className="max-w-fit border-b bg-[#f7f7f7] border-gray-900 pb-6">
-                    <div className="w-full h-[170px] bg-cover bg-[50% bg-center" style={{ background: `url(${data.image.src})`, backgroundPosition: '50%', backgroundSize: 'cover' }}></div>
+                  <div className="max-w-fit rounded-md border-b bg-[#f7f7f7] border-gray-900 pb-6 shadow-md">
+                    <div className="w-full h-[170px] bg-cover rounded-tl-md rounded-tr-md  bg-[50% bg-center" style={{ background: `url(${data.image.src})`, backgroundPosition: '50%', backgroundSize: 'cover' }}></div>
                     <div className="px-2 mt-6 flex flex-col gap-4">
                       <h5 className="font-bold">{data.title}</h5>
                       <p className="text-xs">{data.date}</p>

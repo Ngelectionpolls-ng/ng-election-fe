@@ -28,6 +28,7 @@ export default function Page() {
   >('subscriber');
 
   const electionProps = {
+    totalRegisteredVoters: 500,
     totalAccredictedVoters: 500,
     totalVotesCount: 500,
     totalValidVotes: 500,
@@ -67,7 +68,19 @@ export default function Page() {
   }, [eyewitnessApi]);
 
   const router = useRouter();
-
+  const tailwindColors = [
+    'bg-red-500',
+    'bg-blue-500',
+    'bg-green-500',
+    'bg-yellow-500',
+    'bg-purple-500',
+    'bg-pink-500',
+    'bg-teal-500',
+    'bg-indigo-500',
+    'bg-orange-500',
+    'bg-gray-500',
+  ];
+  
   return (
     <section className="grid gap-10 p-4">
       {dashboard === 'eyewitness' && (
@@ -92,27 +105,43 @@ export default function Page() {
       {dashboard === 'subscriber' && (
         <div className="relative w-full overflow-hidden">
           <div className="grid gap-2 shadow-sm m-1 p-3 rounded-md">
-            <div className="flex justify-between">
+            <div className="flex mb-4 justify-between flex-wrap">
               <FormControl
                 as="select"
-                options={[{ value: 'eyewitness', label: 'Eyewitness' }]}
+                className="max-w-[200px] text-[8px] sm:text-base"
+                placeholder="Select election type"
+                options={[
+                  { value: '1', label: 'presidential' },
+                  { value: '2', label: 'Gubernatorial' },
+                  { value: '3', label: 'Federal House of Assembly' },
+                  { value: '4', label: 'State House of Assembly' },
+                  { value: '5', label: 'Local government' },
+                  { value: '6', label: 'Off-cycle elections' },
+                ]}
+                // label="Select State"
               />
-              <span>21st September 2024</span>
+              <FormControl
+                as="select"
+                className="max-w-[200px] text-[8px] sm:text-base"
+                placeholder="Select election year"
+                options={[{ value: '1', label: '2014' }]}
+                // label="Select State"
+              />
             </div>
-            <div className="flex justify-between text-[15px]">
+            <div className="flex justify-between gap-10 mb-9 text-[15px]">
               <span>Leading Candidates</span>
-              <span>Accumulated Votes</span>
+              <span className='justify-end'>Accumulated Votes</span>
             </div>
-            <div className="flex gap-6 flex-col">
+            <div className="flex gap-6 flex-col mb-9">
               {resultData2.map((res, id) => (
-                <CandidateInfo props={res} key={id} />
+                <CandidateInfo props={res} key={id} classStyle={tailwindColors[id % tailwindColors.length]} />
               ))}
             </div>
             <ElectionInfo props={electionProps} />
           </div>
 
           {/* Other Candidates Carousel */}
-          <div className="p-3 grid gap-2 relative overflow-hidden">
+          <div className="p-3 grid gap-4 relative overflow-hidden">
             <span>Other Candidates</span>
             <div className="w-full relative overflow-hidden">
               <Carousel id="candidatesApi" setApi={setOtherCandidatesApi}>
@@ -122,7 +151,7 @@ export default function Page() {
                       key={index}
                       className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                     >
-                      <CandidateInfo className='shadow-md' props={res} />
+                      <CandidateInfo className="shadow-md rounded-md" props={res} />
                     </CarouselItem>
                   ))}
                 </CarouselContent>
@@ -141,7 +170,9 @@ export default function Page() {
               <span>
                 Recent Updates of Eyewitness Report from all Polling Units
               </span>
-              <Button variant={'outline'} className="max-w-max text-[10px] md:text-sm text-green-900"
+              <Button
+                variant={'outline'}
+                className="max-w-max text-[10px] md:text-sm text-green-900"
                 onClick={() => router.push('/dashboard/eyewitness-report')}
               >
                 View More

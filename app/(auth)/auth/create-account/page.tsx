@@ -132,7 +132,7 @@ function CreateAccount() {
                                         render={({ field }) => (
                                             <FormControl
                                                 as='input'
-                                                labelText='Name'
+                                                labelText='Full Name'
                                                 placeholder='Enter full name'
                                                 {...field}
                                                 error={getErrorMessage(errors.name)}
@@ -203,7 +203,7 @@ function CreateAccount() {
                                         render={({ field }) => (
                                             <FormControl
                                                 as='input'
-                                                labelText='Name'
+                                                labelText='Full Name'
                                                 placeholder='Enter full name'
                                                 {...field}
                                                 error={getErrorMessage(errors.name)}
