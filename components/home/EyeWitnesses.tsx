@@ -14,8 +14,8 @@ function EyeWitnesses() {
         {/* Optional overlay for better text readability */}
         <div className="relative p-6 ">
           <h1 className="text-white text-4xl md:text-5xl text-left  !leading-[60px] font-semibold mb-12">
-            Become an Eyewitness today and help curb misinformation. Together
-            let's make our nation great again.
+            {` Become an Eyewitness today and help curb misinformation. Together
+            let's make our nation great again.`}
           </h1>
 
           <div className="flex justify-start p-3">

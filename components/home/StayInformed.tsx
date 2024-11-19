@@ -7,7 +7,7 @@ function StayInformed() {
     <section className="my-14 px-4 lg:px-10 w-full lg:w-[85%] flex  flex-col justify-center mx-auto max-w-[1280px]">
       <div className="mt-4 lg:m-0 flex justtify-center items-center flex-col gap-6">
         <h3 className="text-primary text-5xl font-bold text-center px-10">
-          "Stay Informed. Monitor Election Results in Real-Time."
+          {"Stay Informed. Monitor Election Results in Real-Time."}
         </h3>
         <p className="text-xl text-primary">
           Join Millions of Nigerian citizens and well wishers of Nigerian of in
