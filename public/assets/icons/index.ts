@@ -1,0 +1,30 @@
+export { default as baseFeatureIcon } from "./base-feature-icon.svg";
+export { default as baseFeatureIcon2 } from "./base-feature-icon2.svg";
+export { default as baseFeatureIcon3 } from "./base-feature-icon3.svg";
+export { default as baseFeatureIcon4 } from "./base-feature-icon4.svg";
+export { default as baseFeatureIcon5 } from "./base-feature-icon5.svg";
+export { default as baseFeatureIcon6 } from "./base-feature-icon6.svg";
+export { default as hamburgerIcon } from "./hambuger-icon.svg";
+export { default as TrendIcon } from "./trending-up.svg";
+export { default as CameraIcon } from "./camera.svg";
+export { default as DownloadIcon } from "./downloadIcon.svg";
+export { default as ShareIcon } from "./shareIcon.svg";
+export { default as ResultIcon } from "./file-text.svg";
+export { default as ElectionMaterialIcon } from "./trello.svg";
+export { default as VideoIcon } from "./video.svg";
+export { default as googleIcon } from "./google-icon.svg";
+
+//DASHBOARD SIDEBAR
+export { default as houseIcon } from "./house-icon.svg";
+export { default as houseIconGreen } from "./house-icon-green.svg";
+export { default as searchIcon } from "./search-icon.svg";
+export { default as puzzleIcon } from "./puzzle-icon.svg";
+export { default as chatIcon } from "./chat-icon.svg";
+export { default as paperIcon } from "./paper.svg";
+export { default as pieChartIcon } from "./piechart-icon.svg";
+export { default as logoutIcon } from "./logout-icon.svg";
+export { default as logoutIconGreen } from "./logout-icon-green.svg";
+export { default as bellIcon } from "./bell-icon.svg";
+export { default as cloudIcon } from "./cloud-icon.svg";
+export { default as tiktok } from "./tiktok.svg";
+export { default as twitterX } from "./twitter-x.svg";
