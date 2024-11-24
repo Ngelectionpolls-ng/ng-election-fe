@@ -8,7 +8,7 @@ const candidates = [
   { name: 'NNPP', percentage: 3, votes: '4,890', color: 'bg-green-400', img: '/assets/images/pdp.png' },
 ];
 
-export default function ElectionResults({state, width=343, height=260, x=50, y=100, visible=false}) {
+export default function ElectionResults({state, width=400, height=260, x=50, y=100, visible=false}) {
   
   return (
       <div className={`fixed w-[${width}px] h-[${height}px] p-3 bg-gray-800 text-white rounded-lg shadow-lg space-y-3 z-[10] ${visible ? 'block' : 'hidden'}`} 

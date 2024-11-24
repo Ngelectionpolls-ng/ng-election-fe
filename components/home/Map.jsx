@@ -8,7 +8,7 @@ import ElectionResults from './ElectionResults';
 export default function Map(){
 
     const mouseOffset = 60;
-    const width = 343;
+    const width = 400;
     const height = 260;
     const [x, setX] = useState(200);
     const [y, setY] = useState(300);
@@ -33,7 +33,7 @@ export default function Map(){
         }
 
         if(e.screenY - mouseOffset + height > window.screen.height){
-            setY( e.screenY - mouseOffset - height);
+            setY( e.screenY - 1.5 * mouseOffset - height);
         }else{
             setY(e.screenY - mouseOffset);
         }
