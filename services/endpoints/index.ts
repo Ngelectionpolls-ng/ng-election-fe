@@ -2,6 +2,8 @@
 export const CREATE_ACCOUNT = (accountType: string) =>
   `/auth/${accountType}/register`;
 
+export const SIGN_IN_ACCOUNT = `/auth/login`;
+
 export const GOOGLE_OAUTH_CONSENT = "/auth/consent-page";
 
 export const VERIFY_REGISTRATION = "/auth/verify/registration";

@@ -11,6 +11,8 @@ import useResendOTP from "@/hooks/mutations/auth/useResendOTP";
 import { ResendOTPPayload } from "@/services/api/auth";
 import { InputCode } from "@/components/common/InputCode";
 import useVerifyTokens from "@/hooks/mutations/auth/useVerifyTokens";
+import { RESEND_OTP, VERIFY_TOKENS } from "@/services/endpoints";
+import { postData } from "@/services/api/axiosAuth";
 
 function VerifyAccount() {
   const [confirmation, setConfirmation] = useState<boolean>(false);
@@ -43,51 +45,72 @@ function VerifyAccount() {
   }, []);
 
   // Function to resend OTP
-  const handleResendOTP = () => {
+  const handleResendOTP = async () => {
     const payload: ResendOTPPayload = {
       email: emailParam,
       channel: "registration",
       redirectUrl: "/auth/verify-account",
     };
-    mutateResendOTP(payload, {
-      onSuccess: (response) => {
-        toast.success(response.data.message);
-        setTimeLeft(300);
-      },
-      onError: (error: any) => {
-        toast.error(error.response.data.message[0]);
-      },
-    });
+    const response = await postData(RESEND_OTP, payload);
+    if (response.status == 200 || response.status == 201) {
+      console.log(response);
+      toast.success(response?.data?.message);
+    } else {
+      console.log(response);
+      toast.error(response?.response?.data?.message);
+    }
+    // mutateResendOTP(payload, {
+    //   onSuccess: (response) => {
+    //     toast.success(response.data.message);
+    //     setTimeLeft(300);
+    //   },
+    //   onError: (error: any) => {
+    //     toast.error(error.response.data.message[0]);
+    //   },
+    // });
   };
 
   // Function to handle OTP submission
-  const onSubmit = () => {
-    const payload = {
+  const onSubmit = async () => {
+    const payload: any = {
       id: idParam,
       code: otpCode,
     };
     setIsLoading(true);
-    mutateVerifyTokens(payload, {
-      onSuccess: (response) => {
-        mutateVerifyAccount(
-          { id: response.data.sessionId },
-          {
-            onSuccess: () => {
-              setIsLoading(false);
-              setConfirmation(true);
-            },
-            onError: () => {
-              toast.error("An error occurred while verifying account");
-              setIsLoading(false);
-            },
-          }
-        );
-      },
-      onError: (error) => {
-        setIsLoading(false);
-        toast.error(error.message);
-      },
-    });
+
+    const response = await postData(VERIFY_TOKENS(payload.id, payload.code));
+    if (response.status == 200 || response.status == 201) {
+      console.log(response);
+      toast.success(response?.data?.message);
+      setIsLoading(false);
+      setConfirmation(true);
+    } else {
+      console.log(response);
+      toast.error(response?.response?.data?.message);
+      //           setIsLoading(false);
+    }
+
+    // mutateVerifyTokens(payload, {
+    //   onSuccess: (response) => {
+    //     mutateVerifyAccount(
+    //       { id: response.data.sessionId },
+    //       {
+    //         onSuccess: () => {
+    //           setIsLoading(false);
+    //           setConfirmation(true);
+    //         },
+    //         onError: () => {
+    //           toast.error("An error occurred while verifying account");
+    //           setIsLoading(false);
+    //         },
+    //       }
+    //     );
+    // },
+    // onError: (error) => {
+    //   setIsLoading(false);
+    //   toast.error(error.message);
+    // },
+    // });
   };
 
   // Countdown timer effect
@@ -123,7 +146,7 @@ function VerifyAccount() {
       headerTitle={headerTitle}
       headerSubTitle=""
       verifyEmailConfirmation={confirmation}
-      bgImg="forgotPassword.png"
+      bgImg="authenticateAccout.png"
     >
       {confirmation ? (
         <>

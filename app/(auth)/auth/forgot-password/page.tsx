@@ -7,6 +7,8 @@ import AuthLayout from "../_component/authLayout";
 import { MoonLoader } from "react-spinners";
 import useSendPasswordLink from "@/hooks/mutations/auth/useSendPasswordLink";
 import { toast } from "sonner";
+import { postData } from "@/services/api/axiosAuth";
+import { PASSWORD_RESET_LINK } from "@/services/endpoints";
 
 function ForgotPassword() {
   const {
@@ -17,21 +19,32 @@ function ForgotPassword() {
 
   const { mutate, isPending } = useSendPasswordLink();
 
-  const onSubmit = (data: FieldValues) => {
+  const onSubmit = async (data: FieldValues) => {
     const payload = {
       email: data.email,
       resetUrl: "/auth/one-time-password",
     };
-    mutate(payload, {
-      onSuccess: () => {
-        toast.success(
-          "A link to reset your password has been sent to your email"
-        );
-      },
-      onError: (error: any) => {
-        toast.error(error.data.message);
-      },
-    });
+    const response = await postData(PASSWORD_RESET_LINK, payload);
+    if (response.status == 200 || response.status == 201) {
+      console.log(response);
+      toast.success(
+        "A link to reset your password has been sent to your email"
+      );
+      // toast.success(response?.data?.message);
+    } else {
+      console.log(response);
+      toast.error(response?.response?.data?.message);
+    }
+    // mutate(payload, {
+    //   onSuccess: () => {
+    //     toast.success(
+    //       "A link to reset your password has been sent to your email"
+    //     );
+    //   },
+    //   onError: (error: any) => {
+    //     toast.error(error.data.message);
+    //   },
+    // });
   };
 
   const getErrorMessage = (error: any): string | undefined => {

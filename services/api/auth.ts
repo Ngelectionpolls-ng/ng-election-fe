@@ -1,4 +1,5 @@
 import {
+  SIGN_IN_ACCOUNT,
   CREATE_ACCOUNT,
   GOOGLE_OAUTH_CONSENT,
   PASSWORD_RESET_LINK,
@@ -13,6 +14,10 @@ import { instance } from "../instance";
 export interface CreateAccountPayload {
   accountType: string;
   [key: string]: any;
+}
+export interface SignInAccountPayload {
+  email: string;
+  password: string;
 }
 export interface ResendOTPPayload {
   email: string | null;
@@ -37,6 +42,12 @@ export const createAccount = (payload: CreateAccountPayload) => {
   return instance.post(CREATE_ACCOUNT(accountType), rest);
 };
 
+export const signInAccount = (payload: object) => {
+  console.log(payload)
+  // const { accountType, ...rest } = payload;
+  return instance.post(SIGN_IN_ACCOUNT, payload);
+};
+
 export const createAccountWithGoogle = (payload: string) =>
   instance.post(GOOGLE_OAUTH_CONSENT, payload);
 
@@ -53,8 +64,9 @@ export const resendOTP = (payload: ResendOTPPayload) =>
 export const passwordResetLink = (payload: PasswordResetLinkPayload) =>
   instance.post(PASSWORD_RESET_LINK, payload);
 
-export const verifyResetPasswordToken = (payload: VerifyResetPasswordTokenPayload) =>
-  instance.post(VERIFY_RESET_TOKEN, payload);
+export const verifyResetPasswordToken = (
+  payload: VerifyResetPasswordTokenPayload
+) => instance.post(VERIFY_RESET_TOKEN, payload);
 
 export const resetPassword = (payload: ResetPasswordPayload) =>
   instance.post(RESET_PASSWORD, payload);

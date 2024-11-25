@@ -67,8 +67,8 @@ function AuthLayout({
         className="relative hidden md:block w-full max-w-[852px] text-white-full-500 bg-no-repeat bg-cover bg-center rounded-[20px] min-h-[675px] "
         style={{ backgroundImage: `url(/assets/images/${bgImg})` }}
       >
-        <div className="absolute inset-0 bg-[#39693D8C] rounded-[20px] flex flex-col justify-end px-[49px] pb-10">
-          <div>
+        <div className="absolute inset-0  rounded-[20px] flex flex-col justify-end px-[49px] pb-10">
+          {/* <div>
             <h1 className="text-5xl font-semibold leading-tight">
               Making positive impact in our great nation.
             </h1>
@@ -76,7 +76,7 @@ function AuthLayout({
               Create a free account and join millions of others to shape
               Nigeria’s election.
             </p>
-          </div>
+          </div> */}
           <p className="my-12">Open to all. 1 million+ people.</p>
         </div>
       </div>

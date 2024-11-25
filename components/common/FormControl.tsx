@@ -96,7 +96,7 @@ export default function FormControl({
         const inputType = props.type === 'password' && showPassword ? 'text' : props.type;
 
         content = (
-            <div className="relative">
+            <div className="relative w-full">
                 <input
                     {...props}
                     type={inputType}
