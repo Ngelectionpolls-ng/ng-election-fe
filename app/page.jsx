@@ -10,12 +10,14 @@ import JoinCommunitySection from "../components/home/JoinCommunitySection";
 import NewsAndReports from "../components/home/NewsAndReports";
 import OurMission from "../components/home/OurMission";
 import StayInformed from "../components/home/StayInformed";
+import LiveElectionUpdates from "../components/home/LiveElectionUpdates";
 
 export default function Home() {
   return (
     <>
       <NavBar />
       <Hero />
+      <LiveElectionUpdates />
       <ElectionUpdateSection />
       <JoinCommunitySection />
       <StayInformed />

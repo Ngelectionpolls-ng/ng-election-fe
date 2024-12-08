@@ -1,10 +1,16 @@
 "use client"
 import React from 'react';
 
-export default function State({id, fill, displayResult, children}){
+
+
+export default function State({id, fill, onMouseEnter, onMouseLeave, children}){
+
+     
     return (
-            <g className="state" id={id}  style={{fill: fill, color: 'red'}} onMouseEnter={displayResult}>
-                {...children}
-            </g>
+        
+        <g className="state" id={id}  style={{fill: fill, color: 'red'}} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            {...children}
+        </g>
+        
     );
 }

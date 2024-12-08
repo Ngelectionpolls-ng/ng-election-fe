@@ -4,7 +4,7 @@ import {
   nationalAssemblyImg,
   robberyImg,
   thugAttackImg,
-} from "../..//public/assets/images/home";
+} from "../../public/assets/images/home";
 
 function ElectionUpdateSection() {
   const upcomingElectionData = [
