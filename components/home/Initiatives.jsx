@@ -43,13 +43,13 @@ const Initiatives = () => {
   return (
     <div className="max-w-6xl mx-auto p-8 text-center">
       <h2 className="text-3xl font-bold mb-8">Our Initiatives</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-24">
         {initiativesData.map((initiative, index) => (
           <div
             key={index}
-            className="group relative cursor-pointer rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition duration-300 ease-in-out"
+            className="group relative cursor-pointer  overflow-hidden shadow-lg transform hover:scale-105 transition duration-300 ease-in-out rounded-3xl"
           >
-            <div className="relative w-full h-[570px]">
+            <div className="relative w-full h-[500px]">
               <Image
                 src={initiative.image}
                 alt={initiative.title}
@@ -58,12 +58,12 @@ const Initiatives = () => {
                 className="rounded-lg"
               />
             </div>
-            <div className="absolute inset-0 bg-[#17633BB2]/70 p-4 px-8 text-white flex flex-col justify-center">
-              <div className="w-[85%]">
-                <h3 className="text-4xl font-bold text-left">
+            <div className="absolute inset-0 bg-[#17633BB2]/70 p-4 px-8 text-white flex flex-col justify-start">
+              <div className="w-[85%] mt-10">
+                <h3 className="text-2xl font-bold text-left">
                   {initiative.title}
                 </h3>
-                <p className="text-base mt-2 text-left leading-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out ">
+                <p className="text-base mt-2 text-left leading-10 transition-opacity duration-300 ease-in-out ">
                   {initiative.description}
                 </p>
               </div>

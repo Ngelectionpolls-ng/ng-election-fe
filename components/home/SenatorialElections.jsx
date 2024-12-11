@@ -20,7 +20,7 @@ export default function SenatorialElections(){
     ];
 
     return (
-        <div className="md:w-1/2 px-10">
+        <div className="w-full flex flex-col">
 
             <div className="relative flex justify-center">
                 <svg viewBox="0 0 670 336" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -152,7 +152,7 @@ export default function SenatorialElections(){
                     <CarouselContent className="w-full">
                         {Array.from({ length: 5 }).map((_, index) => (
                             <CarouselItem key={index} className="p-8 md:basis-1/2">
-                                <div className={`min-w-[260px] bg-gray-800 text-white flex flex-col p-4 rounded-xl shadow-lg space-y-3`} >                                
+                                <div className={`min-w-[230px] bg-gray-800 text-white flex flex-col p-4 rounded-xl shadow-lg space-y-3`} >                                
                                     {/* Title */}
                                     <div>
                                         <h2 className="text-xs font-semibold">PROJECTED SENATORIAL ELECTIONS WINNER Election</h2>

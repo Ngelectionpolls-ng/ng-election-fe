@@ -71,12 +71,12 @@ function NavBar() {
                         </NavigationMenuList>
                     </NavigationMenu>
                     <div className="flex space-x-4">
-                    <Button className="bg-green-900 min-w-[100px] rounded-[5px] hover:bg-black">
+                        <Button className="bg-green-900 text-white min-w-[100px] rounded-[5px] hover:bg-black">
                             <Link href="/auth/login">
                                 Login
                             </Link>
                         </Button>
-                        <Button className="min-w-[100px] rounded-[5px] hover:bg-green-900 hover:text-white"  variant="secondary">
+                        <Button className="min-w-[100px] rounded-[5px] hover:bg-green-900  hover:text-white"  variant="secondary">
                             <Link href="/auth/create-account">
                                 Join us
                             </Link>
@@ -205,10 +205,10 @@ function NavBar() {
         //                 </li>
 
         //                 <Link href="/auth/login">
-        //                     <button className='bg-primary w-[128px] text-sm text-white font-bold uppercase  border border-primary hover:bg-transparent hover:text-green-900 py-3 rounded-lg'>Login</button>
+        //                     <button className='bg-green-900 w-[128px] text-sm text-white font-bold uppercase  border border-primary hover:bg-transparent hover:text-green-900 py-3 rounded-lg'>Login</button>
         //                 </Link>
         //                 <Link href="/auth/create-account" >
-        //                     <button className='bg-transparent text-green-900 font-bold uppercase border border-primary hover:bg-primary hover:text-white text-sm py-3 px-3 rounded-lg'>Join us now</button>
+        //                     <button className='bg-transparent text-green-900 font-bold uppercase border border-primary hover:bg-green-900 hover:text-white text-sm py-3 px-3 rounded-lg'>Join us now</button>
         //                 </Link>
         //             </ul>
         //         </div>

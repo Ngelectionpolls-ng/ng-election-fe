@@ -30,7 +30,7 @@ export default function LiveElectionNews() {
     ];
     return (
         <div className="md:w-1/2 px-4">
-            <div className="flex flex-col w-full bg-green-900 p-8 h-full justify-left">
+            <div className="flex flex-col w-full bg-green-900  p-8 h-full justify-left">
                 <div className="bg-white/50 h-full w-full p-4 ">
                     <h2 className="text-green-900 text-md font-bold">Live Election Coverage</h2>
 

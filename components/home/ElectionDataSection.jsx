@@ -1,38 +1,39 @@
+import Link from 'next/link'
+import { Button } from "../ui/button"
 import Image from "next/image";
 import electionImage from "/public/assets/images/election-data.png"; // Replace with actual path to your image
 import electionImage2 from "/public/assets/images/election-data2.png"; // Replace with actual path to your image
 
 export default function ElectionDataSection() {
   return (
-    <div className="flex items-center justify-between max-w-6xl mx-auto px-4 py-16 space-x-8">
-      {/* Text Section */}
-      <div className="max-w-lg">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Nigerian Election data you can trust
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Follow verified election results to stay updated.
-        </p>
-        <button className="bg-green-700 text-white font-semibold py-2 px-6 rounded-lg mb-6">
-          JOIN NOW FOR FREE
-        </button>
-        <p className="text-gray-600">
-          Available in 3400 LGAs and 141,300 Electoral Wards
-        </p>
-      </div>
-
-      {/* Image Section */}
-      <div className="relative ">
-        <div className="overflow-hidden rounded-full">
-          <Image
-            src={electionImage}
-            alt="People voting in Nigeria"
-            objectFit="cover"
-            className="rounded-full"
-            width={432}
-          />
+    <section className="bg-black/5 w-screen flex justify-center py-12">
+      <div className="flex justify-between md:w-[1024px] w-full space-x-8" >
+        {/* Text Section */}
+        <div className="text-md w-full md:w-1/2 flex flex-col justify-center space-y-12 pr-[15%]">
+          <h1 className="font-bold text-gray-900 text-3xl">
+            Nigerian Election data you can trust
+          </h1>
+          <p className="text-gray-600 mb-6 text-sm">
+            Follow verified election results to stay updated.
+          </p>
+          <Button className="bg-green-900 text-white min-w-[100px] rounded-[5px] hover:bg-black">
+              <Link href="/auth/create-account">
+                  JOIN NOW FOR FREE
+              </Link>
+          </Button>
+          <p className="text-gray-600 text-sm">
+            Available in 774 LGAs and 141,300 Electoral Wards
+          </p>
         </div>
+
+        {/* Image Section */}
+        
+          <img
+            src={"/assets/home/stay-informed.png"}
+            className="w-full md:w-1/2"
+            alt=""
+          />
       </div>
-    </div>
+    </section>
   );
 }
