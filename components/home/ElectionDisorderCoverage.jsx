@@ -32,7 +32,7 @@ export default function ElectionDisorderCoverage(){
         },
     ];
     return (
-            <div className="w-full">
+            <div className="w-full px-4 md:px-0">
                 <div className="mb-6">
                     <h3 className="text-xl font-bold">
                         Election-Related Disorder Coverage
@@ -69,7 +69,7 @@ export default function ElectionDisorderCoverage(){
                             </div>
                             </div>
                         );
-                        })}
+                    })}
                     </div>
                     <div className="bg-green-900  p-3 text-white font-bold w-full">
                         <p className="px-2">September 2023</p>

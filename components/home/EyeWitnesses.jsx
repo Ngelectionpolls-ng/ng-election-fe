@@ -6,13 +6,13 @@ function EyeWitnesses() {
   return (
     <>
       <section className="bg-white w-screen flex justify-center">
-        <div className="md:w-[1024px] w-full flex" >
-          <div className="w-full md:w-1/2 flex justify-right">
+        <div className="md:w-[1104px] w-full flex flex-col md:flex-row px-4 md:px-0" >
+          <div className="w-full md:w-1/2 flex justify-right md:justify-center">
             <img src="/assets/home/Team-cuate.png" className="w-full" alt="" />
           </div>
 
           <div className="w-full md:w-1/2 flex flex-col justify-center">
-            <h1 className="text-green-900 font-bold ml-[50%] text-right text-3xl">
+            <h1 className="text-green-900 font-bold md:ml-[50%] md:text-right text-3xl">
               Become an Eyewitness today and help curb misinformation. Together lets make our nation great again.
             </h1>
           </div>
@@ -21,8 +21,8 @@ function EyeWitnesses() {
       </section>
       
       <section className="bg-white w-screen flex justify-center">
-        <div className="md:w-[1024px] py-16 w-full">
-          <div className="  w-4/5">
+        <div className="md:w-[1104px] py-16 w-full px-4 md:px-0">
+          <div className="w-4/5">
             <h2 className="text-3xl font-bold text-gray-900 mb-8">
               How to become an eyewitness
             </h2>

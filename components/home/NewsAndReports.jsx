@@ -73,11 +73,11 @@ function NewsAndReports() {
   ]
   return (
     <section className="bg-white/90 w-screen flex flex-col justify-center items-center py-12">
-      <div className="md:w-[1024px]">
+      <div className="md:w-[1104px] px-4 md:px-0">
         <h2 className='text-xl md:text-3xl font-bold'>Election News & Reports</h2>
         <p className='text-gray-500 text-sm'>Latest installments in the Election Watxh Series. Click here to watch the Eyewitness Documentary</p>
       </div>
-      <div className="md:w-[1024px]">
+      <div className="w-full md:w-[1104px]  px-4 md:px-0">
         <div className="w-full">
             <Carousel
                 opts={{
@@ -85,9 +85,9 @@ function NewsAndReports() {
                 }}
                 className="w-full"
                 >
-                <CarouselContent className="w-full">
+                <CarouselContent className="">
                     {newsAndReportContent.map((item, index) => (
-                        <CarouselItem key={index} className="p-2 md:basis-1/4">
+                        <CarouselItem key={index} className="p-2 basis-1/2 md:basis-1/4">
                             <div className="w-[230px] shadow-xl mx-1 flex flex-col rounded-md">
 
                               <Image width={'100%'} src={newsReportImg}  className="w-full rounded-t-md" alt="" />

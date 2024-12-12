@@ -40,7 +40,7 @@ export default function FAQSection() {
   ];
   return (
     <section className="bg-white/70 w-screen flex justify-center py-12 ">
-      <div className="md:w-[1024px] flex">
+      <div className="md:w-[1104px] flex flex-col md:flex-row space-y-8">
         <div className="text-left w-fill md:w-1/2">
           <Image src={'/assets/home/FAQs-cuate.png'} alt="" width={200} height={300} className="block" />
           <h2 className="text-4xl font-bold text-green-900 leading-tight -mt-12">

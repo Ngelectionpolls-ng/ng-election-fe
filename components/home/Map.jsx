@@ -9,8 +9,8 @@ import ElectionResults from './ElectionResults';
 export default function Map(){
 
     const mouseOffset = 60;
-    const width = 400;
-    const height = 260;
+    const width = 500;
+    const height = 300;
     const [x, setX] = useState(200);
     const [y, setY] = useState(300);
     const [visible, setVisible] = useState(false);

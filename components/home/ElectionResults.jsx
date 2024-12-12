@@ -13,7 +13,7 @@ export default function ElectionResults({state, width=400, height=260, x=50, y=1
   return (
       // <div className={`fixed min-w-[${width}px] h-[${height}px] p-3 bg-gray-800 text-white rounded-lg shadow-lg space-y-3 z-[10] ${visible ? 'block' : 'hidden'}`} 
       <div onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} 
-           className={`fixed min-w-[450px] h-[${height}px] p-3 bg-gray-800 text-white rounded-lg shadow-lg space-y-3 z-[10] ${visible ? 'block' : 'hidden'}`} 
+           className={`fixed min-w-[450px] h-[${height}px] p-3 bg-white text-gray-700 rounded-xl shadow-xl space-y-3 z-[10] ${visible ? 'block' : 'hidden'}`} 
            style={{'left' : `${x}px`, 'top' : `${y}px`}} >
         {/* Title */}
         <div>
@@ -33,15 +33,15 @@ export default function ElectionResults({state, width=400, height=260, x=50, y=1
                 className="rounded-full"
               />
               <p className="w-10 text-xs font-semibold">{candidate.name}</p>
-              <div className="flex-1 h-3 bg-gray-300 rounded-full overflow-hidden max-w-[50%]">
+              <div className="flex-1 h-3 bg-gray-400 rounded-full overflow-hidden max-w-[50%]">
                 <div
-                  className={`h-full ${candidate.color} text-[10px] text-center text-white font-semibold`}
+                  className={`h-full ${candidate.color} text-[10px] text-center text-white font-semibold border-gray-950`}
                   style={{ width: `${candidate.percentage}%` }}
                 >
                   {candidate.percentage}%
                 </div>
               </div>
-              <p className="text-xs text-gray-400">{candidate.votes} votes</p>
+              <p className="text-xs text-gray-800">{candidate.votes} votes</p>
             </div>
           ))}
         </div>

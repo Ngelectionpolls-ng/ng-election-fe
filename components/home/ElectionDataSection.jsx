@@ -1,16 +1,13 @@
 import Link from 'next/link'
 import { Button } from "../ui/button"
-import Image from "next/image";
-import electionImage from "/public/assets/images/election-data.png"; // Replace with actual path to your image
-import electionImage2 from "/public/assets/images/election-data2.png"; // Replace with actual path to your image
 
 export default function ElectionDataSection() {
   return (
     <section className="bg-black/5 w-screen flex justify-center py-12">
-      <div className="flex justify-between md:w-[1024px] w-full space-x-8" >
+      <div className="flex flex-col md:flex-row justify-between md:w-[1104px] w-full md:space-x-8" >
         {/* Text Section */}
-        <div className="text-md w-full md:w-1/2 flex flex-col justify-center space-y-12 pr-[15%]">
-          <h1 className="font-bold text-gray-900 text-3xl">
+        <div className="text-md w-full md:w-1/2 flex flex-col justify-center space-y-12 px-4 md:px-0">
+          <h1 className="font-bold text-gray-900 text-3xl text-center md:text-left">
             Nigerian Election data you can trust
           </h1>
           <p className="text-gray-600 mb-6 text-sm">

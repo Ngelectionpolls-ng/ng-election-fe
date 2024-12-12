@@ -4,7 +4,7 @@ import Link from "next/link"
 function JoinCommunitySection() {
     return (
         <section className="w-screen flex justify-center py-16">
-            <div className="flex flex-col lg:flex-row w-full md:w-[1024px]">
+            <div className="flex flex-col lg:flex-row w-full md:w-[1104px]">
                 <div className="bg-green-900 w-full lg:w-1/2">
                     <div className="p-4 md:p-8">
                         <h3 className="tracking-[12.3px] text-2xl md:text-4xl text-white text-center font-bold py-2">ONE NAIJA FOR</h3>

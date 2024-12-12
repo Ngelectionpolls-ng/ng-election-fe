@@ -22,7 +22,7 @@ export default function SenatorialElections(){
     return (
         <div className="w-full flex flex-col">
 
-            <div className="relative flex justify-center">
+            <div className="relative w-full flex justify-center">
                 <svg viewBox="0 0 670 336" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="653" cy="281" r="13" fill="#65B765"></circle>
                     <circle cx="657" cy="323" r="12.5" fill="#83A811" stroke="black"></circle>
@@ -142,17 +142,17 @@ export default function SenatorialElections(){
             </div>
 
             
-            <div className="w-full">
+            <div className="w-full px-4 md:px-0">
                 <Carousel
                     opts={{
                         align: "start",
                     }}
-                    className="w-full"
+                    className=""
                     >
-                    <CarouselContent className="w-full">
+                    <CarouselContent className="w-screen md:w-full">
                         {Array.from({ length: 5 }).map((_, index) => (
-                            <CarouselItem key={index} className="p-8 md:basis-1/2">
-                                <div className={`min-w-[230px] bg-gray-800 text-white flex flex-col p-4 rounded-xl shadow-lg space-y-3`} >                                
+                            <CarouselItem key={index} className="py-8 basis-1/2">
+                                <div className={`w-[250px] md:w-[230px] bg-gray-800 text-white flex flex-col p-4 rounded-xl shadow-lg space-y-3`} >                                
                                     {/* Title */}
                                     <div>
                                         <h2 className="text-xs font-semibold">PROJECTED SENATORIAL ELECTIONS WINNER Election</h2>
