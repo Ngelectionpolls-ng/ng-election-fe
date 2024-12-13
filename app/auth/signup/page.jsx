@@ -1,6 +1,7 @@
 "use client"
 
 import GoogleButton from "components/commons/GoogleButton";
+import Link from "next/link";
 import Image from "next/image";
 import SiteIcon from "../../../components/commons/SiteIcon";
 import { Button } from "../../../components/ui/button"
@@ -26,6 +27,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import {ShieldCheck} from "lucide-react";
 
 
 const formSchema = z.object({
@@ -100,7 +102,7 @@ export default function Signup(){
                                 <FormItem>
                                 <FormLabel>Full Name</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Enter you full name" {...field} />
+                                    <Input placeholder="Enter your full name" {...field} />
                                 </FormControl>
                                 <FormDescription></FormDescription>
                                 <FormMessage />
@@ -152,9 +154,13 @@ export default function Signup(){
                         />
                                                
                         
-                        <Button type="submit" className="text-white rounded-xl px-8 py-2 mt-4">Submit</Button>
+                        <Button type="submit" className="text-white rounded-full w-full px-8 py-2 mt-4 h-12">Create Account</Button>
                     </form>
                 </Form>
+                <div className="flex flex-col w-full space-y-4">
+                    <p className="text-sm text-center text-gray-800">Have an account? <Link  href="/auth/login"><span className="font-bold text-black">Login</span></Link></p>
+                    <p className="text-sm text-center text-gray-800"><ShieldCheck className="inline h-4"/> By logging in you agree to <Link  href="/terms-of-service"><span className="font-bold text-black">Terms of Service</span></Link> and <Link  href="/privacy-policy"><span className="font-bold text-black">Privacy Policy</span></Link></p>
+                </div>
             </>
         );            
             
