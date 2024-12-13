@@ -77,7 +77,7 @@ function NavBar() {
                             </Link>
                         </Button>
                         <Button className="min-w-[100px] rounded-[5px] hover:bg-green-900  hover:text-white"  variant="secondary">
-                            <Link href="/auth/create-account">
+                            <Link href="/auth/signup">
                                 Join us
                             </Link>
                         </Button> 
