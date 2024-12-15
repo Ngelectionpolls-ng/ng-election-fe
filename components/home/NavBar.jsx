@@ -1,4 +1,6 @@
-import React from 'react'
+"use client"
+
+import React, {useContext} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from "../ui/button"
@@ -12,14 +14,18 @@ import {
     navigationMenuTriggerStyle,
   } from "../ui/navigation-menu"
 
+import {AuthContext} from "../../contexts/Auth";
+
 function NavBar() {
     const navItems = ['Our Mission', 'Election Results', 'Eye Witness', 'Resources'];
     const subItems = [
         ["About Us", "Mission Statement", "Methodology", "Initiatives"],
-        ["Presidential", "Gubernational", "House of Assembly", "Local Government", "Off-cycle elections"],
+        ["Presidential", "Gubernational", "Senatorial", "Federal House of Prepresentative", "State House of Prepresentative", "Local Government", "Off-cycle elections"],
         ["Objectives", "How to volunteer", "Available polling unit"],
         ["Publications", "Elelction update", "Find polling unit"]
     ];
+
+    const {isLoggeIn, getUser} = useContext(AuthContext);
     
     return (
         <nav className="bg-gray-50 border-gray-200 dark:bg-gray-900 dark:border-gray-700 shadow-xl border-b border-b-green-900 fixed z-20 w-full">
@@ -70,18 +76,27 @@ function NavBar() {
 
                         </NavigationMenuList>
                     </NavigationMenu>
-                    <div className="flex space-x-4">
-                        <Button className="bg-green-900 text-white min-w-[100px] rounded-[5px] hover:bg-black">
-                            <Link href="/auth/login">
-                                Login
-                            </Link>
-                        </Button>
-                        <Button className="min-w-[100px] rounded-[5px] hover:bg-green-900  hover:text-white"  variant="secondary">
-                            <Link href="/auth/signup">
-                                Join us
-                            </Link>
-                        </Button> 
-                    </div>
+                    {
+                        isLoggeIn ? (
+                            <div className="">
+                                John Doe here!
+                            </div>
+                        ) : (                            
+                            <div className="flex space-x-4">
+                                <Button className="bg-green-900 text-white min-w-[100px] rounded-[5px] hover:bg-black">
+                                    <Link href="/auth/login">
+                                        Login
+                                    </Link>
+                                </Button>
+                                <Button className="min-w-[100px] rounded-[5px] hover:bg-green-900  hover:text-white"  variant="secondary">
+                                    <Link href="/auth/signup">
+                                        Join us
+                                    </Link>
+                                </Button> 
+                            </div>
+                        )
+                    }
+                    
                 </div>
                 
                 
