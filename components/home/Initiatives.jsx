@@ -42,21 +42,19 @@ const initiativesData = [
 const Initiatives = () => {
   return (
     <section className="w-screen flex bg-black/5 justify-center py-16">
-      <div className="flex flex-col items-center md:w-[1104px] px-4 md:px-0">
+      <div className="flex flex-col items-center md:w-[1124px] px-4 md:px-0">
         <h2 className="text-3xl font-bold mb-8">Our Initiatives</h2>
-        <div className="w-full md:w-[1104px] grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-24">
+        <div className="w-full md:w-[1124px] grid grid-cols-1 md:grid-cols-3 md:gap-24">
           {initiativesData.map((initiative, index) => (
             <div
               key={index}
-              className="group relative cursor-pointer  overflow-hidden shadow-lg transform hover:scale-105 transition duration-300 ease-in-out rounded-3xl"
+              className="mb-24 group relative cursor-pointer overflow-hidden shadow-lg transform hover:scale-105 transition duration-300 ease-in-out rounded-3xl"
             >
               <div className="relative w-full h-[500px]">
-                <Image
+                <img
                   src={initiative.image}
                   alt={initiative.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-lg"
+                  className="rounded-lg w-full h-full"
                 />
               </div>
               <div className="absolute inset-0 bg-[#17633BB2]/70 p-4 px-8 text-white flex flex-col justify-start">

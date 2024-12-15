@@ -1,18 +1,18 @@
 "use client"
 
-import GoogleButton from "components/commons/GoogleButton";
+import {useState} from "react"
+import GoogleButton from "components/commons/GoogleButton"
 import Link from "next/link";
-import Image from "next/image";
-import SiteIcon from "../../../components/commons/SiteIcon";
-import { Button } from "../../../components/ui/button"
-import { Input } from "../../../components/ui/input"
-import { Label } from "../../../components/ui/label"
+import SiteIcon from "components/commons/SiteIcon"
+import Error from "components/commons/Error"
+import { Button } from "components/ui/button"
+import { Input } from "components/ui/input"
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "../../../components/ui/tabs"
+} from "components/ui/tabs"
 
 import {
     Form,
@@ -22,13 +22,16 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-  } from "../../../components/ui/form"
+  } from "components/ui/form"
  
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import {ShieldCheck} from "lucide-react";
+import {ShieldCheck} from "lucide-react"
 
+import {Signup} from "services/auth/api"
+import { useToast } from "hooks/use-toast"
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
     name: z.string().min(2, {
@@ -39,53 +42,91 @@ const formSchema = z.object({
 });
 
 
-export default function Signup(){
+export default function SignupForm(){
+
+    const [submitting, setSubmitting] = useState(false);
+    const [error, setError] = useState(null);
+    const [role, setRole] = useState('iwitness');
+    const router = useRouter();
+    const {toast} = useToast();
 
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
             email: "",
-            password: "",
-            role: "eyewitness"
+            password: ""
         },
     });
 
-    function onSubmit(values) {
-        console.log(values)
+    async function onSubmit(values) {
+        console.log(values);
+        
+        setError(null);
+        setSubmitting(true);
+        const response = await Signup(role, values);
+        setSubmitting(false);
+
+        console.log(response);
+        if(response.status >= 200 && response.status < 300){            
+            
+            localStorage.setItem('email', values.email);
+            toast({
+                variant: 'positive',
+                description: response.data.message
+            });
+            setTimeout(() => {
+                router.push('/auth/signup-success');
+            }, 1000);
+            
+        }else{
+
+            if(response.response.data.message){
+                setError(response.response.data.message);
+                toast({
+                    variant: 'destructive',
+                    description: response.response.data.message
+                });
+            }else{
+                toast({
+                    variant: 'destructive',
+                    description: 'Something went wrong. Please try again'
+                });
+            }
+        }
+
     }
+
 
     return (
         <main className="w-screen flex justify-center">
-            <div className="w-full md:w-[1104px] flex py-16 space-x-8">
+            <div className="w-full md:w-[1124px] flex py-16 space-x-8">
                 <div className="w-full md:w-1/2 space-y-4 flex flex-col items-center">
-                    <h1 className="text-2xl font-bold text-gray-800">Sign up</h1>
+                    <SiteIcon className="absolute mx-auto top-0 mb-8"/>
+                    <h1 className="text-2xl font-bold text-gray-800 mt-8">Sign up</h1>
                     <p className="text-sm text-gray-800">Create an account to get started with us</p>
 
-                    <Tabs defaultValue="eyewitness" className="w-[450px]">
+                    <Tabs defaultValue="iwitness" className="w-[450px]">
                         <TabsList className="grid w-full grid-cols-2 h-13 p-1 rounded-lg my-8">
-                            <TabsTrigger value="eyewitness" active className="py-2 rounded-lg">Eyewitness</TabsTrigger>
-                            <TabsTrigger value="agent" className="py-2 rounded-lg">Polling Unit Agent</TabsTrigger>
+                            <TabsTrigger value="iwitness" active className="py-2 rounded-lg" onClick={() => setRole('iwitness')} >Eyewitness</TabsTrigger>
+                            <TabsTrigger value="agent" className="py-2 rounded-lg" onClick={() => setRole('agent')}>Polling Unit Agent</TabsTrigger>
                         </TabsList>
-                        <TabsContent value="eyewitness" className="flex flex-col space-y-4">
-                            
-                            {SignupForm("eyewitness")}
+                        <TabsContent value="iwitness" className="flex flex-col space-y-4">                            
+                            {SignupForm("iwitness")}
                         </TabsContent>
-                        <TabsContent value="agent" className="flex flex-col space-y-4">
-                            
+                        <TabsContent value="agent" className="flex flex-col space-y-4">                            
                             {SignupForm("agent")}
                         </TabsContent>
                     </Tabs>
                 </div>
-                <div className="w-full md:w-1/2 relative hidden md:flex flex-col items-center  ">
-                    <SiteIcon className="absolute mx-auto top-0"/>
+                <div className="w-full md:w-1/2 relative hidden md:flex flex-col items-center justify-center ">                    
                     <img src={'/assets/auth/Sign up-pana.png'} alt="" className="w-full" /> 
                 </div>
             </div>            
         </main>
     );
 
-    function SignupForm({role="eyewitness"}){
+    function SignupForm({role="iwitness"}){
         return (
             <>
                 <GoogleButton />
@@ -93,6 +134,7 @@ export default function Signup(){
                     <div className="h-0.5 bg-gray-900 w-full"></div>
                     <h1 className="text-gray-800 text-center w-10 h-10 bg-white item-center absolute top-2 font-bold text-sm">OR</h1>
                 </div>
+                <Error error={error} />
                 <Form {...form} className="flex justify-left flex-col">
                     <form onSubmit={form.handleSubmit(onSubmit)} className="">
                         <FormField
@@ -132,29 +174,19 @@ export default function Signup(){
                                 <FormControl className="-mt-2">
                                     <Input type="password" placeholder="Create your password" {...field} />
                                 </FormControl>
-                                <FormDescription></FormDescription>
+                                <FormDescription className="italic text-xs ">Should contain at lease 1 uppercase, 1 lowercase and 1 special character</FormDescription>
                                 <FormMessage />
                                 </FormItem>
                             )}
-                        />
-
-                        <FormField
-                            control={form.control}
-                            name="role"
-                            render={({ role }) => (
-                                <FormItem>
-                                <FormLabel></FormLabel>
-                                <FormControl>
-                                    <Input type="hidden" {...role} />
-                                </FormControl>
-                                <FormDescription></FormDescription>
-                                <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                                               
+                        />                                               
                         
-                        <Button type="submit" className="text-white rounded-full w-full px-8 py-2 mt-4 h-12">Create Account</Button>
+                        {
+                            submitting ? (
+                                <Button disabled className="text-white/50 rounded-full w-full px-8 py-2 mt-4 h-12 bg-gray-700">Creating...</Button>
+                            ) : (
+                                <Button type="submit" className="text-white rounded-full w-full px-8 py-2 mt-4 h-12">Create Account</Button>
+                            )
+                        }
                     </form>
                 </Form>
                 <div className="flex flex-col w-full space-y-4">

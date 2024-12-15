@@ -1,12 +1,12 @@
 "use client"
 
-import GoogleButton from "components/commons/GoogleButton";
+import React, {useState, useEffect} from "react";
 import Link from "next/link";
-import Image from "next/image";
-import SiteIcon from "../../../components/commons/SiteIcon";
-import { Button } from "../../../components/ui/button"
-import { Input } from "../../../components/ui/input"
-import { Label } from "../../../components/ui/label"
+import SiteIcon from "components/commons/SiteIcon";
+import Error from "components/commons/Error";
+import { Button } from "components/ui/button";
+import { Input } from "components/ui/input";
+import { useSearchParams } from "next/navigation";
 
 import {
     Form,
@@ -16,21 +16,31 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-  } from "../../../components/ui/form"
+  } from "components/ui/form"
  
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import {ShieldCheck} from "lucide-react";
 
+import {ResetPassword} from "services/auth/api"
+import { useToast } from "hooks/use-toast"
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({    
-    email: z.string().email(),
-    password: z.string().min(8)
+    password: z.string().min(8),
+    password_confirmation: z.string().min(8)
 });
 
 
-export default function ResetPassword(){
+export default function ResetPasswordForm(){
+
+    const [submitting, setSubmitting] = useState(false);
+    const [error, setError] = useState(null);   
+    const [id, setId] = useState(null); 
+    const router = useRouter();
+    const {toast} = useToast();
+    const searchParams = useSearchParams();
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -40,18 +50,63 @@ export default function ResetPassword(){
         },
     });
 
-    function onSubmit(values) {
-        console.log(values)
+    async function onSubmit(values) {
+        console.log(values);
+        
+        setSubmitting(true);
+        if(values.password != values.password_confirmation){
+            setError("Passwords don't match");
+            setSubmitting(false);
+            return;
+        }
+
+        setError(null);        
+        const response = await ResetPassword(id, values.password);
+        setSubmitting(false);
+
+        console.log(response);
+        if(response.status >= 200 && response.status < 300){            
+            
+            toast({
+                variant: 'positive',
+                description: response.data.message
+            });
+            setTimeout(() => {
+                router.push('/auth/password-reset-successful');
+            }, 1000);
+            
+        }else{
+
+            if(response.response.data.message){
+                setError(response.response.data.message);
+                toast({
+                    variant: 'destructive',
+                    description: response.response.data.message
+                });
+            }else{
+                toast({
+                    variant: 'destructive',
+                    description: 'Something went wrong. Please try again'
+                });
+            }
+        }
+
     }
+
+    useEffect(() => {
+        setId(searchParams.get('id'));
+    }, []);
 
     return (
         <main className="w-screen flex justify-center">
-            <div className="w-full md:w-[1104px] flex py-16 space-x-8">
+            <div className="w-full md:w-[1124px] flex py-16 space-x-8">
                 <div className="w-full md:w-1/2 space-y-4 flex flex-col items-center px-4 pt-12">
                     <SiteIcon />
                     <h1 className="text-2xl font-bold text-gray-800">Reset Password</h1>
+                 
 
-                    <div className="w-[450px]">
+                    <div className="min-w-[300px] md:w-[450px]">
+                        <Error error={error} />
                         <Form {...form} className="flex justify-left flex-col w-full">
                             <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
                                 
@@ -89,7 +144,13 @@ export default function ResetPassword(){
                                     <p className="text-sm text-gray-800"><Link  href="/auth/forgot-password"><span className="font-bold text-black">Forgot Password?</span></Link></p>
                                 </div>                                                */}
                                 
-                                <Button type="submit" className="text-white rounded-full w-full px-8 py-2 mt-4 h-12">Reset</Button>
+                                {
+                                    submitting ? (
+                                        <Button disabled className="text-white/50 rounded-full w-full px-8 py-2 mt-4 h-12 bg-gray-700">Resseting Password...</Button>
+                                    ) : (
+                                        <Button type="submit" className="text-white rounded-full w-full px-8 py-2 mt-4 h-12">Reset</Button>
+                                    )
+                                }
                             </form>
                         </Form>
 

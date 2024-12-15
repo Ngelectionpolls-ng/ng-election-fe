@@ -4,7 +4,7 @@ import { Button } from "../ui/button"
 export default function ElectionDataSection() {
   return (
     <section className="bg-black/5 w-screen flex justify-center py-12">
-      <div className="flex flex-col md:flex-row justify-between md:w-[1104px] w-full md:space-x-8" >
+      <div className="flex flex-col md:flex-row justify-between md:w-[1124px] w-full md:space-x-8" >
         {/* Text Section */}
         <div className="text-md w-full md:w-1/2 flex flex-col justify-center space-y-12 px-4 md:px-0">
           <h1 className="font-bold text-gray-900 text-3xl text-center md:text-left">

@@ -1,5 +1,6 @@
 import "./globals.css";
 import {AuthProvider} from "contexts/Auth";
+import { Toaster } from "components/ui/toaster";
 
 export default function RootLayout({children}){
     return (
@@ -12,7 +13,8 @@ export default function RootLayout({children}){
             <body style={{fontFamily: "Poppins", fontWeight: "400", fontStyle: "normal"}}>
                 <AuthProvider>
                     {children}
-                </AuthProvider>                
+                </AuthProvider>
+                <Toaster />                
             </body>
         </html>
     );

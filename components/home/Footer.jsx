@@ -11,7 +11,7 @@ function Footer() {
                 <h4 className="text-white uppercase text-center text-xl font-bold">Nigeria can be great again</h4>
             </div>
             <footer className="bg-[#0A491C] flex justify-center py-16 w-screen text-white">
-                <div className="w-[1104px]">
+                <div className="w-[1124px]">
                     <div className="flex items-center justify-center gap-2">
                         <div className="bg-white h-[1px] w-full"></div>
                         <div className="text-green-500 font-bold flex gap-1">Nigeria<span className="text-white"> Election</span><span className="text-green-500">Poll<sup className="text-white text-[8px] ml-[2px]">TM</sup></span> </div>

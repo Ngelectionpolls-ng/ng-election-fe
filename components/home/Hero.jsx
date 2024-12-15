@@ -7,7 +7,7 @@ function Hero() {
       <div
         className="relative bg-[#F2F2F2] flex flex-col items-center w-full"
         style={{
-          backgroundImage: `url('${process.env.NEXT_PUBLIC_FRONTEND_URL}/assets/images/home/background.jpeg')`,
+          backgroundImage: `url('/assets/images/home/background.jpeg')`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}

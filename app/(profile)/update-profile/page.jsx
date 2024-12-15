@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import SiteIcon from "components/commons/SiteIcon";
+import Error from "components/commons/Error";
 import { Button } from "components/ui/button"
 import { Input } from "components/ui/input"
 import { Label } from "components/ui/label"
@@ -50,7 +51,7 @@ export default function UpdateProfile(){
 
     return (
         <main className="w-screen flex justify-center">
-            <div className="w-full md:w-[1104px] flex py-16 space-x-8">
+            <div className="w-full md:w-[1124px] flex py-16 space-x-8">
                 <div className="w-full md:w-1/2 space-y-4 flex flex-col items-center">
                 <   SiteIcon className="absolute mx-auto top-0"/>
                     <h1 className="text-2xl font-bold text-gray-800">Update your profile</h1>

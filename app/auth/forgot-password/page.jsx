@@ -1,12 +1,11 @@
 "use client"
 
-import GoogleButton from "components/commons/GoogleButton";
+import React, {useState} from "react";
 import Link from "next/link";
-import Image from "next/image";
-import SiteIcon from "../../../components/commons/SiteIcon";
-import { Button } from "../../../components/ui/button"
-import { Input } from "../../../components/ui/input"
-import { Label } from "../../../components/ui/label"
+import SiteIcon from "components/commons/SiteIcon";
+import Error from "components/commons/Error";
+import { Button } from "components/ui/button"
+import { Input } from "components/ui/input"
 
 import {
     Form,
@@ -16,21 +15,28 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-  } from "../../../components/ui/form"
+  } from "components/ui/form"
  
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import {ShieldCheck} from "lucide-react";
 
+import {ForgotPassword} from "services/auth/api"
+import { useToast } from "hooks/use-toast"
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({    
-    email: z.string().email(),
-    password: z.string().min(8)
+    email: z.string().email()
 });
 
 
-export default function ForgotPassword(){
+export default function ForgotPasswordForm(){
+
+    const [submitting, setSubmitting] = useState(false);
+    const [error, setError] = useState(null);
+    const router = useRouter();
+    const {toast} = useToast();
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -39,19 +45,53 @@ export default function ForgotPassword(){
         },
     });
 
-    function onSubmit(values) {
+    async function onSubmit(values) {
         console.log(values)
+        setError(null);
+        setSubmitting(true);
+        const response = await ForgotPassword(values.email);
+        setSubmitting(false);
+
+        console.log(response);
+        if(response.status >= 200 && response.status < 300){    
+            
+            toast({
+                variant: 'positive',
+                description: response.data.message
+            });
+            setTimeout(() => {
+                router.push('/auth/login');
+            }, 1000);
+            
+        }else{
+
+            if(response.response.data.message){
+                setError(response.response.data.message);
+                toast({
+                    variant: 'destructive',
+                    description: response.response.data.message
+                });
+            }else{
+                toast({
+                    variant: 'destructive',
+                    description: 'Something went wrong. Please try again'
+                });
+            }
+        }
     }
 
     return (
         <main className="w-screen flex justify-center">
-            <div className="w-full md:w-[1104px] flex py-16 space-x-8">
+            <div className="w-full md:w-[1124px] flex py-16 space-x-8">
                 <div className="w-full md:w-1/2 space-y-4 flex flex-col items-center px-4 pt-12">
                     <SiteIcon />
                     <h1 className="text-2xl font-bold text-gray-800">Forgot Password</h1>
                     <p className="text-sm text-gray-800 text-center w-[450px]">Enter the email address you used to create the account to receive instructions on how to reset your password</p>
 
                     <div className="w-[450px]">
+                        
+                        <Error error={error} />
+                        
                         <Form {...form} className="flex justify-left flex-col w-full">
                             <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
                                 
@@ -74,8 +114,13 @@ export default function ForgotPassword(){
                                 <div className="w-full my-4 text-right">
                                     <p className="text-sm text-gray-800"><Link  href="/auth/login"><span className="font-bold text-black">I remember my password</span></Link></p>
                                 </div>                                               
-                                
-                                <Button type="submit" className="text-white rounded-full w-full px-8 py-2 mt-4 h-12">Send</Button>
+                                {
+                                   submitting ? (
+                                        <Button disabled className="text-white/50 rounded-full w-full px-8 py-2 mt-4 h-12 bg-gray-700">Submitting...</Button>
+                                    ) : (
+                                        <Button type="submit" className="text-white rounded-full w-full px-8 py-2 mt-4 h-12">Submit</Button>
+                                    ) 
+                                }                                
                             </form>
                         </Form>
 

@@ -25,7 +25,7 @@ function NavBar() {
         ["Publications", "Elelction update", "Find polling unit"]
     ];
 
-    const {isLoggeIn, getUser} = useContext(AuthContext);
+    const {isLoggeIn, user} = useContext(AuthContext);
     
     return (
         <nav className="bg-gray-50 border-gray-200 dark:bg-gray-900 dark:border-gray-700 shadow-xl border-b border-b-green-900 fixed z-20 w-full">

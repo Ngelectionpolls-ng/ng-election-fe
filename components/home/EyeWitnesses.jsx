@@ -6,7 +6,7 @@ function EyeWitnesses() {
   return (
     <>
       <section className="bg-white w-screen flex justify-center">
-        <div className="md:w-[1104px] w-full flex flex-col md:flex-row px-4 md:px-0" >
+        <div className="md:w-[1124px] w-full flex flex-col md:flex-row px-4 md:px-0" >
           <div className="w-full md:w-1/2 flex justify-right md:justify-center">
             <img src="/assets/home/Team-cuate.png" className="w-full" alt="" />
           </div>
@@ -21,7 +21,7 @@ function EyeWitnesses() {
       </section>
       
       <section className="bg-white w-screen flex justify-center">
-        <div className="md:w-[1104px] py-16 w-full px-4 md:px-0">
+        <div className="md:w-[1124px] py-16 w-full px-4 md:px-0">
           <div className="w-4/5">
             <h2 className="text-3xl font-bold text-gray-900 mb-8">
               How to become an eyewitness
