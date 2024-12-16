@@ -3,9 +3,9 @@
 import React, {createContext, useEffect, useState} from "react";
 import { useSearchParams } from "next/navigation";
 
-const AuthContext = createContext();
+const AppContext = createContext();
 
-const AuthProvider = ({children}) => {
+const AppProvider = ({children}) => {
     
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
@@ -19,22 +19,16 @@ const AuthProvider = ({children}) => {
         if(storedUser != undefined && storedUser != null){
             setUser(JSON.parse(storedUser));
             setIsLoggedIn(true);
-            setToken(localStorage.getItem('token'));            
-            // console.log(JSON.parse(storedUser));
-            if(searchParams.get('redirect')){
-                window.location = searchParams.get('redirect');
-            }else{
-                window.location = '/';
-            }
+            setToken(localStorage.getItem('token'));  
         }       
         
     }, []);
 
     return (
-        <AuthContext.Provider value={{user, token, isLoggedIn}}>
+        <AppContext.Provider value={{user, token, isLoggedIn}}>
             {children}
-        </AuthContext.Provider>
+        </AppContext.Provider>
     )
 }
 
-export {AuthContext, AuthProvider};
+export {AppContext, AppProvider};
