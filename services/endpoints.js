@@ -11,6 +11,7 @@ export const VERIFY_RESET_TOKEN = "auth/reset-password/verify";
 export const RESET_PASSWORD = "auth/reset-password";
 // CREATE PROFILE
 export const CREATE_PROFILE = `:account_type`;
+export const REGISTER_SUBSCRIBER = 'auth/subscriber/register';
 
 //states information endpoints
 export const GET_STATES = `states`;

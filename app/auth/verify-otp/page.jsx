@@ -142,9 +142,9 @@ export default function VerifyOTPForm(){
                 <div className="w-full md:w-1/2 space-y-4 flex flex-col items-center px-4 pt-12">
                     <SiteIcon />
                     <h1 className="text-2xl font-bold text-gray-800">Verify your account</h1>
-                    <p className="text-sm text-gray-800 text-center w-[450px]">We sent a code to your email. Input the code to complete registration</p>
+                    <p className="text-sm text-gray-800 text-center w-[400px]">We sent a code to your email. Input the code to complete registration</p>
 
-                    <div className="w-[450px] mt-12">
+                    <div className="w-[400px] mt-12">
                         <Error error={error} />
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-8">

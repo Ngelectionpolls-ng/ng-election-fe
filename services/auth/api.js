@@ -1,6 +1,6 @@
 import Axios from "../Axios";
 import {CREATE_ACCOUNT, FORGOT_PASSWORD, REQUEST_NEW_CODE, 
-        VERIFY_TOKENS, RESET_PASSWORD, SIGN_IN} from 'services/endpoints';
+        VERIFY_TOKENS, RESET_PASSWORD, SIGN_IN, REGISTER_SUBSCRIBER} from 'services/endpoints';
 
 export const Signup = async (role, data) => {
 
@@ -87,6 +87,19 @@ export const VerifyOTP = async (id, code) => {
     return result;
 
 } 
+
+export const RegisterSubscriber = async (email) => {
+    let result = null;
+
+    await Axios.post(REGISTER_SUBSCRIBER, {
+        email,
+        redirectUrl: "auth/verify-otp"
+    })
+    .then(response => {result = response})
+    .catch(error => {result = error});
+
+    return result;
+}
 
 
 
