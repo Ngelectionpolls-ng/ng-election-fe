@@ -11,3 +11,10 @@ export const VERIFY_RESET_TOKEN = "auth/reset-password/verify";
 export const RESET_PASSWORD = "auth/reset-password";
 // CREATE PROFILE
 export const CREATE_PROFILE = `:account_type`;
+
+//states information endpoints
+export const GET_STATES = `states`;
+export const GET_STATE_LGAS = `states/:state_id/lgas`;
+export const GET_LGA_WARDS = `lgas/:lga_id/wards`;
+export const GET_WARD_POLLING_UNITS = `wards/:ward_id/pollingunits`;
+export const GET_POLITICAL_PARTIES = `parties`;

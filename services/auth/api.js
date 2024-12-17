@@ -14,7 +14,6 @@ export const Signup = async (role, data) => {
     .catch(error => {result = error});
 
     return result;
-
 } 
 
 export const RequestNewCode = async (email, channel) => {

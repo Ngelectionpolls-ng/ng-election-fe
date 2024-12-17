@@ -9,7 +9,7 @@ function Sidebar() {
 
     
     return (
-        <div className="w-8 md:w-[200px] bg-green-800 h-screen shadow py-16 ml-2">
+        <div className="w-8 md:w-[200px] bg-green-800 h-screen shadow py-20">
             <span className="text-white">Sidebar</span>
         </div>    
     )
