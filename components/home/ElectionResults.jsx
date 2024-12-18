@@ -18,8 +18,10 @@ export default function ElectionResults({state, width=400, height=260, x=50, y=1
            className={`fixed w-[450px] p-3 bg-white rounded-xl shadow-xl justify-between z-[10] ${visible ? 'block' : 'hidden'} text-gray-900`} 
            style={{'left' : `${x}px`, 'top' : `${y}px`}} >
         {/* Title */}
-        <div className="flex flex-col space-y-2 my-2">
-          <h2 className="text-sm font-semibold">{state} State</h2>
+        <div className="flex flex-col space-y-1 my-2">
+        <h2 className="text-md font-bold">Presidential Election</h2>
+          <h2 className="text-sm font-semibold text-green-900">{state} State</h2>
+          <p className="text-xs">Total Registered Voters: 2,501,081</p>
           <div className="flex justify-between text-xs">
             <span>Leading candidates</span>
             <span>Top 4 of 18</span>
@@ -53,12 +55,11 @@ export default function ElectionResults({state, width=400, height=260, x=50, y=1
 
         {/* Footer */}
         <div className="flex justify-between items-center pt-2 border-t border-gray-600">
-          <div className="">
-            <p className="text-xs">Total Registered Voters: 2,501,081</p>
+          <div className="">            
             <p className="text-xs">Click to view result from all Polling Unit </p>
           </div>          
-          <Button className="h-12 w-[150px] space-x-2 text-xs flex font-semibold text-white bg-green-900 p-3 py-4 hover:bg-green-800 rounded-xl">
-            <span className="w-[100px] rounded-xl text-left py-2">Click to view <br/>More</span>
+          <Button className="w-[150px] space-x-2 text-xs flex font-semibold text-white bg-green-900 p-3 py-4 hover:bg-green-800 rounded-xl">
+            <span className="w-[100px] rounded-xl text-left py-2">Click to view More</span>
             <ChevronRight />
           </Button>
         </div>

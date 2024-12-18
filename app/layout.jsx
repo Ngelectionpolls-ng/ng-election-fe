@@ -1,6 +1,7 @@
 "use client"
 
 import "./globals.css";
+import { Suspense } from "react";
 import { Toaster } from "components/ui/toaster";
 import {AppProvider} from "contexts/App";
 
@@ -14,7 +15,9 @@ export default function RootLayout({children}){
             </head>
             <body style={{fontFamily: "Poppins", fontWeight: "400", fontStyle: "normal"}}>      
                 <AppProvider>
-                    {children}    
+                    <Suspense>
+                        {children}   
+                    </Suspense>                     
                 </AppProvider>                                                       
                 <Toaster />                
             </body>

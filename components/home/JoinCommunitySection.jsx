@@ -103,14 +103,14 @@ function JoinCommunitySection() {
                                             subscriberRegistered && <p className="text-xs text-white bg-green-700 p-4 rounded-xl">A mail has been sent to the email address you provided  for you  to Verify your email account </p>
                                         }
                                         <div className="flex w-full border-2 rounded-xl h-12 border-green-800 items-center">
+                                            <Input type="email" onChange={(e) => {setError(null); setEmail(e.target.value)}} placeholder="Enter your email address" className="h-full w-1/2"/>
                                             {
                                                 submitting ? (
                                                     <Button className="w-1/2 rounded-xl text-white/50 text-white h-full bg-gray-700">Submitting</Button>                                            
                                                 ) : (
                                                     <Button className="w-1/2 rounded-xl bg-green-900 text-white h-full" onClick={subscribeEmaiil}>Click to Subscribe</Button>
                                                 )
-                                            }
-                                            <Input type="email" onChange={(e) => {setError(null); setEmail(e.target.value)}} placeholder="Enter your email address" className="h-full w-1/2"/>
+                                            }                                            
                                         </div>
                                         <p className="text-sm text-gray-800">I already have a subscribed account <Link  href="/auth/login"><span className="font-bold text-black">Login</span></Link></p>
                                     </div>    

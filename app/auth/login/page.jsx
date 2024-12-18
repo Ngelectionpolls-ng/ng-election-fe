@@ -160,7 +160,7 @@ export default function SignIn(){
                     
                 </div>
                 <div className="w-full md:w-1/2 relative hidden md:flex flex-col items-center  ">                    
-                    <img src={'/assets/auth/Tablet login-pana.png'} alt="" className="w-full" /> 
+                    <img src={'/assets/auth/Tablet login-pana.png'} alt="" className="w-full scale-110" /> 
                 </div>
             </div>            
         </main>

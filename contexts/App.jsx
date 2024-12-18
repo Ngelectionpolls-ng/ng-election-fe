@@ -1,7 +1,6 @@
 "use client"
 
 import React, {createContext, useEffect, useState} from "react";
-import { useSearchParams } from "next/navigation";
 
 const AppContext = createContext();
 
@@ -10,9 +9,6 @@ const AppProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    const searchParams = useSearchParams();
-
 
     useEffect(() => {
         let storedUser = localStorage.getItem('user');

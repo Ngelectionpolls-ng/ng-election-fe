@@ -120,7 +120,7 @@ export default function SignupForm(){
                     </Tabs>
                 </div>
                 <div className="w-full md:w-1/2 relative hidden md:flex flex-col items-center justify-center ">                    
-                    <img src={'/assets/auth/Sign up-pana.png'} alt="" className="w-full" /> 
+                    <img src={'/assets/auth/Sign up-pana.png'} alt="" className="w-full scale-125" /> 
                 </div>
             </div>            
         </main>

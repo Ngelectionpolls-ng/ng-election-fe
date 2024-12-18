@@ -360,7 +360,7 @@ export default function UpdateProfile(){
                     </div>
                 </div>
                 <div className="w-full md:w-1/2 relative hidden md:flex flex-col justify-center  ">
-                    <img src={'/assets/auth/Team spirit-pana.png'} alt="" className="w-full" /> 
+                    <img src={'/assets/auth/Team spirit-pana.png'} alt="" className="w-full scale-125" /> 
                 </div>
             </div>            
         </main>

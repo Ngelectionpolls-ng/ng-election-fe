@@ -13,7 +13,7 @@ export default function ElectionDataSection() {
           <p className="text-gray-600 mb-6 text-sm">
             Follow verified election results to stay updated.
           </p>
-          <Button className="bg-green-900 text-white min-w-[100px] rounded-[5px] hover:bg-black">
+          <Button className="bg-green-900 text-white w-[200px] rounded-[5px] hover:bg-black">
               <Link href="/auth/create-account">
                   JOIN NOW FOR FREE
               </Link>
@@ -27,7 +27,7 @@ export default function ElectionDataSection() {
         
           <img
             src={"/assets/home/stay-informed.png"}
-            className="w-full md:w-1/2"
+            className="w-full md:w-1/2 scale-125"
             alt=""
           />
       </div>

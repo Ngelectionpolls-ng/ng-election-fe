@@ -134,7 +134,7 @@ export default function ForgotPasswordForm(){
                     
                 </div>
                 <div className="w-full md:w-1/2 relative hidden md:flex flex-col items-center  ">                    
-                    <img src={'/assets/auth/Forgot password-cuate.png'} alt="" className="w-full" /> 
+                    <img src={'/assets/auth/Forgot password-cuate.png'} alt="" className="w-full scale-110" /> 
                 </div>
             </div>            
         </main>
