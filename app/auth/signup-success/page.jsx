@@ -1,9 +1,10 @@
 "use client"
 
+import React, {useState, useContext, useEffect } from "react";
+import { AppContext } from "contexts/App"
 import Link from "next/link";
 import SiteIcon from "components/commons/SiteIcon";
 import Error from "components/commons/Error";
-import React, {useState} from "react";
 import {RequestNewCode} from "services/auth/api";
 import { Button } from "components/ui/button";
 import { useToast } from "hooks/use-toast";
@@ -17,6 +18,8 @@ export default function VerificationEmailSent(){
     const [error, setError] = useState(null);
     const {toast} = useToast();
     const router = useRouter();
+
+    const {setLoading} = useContext(AppContext);
 
     const resentVerificationEmail = async (email, channel) => {
 
@@ -52,6 +55,10 @@ export default function VerificationEmailSent(){
 
     }
 
+    useEffect(() => {
+        setLoading(false);
+    }, []);
+
     return (
         <main className="w-screen flex justify-center">
             <div className="w-full md:w-[1124px] flex py-16 space-x-8">
@@ -67,7 +74,7 @@ export default function VerificationEmailSent(){
 
                         <p className="text-sm text-gray-800 text-center mb-8">Didn't recieve an email?  <Button variant="ghost" onClick={() => !submitting && resentVerificationEmail(email, "registration")} ><span className="font-bold text-blue-699">Click to Resend</span></Button></p>
                         
-                        <Link href="/auth/login" className="text-white w-full rounded-full mt-8 px-4 py-2 h-12 bg-green-900">Login</Link>
+                        <Button onClick={() => {setLoading(true); router.push("/auth/login"); }} className="text-white w-full rounded-full mt-8 px-4 py-2 h-12 bg-green-900">Login</Button>
 
                     </div>
 

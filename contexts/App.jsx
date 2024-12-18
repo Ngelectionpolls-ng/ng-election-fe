@@ -9,6 +9,7 @@ const AppProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         let storedUser = localStorage.getItem('user');
@@ -21,7 +22,7 @@ const AppProvider = ({children}) => {
     }, []);
 
     return (
-        <AppContext.Provider value={{user, token, isLoggedIn}}>
+        <AppContext.Provider value={{user, token, isLoggedIn, loading, setLoading}}>
             {children}
         </AppContext.Provider>
     )

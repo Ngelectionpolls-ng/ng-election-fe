@@ -1,5 +1,5 @@
-export const EYEWITNESS = 'eyewitness';
-export const AGENT = 'agent';
+export const EYEWITNESS = 'iWitness';
+export const AGENT = 'pollingUnitAgent';
 
 export function getInitials(subject){
     if(!subject){

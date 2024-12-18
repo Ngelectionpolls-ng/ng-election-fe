@@ -1,6 +1,7 @@
 "use client"
 
-import React, {useState} from "react";
+import React, {useState, useContext, useEffect } from "react";
+import { AppContext } from "contexts/App"
 import Link from "next/link";
 import SiteIcon from "components/commons/SiteIcon";
 import Error from "components/commons/Error";
@@ -38,6 +39,8 @@ export default function ForgotPasswordForm(){
     const router = useRouter();
     const {toast} = useToast();
 
+    const {setLoading} = useContext(AppContext);
+
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -60,6 +63,7 @@ export default function ForgotPasswordForm(){
                 description: response.data.message
             });
             setTimeout(() => {
+                setLoading(true);
                 router.push('/auth/login');
             }, 1000);
             
@@ -79,6 +83,10 @@ export default function ForgotPasswordForm(){
             }
         }
     }
+
+    useEffect(() => {
+        setLoading(false);
+    }, []);
 
     return (
         <main className="w-screen flex justify-center">

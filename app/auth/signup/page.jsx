@@ -1,6 +1,7 @@
 "use client"
 
-import {useState} from "react"
+import React, {useState, useContext, useEffect } from "react";
+import { AppContext } from "contexts/App"
 import GoogleButton from "components/commons/GoogleButton"
 import Link from "next/link";
 import SiteIcon from "components/commons/SiteIcon"
@@ -27,7 +28,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import {ShieldCheck} from "lucide-react"
+import {ShieldCheck, Eye, EyeOff} from "lucide-react";
 
 import {Signup} from "services/auth/api"
 import { useToast } from "hooks/use-toast"
@@ -45,10 +46,13 @@ const formSchema = z.object({
 export default function SignupForm(){
 
     const [submitting, setSubmitting] = useState(false);
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const [error, setError] = useState(null);
     const [role, setRole] = useState('iwitness');
     const router = useRouter();
     const {toast} = useToast();
+
+    const {setLoading} = useContext(AppContext);
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -76,6 +80,7 @@ export default function SignupForm(){
                 description: response.data.message
             });
             setTimeout(() => {
+                setLoading(true);
                 router.push('/auth/signup-success');
             }, 1000);
             
@@ -96,6 +101,10 @@ export default function SignupForm(){
         }
 
     }
+
+    useEffect(() => {
+        setLoading(false);
+    }, []);
 
 
     return (
@@ -171,8 +180,19 @@ export default function SignupForm(){
                             render={({ field }) => (
                                 <FormItem>
                                 <FormLabel>Password</FormLabel>
-                                <FormControl className="-mt-2">
-                                    <Input type="password" placeholder="Create your password" {...field} />
+                                <FormControl className="-mt-2">                                    
+                                    <div className="relative">
+                                        <Input type={passwordVisible ? "text" : "password"} placeholder="Creat your password" {...field} className="h-12" />
+                                        {
+                                            passwordVisible ? (
+                                                <Eye className="z-10 absolute right-3 my-auto w-5 top-3 text-gray-500 cursor-pointer" onClick={() => setPasswordVisible(!passwordVisible)} />
+                                            ) : (
+                                                <EyeOff className="z-10 absolute right-3 my-auto w-5 top-3 text-gray-500 cursor-pointer" onClick={() => setPasswordVisible(!passwordVisible)} />
+                                            )
+                                            
+                                        }
+                                        
+                                    </div>  
                                 </FormControl>
                                 <FormDescription className="italic text-xs ">Should contain at lease 1 uppercase, 1 lowercase and 1 special character</FormDescription>
                                 <FormMessage />

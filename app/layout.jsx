@@ -3,9 +3,11 @@
 import "./globals.css";
 import { Suspense } from "react";
 import { Toaster } from "components/ui/toaster";
-import {AppProvider} from "contexts/App";
+import {AppProvider, AppContext} from "contexts/App";
+import Loading from "components/commons/Loading";
 
 export default function RootLayout({children}){
+
     return (
         <html lang="en">
             <head>
@@ -17,7 +19,8 @@ export default function RootLayout({children}){
                 <AppProvider>
                     <Suspense>
                         {children}   
-                    </Suspense>                     
+                    </Suspense>   
+                    <Loading />                  
                 </AppProvider>                                                       
                 <Toaster />                
             </body>

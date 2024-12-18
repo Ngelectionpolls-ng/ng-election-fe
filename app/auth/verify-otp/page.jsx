@@ -1,6 +1,7 @@
 "use client"
 
-import React, {useState, useEffect} from "react";
+import React, {useState, useContext, useEffect } from "react";
+import { AppContext } from "contexts/App"
 import Link from "next/link";
 import SiteIcon from "components/commons/SiteIcon";
 import Error from "components/commons/Error";
@@ -53,6 +54,8 @@ export default function VerifyOTPForm(){
     const {toast} = useToast();
     const searchParams = useSearchParams();
 
+    const {setLoading} = useContext(AppContext);
+
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -76,6 +79,7 @@ export default function VerifyOTPForm(){
                 description: response.data.message ?? "Email verified successfully"
             });
             setTimeout(() => {
+                setLoading(true);
                 router.push('/auth/email-verified');
             }, 1000);
             
@@ -132,6 +136,7 @@ export default function VerifyOTPForm(){
     }
 
     useEffect(() => {
+        setLoading(false);
         setId(searchParams.get('id'));
         setEmail(searchParams.get('email'));
     }, []);

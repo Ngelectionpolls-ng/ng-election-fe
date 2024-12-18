@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import SiteIcon from "components/commons/SiteIcon";
@@ -17,16 +17,6 @@ import { useToast } from "hooks/use-toast";
 import { useRouter } from 'next/navigation';
 
 import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "components/ui/form"
-
-import {
     Select,
     SelectContent,
     SelectGroup,
@@ -34,12 +24,13 @@ import {
     SelectLabel,
     SelectTrigger,
     SelectValue,
-} from "components/ui/select"
+} from "components/ui/select";
  
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import {ShieldCheck} from "lucide-react";
+import {AppContext} from "contexts/App";
 
 
 const formSchema = z.object({
@@ -65,6 +56,7 @@ export default function UpdateProfile(){
     const [pollingUnits, setPollingUnits] = useState([{id: 'pollingunit_0', name: 'Select a ward first'}]);
     const [politicalParties, setPoliticalParties] = useState([{id: 'political_party_0', name: 'Select a political party'}]);
 
+    const {user, setLoading} = useContext(AppContext);
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -231,7 +223,7 @@ export default function UpdateProfile(){
     }
 
     useEffect(() => {
-
+        setLoading(false);
         getAllStates();
         getPoliticalParties();
 
@@ -326,34 +318,37 @@ export default function UpdateProfile(){
                             </SelectContent>
                         </Select>
 
-                        <Label className="">Political party</Label>
-                        <Select className="mb-8">
-                            <SelectTrigger className="w-full h-10">
-                                <SelectValue placeholder="Select a political party" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                {
-                                        politicalParties.map((politicalParty, index) => (
-                                            <SelectItem key={index + '-' + politicalParty.id} value={politicalParty.name}>{politicalParty.name}</SelectItem>
-                                        ))                                        
-                                    }
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
+                        {
+                            user?.role == 'iWitness' && (
+                                <>
+                                    <Label className="">Political party</Label>
+                                    <Select className="mb-8">
+                                        <SelectTrigger className="w-full h-10">
+                                            <SelectValue placeholder="Select a political party" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectGroup>
+                                            {
+                                                    politicalParties.map((politicalParty, index) => (
+                                                        <SelectItem key={index + '-' + politicalParty.id} value={politicalParty.name}>{politicalParty.name}</SelectItem>
+                                                    ))                                        
+                                                }
+                                            </SelectGroup>
+                                        </SelectContent>
+                                    </Select>
+                                </>        
+                            )
+                        }                        
                         
                         {
                             submitting ? (
                                 <Button className="text-white/50 rounded-full w-full px-8 py-2 mt-4 h-12 bg-gray-700">Continuing to Dashboard...</Button>
                             ) : (
-                                <Button className="text-white rounded-full w-full px-8 py-2 mt-8 h-12 " onClick={() => setSubmitting(true)}><Link href="/dashboard">Continue to Dashboard</Link></Button>
+                                <Button className="text-white rounded-full w-full px-8 py-2 mt-8 h-12 " onClick={() => {setSubmitting(true); setLoading(true); router.push('/dashboard');}}>Continue to Dashboard</Button>
                             )
                         }                        
                             
                     </div>
-
-                    
-                    
 
                     <div className="flex flex-col w-full space-y-4">
                         <p className="text-sm text-center text-gray-800"><ShieldCheck className="inline h-4"/> By logging in you agree to <Link  href="/terms-of-service"><span className="font-bold text-black">Terms of Service</span></Link> and <Link  href="/privacy-policy"><span className="font-bold text-black">Privacy Policy</span></Link></p>

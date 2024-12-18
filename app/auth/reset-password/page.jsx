@@ -1,6 +1,7 @@
 "use client"
 
-import React, {useState, useEffect} from "react";
+import React, {useState, useContext, useEffect } from "react";
+import { AppContext } from "contexts/App"
 import Link from "next/link";
 import SiteIcon from "components/commons/SiteIcon";
 import Error from "components/commons/Error";
@@ -21,7 +22,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import {ShieldCheck} from "lucide-react";
+import {ShieldCheck, Eye, EyeOff} from "lucide-react";
 
 import {ResetPassword} from "services/auth/api"
 import { useToast } from "hooks/use-toast"
@@ -36,11 +37,15 @@ const formSchema = z.object({
 export default function ResetPasswordForm(){
 
     const [submitting, setSubmitting] = useState(false);
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
     const [error, setError] = useState(null);   
     const [id, setId] = useState(null); 
     const router = useRouter();
     const {toast} = useToast();
     const searchParams = useSearchParams();
+
+    const {setLoading} = useContext(AppContext);
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -72,6 +77,7 @@ export default function ResetPasswordForm(){
                 description: response.data.message
             });
             setTimeout(() => {
+                setLoading(true);
                 router.push('/auth/password-reset-successful');
             }, 1000);
             
@@ -94,6 +100,7 @@ export default function ResetPasswordForm(){
     }
 
     useEffect(() => {
+        setLoading(false);
         setId(searchParams.get('id'));
     }, []);
 
@@ -117,7 +124,18 @@ export default function ResetPasswordForm(){
                                         <FormItem>
                                         <FormLabel>Password</FormLabel>
                                         <FormControl className="-mt-2">
-                                            <Input type="password" placeholder="Enter your password" {...field} className="h-12" />
+                                            <div className="relative">
+                                                <Input type={passwordVisible ? "text" : "password"} placeholder="Enter your password" {...field} className="h-12" />
+                                                {
+                                                    passwordVisible ? (
+                                                        <Eye className="z-10 absolute right-3 my-auto w-5 top-3 text-gray-500 cursor-pointer" onClick={() => setPasswordVisible(!passwordVisible)} />
+                                                    ) : (
+                                                        <EyeOff className="z-10 absolute right-3 my-auto w-5 top-3 text-gray-500 cursor-pointer" onClick={() => setPasswordVisible(!passwordVisible)} />
+                                                    )
+                                                    
+                                                }
+                                                
+                                            </div>  
                                         </FormControl>
                                         <FormDescription></FormDescription>
                                         <FormMessage />
@@ -132,7 +150,18 @@ export default function ResetPasswordForm(){
                                         <FormItem>
                                         <FormLabel>Confirm Password</FormLabel>
                                         <FormControl className="-mt-2">
-                                            <Input type="password" placeholder="Confirm your password" {...field} className="h-12" />
+                                            <div className="relative">
+                                                <Input type={confirmPasswordVisible ? "text" : "password"} placeholder="Confirm your password" {...field} className="h-12" />
+                                                {
+                                                    passwordVisible ? (
+                                                        <Eye className="z-10 absolute right-3 my-auto w-5 top-3 text-gray-500 cursor-pointer" onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)} />
+                                                    ) : (
+                                                        <EyeOff className="z-10 absolute right-3 my-auto w-5 top-3 text-gray-500 cursor-pointer" onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)} />
+                                                    )
+                                                    
+                                                }
+                                                
+                                            </div>  
                                         </FormControl>
                                         <FormDescription></FormDescription>
                                         <FormMessage />
