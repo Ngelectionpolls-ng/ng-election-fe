@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from "components/ui/button"
@@ -24,29 +24,43 @@ import {
 } from "components/ui/dropdown-menu"
 
 import { AppContext } from "contexts/App";
+import { DashboardContext } from "contexts/Dashboard";
 import { Avatar, AvatarFallback, AvatarImage } from "components/ui/avatar";
 import {getInitials, ellipsify, logout} from 'helpers';
 import {ChevronDown} from "lucide-react";
+import { useRouter } from 'next/navigation';
 
 function NavBar() {
     const navItems = ['Our Mission', 'Election Results', 'Eye Witness', 'Resources'];
     const subItems = [
         ["About Us", "Mission Statement", "Methodology", "Initiatives"],
-        ["Presidential", "Gubernational", "Senatorial", "Federal House of Prepresentative", "State House of Prepresentative", "Local Government", "Off-cycle elections"],
+        ["Presidential", "Gubernational", "Senatorial", "Federal House of Representative", "State House of Representative", "Local Government", "Off-cycle elections"],
         ["Objectives", "How to volunteer", "Available polling unit"],
         ["Publications", "Elelction update", "Find polling unit"]
     ];
+    const itemIds = [
+        ["#about-us", "#mission-statement", "#methodology", "#initiatives"],
+        ["#presidential", "#gubernational", "#senatorial", "#federal-house-of-representative", "#state-house-of-representative", "#local-government", "#off-cycle-elections"],
+        ["#objectives", "#how-to-volunteer", "#available-polling-unit"],
+        ["#publications", "#elelction-update", "#find-polling-unit"]
+    ];
 
-    const {isLoggedIn, user} = useContext(AppContext);
+    const {isLoggedIn, user, setLoading} = useContext(AppContext);
+    const {setActiveMenu} = useContext(AppContext);
+    const router = useRouter();
 
-    console.log("User in NAVBAR", user);
-    console.log("is logged in", isLoggedIn);
+    // console.log("User in NAVBAR", user);
+    // console.log("is logged in", isLoggedIn);
+
+    useEffect(() => {
+        setLoading(false);
+    }, []);
     
     return (
         
         <nav className="bg-gray-50 border-gray-200 dark:bg-gray-900 dark:border-gray-700 shadow-lg border-b border-b-green-900 fixed z-20 w-screen">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-2">
-                <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+                <Link href="/" onClick={() => setLoading(true)} className="flex items-center space-x-3 rtl:space-x-reverse">
                     <Image src={"/Nigelctionpolls 4.svg"} width={250} height={50} alt='NG Election logo' className='w-[140px] h-auto' />
                 </Link>
                 <button data-collapse-toggle="navbar-dropdown" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-dropdown" aria-expanded="false">
@@ -65,13 +79,13 @@ function NavBar() {
                                     <NavigationMenuContent className="w-full">
                                         <ul className="w-full " key={"ul-" + index}>
                                             {
-                                                subItems[index].map(subItem => (
+                                                subItems[index].map((subItem, index2) => (
                                                     
                                                     <li className="w-[300px] hover:bg-muted/50">
                                                         <NavigationMenuLink asChild>
                                                             <a
                                                                 className="flex h-full w-full select-none flex-col justify-end rounded-md p-4 text-sm hover:text-black no-underline outline-none focus:shadow-md"
-                                                                href="#"
+                                                                href={itemIds[index][index2]}
                                                             >{subItem}</a>
                                                         </NavigationMenuLink>
                                                     </li>
@@ -99,7 +113,11 @@ function NavBar() {
                                     <AvatarImage src={user.photo} />
                                     <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
                                 </Avatar>
-                                <span className="text-xs mx-2">{ellipsify(user.name)}</span>
+                                <div className="flex flex-col items-center">
+                                    <span className="text-xs mx-2 font-semibold">{ellipsify(user.name)}</span>
+                                    <span className="text-xs mx-2 italic">{ellipsify(user.role)}</span>
+                                </div>
+                                
                                 
                                 <DropdownMenu className="ml-auto mr-4">
                                     <DropdownMenuTrigger>
@@ -108,8 +126,8 @@ function NavBar() {
                                         </div>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent>
-                                        <DropdownMenuItem>My Account</DropdownMenuItem>
-                                        <DropdownMenuItem>Dashboard</DropdownMenuItem>
+                                        <DropdownMenuItem><Link onClick={() => {setLoading(true); setActiveMenu(constants.PROFILE)}} href="/dashboard/profile" >My Account</Link></DropdownMenuItem>
+                                        <DropdownMenuItem><Link onClick={() => setLoading(true)} href="/dashboard" >Dashboard</Link></DropdownMenuItem>
                                         <DropdownMenuSeparator />
                                         <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
                                     </DropdownMenuContent>

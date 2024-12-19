@@ -1,0 +1,29 @@
+
+"use client"
+
+import React, {useContext, useEffect, setState} from "react";
+import { Button } from "components/ui/button"
+import { AppContext } from "contexts/App";
+import Error from "components/commons/Error";
+import Link from "next/link";
+
+import { useToast } from "hooks/use-toast"
+import { useRouter } from "next/navigation";
+
+export default function Page(){
+
+    const router = useRouter();
+    const {toast} = useToast();
+    const {setLoading} = useContext(AppContext);
+
+    useEffect(() => {
+        setLoading(false);
+    });
+
+    return (
+        <main className="w-screen flex justify-center">
+            News content summary
+        </main>
+    );
+
+}

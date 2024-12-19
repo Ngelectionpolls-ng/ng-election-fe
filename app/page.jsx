@@ -1,3 +1,6 @@
+"use client"
+
+import React, {useEffect, useContext} from "react";
 import NavBar from 'components/home/NavBar';
 import Hero from 'components/home/Hero';
 import ElectionDataSection from "components/home/ElectionDataSection";
@@ -12,7 +15,17 @@ import OurMission from "components/home/OurMission";
 import StayInformed from "components/home/StayInformed";
 import LiveElectionUpdates from "components/home/LiveElectionUpdates";
 
+import {AppContext} from "contexts/App"
+
+
 export default function Home() {
+
+  const {setLoading} = useContext(AppContext);
+
+  useEffect(() => {
+      setLoading(false);
+  }, []);
+
   return (
     <>
       <NavBar />

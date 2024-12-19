@@ -1,5 +1,23 @@
-export const EYEWITNESS = 'iWitness';
-export const AGENT = 'pollingUnitAgent';
+export const constants = {
+    EYEWITNESS: 'iWitness',
+    AGENT: 'pollingUnitAgent',
+    DASHBOARD: "Dashboard", 
+    EYEWITNESS_REPORT: "Eyewitness Report",
+    ELECTION_MAP: 'Election Map', 
+    NEWS: 'News', 
+    MEDIA_GALLERY: 'Media Gallery',
+    PROFILE: "Profile"
+}
+
+export function makeSlug(subject){
+    if(!subject){
+        return "";
+    }else if(typeof(subject) != 'string'){
+        return "";
+    }
+
+    return subject.replace(' ', '-').toLowerCase();
+}
 
 export function getInitials(subject){
     if(!subject){

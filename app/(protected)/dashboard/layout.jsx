@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import NavBar from 'components/home/NavBar';
 import Sidebar from 'components/commons/Sidebar';
 import { SessionProvider } from "contexts/Session";
+import { DashboardProvider } from "contexts/Dashboard";
 
 export default function Layout({children}){
 
@@ -22,11 +23,12 @@ export default function Layout({children}){
         <main className="w-screen flex justify-center">
              
             <SessionProvider>
-                <div className="flex w-full">
-                    <NavBar /> 
-                    <Sidebar />
-                    {children}   
-                </div> 
+                <DashboardProvider>
+                    <div className="flex w-full">
+                        <Sidebar />
+                        {children}   
+                    </div>
+                </DashboardProvider>                 
             </SessionProvider>                                 
         </main>
     );

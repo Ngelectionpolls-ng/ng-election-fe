@@ -3,8 +3,9 @@
 import "./globals.css";
 import { Suspense } from "react";
 import { Toaster } from "components/ui/toaster";
-import {AppProvider, AppContext} from "contexts/App";
+import {AppProvider} from "contexts/App";
 import Loading from "components/commons/Loading";
+import { DashboardContext } from "contexts/Dashboard";
 
 export default function RootLayout({children}){
 
@@ -17,9 +18,11 @@ export default function RootLayout({children}){
             </head>
             <body style={{fontFamily: "Poppins", fontWeight: "400", fontStyle: "normal"}}>      
                 <AppProvider>
-                    <Suspense>
-                        {children}   
-                    </Suspense>   
+                    <DashboardContext>
+                        <Suspense>
+                            {children}   
+                        </Suspense>  
+                    </DashboardContext>                     
                     <Loading />                  
                 </AppProvider>                                                       
                 <Toaster />                

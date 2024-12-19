@@ -28,15 +28,18 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "strictNullChecks": true
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     "next-env.d.ts",
     "twin.d.ts",
-    ".next/types/**/*.ts"
-, "app/auth/signup/page.jsx", "contexts/AuthContext.jsx"  ],
+    ".next/types/**/*.ts",
+    "app/auth/signup/page.jsx",
+    "contexts/AuthContext.jsx"
+  ],
   "exclude": [
     "node_modules"
   ]
