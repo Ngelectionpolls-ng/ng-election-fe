@@ -3,10 +3,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "contexts/App";
 import { useRouter } from "next/navigation";
-import NavBar from 'components/home/NavBar';
+import DashboardNavBar from 'components/commons/DashboardNavBar';
 import Sidebar from 'components/commons/Sidebar';
 import { SessionProvider } from "contexts/Session";
-import { DashboardProvider } from "contexts/Dashboard";
 
 export default function Layout({children}){
 
@@ -20,15 +19,16 @@ export default function Layout({children}){
 
 
     return (
-        <main className="w-screen flex justify-center">
+        <main className="w-screen">
              
-            <SessionProvider>
-                <DashboardProvider>
-                    <div className="flex w-full">
-                        <Sidebar />
+            <SessionProvider>                
+                <div className="flex w-screen">
+                    <Sidebar />
+                    <div className="flex-1">
+                        <DashboardNavBar />
                         {children}   
-                    </div>
-                </DashboardProvider>                 
+                    </div>                        
+                </div>                              
             </SessionProvider>                                 
         </main>
     );

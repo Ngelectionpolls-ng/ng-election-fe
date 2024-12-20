@@ -6,7 +6,7 @@ export const constants = {
     ELECTION_MAP: 'Election Map', 
     NEWS: 'News', 
     MEDIA_GALLERY: 'Media Gallery',
-    PROFILE: "Profile"
+    PROFILE: "My Account Info"
 }
 
 export function makeSlug(subject){
@@ -16,7 +16,7 @@ export function makeSlug(subject){
         return "";
     }
 
-    return subject.replace(' ', '-').toLowerCase();
+    return subject.replaceAll(' ', '-').toLowerCase();
 }
 
 export function getInitials(subject){
@@ -51,6 +51,13 @@ export function ellipsify(subject, length=10){
     }
 
     return subject.slice(0, length) + '...';
+}
+
+export function displayCount(count){
+    if(count > 99){
+        return '99+';
+    }
+    return count;
 }
 
 

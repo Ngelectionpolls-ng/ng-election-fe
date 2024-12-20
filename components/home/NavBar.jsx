@@ -24,11 +24,9 @@ import {
 } from "components/ui/dropdown-menu"
 
 import { AppContext } from "contexts/App";
-import { DashboardContext } from "contexts/Dashboard";
-import { Avatar, AvatarFallback, AvatarImage } from "components/ui/avatar";
-import {getInitials, ellipsify, logout} from 'helpers';
-import {ChevronDown} from "lucide-react";
+import NavUserIcon from "components/commons/NavUserIcon";
 import { useRouter } from 'next/navigation';
+import { DashboardContext } from 'contexts/Dashboard'
 
 function NavBar() {
     const navItems = ['Our Mission', 'Election Results', 'Eye Witness', 'Resources'];
@@ -46,7 +44,7 @@ function NavBar() {
     ];
 
     const {isLoggedIn, user, setLoading} = useContext(AppContext);
-    const {setActiveMenu} = useContext(AppContext);
+    const {setActiveMenu} = useContext(DashboardContext);
     const router = useRouter();
 
     // console.log("User in NAVBAR", user);
@@ -108,31 +106,7 @@ function NavBar() {
                     </NavigationMenu>
                     {
                         isLoggedIn ? (
-                            <div className="flex items-center min-w-[180px] cursor-pointer p-1 rounded-full bg-gray-200">
-                                <Avatar>
-                                    <AvatarImage src={user.photo} />
-                                    <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
-                                </Avatar>
-                                <div className="flex flex-col items-center">
-                                    <span className="text-xs mx-2 font-semibold">{ellipsify(user.name)}</span>
-                                    <span className="text-xs mx-2 italic">{ellipsify(user.role)}</span>
-                                </div>
-                                
-                                
-                                <DropdownMenu className="ml-auto mr-4">
-                                    <DropdownMenuTrigger>
-                                        <div className="rounded-full w-6 h-6 hover:bg-white/50 flex justify-center items-center flex-col">
-                                            <ChevronDown className="w-4 h-4" />                                    
-                                        </div>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent>
-                                        <DropdownMenuItem><Link onClick={() => {setLoading(true); setActiveMenu(constants.PROFILE)}} href="/dashboard/profile" >My Account</Link></DropdownMenuItem>
-                                        <DropdownMenuItem><Link onClick={() => setLoading(true)} href="/dashboard" >Dashboard</Link></DropdownMenuItem>
-                                        <DropdownMenuSeparator />
-                                        <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
-                            </div>
+                            <NavUserIcon />   
                         ) : (                            
                             <div className="flex space-x-4">
                                 <Button className="bg-green-900 text-white min-w-[100px] rounded-[5px] hover:bg-black">

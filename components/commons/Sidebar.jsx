@@ -1,13 +1,14 @@
 "use client"
 
 import React, {useContext, useEffect, useState} from 'react'
-import {ChevronRight, ChevronLeft} from 'lucide-react'
+import {ChevronRight, ChevronLeft, LogOut } from 'lucide-react'
 import Link from 'next/link'
 import { SessionContext } from "contexts/Session"
 import { AppContext } from "contexts/App"
 import { DashboardContext } from "contexts/Dashboard"
 import {constants, makeSlug} from "helpers" 
 import {useRouter} from 'next/navigation'
+import { logout } from '../../helpers'
 
 function Sidebar() {
 
@@ -48,7 +49,7 @@ function Sidebar() {
         if(activeMenu == menuItem){
             return;
         }
-        setLoading(true);
+        // setLoading(true);
         setActiveMenu(menuItem);
         if(menuItem == constants.DASHBOARD){
             router.push(`/dashboard`);
@@ -59,7 +60,7 @@ function Sidebar() {
 
     
     return (
-        <div className={`${expanded ? 'w-[250px]' : 'w-[80px]'} bg-green-800 h-screen shadow p-2 py-6 flex flex-col space-y-4 ${expanded ? '' : 'items-center'} transition-all duration-200`}>
+        <div className={`${expanded ? 'w-[250px]' : 'w-[80px]'} bg-green-900 h-screen shadow p-2 py-6 flex flex-col space-y-4 ${expanded ? '' : 'items-center'} transition-all duration-200`}>
             <Link onClick={() => setLoading(true)} href="/">
                 {
                     expanded ? (
@@ -70,21 +71,27 @@ function Sidebar() {
                 }
                 
             </Link>
-
-            <Open expanded={expanded}/>
-
+            
             {
-                expanded ? (
-                    <span className="text-[10px] text-white">Main Menu</span>
-                ) : (
-                    <span className="text-[10px] text-white">Menu</span>
+                !expanded && (
+                     <span className="text-[10px] text-white">Menu</span>
                 )
-            }            
+            }           
+
+            <div className="flex flex-between">
+
+                {
+                    expanded && (
+                        <span className="text-[10px] text-green-500">Main Menu</span>
+                    )
+                }   
+                
+                <Open expanded={expanded}/> 
+
+            </div>                    
             
             <Dashboard onClick={() => displayPage(constants.DASHBOARD)} active={activeMenu == constants.DASHBOARD} />
-
-            <Profile onClick={() => displayPage(constants.PROFILE)} active={activeMenu == constants.PROFILE} />
-
+            
             <ElectionMap onClick={() => displayPage(constants.ELECTION_MAP)} active={activeMenu == constants.ELECTION_MAP} />
 
             <EyewitnessReport onClick={() => displayPage(constants.EYEWITNESS_REPORT)} active={activeMenu == constants.EYEWITNESS_REPORT} />
@@ -93,8 +100,14 @@ function Sidebar() {
 
             <News onClick={() => displayPage(constants.NEWS)} active={activeMenu == constants.NEWS} />
             
-            <Open expanded={expanded}/>
+            <Profile onClick={() => displayPage(constants.PROFILE)} active={activeMenu == constants.PROFILE} />
             
+            <div className="grow"></div>
+
+            <Signout onClick={() => logout()} />
+
+
+
         </div>    
     )
 
@@ -107,7 +120,7 @@ function Sidebar() {
                 </svg>
                 {
                     expanded && (
-                        <span className={`ml-2 text-sm text-white font-semibold ${active ? 'text-gray-700' : ''} group-hover:text-gray-700`}>{constants.DASHBOARD}</span>
+                        <span className={`ml-2 text-sm  font-semibold ${active ? 'text-gray-700' : 'text-white'} group-hover:text-gray-700`}>{constants.DASHBOARD}</span>
                     )
                 }
             </div>
@@ -122,7 +135,7 @@ function Sidebar() {
                 </svg>
                 {
                     expanded && (
-                        <span className={`ml-2 text-sm text-white font-semibold ${active ? 'text-gray-700' : ''} group-hover:text-gray-700`}>{constants.PROFILE}</span>
+                        <span className={`ml-2 text-sm  font-semibold ${active ? 'text-gray-700' : 'text-white'} group-hover:text-gray-700`}>{constants.PROFILE}</span>
                     )
                 }
             </div>
@@ -137,7 +150,7 @@ function Sidebar() {
                 </svg>
                 {
                     expanded && (
-                        <span className={`ml-2 text-sm text-white font-semibold ${active ? 'text-gray-700' : ''} group-hover:text-gray-700`}>{constants.ELECTION_MAP}</span>
+                        <span className={`ml-2 text-sm  font-semibold ${active ? 'text-gray-700' : 'text-white'} group-hover:text-gray-700`}>{constants.ELECTION_MAP}</span>
                     )
                 }
             </div>
@@ -152,7 +165,7 @@ function Sidebar() {
                 </svg>
                 {
                     expanded && (
-                        <span className={`ml-2 text-sm text-white font-semibold ${active ? 'text-gray-700' : ''} group-hover:text-gray-700`}>{constants.EYEWITNESS_REPORT}</span>
+                        <span className={`ml-2 text-sm  font-semibold ${active ? 'text-gray-700' : 'text-white'} group-hover:text-gray-700`}>{constants.EYEWITNESS_REPORT}</span>
                     )
                 }
             </div>
@@ -168,7 +181,7 @@ function Sidebar() {
                 </svg>
                 {
                     expanded && (
-                        <span className={`ml-2 text-sm text-white font-semibold ${active ? 'text-gray-700' : ''} group-hover:text-gray-700`}>{constants.MEDIA_GALLERY}</span>
+                        <span className={`ml-2 text-sm  font-semibold ${active ? 'text-gray-700' : 'text-white'} group-hover:text-gray-700`}>{constants.MEDIA_GALLERY}</span>
                     )
                 }
             </div>
@@ -184,7 +197,20 @@ function Sidebar() {
                 </svg>
                 {
                     expanded && (
-                        <span className={`ml-2 text-sm text-white font-semibold ${active ? 'text-gray-700' : ''} group-hover:text-gray-700`}>{constants.NEWS}</span>
+                        <span className={`ml-2 text-sm  font-semibold ${active ? 'text-gray-700' : 'text-white'} group-hover:text-gray-700`}>{constants.NEWS}</span>
+                    )
+                }
+            </div>
+        );
+    }
+
+    function Signout({onClick, active}){
+        return (
+            <div onClick={onClick} className={`${expanded ? 'w-full' :'w-[44px]'} h-[40px] p-2 rounded-[5px] flex items-center hover:bg-white cursor-pointer group`}>
+                <LogOut className="group-hover:text-[#008000] text-white" />
+                {
+                    expanded && (
+                        <span className={`ml-2 text-sm  font-semibold hover:text-gray-700 text-white group-hover:text-gray-700`}>Logout</span>
                     )
                 }
             </div>
@@ -193,12 +219,14 @@ function Sidebar() {
 
     function Open({expanded}){
         return (
-            <div className={`bg-green-500 hover:bg-green-900 rounded text-center h-5 w-5 flex justify-center items-center cursor-pointer ${expanded ? 'ml-auto' :'justify-center'}`}>
+            <div className={`bg-green-500 hover:bg-green-900 rounded 
+                            text-center h-5 w-5 flex justify-center items-center cursor-pointer 
+                            ${expanded ? 'ml-auto' :'justify-center'} `}>
                 {
                     expanded ? (
-                        <ChevronLeft onClick={() => setExpanded(false)} className="text-white " />
+                        <ChevronLeft onClick={() => setExpanded(false)} className="text-white" />
                     ) : (
-                        <ChevronRight onClick={() => setExpanded(true)} className="text-white " />
+                        <ChevronRight onClick={() => setExpanded(true)} className="text-white" />
                     )
                     
                 }

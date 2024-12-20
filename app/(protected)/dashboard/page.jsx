@@ -9,7 +9,7 @@ export default function Dashboard(){
     const router = useRouter();
 
     return (
-        <main className="w-screen flex justify-center">
+        <main className="flex-1 flex justify-center">
             Dashboard content summary
         </main>
     );

@@ -25,7 +25,7 @@ export default function Profile(){
     });
 
     return (
-        <main className="w-screen flex justify-center">
+        <main className="flex-1 flex justify-center">
             Profile page content
         </main>
     );

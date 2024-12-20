@@ -17,7 +17,7 @@ export default function EyewitnessReport(){
     });
 
     return (
-        <main className="w-screen flex justify-center">
+        <main className="flex-1 flex justify-center">
             Eyewitness report content summary
         </main>
     );

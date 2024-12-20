@@ -17,7 +17,7 @@ export default function ElectionMap(){
     });
 
     return (
-        <main className="w-screen flex justify-center">
+        <main className="flex-1 flex justify-center">
             Election map content summary
         </main>
     );

@@ -16,7 +16,7 @@ export default function MediaGallery(){
     });
 
     return (
-        <main className="w-screen flex justify-center">
+        <main className="flex-1 flex justify-center">
             Media gallery content summary
         </main>
     );

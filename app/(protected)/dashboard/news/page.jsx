@@ -17,7 +17,7 @@ export default function News(){
     });
 
     return (
-        <main className="w-screen flex justify-center">
+        <main className="flex-1 flex justify-center">
             News content summary
         </main>
     );

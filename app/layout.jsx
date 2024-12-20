@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import { Toaster } from "components/ui/toaster";
 import {AppProvider} from "contexts/App";
 import Loading from "components/commons/Loading";
-import { DashboardContext } from "contexts/Dashboard";
+import { DashboardProvider } from "contexts/Dashboard";
 
 export default function RootLayout({children}){
 
@@ -18,11 +18,11 @@ export default function RootLayout({children}){
             </head>
             <body style={{fontFamily: "Poppins", fontWeight: "400", fontStyle: "normal"}}>      
                 <AppProvider>
-                    <DashboardContext>
+                    <DashboardProvider>
                         <Suspense>
                             {children}   
                         </Suspense>  
-                    </DashboardContext>                     
+                    </DashboardProvider>                     
                     <Loading />                  
                 </AppProvider>                                                       
                 <Toaster />                
