@@ -18,7 +18,7 @@ export default function Page(){
 
     useEffect(() => {
         setLoading(false);
-    });
+    }, []);
 
     return (
         <main className="w-screen flex justify-center">

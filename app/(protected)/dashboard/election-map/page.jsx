@@ -14,7 +14,7 @@ export default function ElectionMap(){
 
     useEffect(() => {
         setLoading(false);
-    });
+    }, []);
 
     return (
         <main className="flex-1 flex justify-center">

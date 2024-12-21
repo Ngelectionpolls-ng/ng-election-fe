@@ -14,7 +14,7 @@ export default function EyewitnessReport(){
 
     useEffect(() => {
         setLoading(false);
-    });
+    }, []);
 
     return (
         <main className="flex-1 flex justify-center">

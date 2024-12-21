@@ -60,6 +60,21 @@ export function displayCount(count){
     return count;
 }
 
+export function getFirstName(full_name){
+    if(!full_name){
+        return '';
+    }
+    return full_name.split(' ')[0];
+}
+
+export function getLastName(full_name){
+    if(!full_name){
+        return '';
+    }
+    const full_name_array = full_name.split(' ');
+    return full_name_array[full_name_array.length - 1];
+}
+
 
 export function logout(){
     localStorage.clear();
