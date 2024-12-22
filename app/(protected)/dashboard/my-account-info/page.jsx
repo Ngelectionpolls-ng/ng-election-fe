@@ -21,7 +21,9 @@ import {
     SelectLabel,
     SelectTrigger,
     SelectValue,
-  } from "components/ui/select"
+} from "components/ui/select"
+
+import ProfileSetup from "components/commons/ProfileSetup";
 
 export default function Profile(){
 
@@ -81,8 +83,10 @@ export default function Profile(){
     
 
     return (
-        <main className="flex-1 flex bg-black/5 p-4 space-x-4">
-            <div className="flex-1 flex flex-col space-y-2">
+
+        <div className="w-full flex bg-black/5 p-4 space-x-4">
+            
+            <div className="w-full md:flex-1 flex flex-col space-y-2">
 
                 <div className='w-full h-full p-4 bg-white rounded-xl shadow flex flex-col'>
 
@@ -101,12 +105,13 @@ export default function Profile(){
                         </div>
                     </div>
                     
+                    {/* General section */}
                     <div className="flex w-full items-center space-x-2 my-2">
                         <h1 className="text-xs font-semibold text-black w-auto">GENERAL</h1>
                         <div className="h-0.5 bg-gray-200 flex-1"></div>
                     </div>
 
-                    <div className="w-full flex flex-wrap py-3 space-x-2">
+                    <div className="w-full flex flex-col md:flex-row py-3 md:space-x-2">
 
                         <div className="w-full md:w-[30%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">First Name</h4>
@@ -201,7 +206,7 @@ export default function Profile(){
 
                     </div>
 
-                    <div className="w-full flex flex-wrap py-3 space-x-2">
+                    <div className="w-full flex flex-col md:flex-row py-3 md:space-x-2">
 
                         <div className="w-full md:w-[30%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">Sex</h4>
@@ -278,13 +283,14 @@ export default function Profile(){
                         </div>
 
                     </div> 
-
+                    
+                    {/* Contact section */}
                     <div className="flex w-full items-center space-x-2 my-2">
                         <h1 className="text-xs font-semibold text-black w-auto">CONTACT</h1>
                         <div className="h-0.5 bg-gray-200 flex-1"></div>
                     </div>  
 
-                    <div className="w-full flex flex-wrap py-3 space-x-2">
+                    <div className="w-full flex flex-col md:flex-row py-3 md:space-x-2">
 
                         <div className="w-full md:w-[30%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">Mobile</h4>
@@ -406,7 +412,7 @@ export default function Profile(){
 
                     </div>     
 
-                    <div className="w-full flex flex-wrap py-3 space-x-2">
+                    <div className="w-full flex flex-col md:flex-row py-3 md:space-x-2">
                         
 
                         <div className="w-full md:w-[30%] flex flex-col space-y-2 mt-4">
@@ -468,19 +474,40 @@ export default function Profile(){
                             </div>                            
                         </div>
 
-                    </div>            
+                    </div>   
+
+                    {/* Progress section */}
+                    <div className="flex w-full items-center space-x-2 my-2">
+                        <h1 className="text-xs font-semibold text-black w-auto">PROGRESS</h1>
+                        <div className="h-0.5 bg-gray-200 flex-1"></div>
+                    </div> 
+
+                    <div className="w-full flex flex-col md:flex-row py-3 md:space-x-4">
+                        
+                        <ProfileSetup name="General info setup" percentage="75%" />
+
+                        <ProfileSetup name="Account info setup" percentage="60%" />
                     
+                    </div>
 
+                    <div className="w-full flex flex-col md:flex-row py-3 md:space-x-4">   
 
+                        <ProfileSetup name="Contact info setup" percentage="90%" />
+
+                    </div>
 
                 </div>
             </div>
-            <div className="w-[250px] ">
+
+            <div className="hidden md:block md:w-[250px] ">
                 <div className='w-full h-[500px] bg-white rounded-xl shadow flex flex-col justify-center'>
 
                 </div>
-            </div>            
-        </main>
+            </div>
+
+        </div>
     );
 
+
+    
 }

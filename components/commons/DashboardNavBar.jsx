@@ -44,7 +44,7 @@ function DashboardNavBar() {
                {activeMenu} Page
             </div>
 
-            <div className="w-[450px] h-10 rounded-full bg-slate-200 flex justify-between p-1">
+            <div className="hidden md:flex w-[450px] h-10 rounded-full bg-slate-200 justify-between p-1">
                 <span className="w-[20px]"></span>
                 <Input type="text" placeholder="Search something here..." className="h-full w-[350px] focus:outline-slate-200 focus:border-slate-200 focus-visible:ring-none focus-visible:ring-0"/>
                 <div className="cursor-pointer h-8 w-8 flex items-center justify-center rounded-full hover:bg-black/10 mr-2" onClick={() => {}}>
