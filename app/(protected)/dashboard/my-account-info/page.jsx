@@ -461,7 +461,6 @@ export default function Profile(){
                                         <SelectGroup>
                                             <SelectItem value="abia">ABIA</SelectItem>
                                             <SelectItem value="adamawa">ADAMAWA</SelectItem>
-                                            <SelectItem value="akwa-ibom">AKWA-IBOM</SelectItem>
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
