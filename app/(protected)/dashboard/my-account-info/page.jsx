@@ -133,7 +133,7 @@ export default function Profile(){
                                             <Input type="text" value={firstName} placeholder="Enter your first name..." onChange={(e) => setFirstName(e.target.value)} 
                                                 className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0"  
                                                 readonly={"readonly"} />
-                                            <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1">
+                                            <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1 bg-white">
                                                 <Pencil className="text-gray-500 w-4 h-4" onClick={() => setEditingFirstName(true)} />
                                             </div>
                                         </>
@@ -169,7 +169,7 @@ export default function Profile(){
                                             <Input type="text" value={lastName} placeholder="Enter your last name..." onChange={(e) => setLastName(e.target.value)} 
                                                     className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0" 
                                                     readonly="readonly" />
-                                            <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1">
+                                            <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1 bg-white">
                                                 <Pencil className="text-gray-500 w-4 h-4" onClick={() => setEditingLastName(true)} />
                                             </div>
                                         </>
@@ -247,7 +247,7 @@ export default function Profile(){
                                             <Input type="text" value={occupation} placeholder="Enter occupation..." onChange={(e) => setOccupation(e.target.value)} 
                                                 className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0"  
                                                 readonly={"readonly"} />
-                                            <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1">
+                                            <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1 bg-white">
                                                 <Pencil className="text-gray-500 w-4 h-4" onClick={() => setEditingOccupation(true)} />
                                             </div>
                                         </>                                        
@@ -314,7 +314,7 @@ export default function Profile(){
                                             <Input type="text" value={phone} placeholder="Enter your mobile..." onChange={(e) => setPhone(e.target.value)} 
                                                 className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-8"  
                                                 readonly={"readonly"} />
-                                            <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1">
+                                            <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1 bg-white">
                                                 <Pencil className="text-gray-500 w-4 h-4" onClick={() => setEditingPhone(true)} />
                                             </div>
                                         </>
@@ -354,7 +354,7 @@ export default function Profile(){
                                             <Input type="text" value={whatsApp} placeholder="WhatsApp number..." onChange={(e) => setWhatsApp(e.target.value)} 
                                                     className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-8" 
                                                     readonly="readonly" />
-                                            <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1">
+                                            <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1 bg-white">
                                                 <Pencil className="text-gray-500 w-4 h-4" onClick={() => setEditingWhatsApp(true)} />
                                             </div>
                                         </>
@@ -394,7 +394,7 @@ export default function Profile(){
                                             <Input type="text" value={email} placeholder="Enter new email..." onChange={(e) => setEmail(e.target.value)} 
                                                     className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-8" 
                                                     readonly="readonly" />
-                                            <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1">
+                                            <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1 bg-white">
                                                 <Pencil className="text-gray-500 w-4 h-4" onClick={() => setEditingEmail(true)} />
                                             </div>
                                         </>
