@@ -9,6 +9,7 @@ import { DashboardContext } from "contexts/Dashboard";
 import Error from "components/commons/Error";
 import Link from "next/link";
 import { constants, getFirstName, getLastName } from "helpers";
+import {getInitials, ellipsify, logout} from 'helpers';
 
 import { useToast } from "hooks/use-toast"
 import { useRouter } from "next/navigation";
@@ -22,6 +23,9 @@ import {
     SelectTrigger,
     SelectValue,
 } from "components/ui/select"
+
+import ProfileSummary from "components/commons/ProfileSummary";
+
 
 import ProfileSetup from "components/commons/ProfileSetup";
 
@@ -499,11 +503,7 @@ export default function Profile(){
                 </div>
             </div>
 
-            <div className="hidden md:block md:w-[250px] ">
-                <div className='w-full h-[500px] bg-white rounded-xl shadow flex flex-col justify-center'>
-
-                </div>
-            </div>
+            <ProfileSummary />
 
         </div>
     );

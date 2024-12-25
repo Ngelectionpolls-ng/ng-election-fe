@@ -2,11 +2,14 @@ export const constants = {
     EYEWITNESS: 'iWitness',
     AGENT: 'pollingUnitAgent',
     DASHBOARD: "Dashboard", 
+    MY_ACTIVITY_REPORT: "My Activity Report",
     EYEWITNESS_REPORT: "Eyewitness Report",
-    ELECTION_MAP: 'Election Map', 
+    ELECTION_RESULT: 'Election Result', 
     NEWS: 'News', 
-    MEDIA_GALLERY: 'Media Gallery',
-    PROFILE: "My Account Info"
+    RESULT_COLLATION: 'Result Collation',
+    WALLET: 'Wallet',
+    MESSAGES: 'Messages',
+    MY_ACCOUNT_INFO: "My Account Info"
 }
 
 export function makeSlug(subject){

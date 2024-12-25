@@ -6,8 +6,7 @@ import { Button } from "components/ui/button"
 import { useRouter } from "next/navigation";
 import { AppContext } from "contexts/App";
 
-
-export default function ElectionMap(){
+export default function Messages(){
 
     const router = useRouter();
     const {setLoading} = useContext(AppContext);
@@ -18,7 +17,7 @@ export default function ElectionMap(){
 
     return (
         <main className="flex-1 flex justify-center">
-            Election map content summary
+            Messages Page
         </main>
     );
 
