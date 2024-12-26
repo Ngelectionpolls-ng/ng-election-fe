@@ -153,7 +153,7 @@ export default function SignupForm(){
                                 <FormItem>
                                 <FormLabel>Full Name</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Enter your full name" {...field} />
+                                    <Input placeholder="Enter your full name" {...field} className="h-12" />
                                 </FormControl>
                                 <FormDescription></FormDescription>
                                 <FormMessage />
@@ -167,7 +167,7 @@ export default function SignupForm(){
                                 <FormItem>
                                 <FormLabel>Email</FormLabel>
                                 <FormControl>
-                                    <Input type="email" placeholder="Enter your email address" {...field} />
+                                    <Input type="email" placeholder="Enter your email address" {...field} className="h-12" />
                                 </FormControl>
                                 <FormDescription></FormDescription>
                                 <FormMessage />
@@ -182,7 +182,7 @@ export default function SignupForm(){
                                 <FormLabel>Password</FormLabel>
                                 <FormControl className="-mt-2">                                    
                                     <div className="relative">
-                                        <Input type={passwordVisible ? "text" : "password"} placeholder="Creat your password" {...field} className="h-12" />
+                                        <Input type={passwordVisible ? "text" : "password"} placeholder="Create your password" {...field} className="h-12" />
                                         {
                                             passwordVisible ? (
                                                 <Eye className="z-10 absolute right-3 my-auto w-5 top-3 text-gray-500 cursor-pointer" onClick={() => setPasswordVisible(!passwordVisible)} />
