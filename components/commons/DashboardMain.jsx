@@ -12,6 +12,18 @@ import {
     DropdownMenuTrigger,
 } from "components/ui/dropdown-menu"
 
+import { Button } from "components/ui/button"
+
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "components/ui/select"
+
 import {
     Tooltip,
     TooltipContent,
@@ -30,12 +42,17 @@ import { useRouter } from 'next/navigation';
 import NavUserIcon from "components/commons/NavUserIcon";
 import Notifications from "components/commons/Notifications";
 import camera from "components/commons/camera";
+import ResultEntry from "components/dashboard/ResultEntry";
 
 function DashboardMain({children}) {
 
-    const [capturing, setCapturing] = useState(false);
-    const [capturingVideo, setCapturingVideo] = useState(false);
-    const [captured, setCaptured] = useState(false);
+    const {
+        capturing, setCapturing, 
+        capturingVideo, setCapturingVideo,
+        captured, setCaptured,
+        enteringResult, setEnteringResult,
+        addingResult, setAddingResult
+    } = useContext(DashboardContext);
     
     const {isLoggedIn, user, setLoading} = useContext(AppContext);
     const {activeMenu, setActiveMenu} = useContext(DashboardContext);
@@ -104,7 +121,7 @@ function DashboardMain({children}) {
                     </div>
                 </div>
                 {/* Image capture */}
-                <div className="flex items-center justify-end space-x-2">
+                <div className="flex items-center justify-end space-x-2" onClick={streamVideo}>
                     <span className="text-black text-xs">Capture Result</span>
                     <div className="w-14 h-14 bg-green-900 hover:bg-gray-800 cursor-pointer text-white 
                             rounded-full shadow-xl drop-shadow-xl flex justify-center items-center">
@@ -112,7 +129,7 @@ function DashboardMain({children}) {
                     </div>
                 </div>
                 {/* Input result */}
-                <div className="flex items-center justify-end space-x-2">
+                <div className="flex items-center justify-end space-x-2" onClick={() => setEnteringResult(true)}>
                     <span className="text-black text-xs">Input Result</span>
                     <div className="w-14 h-14 bg-green-900 hover:bg-gray-800 cursor-pointer text-white 
                             rounded-full shadow-xl drop-shadow-xl flex justify-center items-center">
@@ -159,10 +176,11 @@ function DashboardMain({children}) {
                         </span>                          
                         
                     </div>
-
-                </div>
-                
+                </div>                
             </div>
+                           
+            {/* Entering result */}
+            <ResultEntry />
                            
         </div>
 
