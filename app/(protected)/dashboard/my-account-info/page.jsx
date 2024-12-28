@@ -24,7 +24,7 @@ import {
     SelectValue,
 } from "components/ui/select"
 
-import ProfileSummary from "components/commons/ProfileSummary";
+import ProfileSummary from "components/dashboard/ProfileSummary";
 
 
 import ProfileSetup from "components/commons/ProfileSetup";

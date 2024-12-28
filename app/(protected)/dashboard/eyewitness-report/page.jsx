@@ -35,7 +35,7 @@ import {ChevronDown, Plus, Video, Image, FileInput, PenLine, X, ChartColumnBig, 
 import { useRouter } from "next/navigation";
 import { AppContext } from "contexts/App";
 import DashboardMain from "components/commons/DashboardMain";
-import ProfileSummary from "components/commons/ProfileSummary";
+import ProfileSummary from "components/dashboard/ProfileSummary";
 
 export default function EyeWitnessReport(){
 
@@ -240,12 +240,19 @@ export default function EyeWitnessReport(){
                                                     </p>
                                                 </div>
                                                 <div className="text-xs text-gray-800 w-[100px] flex space-x-1">
-                                                    <p className="flex space-x-1 items-center">
+                                                    <div className="flex space-x-1 items-center px-2 py-1 cursor-pointer rounded-full hover:bg-slate-200">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5 text-green-800 fill-current">
                                                             <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
                                                         </svg>
                                                         <span>{activity.likes}</span>
-                                                    </p>
+                                                    </div>
+                                                </div>
+                                                <div className="text-xs text-gray-800 w-[100px] flex space-x-1">
+                                                    <div className="w-10 h-10 cursor-pointer flex justify-center items-center rounded-full hover:bg-slate-200">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-gray-800 fill-current">
+                                                            <path fillRule="evenodd" d="M15.75 4.5a3 3 0 1 1 .825 2.066l-8.421 4.679a3.002 3.002 0 0 1 0 1.51l8.421 4.679a3 3 0 1 1-.729 1.31l-8.421-4.678a3 3 0 1 1 0-4.132l8.421-4.679a3 3 0 0 1-.096-.755Z" clipRule="evenodd" />
+                                                        </svg>
+                                                    </div>
                                                 </div>
                                             </div>
 

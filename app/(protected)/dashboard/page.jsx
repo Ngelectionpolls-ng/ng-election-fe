@@ -1,6 +1,6 @@
 "use client"
 
-import ProfileSummary from "components/commons/ProfileSummary";
+import ProfileSummary from "components/dashboard/ProfileSummary";
 import { Button } from "components/ui/button";
 import { useRouter } from "next/navigation";
 import DashboardMain from "components/commons/DashboardMain";
@@ -19,7 +19,7 @@ export default function Dashboard(){
 
                 <div className="w-full flex justify-between">
                     <span className="text-gray-900 text-xs font-semibold">{"Name of polling unit"}</span>
-                    <span className="text-gray-900 text-xs">{"Spetember 12, 2023"}</span>
+                    <span className="text-gray-900 text-xs">{"September 12, 2023"}</span>
                 </div>
                 { 
                     !activities.length ? (

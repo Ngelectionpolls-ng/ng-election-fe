@@ -39,7 +39,7 @@
     ".next/types/**/*.ts",
     "app/auth/signup/page.jsx",
     "contexts/AuthContext.jsx"
-  ],
+, "components/dashboard/RadialChart.jsx"  ],
   "exclude": [
     "node_modules"
   ]

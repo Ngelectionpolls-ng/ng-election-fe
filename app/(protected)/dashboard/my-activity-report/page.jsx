@@ -35,7 +35,7 @@ import {ChevronDown, Plus, Video, Image, FileInput, PenLine, X, ChartColumnBig, 
 import { useRouter } from "next/navigation";
 import { AppContext } from "contexts/App";
 import DashboardMain from "components/commons/DashboardMain";
-import ProfileSummary from "components/commons/ProfileSummary";
+import ProfileSummary from "components/dashboard/ProfileSummary";
 
 export default function MyActivityReport(){
 
@@ -206,8 +206,8 @@ export default function MyActivityReport(){
                         activities.map((activity, index) => {
                             return (
                                 <>
-                                    <div className="py-2 my-1 flex space-x-2">
-                                        <img src={activity.image} alt="" className="w-[200px] h-[120pxx] mr-1 rouunded-xl" />
+                                    <div className="py-2 my-1 flex flex-col md:flex-row space-y-2 md:space-x-2 ">
+                                        <img src={activity.image} alt="" className="w-full md:w-[200px] h-[120pxx] mr-1 rouunded-xl" />
                                         <div className="flex flex-col space-y-2">
                                             <span className="text-md font-semibold text-gray-800">
                                                 {activity.pollingUnit}, {activity.ward}, {activity.lga}, {activity.state}
@@ -221,15 +221,15 @@ export default function MyActivityReport(){
                                                     <p className="flex space-x-1 items-center">
                                                         {
                                                             activity.status == 'pending' && 
-                                                                <span className="text-xs text-gray-700 font-semibold">Pending</span>                                                         
+                                                                <span className="text-xs text-gray-600 font-semibold">Pending</span>                                                         
                                                         }
                                                         {
                                                             activity.status == 'approved' && 
-                                                                <span className="text-xs text-green-700 font-semibold">Approved</span>                                                         
+                                                                <span className="text-xs text-green-600 font-semibold">Approved</span>                                                         
                                                         }
                                                         {
                                                             activity.status == 'rejected' && 
-                                                                <span className="text-xs text-red-700 font-semibold">Rejected</span>                                                         
+                                                                <span className="text-xs text-red-500 font-semibold">Rejected</span>                                                         
                                                         }
                                                         
                                                     </p>
