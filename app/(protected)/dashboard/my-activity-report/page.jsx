@@ -195,7 +195,7 @@ export default function MyActivityReport(){
                             <SelectTrigger className="h-9 bg-slate-200 w-[150px] text-xs" >
                                 <SelectValue placeholder="All Updates" />
                             </SelectTrigger>
-                            <SelectContent className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b h-9">
+                            <SelectContent className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b">
                                 <SelectGroup>
                                     <SelectItem value="all-updates">All Updates</SelectItem>
                                     <SelectItem value="today">Today</SelectItem>
