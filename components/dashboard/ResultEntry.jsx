@@ -187,7 +187,7 @@ export default function ResultEntry(){
                                                             value={party.value}
                                                             onSelect={(currentValue) => {
                                                                 setValue(currentValue === value ? "" : currentValue)
-                                                                setOpen(false)
+                                                                setOpenPoliticalParty(false)
                                                             }}
                                                         >
                                                         {party.label}
