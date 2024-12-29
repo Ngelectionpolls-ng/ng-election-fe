@@ -84,7 +84,7 @@ export default function ResultCollation(){
                     
                 }   
 
-                <div className="w-full overflow-x-scroll flex flex-wrap space-y-4 md:space-x-6">
+                <div className="w-full overflow-x-scroll flex flex-wrap md:flex-nowrap space-y-4 md:space-x-6">
                     {
                         activities.map((activity, index) => {
                             return (

@@ -5,20 +5,6 @@ import React, {useContext, useEffect, useState} from "react";
 import { cn } from "lib/utils"
 import { Button } from "components/ui/button"
 import { Separator } from "components/ui/separator"
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "components/ui/command"
-
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "components/ui/popover"
 
 import {
     Select,
@@ -140,50 +126,6 @@ export default function MyActivityReport(){
                     </span>
                 
                     <div className="flex space-x-12 items-center">
-
-                        <Popover open={openPollingUnits} onOpenChange={setOpenPollingUnits}>
-                            <PopoverTrigger asChild>
-                                <Button
-                                    variant="outline"
-                                    role="combobox"
-                                    aria-expanded={openPollingUnits}
-                                    className="w-full justify-between rounded text-black text-xs h-9 bg-slate-200 w-[150px]"
-                                >
-                                    {pollingUnit
-                                        ? pollingUnits.find((pollingUnit) => pollingUnit.value === value)?.label
-                                        : "All polling units"}
-                                    <ChevronDown className="opacity-50" />
-                                </Button>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-full p-0">
-                                <Command>
-                                    <CommandInput placeholder="Search polling units..." className="h-9" />
-                                    <CommandList>
-                                        <CommandEmpty>No polling units found.</CommandEmpty>
-                                        <CommandGroup>
-                                            {pollingUnits.map((apollingUnit) => (
-                                                <CommandItem
-                                                    key={apollingUnit.value}
-                                                    value={apollingUnit.value}
-                                                    onSelect={(currentValue) => {
-                                                        setValue(currentValue === value ? "" : currentValue)
-                                                        setOpenPollingUnits(false)
-                                                    }}
-                                                >
-                                                {apollingUnit.label}
-                                                <Check
-                                                    className={cn(
-                                                    "ml-auto",
-                                                    pollingUnit === apollingUnit.value ? "opacity-100" : "opacity-0"
-                                                    )}
-                                                />
-                                                </CommandItem>
-                                            ))}
-                                        </CommandGroup>
-                                    </CommandList>
-                                </Command>
-                            </PopoverContent>
-                        </Popover>
 
                         <Select onValueChange={(e) => {console.log(e)}} className="h-9 text-xs">
                             <SelectTrigger className="h-9 bg-slate-200 w-[150px] text-xs" >

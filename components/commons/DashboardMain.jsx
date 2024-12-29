@@ -94,7 +94,7 @@ function DashboardMain({children}) {
                 onClick={() => setCapturing(false)}>
             </div>
             
-            <div className="fixed right-8 md:right-[300px] bottom-8 z-10 w-14 h-14 bg-green-900 hover:bg-gray-800 
+            <div className="fixed right-8 md:right-[320px] bottom-8 z-10 w-14 h-14 bg-green-900 hover:bg-gray-800 
                                 cursor-pointer text-white rounded-full shadow-xl drop-shadow-xl flex justify-center items-center"
                 onClick={() => setCapturing(!capturing)} >    
                 <TooltipProvider>
@@ -109,17 +109,17 @@ function DashboardMain({children}) {
                 </TooltipProvider>
             </div> 
 
-            <div className={`fixed right-8 md:right-[300px] bottom-24 z-10
+            <div className={`fixed right-8 md:right-[320px] bottom-24 z-10
                             transition-all duration-500 ease-in-out
-                            flex flex-col space-y-2 items-right ${capturing ? 'block h-64' : 'hidden'}`}>
+                            flex flex-col space-y-2 items-right ${capturing ? 'block h-36' : 'hidden'}`}>
                 {/* Video stream */}
-                <div className="flex items-center justify-end space-x-2" onClick={streamVideo}>
+                {/* <div className="flex items-center justify-end space-x-2" onClick={streamVideo}>
                     <span className="text-black text-xs">Video Stream</span>
                     <div className="w-14 h-14 bg-green-900 hover:bg-gray-800 cursor-pointer text-white 
                             rounded-full shadow-xl drop-shadow-xl flex justify-center items-center">
                         <Video className="w-5 h-5" />
                     </div>
-                </div>
+                </div> */}
                 {/* Image capture */}
                 <div className="flex items-center justify-end space-x-2" onClick={streamVideo}>
                     <span className="text-black text-xs">Capture Result</span>
@@ -137,13 +137,13 @@ function DashboardMain({children}) {
                     </div>
                 </div>
                 {/* Write */}
-                <div className="flex items-center justify-end space-x-2">
+                {/* <div className="flex items-center justify-end space-x-2">
                     <span className="text-black text-xs">Write</span>
                     <div className="w-14 h-14 bg-green-900 hover:bg-gray-800 cursor-pointer text-white 
                             rounded-full shadow-xl drop-shadow-xl flex justify-center items-center space-x-1">
                         <PenLine className="w-5 h-5" />
                     </div>
-                </div>
+                </div> */}
                 
             </div>
             

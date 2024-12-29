@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const constants = {
     EYEWITNESS: 'iWitness',
     AGENT: 'pollingUnitAgent',
@@ -82,4 +84,19 @@ export function getLastName(full_name){
 export function logout(){
     localStorage.clear();
     window.location = '/auth/login';
+}
+
+export function getTime(datetime){
+    if(!datetime || datetime.trim() == ''){
+        return '';
+    }
+
+    try{
+
+        return moment(datetime).format('hh:mm A');
+
+    }catch(e){
+        console.log(e);
+        return '';
+    }
 }

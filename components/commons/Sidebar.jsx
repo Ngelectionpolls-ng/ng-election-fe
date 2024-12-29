@@ -104,7 +104,7 @@ function Sidebar() {
 
             <EyewitnessReport onClick={() => displayPage(constants.EYEWITNESS_REPORT)} active={activeMenu == constants.EYEWITNESS_REPORT} />
 
-            <News onClick={() => displayPage(constants.NEWS)} active={activeMenu == constants.NEWS} />
+            {/* <News onClick={() => displayPage(constants.NEWS)} active={activeMenu == constants.NEWS} /> */}
             
             <MyAccountInfo onClick={() => displayPage(constants.MY_ACCOUNT_INFO)} active={activeMenu == constants.MY_ACCOUNT_INFO} />
             

@@ -11,7 +11,7 @@ import {
   import { ChartConfig, ChartContainer } from "components/ui/chart";
 
   
-  export default function RadialChart({title, color, percent}) {
+  export default function RadialChart({title, subtitle=null, color, percent}) {
 
     const chartData = [
       { browser: "safari", percent: percent, fill: color },
@@ -78,8 +78,17 @@ import {
             </PolarRadiusAxis>
           </RadialBarChart>
         </ChartContainer>
-        <p className="text-center text-[10px] leading-none font-semibold">
-          {title}
+        <p className="text-center text-[12px] leading-none font-semibold mt-2">
+          <span>{title}</span>
+          {
+            subtitle && (
+              <>
+                <br />
+                <br />
+                <span className="font-normal mt-2">{subtitle}</span>
+              </>
+            )            
+          }
         </p>  
       </div>
   )
