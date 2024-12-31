@@ -58,6 +58,17 @@ export function ellipsify(subject, length=10){
     return subject.slice(0, length) + '...';
 }
 
+export function titleCase(str) {
+    if(!str){
+        return "";;
+    }
+    str = str.toLowerCase().split(' ');
+    for (let i = 0; i < str.length; i++) {
+        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+    }
+    return str.join(' ');
+}
+
 export function displayCount(count){
     if(count > 99){
         return '99+';

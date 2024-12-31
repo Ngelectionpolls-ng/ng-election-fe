@@ -167,9 +167,9 @@ export default function ResultEntry(){
                                             variant="outline"
                                             role="combobox"
                                             aria-expanded={openPoliticalParty}
-                                            className="w-full justify-between rounded text-gray-500 text-xs h-12"
+                                            className="w-full justify-between rounded text-gray-500 text-xs h-12 focus:border-white"
                                         >
-                                            {politicalParty
+                                            {value
                                                 ? parties.find((party) => party.value === value)?.label
                                                 : "Select political party..."}
                                             <ChevronDown className="opacity-50" />
@@ -194,7 +194,7 @@ export default function ResultEntry(){
                                                         <Check
                                                             className={cn(
                                                             "ml-auto",
-                                                            politicalParty === party.value ? "opacity-100" : "opacity-0"
+                                                                value === party.value ? "opacity-100" : "opacity-0"
                                                             )}
                                                         />
                                                         </CommandItem>

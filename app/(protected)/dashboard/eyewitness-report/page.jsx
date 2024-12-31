@@ -155,7 +155,7 @@ export default function EyeWitnessReport(){
                                     aria-expanded={openPollingUnits}
                                     className="w-full justify-between rounded text-black text-xs h-9 bg-slate-200 w-[150px]"
                                 >
-                                    {pollingUnit
+                                    {value
                                         ? pollingUnits.find((pollingUnit) => pollingUnit.value === value)?.label
                                         : "All polling units"}
                                     <ChevronDown className="opacity-50" />
@@ -180,7 +180,7 @@ export default function EyeWitnessReport(){
                                                 <Check
                                                     className={cn(
                                                     "ml-auto",
-                                                    pollingUnit === apollingUnit.value ? "opacity-100" : "opacity-0"
+                                                    value === apollingUnit.value ? "opacity-100" : "opacity-0"
                                                     )}
                                                 />
                                                 </CommandItem>
@@ -212,7 +212,7 @@ export default function EyeWitnessReport(){
                         activities.map((activity, index) => {
                             return (
                                 <>
-                                    <div className="py-2 my-1 flex space-x-2">
+                                    <div className="py-2 my-1 flex space-x-2 hover:bg-slate-50 cursor-pointer pr-2">
                                         <img src={activity.image} alt="" className="w-[200px] h-[120pxx] mr-1 rouunded-xl" />
                                         <div className="flex flex-col space-y-2">
                                             <span className="text-md font-semibold text-gray-800">
