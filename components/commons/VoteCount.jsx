@@ -5,7 +5,6 @@ export default function VoteCount({data, total}){
 
     const width = Math.round((data.votes / total) * 400);
 
-    console.log(width);
     const percentage = Math.round((data.votes / total) * 100);
     const indicatorLeft = width > 30 ? width - 30 : width;
     const indicatorColor = width > 30 ? 'text-white' : 'text-black';

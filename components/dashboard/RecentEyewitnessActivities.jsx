@@ -55,7 +55,7 @@ export default function RecentEyewitnessActivities(){
                 <Button className="bg-transparent border border-black/40 text-gray-800 hover:text-white hover:bg-black/40 text-xs rounded-xl ">View More</Button>
             </div>
             
-            <div className="w-full overflow-x-scroll flex flex-wrap md:flex-nowrap space-y-4 md:space-y-0 md:space-x-6">
+            <div className="w-full overflow-x-scroll flex justify-between flex-wrap md:flex-nowrap space-y-4 md:space-y-0 md:space-x-6">
                 {
                     activities.map((activity, index) => {
                         return (

@@ -41,8 +41,11 @@ import { useToast } from "hooks/use-toast";
 import Error from "components/commons/Error";
 import { makeSlug, titleCase } from "helpers";
 import {ChevronDown, Check, Eye, ChevronRight, ArrowLeft} from "lucide-react";
-import VoteCount from "components/commons/VoteCount";
 import RecentEyewitnessActivities from "components/dashboard/RecentEyewitnessActivities";
+import WardResults from "components/dashboard/WardResults";
+import LGAResults from "components/dashboard/LGAResults";
+import StateResults from "components/dashboard/StateResults";
+import NationalResults from "components/dashboard/NationalResults";
 
 export default function ElectionResult(){
 
@@ -65,6 +68,12 @@ export default function ElectionResult(){
     const [pollingUnits, setPollingUnits] = useState([{label:"Select a polling unit", value: ""}]);
     const [openPollingUnitElections, setOpenPollingUnitElections] = useState(false);
     const [pollingUnitValue, setPollingUnitValue] = useState(null);
+
+    //Results
+    const [stateResults, setStateResults] = useState([]);
+    const [lgaResults, setLgaResults] = useState([]);
+    const [wardResults, setWardResults] = useState([]);
+    const [pollingUnitResults, setPollingUnitResults] = useState([]);
 
     const [error, setError] = useState(null);
     const [fetching, setFetching] = useState(false);
@@ -145,6 +154,8 @@ export default function ElectionResult(){
             });
 
             setLgas(lgaResult);
+
+            displayStateResult(lgaResult);  
             
         }else{
 
@@ -172,7 +183,7 @@ export default function ElectionResult(){
         console.log(response);
         if(response.status >= 200 && response.status < 300){    
             
-            //we fill the states selection with all the stattes
+            //we fill the states selection with all the wards
             const ward_data = response.data.data;
             let wardResult = [];
             ward_data.forEach(element => {
@@ -183,7 +194,9 @@ export default function ElectionResult(){
             });
 
             setWards(wardResult);
-            
+
+            displayLGAResult(wardResult);   
+                                                                                    
         }else{
 
             if(response.response.data.message){
@@ -215,15 +228,17 @@ export default function ElectionResult(){
             setPollingUnits(wardPollingUnits);
 
             const polling_unit_data = response.data.data;
-            let pollingUnitResult = [];
+            let pollingUnitResults = [];
             polling_unit_data.forEach(element => {
-                pollingUnitResult.push({
+                pollingUnitResults.push({
                     label: element.name, value: makeSlug(element.name),
                     name: element.name, id: element.id
                 });
             });
 
-            setPollingUnits(pollingUnitResult);
+            setPollingUnits(pollingUnitResults);
+
+            displayWardResult(pollingUnitResults)
             
         }else{
 
@@ -242,25 +257,87 @@ export default function ElectionResult(){
         }
     }
 
-    const displayStateResult = (state_id) => {
+    const displayStateResult = (lgaResult) => {
         setLgaValue(null);
         setWardValue(null);
         setPollingUnitValue(null);
-        //Get state result
+
+        // Get state result
+        // getLGAResults(state_id);
+
+        // let's create fake results for now
+        let results = [];
+        console.log('lgaResult', lgaResult);
+        lgaResult.forEach(lga => {
+            results.push({
+                candidates : [
+                    { name: 'Bola Tinubu', acronym: 'APC', votes: 3000, color: 'bg-green-600', image: '/assets/images/apc.png' },
+                    { name: 'Abubakar Atiku', acronym: 'PDP', votes: 3000, color: 'bg-pink-600', image: '/assets/images/pdp.png' },
+                    { name: 'Peter Obi', acronym: 'LP', votes: 29000, color: 'bg-yellow-600', image: '/assets/images/apc.png' },
+                    { name: 'Rabiu Kwankwaso', acronym: 'NNPP', votes: 90, color: 'bg-green-400', image: '/assets/images/pdp.png'}
+                ],
+                lga: lga,
+                stats: {total_accredited: 12345, total_valid: 12345, total_votes: 12345, total_rejected: 2345},
+                activity: {created_at: '10 mins', likes: '10k', views: '50k', shares: '2k'}    
+            });
+        });
+
+        setLgaResults(results);
     }
 
-    const displayLGAResult = (lga_id) => {
+    const displayLGAResult = (wardResults) => {
         setWardValue(null);
         setPollingUnitValue(null);
         //Get lga result
+
+        //lets make fake results
+        let results = [];
+        console.log('wardResults', wardResults);
+        wardResults.forEach(ward => {
+            results.push({
+                candidates : [
+                    { name: 'Bola Tinubu', acronym: 'APC', votes: 3000, color: 'bg-green-600', image: '/assets/images/apc.png' },
+                    { name: 'Abubakar Atiku', acronym: 'PDP', votes: 3000, color: 'bg-pink-600', image: '/assets/images/pdp.png' },
+                    { name: 'Peter Obi', acronym: 'LP', votes: 29000, color: 'bg-yellow-600', image: '/assets/images/apc.png' },
+                    { name: 'Rabiu Kwankwaso', acronym: 'NNPP', votes: 90, color: 'bg-green-400', image: '/assets/images/pdp.png'}
+                ],
+                ward: ward,
+                stats: {total_accredited: 12345, total_valid: 12345, total_votes: 12345, total_rejected: 2345, status: 'Complete', report: 'Successful'},
+                activity: {created_at: '10 mins', likes: '10k', views: '50k', shares: '2k'}    
+            });
+        });
+
+        setWardResults(results);
     }
 
-    const displayWardResult = (ward_id) => {
+    const displayWardResult = (pollingUnitResults) => {
         setPollingUnitValue(null);
         // get ward result
+
+        //lets make fake results
+        let results = [];
+        console.log('pollingUnitResults', pollingUnitResults);
+        pollingUnitResults.forEach(pollingUnit => {
+            results.push({
+                candidates : [
+                    { name: 'Bola Tinubu', acronym: 'APC', votes: 300, color: 'bg-green-600', image: '/assets/images/apc.png' },
+                    { name: 'Abubakar Atiku', acronym: 'PDP', votes: 300, color: 'bg-pink-600', image: '/assets/images/pdp.png' },
+                    { name: 'Peter Obi', acronym: 'LP', votes: 290, color: 'bg-yellow-600', image: '/assets/images/apc.png' },
+                    { name: 'Rabiu Kwankwaso', acronym: 'NNPP', votes: 10, color: 'bg-green-400', image: '/assets/images/pdp.png'}
+                ],
+                pollingUnit: pollingUnit,
+                stats: {total_accredited: 1345, total_valid: 135, total_votes: 1345, total_rejected: 45, status: 'Complete', report: 'Successful'},
+                activity: {created_at: '10 mins', likes: '1k', views: '500', shares: '100'},   
+                issues: [
+                    {details: "Bad things happened in the polling unit. You don't want to know."}
+                ]
+            });
+        });
+
+        setPollingUnitResults(results);
     }
 
-    const displayPollingUnitResult = (pollingunit_id) => {
+    const displayPollingUnitResults = (pollingunit_id) => {
         // get polliing unit results
     }
 
@@ -286,7 +363,7 @@ export default function ElectionResult(){
         { name: 'Rabiu Hasan', acronym: 'WAPP', votes: 57790, color: 'bg-purple-400', image: '/assets/images/apc.png' },
     ];
 
-
+    
     useEffect(() => {
         getAllStates();
     }, []);
@@ -305,7 +382,7 @@ export default function ElectionResult(){
                             </Button>
                         )
                     }           
-                    <div className="w-full flex justify-between font-semibold">
+                    <div className="w-full flex flex-col md:flex-row space-y-4 md:space-y-0 justify-between font-semibold items-center">
                         {
                             !currentElection && (
                                 <span className="text-gray-900 text-xs font-semibold">
@@ -314,7 +391,7 @@ export default function ElectionResult(){
                             )
                         }                                        
                         {                            
-                            <div className="flex space-x-2 items-center text-xs">
+                            <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 items-center text-xs">
                                 
                                 {
                                     currentElection && (                                        
@@ -343,9 +420,8 @@ export default function ElectionResult(){
                                                                     key={aState.value}
                                                                     value={aState.value}
                                                                     onSelect={(currentValue) => {
-                                                                        setStateValue(currentValue === stateValue ? "" : currentValue);
-                                                                        displayStateResult(aState.id);                                                                        
-                                                                        getStateLGAs(getStateId(aState.label));
+                                                                        setStateValue(currentValue === stateValue ? "" : currentValue);                                                                                                                                            
+                                                                        getStateLGAs(getStateId(aState.label));                                                                          
                                                                         setOpenStateElections(false)
                                                                     }}
                                                                 >
@@ -393,7 +469,6 @@ export default function ElectionResult(){
                                                                     value={lga.value}
                                                                     onSelect={(currentValue) => {
                                                                         setLgaValue(currentValue === lgaValue ? "" : currentValue);
-                                                                        displayLGAResult(lga.id);   
                                                                         getLGAWards(getLGAId(lga.label));
                                                                         setOpenLgaElections(false)
                                                                     }}
@@ -442,9 +517,8 @@ export default function ElectionResult(){
                                                                     value={ward.value}
                                                                     onSelect={(currentValue) => {
                                                                         setWardValue(currentValue === wardValue ? "" : currentValue);
-                                                                        displayWardResult(ward.id); 
                                                                         getWardPollingUnits(getWardId(ward.label));
-                                                                        setOpenLgaElections(false)
+                                                                        setOpenWardElections(false)
                                                                     }}
                                                                 >
                                                                 {ward.label}
@@ -519,88 +593,66 @@ export default function ElectionResult(){
 
                     <Error error={error} />
 
-                    <div className="w-full flex flex-col space-y-4">
-                        <div className="w-full flex justify-between text-xs py-2">
-                            <span>Leading candidates</span>
-                            <span>Accumulated votes</span>
-                        </div>
-                        {
-                            candidates.map((candidate, index) => (
-                                <>
-                                    <VoteCount data={candidate} total={1750000} />
-                                    <Separator />
-                                </>
-                                
-                            ))
-                        }
-                    </div>
+                    {
+                        !stateValue && (
+                            <NationalResults candidates={candidates} />
+                        )
+                    }
+                    
+                    {
+                        stateValue && !lgaValue && (
+                            <StateResults stateValue={stateValue} lgas={lgas} lgaResults={lgaResults} />
+                        )
+                    }
+                        
+                    {
+                        stateValue && lgaValue && !wardValue && (
+                            <LGAResults lgaValue={lgaValue} wards={wards} wardResults={wardResults} />
+                        )
+                    }
 
-                    {/* Vote statistics */}
-                    <div className="w-full flex justify-between">
-                        <div className="my-4 flex flex-col w-1/5 justify-between">
-                            <h6 className="text-xs">
-                                Total Accumulated Votes
-                            </h6>
-                            <span className="text-sm font-bold text-green-800">
-                                12345678
-                            </span>
-                        </div>
-                        <div className="my-4 flex flex-col w-1/5 justify-between">
-                            <h6 className="text-xs">
-                                Total votes count
-                            </h6>
-                            <span className="text-sm font-bold text-green-800">
-                                12345678
-                            </span>
-                        </div>
-                        <div className="my-4 flex flex-col w-1/5 justify-between">
-                            <h6 className="text-xs">
-                                Total valid votes
-                            </h6>
-                            <span className="text-sm font-bold text-green-800">
-                                12345678
-                            </span>
-                        </div>
-                        <div className="my-4 flex flex-col w-1/5 justify-between">
-                            <h6 className="text-xs">
-                                Total rejected votes
-                            </h6>
-                            <span className="text-sm font-bold text-green-800">
-                                345678
-                            </span>
-                        </div>
-                    </div>
+                    {
+                        stateValue && lgaValue && wardValue && (
+                            <WardResults wardValue={wardValue} pollingUnits={pollingUnits} pollingUnitResults={pollingUnitResults} />
+                        )
+                    }                
 
                 </div>
-                
-                <h6 className="text-sm font-semibold pt-4">Other candidates</h6>
-                
-                {/* Other candidate carousel */}
-                <div className="w-full md:w-[800px] flex justify-center">
-                    <Carousel
-                        opts={{
-                            align: "start",
-                        }}
-                        className="w-full"
-                        >
-                        <CarouselContent className="w-full">
-                            {other_candidates.map((item, index) => (
-                                <CarouselItem key={index} className="p-2 basis-1/2 md:basis-1/4">
-                                    <div className="w-[180px] shadow-xl flex space-x-4 rounded-xl bg-white p-4">
-                                        <img src={item.image} alt=""  className="w-12 h-12 rounded-full" />
-                                        <div className="flex flex-col justify-center space-y-1 h-12 w-[100px] max-w-[100px]">
-                                            <h6 className="text-[10px]">{item.name}</h6>
-                                            <p className="text-xs">{item.acronym}</p>
-                                            <p className="text-sm font-bold text-gray-900">{item.votes}</p>
-                                        </div>            
-                                    </div>
-                                </CarouselItem>
-                            ))}
-                        </CarouselContent>
-                        <CarouselPrevious />
-                        <CarouselNext />
-                    </Carousel>
-                </div>
+
+                {
+                    !stateValue && (
+                        <>
+                            <h6 className="text-sm font-semibold pt-4">Other candidates</h6>
+                            
+                            {/* Other candidate carousel */}
+                            <div className="w-full md:w-[800px] flex justify-center">
+                                <Carousel
+                                    opts={{
+                                        align: "start",
+                                    }}
+                                    className="w-full"
+                                    >
+                                    <CarouselContent className="w-full">
+                                        {other_candidates.map((item, index) => (
+                                            <CarouselItem key={index} className="p-2 basis-1/2 md:basis-1/4">
+                                                <div className="w-[180px] shadow-xl flex space-x-4 rounded-xl bg-white p-4">
+                                                    <img src={item.image} alt=""  className="w-12 h-12 rounded-full" />
+                                                    <div className="flex flex-col justify-center space-y-1 h-12 w-[100px] max-w-[100px]">
+                                                        <h6 className="text-[10px]">{item.name}</h6>
+                                                        <p className="text-xs">{item.acronym}</p>
+                                                        <p className="text-sm font-bold text-gray-900">{item.votes}</p>
+                                                    </div>            
+                                                </div>
+                                            </CarouselItem>
+                                        ))}
+                                    </CarouselContent>
+                                    <CarouselPrevious />
+                                    <CarouselNext />
+                                </Carousel>
+                            </div>
+                        </>
+                    )
+                }                
 
                 <RecentEyewitnessActivities />
                 
