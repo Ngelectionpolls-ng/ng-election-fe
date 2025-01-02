@@ -62,8 +62,9 @@ import Notifications from "components/commons/Notifications";
 export default function ResultEntry(){
 
     const [addingResult, setAddingResult] = useState(false);
-    const [openPoliticalParty, setOpenPoliticalParty] = React.useState(false)
-    const [politicalParty, setPoliticalParty] = React.useState("")
+    const [openPoliticalParty, setOpenPoliticalParty] = React.useState(false);
+    const [politicalParty, setPoliticalParty] = React.useState("");
+    const [value, setValue] = React.useState("");
 
     const parties = [
         {
