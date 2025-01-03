@@ -60,7 +60,9 @@ function Sidebar() {
 
     
     return (
-        <div className={`${expanded ? 'w-[230px]' : 'w-[80px]'} bg-green-900 h-screen shadow p-2 py-6 flex flex-col space-y-2 ${expanded ? '' : 'items-center'} transition-all duration-200`}>
+        <div className={`${expanded ? 'w-[230px]' : 'w-[80px]'} bg-green-900 h-screen 
+                        shadow p-2 py-6 flex flex-col space-y-2 ${expanded ? '' : 'items-center'} 
+                        transition-all duration-200`}>
             <Link onClick={() => setLoading(true)} href="/">
                 {
                     expanded ? (

@@ -111,3 +111,10 @@ export function getTime(datetime){
         return '';
     }
 }
+
+export function isMobile() {
+    // const userAgent = /Mobi|Android/i.test(navigator.userAgent);
+    const screenSize = window.matchMedia("(max-width: 767px)").matches;
+    // return userAgent || screenSize;
+    return screenSize;
+}
