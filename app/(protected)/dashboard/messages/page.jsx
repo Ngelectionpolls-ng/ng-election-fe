@@ -232,7 +232,7 @@ export default function Messages(){
                     </div>
 
                     {/* Main chat */}
-                    <div className="w-full" style={{height: 'calc(100% - 180px)'}}>
+                    <div className="w-full rounded border border-gray-200 shadow-inner" style={{height: 'calc(100% - 180px)'}}>
 
                     </div>
 
