@@ -25,19 +25,20 @@ import {
 } from "components/ui/select"
 
 import ProfileSummary from "components/dashboard/ProfileSummary";
-
-
 import ProfileSetup from "components/commons/ProfileSetup";
+import { GetProfile } from "services/profile/api";
 
 export default function Profile(){
 
     const router = useRouter();
     const {toast} = useToast();
+    const [error, setError] = useState(null);
     const {user, setLoading} = useContext(AppContext);
     const {setActiveMenu} = useContext(DashboardContext);
 
     const [firstName, setFirstName] = useState(null);
     const [editingFirstName, setEditingFirstName] = useState(false);
+    const [updating, setUpdating] = useState(false);
 
     const [lastName, setLastName] = useState(null);
     const [editingLastName, setEditingLastName] = useState(false);
@@ -61,9 +62,39 @@ export default function Profile(){
     const [email, setEmail] = useState(null);
     const [editingEmail, setEditingEmail] = useState(false);
 
+    const getProfile = async (user_id) => {
+        console.log(user_id)
+
+        setError(null);
+        setUpdating(true);
+        const response = await GetProfile(user_id);
+        setUpdating(false);
+
+        console.log(response);
+        if(response.status >= 200 && response.status < 300){
+            
+        }else{
+
+            if(response.response.data.message){
+                setError(response.response.data.message);
+                toast({
+                    variant: 'destructive',
+                    description: response.response.data.message
+                });
+            }else{
+                toast({
+                    variant: 'destructive',
+                    description: 'Something went wrong. Please try again'
+                });
+            }
+        }        
+    } 
+
     useEffect(() => {
         setLoading(false);
         setActiveMenu(constants.PROFILE);
+
+        getProfile(user?.id);
 
         setFirstName(getFirstName(user?.name));
         setLastName(getLastName(user?.name));
@@ -93,6 +124,8 @@ export default function Profile(){
             <div className="w-full md:flex-1 flex flex-col space-y-2">
 
                 <div className='w-full h-full p-4 bg-white rounded-xl shadow flex flex-col'>
+
+                    <Error error={error} />
 
                     <div className="w-full flex justify-between">
                         <div className="w-full h-32 flex flex-col space-y-2">

@@ -16,7 +16,7 @@ export default function HationalResults({candidates}){
                 {
                     candidates.map((candidate, index) => (
                         <>
-                            <VoteCount data={candidate} total={1750000} />
+                            <VoteCount key={index} data={candidate} total={1750000} />
                             <Separator />
                         </>
                         

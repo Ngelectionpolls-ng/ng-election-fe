@@ -118,3 +118,7 @@ export function isMobile() {
     // return userAgent || screenSize;
     return screenSize;
 }
+
+export function getToken(){
+    return localStorage.getItem('token');
+}

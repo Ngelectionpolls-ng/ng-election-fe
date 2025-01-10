@@ -19,3 +19,6 @@ export const GET_STATE_LGAS = `states/:state_id/lgas`;
 export const GET_LGA_WARDS = `lgas/:lga_id/wards`;
 export const GET_WARD_POLLING_UNITS = `wards/:ward_id/pollingunits`;
 export const GET_POLITICAL_PARTIES = `parties`;
+
+//Get profile
+export const GET_PROFILE = `common-resources/profile/:user_id`;

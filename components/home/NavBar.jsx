@@ -72,14 +72,14 @@ function NavBar() {
                         <NavigationMenuList className="flex">
                             {
                                 navItems.map((item, index) => (
-                                <NavigationMenuItem className="">
+                                <NavigationMenuItem key={index} className="">
                                     <NavigationMenuTrigger className="flex">{item}</NavigationMenuTrigger>
                                     <NavigationMenuContent className="w-full">
-                                        <ul className="w-full " key={"ul-" + index}>
+                                        <ul className="w-full " key={index}>
                                             {
                                                 subItems[index].map((subItem, index2) => (
                                                     
-                                                    <li className="w-[300px] hover:bg-muted/50">
+                                                    <li className="w-[300px] hover:bg-muted/50" key={index2}>
                                                         <NavigationMenuLink asChild>
                                                             <a
                                                                 className="flex h-full w-full select-none flex-col justify-end rounded-md p-4 text-sm hover:text-black no-underline outline-none focus:shadow-md"

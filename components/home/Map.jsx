@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 import '../../public/css/c.css';
 import State from './State';
 import ElectionResults from './ElectionResults';
+import { isMobile } from "helpers";
 
 
 export default function Map(){
@@ -16,6 +17,7 @@ export default function Map(){
     const [visible, setVisible] = useState(false);
     const [theState, setTheState] = useState("");
     const [hoveringOverResult, setHoveringOverResult] = useState(false);
+    const [mobile, setMobile] = useState(false);
  
 
     const displayResult = (e) => {
@@ -29,13 +31,17 @@ export default function Map(){
 
         setTheState(e.target.id.charAt(0) + e.target.id.slice(1).toLowerCase());
 
-        if(e.screenX - mouseOffset + width > window.screen.width){
-            setX( e.screenX - mouseOffset - width);
+        if(mobile){
+            setX(Math.round((document.documentElement.clientWidth - 450) / 2));
+        }else if(e.screenX - mouseOffset + width > window.screen.width){
+            setX( e.screenX - width);
         }else{
             setX(e.screenX - mouseOffset);
         }
 
-        if(e.screenY - mouseOffset + height > window.screen.height){
+        if(mobile){
+            setY(150);
+        }else if(e.screenY - mouseOffset + height > window.screen.height){
             setY( e.screenY - mouseOffset - height);
         }else{
             setY(e.screenY - mouseOffset);
@@ -70,6 +76,10 @@ export default function Map(){
         }
 
     }
+
+    useEffect(() => {
+        setMobile(isMobile);
+    }, []);
 
         
     return (
