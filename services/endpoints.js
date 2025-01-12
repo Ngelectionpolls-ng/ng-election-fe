@@ -22,3 +22,4 @@ export const GET_POLITICAL_PARTIES = `parties`;
 
 //Get profile
 export const GET_PROFILE = `common-resources/profile/:user_id`;
+export const UPDATE_PROFILE = `common-resources/profile/:user_id`;

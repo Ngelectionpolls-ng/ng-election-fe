@@ -1,7 +1,7 @@
 import Axios from "../Axios";
 import { GET_STATES, GET_STATE_LGAS, GET_LGA_WARDS, 
         GET_WARD_POLLING_UNITS, GET_POLITICAL_PARTIES,
-        GET_PROFILE } from 'services/endpoints';
+        GET_PROFILE, UPDATE_PROFILE } from 'services/endpoints';
 import { getToken } from "helpers";
 
 export const GetStates = async () => {
@@ -65,6 +65,21 @@ export const GetProfile = async (user_id) => {
     let result = null;
 
     await Axios.get(GET_PROFILE.replace(":user_id", user_id), {
+        headers: {
+            Authorization: 'Bearer ' + getToken()
+        }
+    })
+    .then(response => {result = response})
+    .catch(error => {result = error});
+    
+    return result;
+} 
+
+export const UpdateProfile = async (user_id, data) => {
+
+    let result = null;
+
+    await Axios.patch(UPDATE_PROFILE.replace(":user_id", user_id), {...data}, {
         headers: {
             Authorization: 'Bearer ' + getToken()
         }

@@ -122,3 +122,30 @@ export function isMobile() {
 export function getToken(){
     return localStorage.getItem('token');
 }
+
+export function getProfilePercentages(profile){
+
+    let percentages = {contact:0, general:0, account:0};
+
+    //for contact
+    percentages.contact = getSinglePercentage(['phone', 'whatsapp', 'email'], profile);
+    
+    //for general
+    percentages.general = getSinglePercentage(['name', 'age', 'sex', 'occupation', 'party'], profile);
+
+    //for account info
+    percentages.account = getSinglePercentage(['state', 'lga', 'ward', 'pollingUnit'], profile);
+
+    return percentages;
+
+}
+
+function getSinglePercentage(group_array, profile){
+    let filled = 0;
+    for(const single of group_array){
+        if(profile[single] && typeof(profile[single]) == 'string' && profile[single].trim() !== ""){
+            filled++;
+        }
+    }
+    return Math.round(filled * 100 / group_array.length);
+}

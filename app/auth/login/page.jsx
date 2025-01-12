@@ -63,7 +63,7 @@ export default function SignIn(){
         console.log(response);
         if(response.status >= 200 && response.status < 300){    
             
-            const user = response.data.data.user;
+            const user = response.data.data;
             user.accessToken = response.data.tokens.accessToken;
             user.refreshToken = response.data.tokens.refreshToken;
             

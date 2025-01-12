@@ -10,39 +10,100 @@ import {
     TooltipTrigger,
 } from "components/ui/tooltip";
 
+import Error from "components/commons/Error";
+
 import { Separator } from "components/ui/separator";
 
-import {ellipsify} from "helpers";
+import { ellipsify, getProfilePercentages } from "helpers";
 
 import RadialChart from "components/dashboard/RadialChart";
+
+import { GetProfile } from "services/profile/api";
 
 
 export default function ProfileSummary(){
 
     const {user} = useContext(AppContext);
+    const [fetching, setFetching] = useState(false);
+    const [percentages, setPercentages] = useState({contact: 0, general: 0, account: 0});
+    const [name, setName] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [phone, setPhone] = useState(null);
+    const [role, setRole] = useState(null);
+    const [photo, setPhoto] = useState(null);
+    const [posts, setPosts] = useState(0);
+    const [points, setPoints] = useState(0);
+    const [error, setError] = useState(null);
 
+
+
+    const getProfile = async (user_id) => {
+        
+        setError(null);
+        setFetching(true);
+        const response = await GetProfile(user_id);
+        setFetching(false);
+
+        console.log(response);
+        if(response?.status >= 200 && response?.status < 300){
+            const profile = response.data;
+
+            setPhoto(profile.photo);
+            profile.name && setName(profile.name ?? "");
+            profile.role && setRole(profile.role ?? "");
+            profile.phone && setPhone(profile.phone ?? "0-- ---- ---- ");
+            profile.email && setEmail(profile.email ?? "");
+
+            setPosts(profile.posts);
+            setPoints(profile.points);
+
+            setPercentages(getProfilePercentages(profile));
+            
+        }else{
+
+            if(response.response.data.message){
+                setError(response.response.data.message);
+                toast({
+                    variant: 'destructive',
+                    description: response.response.data.message
+                });
+            }else{
+                toast({
+                    variant: 'destructive',
+                    description: 'Something went wrong. Please try again'
+                });
+            }
+        }        
+    } 
+
+    useEffect(() => {
+        user && getProfile(user.id);
+    }, [user]);
 
     return (
         <div className="hidden md:block md:w-[280px] ">
             <div className='w-full h-[550px] bg-white rounded-xl shadow-md shadow-black/50 
                             flex flex-col items-center space-y-4 p-4'>
+                
+                <Error error={error} />
+                
                 <div className="relative">
-                    <img src={user?.photo} className="w-24 h-24 rounded-full bg-slate-500" alt="" />                        
+                    <img src={photo} className="w-24 h-24 rounded-full bg-slate-500" alt="" />                        
                 </div>
-                <h4 className="text-xs font-semibold">{user?.name}</h4>
-                <p className="text-xs italic">{user?.role}</p>
+                <h4 className="text-xs font-semibold">{name}</h4>
+                <p className="text-xs italic">{role}</p>
 
                 <div className="flex space-x-4 w-full">
 
                     <div className="w-1/2 rounded-xl shadow-md 
                             border border-black/10 flex flex-col space-y-1 p-2 py-3 items-center">
-                        <span className="text-xs font-semibold">{220}</span>
+                        <span className="text-xs font-semibold">{posts}</span>
                         <span className="text-xs">Posts</span>
                     </div>
 
                     <div className="w-1/2 rounded-xl shadow-md 
                             border border-black/10 flex flex-col space-y-1 p-2 py-3 items-center">
-                        <span className="text-xs font-semibold">{"4,220"}</span>
+                        <span className="text-xs font-semibold">{points}</span>
                         <span className="text-xs">Points</span>
                     </div>
 
@@ -57,7 +118,7 @@ export default function ProfileSummary(){
                         </svg>
                     </div>
                     <span className="font-semibold text-xs">
-                        {user?.phone ?? "080 ---- ----"}
+                        {phone ?? "0-- ---- ----"}
                     </span>
                 </div>
 
@@ -72,11 +133,11 @@ export default function ProfileSummary(){
                         <Tooltip>
                             <TooltipTrigger>
                                 <span className="font-semibold text-xs">
-                                    {ellipsify(user?.email, 15)}
+                                    {ellipsify(email ?? "", 15)}
                                 </span>
                             </TooltipTrigger>
                             <TooltipContent>
-                                <p>{user?.email}</p>
+                                <p>{email ?? ""}</p>
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>                        
@@ -84,11 +145,11 @@ export default function ProfileSummary(){
 
                 <div className="w-full pt-4 flex justify-between">
 
-                    <RadialChart title={"Contact info setup"} color={"orange"} percent={68} />
+                    <RadialChart title={"Contact info setup"} color={"orange"} percent={percentages.contact} />
 
-                    <RadialChart title={"General info setup"} color={"green"} percent={31} />
+                    <RadialChart title={"General info setup"} color={"green"} percent={percentages.general} />
 
-                    <RadialChart title={"Account info setup"} color={"blue"} percent={7} />
+                    <RadialChart title={"Account info setup"} color={"blue"} percent={percentages.account} />
 
                 </div>
 
