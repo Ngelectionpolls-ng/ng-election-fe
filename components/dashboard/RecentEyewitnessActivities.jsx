@@ -55,7 +55,7 @@ export default function RecentEyewitnessActivities(){
                 <Button className="bg-transparent border border-black/40 text-gray-800 hover:text-white hover:bg-black/40 text-xs rounded-xl ">View More</Button>
             </div>
             
-            <div className="w-full overflow-x-scroll flex justify-between flex-wrap md:flex-nowrap space-y-4 md:space-y-0 md:space-x-6">
+            <div className="w-full overflow-x-scroll flex justify-between flex-wrap md:flex-nowrap space-y-4 md:space-y-0 md:space-x-4">
                 {
                     activities.map((activity, index) => {
                         return (
@@ -64,7 +64,7 @@ export default function RecentEyewitnessActivities(){
                                 <p className="text-sm font-semibold text-gray-800">
                                     {activity.pollingUnit}, {activity.ward}, {activity.lga}, {activity.state}
                                 </p>
-                                <img src={activity.image} alt="" className="w-full h-[120pxx] mr-1 rouunded-xl" />
+                                <img src={activity.image} alt="" className="w-full h-[120px] mr-1 rouunded-xl" />
                                 <div className="flex flex-col space-y-2">
                                     <span className="text-sm font-semibold text-gray-800">
                                         {activity.pollingUnit}, {activity.ward}, {activity.lga}, {activity.state}
@@ -120,8 +120,7 @@ export default function RecentEyewitnessActivities(){
                                 <p className="text-sm font-semibold text-gray-800">
                                     {activity.state}, Nigeria
                                 </p>
-                            </div>
-                            
+                            </div>                            
 
                         );
                     })

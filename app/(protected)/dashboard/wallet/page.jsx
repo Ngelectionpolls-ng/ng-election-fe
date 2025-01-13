@@ -10,6 +10,10 @@ import { Layers2, Waypoints, BriefcaseBusiness, MoveUp, MoveDown } from "lucide-
 import { getTime } from "helpers";
 import RadialChart from "components/dashboard/RadialChart";
 import Barchart from "components/dashboard/Barchart";
+import { GetWalletInfo, ProcessWithdrawal, 
+         GetTransactionHistory, WalletConversions } from "services/wallet/api";
+import Error from "components/commons/Error";
+
 
 export default function Wallet(){
 
@@ -17,6 +21,8 @@ export default function Wallet(){
     const {user} = useContext(AppContext);
 
     const [activeWalletFilter, setActiveWalletFilter] = useState('today');
+    const [error, setError] = useState(null);
+    const [fetching, setFetching] = useState(false);
 
     const activities = [];
 
@@ -78,8 +84,36 @@ export default function Wallet(){
     ];
 
     useEffect(() => {
-
+        getWalletInfo(user?.id);
     }, []);
+
+    const getWalletInfo = async (user_id) => {
+        setError(null);
+        setFetching(true);
+        const response = await GetWalletInfo(user_id);
+        setFetching(false);
+
+        console.log('reports', response);
+        if(response.status >= 200 && response.status < 300){    
+            
+            //we fill the activities now            
+            
+        }else{
+
+            if(response.response.data.message){
+                setError(response.response.data.message);
+                toast({
+                    variant: 'destructive',
+                    description: response.response.data.message
+                });
+            }else{
+                toast({
+                    variant: 'destructive',
+                    description: 'Something went wrong. Please try again'
+                });
+            }
+        }
+    }
 
     const handleWalletFilterChange = (filter) => {
         if(filter != activeWalletFilter){
@@ -92,11 +126,14 @@ export default function Wallet(){
         <main className="flex-1 p-4 flex">
 
             <DashboardMain>
+               
 
                 <div className="w-full flex justify-between mb-4">
                     <span className="text-gray-900 text-xs font-semibold">{"Name of polling unit"}</span>
                     <span className="text-gray-900 text-xs">{"September 12, 2023"}</span>
                 </div>
+                
+                <Error error={error} />
 
                 <div className="w-full flex justify-between items-center">
                     <div className="w-[300px] flex flex-col space-y-1">

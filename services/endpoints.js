@@ -23,3 +23,13 @@ export const GET_POLITICAL_PARTIES = `parties`;
 //Get profile
 export const GET_PROFILE = `common-resources/profile/:user_id`;
 export const UPDATE_PROFILE = `common-resources/profile/:user_id`;
+
+//reports
+export const GET_REPORTS = `reports`;
+export const CREATE_REPORT = `reports`;
+
+//wallet
+export const GET_WALLET_INFO = `wallets/:user_id`;
+export const PROCESS_WITHDRAWAL = `wallets/withdrawals`;
+export const TRANSACTION_HISTORY = `wallets/transactions/history/:user_id`;
+export const WALLET_CONVERSIONS = `wallets/conversions`;

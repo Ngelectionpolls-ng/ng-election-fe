@@ -131,7 +131,7 @@ export default function Profile(){
 
         user && getProfile(user.id);
 
-    }, [user]);
+    }, [user, states]);
 
     const getAllStates = async () => {
         setError(null);

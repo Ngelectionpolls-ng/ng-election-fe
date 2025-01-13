@@ -87,7 +87,7 @@ function DashboardMain({children}) {
     
     return (        
         
-        <div className="w-full flex space-y-2 flex-col p-4 relative h-grow">
+        <div className="flex space-y-2 flex-col p-4 relative h-grow flex-1">
             {children}
 
             <div className={`fixed left-0 -top-2 z-5 w-full h-full bg-white/80 ${capturing ? 'block' : 'hidden'}`}
