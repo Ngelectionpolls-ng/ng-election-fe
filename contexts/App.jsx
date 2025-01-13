@@ -11,6 +11,9 @@ const AppProvider = ({children}) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    const [currentElection, setCurrentElection] = useState(null);
+
+
     useEffect(() => {
         let storedUser = localStorage.getItem('user');
         if(storedUser != undefined && storedUser != null){
@@ -22,7 +25,8 @@ const AppProvider = ({children}) => {
     }, []);
 
     return (
-        <AppContext.Provider value={{user, token, isLoggedIn, loading, setLoading}}>
+        <AppContext.Provider value={{user, token, isLoggedIn, loading, 
+                                     setLoading, currentElection, setCurrentElection}}>
             {children}
         </AppContext.Provider>
     )

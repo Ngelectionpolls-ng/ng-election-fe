@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -13,13 +13,40 @@ import {
     DropdownMenuTrigger,
 } from "components/ui/dropdown-menu"
 
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+  } from "components/ui/command"
+  
+  import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+  } from "components/ui/popover"
+  
+  import {
+      Select,
+      SelectContent,
+      SelectGroup,
+      SelectItem,
+      SelectLabel,
+      SelectTrigger,
+      SelectValue,
+  } from "components/ui/select"
+
+import { cn } from "lib/utils"
 import { Input } from "components/ui/input"
+import { Button } from "components/ui/button"
 
 import { AppContext } from "contexts/App";
 import { DashboardContext } from "contexts/Dashboard";
 import { Avatar, AvatarFallback, AvatarImage } from "components/ui/avatar";
 import {getInitials, ellipsify, logout} from 'helpers';
-import {ChevronDown} from "lucide-react";
+import {ChevronDown, Check} from "lucide-react";
 import { useRouter } from 'next/navigation';
 import NavUserIcon from "components/commons/NavUserIcon";
 import Notifications from "components/commons/Notifications";
@@ -27,9 +54,28 @@ import Messages from "components/commons/Messages";
 
 function DashboardNavBar() {
     
-    const {isLoggedIn, user, setLoading} = useContext(AppContext);
+    const {isLoggedIn, user, setLoading, currentElection, setCurrentElection} = useContext(AppContext);
     const {activeMenu, setActiveMenu} = useContext(DashboardContext);
     const router = useRouter();
+
+    const [openElections, setOpenElections] = useState(false);
+    const [election, setElection] = useState(currentElection);
+    const [value, setValue] = useState(null);
+
+    const elections = [
+        {
+            label: "Presidential Election 2023",
+            value: "presidential-election-2023-unit-1"
+        },
+        {
+            label: "House of Assembly Election",
+            value: "house-of=assembly-election-2023"
+        },
+        {
+            label: "Senatorial Election 2023",
+            value: "senatorial-election-2023"
+        }
+    ];
 
 
     useEffect(() => {
@@ -40,15 +86,59 @@ function DashboardNavBar() {
         
         <div className="flex items-center justify-between px-4 py-4 h-16 w-full">
 
-            <div className="w-[200px] font-semibold">
-               {activeMenu} Page
+            <div className="w-[250px] font-semibold">
+               {/* {activeMenu} Page */}
+                <Popover open={openElections} onOpenChange={setOpenElections}>
+                    <PopoverTrigger asChild>
+                        <Button
+                            variant="outline"
+                            role="combobox"
+                            aria-expanded={openElections}
+                            className="w-full justify-between rounded text-black text-xs h-9"
+                        >
+                            {value
+                                ? elections.find((election) => election.value === value)?.label
+                                : "Select an Election"}
+                            <ChevronDown className="opacity-50" />
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-full p-0">
+                        <Command>
+                            <CommandInput placeholder="Select Election" className="h-9" />
+                            <CommandList>
+                                <CommandEmpty>No elections found.</CommandEmpty>
+                                <CommandGroup>
+                                    {elections.map((an_election) => (
+                                        <CommandItem
+                                            key={an_election.value}
+                                            value={an_election.value}
+                                            onSelect={(currentValue) => {
+                                                setValue(currentValue === value ? "" : currentValue);
+                                                setCurrentElection(currentValue);
+                                                setOpenElections(false)
+                                            }}
+                                        >
+                                        {an_election.label}
+                                        <Check
+                                            className={cn(
+                                            "ml-auto",
+                                            value === an_election.value ? "opacity-100" : "opacity-0"
+                                            )}
+                                        />
+                                        </CommandItem>
+                                    ))}
+                                </CommandGroup>
+                            </CommandList>
+                        </Command>
+                    </PopoverContent>
+                </Popover>
             </div>
 
-            <div className="w-[450px] h-10 rounded-full bg-slate-200 flex justify-between p-1">
+            <div className="hidden md:flex w-[450px] h-8 rounded-full bg-slate-200 justify-between p-1">
                 <span className="w-[20px]"></span>
-                <Input type="text" placeholder="Search something here..." className="h-full w-[350px] focus:outline-slate-200 focus:border-slate-200 focus-visible:ring-none focus-visible:ring-0"/>
-                <div className="cursor-pointer h-8 w-8 flex items-center justify-center rounded-full hover:bg-black/10 mr-2" onClick={() => {}}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+                <Input type="text" placeholder="Search something here..." className="h-full w-[400px] focus:outline-slate-200 focus:border-slate-200 focus-visible:ring-none focus-visible:ring-0"/>
+                <div className="cursor-pointer h-6 w68 flex items-center justify-center rounded-full hover:bg-black/10 mr-2" onClick={() => {}}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
                         <path fillRule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clipRule="evenodd" />
                     </svg>
                 </div>

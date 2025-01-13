@@ -19,3 +19,17 @@ export const GET_STATE_LGAS = `states/:state_id/lgas`;
 export const GET_LGA_WARDS = `lgas/:lga_id/wards`;
 export const GET_WARD_POLLING_UNITS = `wards/:ward_id/pollingunits`;
 export const GET_POLITICAL_PARTIES = `parties`;
+
+//Get profile
+export const GET_PROFILE = `common-resources/profile/:user_id`;
+export const UPDATE_PROFILE = `common-resources/profile/:user_id`;
+
+//reports
+export const GET_REPORTS = `reports`;
+export const CREATE_REPORT = `reports`;
+
+//wallet
+export const GET_WALLET_INFO = `wallets/:user_id`;
+export const PROCESS_WITHDRAWAL = `wallets/withdrawals`;
+export const TRANSACTION_HISTORY = `wallets/transactions/history/:user_id`;
+export const WALLET_CONVERSIONS = `wallets/conversions`;

@@ -34,10 +34,10 @@ export default function ElectionDisorderCoverage(){
     return (
             <div className="w-full px-4 md:px-0">
                 <div className="mb-6">
-                    <h3 className="text-xl font-bold">
+                    <h3 className="text-xl font-bold text-center md:text-left">
                         Election-Related Disorder Coverage
                     </h3>
-                    <p className="text-sm mt-2">
+                    <p className="text-sm mt-2 text-center md:text-left">
                         This list includes elections held last month, as well as those
                         planned during this month, and the next two months.
                     </p>

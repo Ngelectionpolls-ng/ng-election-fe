@@ -24,7 +24,7 @@ export default function Layout({children}){
             <SessionProvider>                
                 <div className="flex w-screen">
                     <Sidebar />
-                    <div className="flex-1">
+                    <div className="flex-1 h-screen overflow-y-scroll">
                         <DashboardNavBar />
                         {children}   
                     </div>                        

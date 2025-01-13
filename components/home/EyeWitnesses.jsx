@@ -13,10 +13,10 @@ function EyeWitnesses() {
           </div>
 
           <div className="w-full md:w-1/2 flex flex-col justify-center">
-            <h1 className="text-green-900 font-bold md:ml-[50%] md:text-right text-3xl">
+            <h1 className="text-green-900 font-bold md:ml-[50%] md:text-right text-3xl text-center">
               Become an Eyewitness today and help curb misinformation. Together lets make our nation great again.
             </h1>
-            <div className="flex w-[350px] md:ml-auto mt-4 border-2 space-x-2 p-1 my-2 rounded-xl h-12 border-black/20 items-center shadow-lg bg-white">
+            <div className="flex w-[350px] mx-auto md:mr-0 md:ml-auto mt-4 border-2 space-x-2 p-1 my-2 rounded-xl h-12 border-black/20 items-center shadow-lg bg-white md:self-right">
                 <p className="w-1/2 text-xs text-green-900 pl-1" >Become an eye witness</p>                
                 <Button className="w-1/2 rounded-xl border border-black/50 text-black hover:text-white font-semibold h-full bg-green-200"><Link href="/auth/signup">Join Us</Link></Button>                                                              
             </div>
@@ -27,11 +27,11 @@ function EyeWitnesses() {
       
       <section className="bg-white w-screen flex justify-center">
         <div className="md:w-[1124px] py-16 w-full px-4 md:px-0">
-          <div className="w-4/5">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">
+          <div className="w-full md:w-4/5">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center md:text-left">
               How to become an eyewitness
             </h2>
-            <p className="text-gray-600 mb-16">
+            <p className="text-gray-600 mb-16 text-center md:text-left">
               We want to let you know that your security and privacy is our
               priority, and that your personal information will not be made public
               unless you permit it.
