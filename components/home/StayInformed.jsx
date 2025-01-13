@@ -8,7 +8,7 @@ function StayInformed() {
         <h3 className="text-green-900 text-3xl font-bold text-center px-10">
           "Stay Informed. Monitor Election Results in Real-Time."
         </h3>
-        <p className="text-sm text-green-900 text-center px-24">
+        <p className="text-sm text-green-900 text-center px-12 md:px-24">
           Join Millions of Nigerian citizens and well wishers of Nigerian of in
           tracking live and Recorded election results. Become an Eyewitness
           today. Lets come together and promote transparency and credibility.

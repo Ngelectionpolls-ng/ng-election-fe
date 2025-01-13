@@ -74,7 +74,7 @@ export default function VerificationEmailSent(){
 
                         <p className="text-sm text-gray-800 text-center mb-8">Didn't recieve an email?  <Button variant="ghost" onClick={() => !submitting && resentVerificationEmail(email, "registration")} ><span className="font-bold text-blue-699">Click to Resend</span></Button></p>
                         
-                        <Button onClick={() => {setLoading(true); router.push("/auth/login"); }} className="text-white w-full rounded-full mt-8 px-4 py-2 h-12 bg-green-900">Login</Button>
+                        {/* <Button onClick={() => {setLoading(true); router.push("/auth/login"); }} className="text-white w-full rounded-full mt-8 px-4 py-2 h-12 bg-green-900">Login</Button> */}
 
                     </div>
 

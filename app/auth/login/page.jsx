@@ -23,7 +23,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import {ShieldCheck, EyeOff, Eye} from "lucide-react";
 
-import {Signin} from "services/auth/api"
+import { Signin } from "services/auth/api"
 import { useToast } from "hooks/use-toast"
 import { useRouter } from 'next/navigation'
 
@@ -63,7 +63,7 @@ export default function SignIn(){
         console.log(response);
         if(response.status >= 200 && response.status < 300){    
             
-            const user = response.data.data.user;
+            const user = response.data.data;
             user.accessToken = response.data.tokens.accessToken;
             user.refreshToken = response.data.tokens.refreshToken;
             

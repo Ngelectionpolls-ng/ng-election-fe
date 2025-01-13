@@ -151,7 +151,7 @@ export default function SenatorialElections(){
                     >
                     <CarouselContent className="w-screen md:w-full">
                         {Array.from({ length: 5 }).map((_, index) => (
-                            <CarouselItem key={index} className="py-8 basis-1/2">
+                            <CarouselItem key={index} className="py-8 basis-1/1 md:basis1/2">
                                 <div className={`w-[250px] md:w-[230px] bg-gray-800 text-white flex flex-col p-4 rounded-xl shadow-lg space-y-3`} >                                
                                     {/* Title */}
                                     <div>
@@ -161,7 +161,7 @@ export default function SenatorialElections(){
                                     {/* Candidates List */}
                                     <div className="space-y-2">
                                         {candidates.map((candidate, index) => (
-                                            <div key={index} className="flex items-center space-x-2">
+                                            <div key={index} className="flex items-center space-x-1">
                                                 <Image
                                                     src={candidate.img}
                                                     alt={candidate.name}
@@ -170,7 +170,7 @@ export default function SenatorialElections(){
                                                     className="rounded-full"
                                                 />
                                                 <p className="w-10 text-xs font-semibold">{candidate.name}</p>
-                                                <div className="flex-1 h-3 bg-gray-300 rounded-full overflow-hidden max-w-[50%]">
+                                                <div className="flex-1 h-3 bg-gray-300 rounded-full overflow-hidden max-w-[50%] grow">
                                                     <div
                                                     className={`h-full ${candidate.color} text-[10px] text-center text-white font-semibold`}
                                                     style={{ width: `${candidate.percentage}%` }}
@@ -178,7 +178,7 @@ export default function SenatorialElections(){
                                                     {candidate.percentage}%
                                                     </div>
                                                 </div>
-                                                <p className="text-xs text-gray-400">{candidate.votes} votes</p>
+                                                <p className="text-[8px] text-white">{candidate.votes} votes</p>
                                             </div>
                                         ))}
                                     </div>
