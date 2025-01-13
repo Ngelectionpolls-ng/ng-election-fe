@@ -41,7 +41,7 @@ import {ChevronDown, Plus, Video, Image, FileInput, PenLine, X, Camera} from "lu
 import { useRouter } from 'next/navigation';
 import NavUserIcon from "components/commons/NavUserIcon";
 import Notifications from "components/commons/Notifications";
-import camera from "components/commons/camera";
+import camera from "components/commons/Camera";
 import ResultEntry from "components/dashboard/ResultEntry";
 
 function DashboardMain({children}) {
