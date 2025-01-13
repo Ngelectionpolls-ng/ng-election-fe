@@ -33,8 +33,8 @@ export default function RecentUpcomingElections(){
     return (
         <div className="w-full px-4 md:px-0">
           <div className="mb-6">
-            <h3 className="text-xl font-bold">Recent & Upcoming Elections</h3>
-            <p className="text-gray-500 mt-2">
+            <h3 className="text-xl font-bold text-center md:text-left">Recent & Upcoming Elections</h3>
+            <p className="text-gray-500 mt-2 text-center md:text-left">
               This list includes elections held last month, as well as those
               planned during this month, and the next two months.
             </p>

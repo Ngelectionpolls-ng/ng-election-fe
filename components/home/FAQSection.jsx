@@ -41,13 +41,13 @@ export default function FAQSection() {
   return (
     <section className="bg-white/70 w-screen flex justify-center py-12 ">
       <div className="md:w-[1124px] flex flex-col md:flex-row space-y-8">
-        <div className="text-left w-fill md:w-1/2">
-          <Image src={'/assets/home/FAQs-cuate.png'} alt="" width={200} height={300} className="block" />
+        <div className="w-full md:w-1/2 text-center md:text-left">
+          <Image src={'/assets/home/FAQs-cuate.png'} alt="" width={200} height={300} className="block mx-auto md:ml-0" />
           <h2 className="text-4xl font-bold text-green-900 leading-tight -mt-12">
             Do You <br/> Have Any <br/> Question?
             <br /> We have <br/> the Answers!
           </h2>
-          <div className="flex">
+          <div className="flex justify-center md:justify-start">
               <div className="flex justify-start mt-8 border-2 border-primary rounded-s-sm">
                 <button className="border border-green-800 text-green-800 px-6 py-2 rounded-lg font-medium hover:bg-green-800 hover:text-white transition">
                   For Further Enquiry <span className="font-bold">Contact Us</span>
