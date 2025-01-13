@@ -1,13 +1,37 @@
 "use client";
 
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import '../../public/css/c.css';
 import State from './State';
 import ElectionResults from './ElectionResults';
 import { isMobile } from "helpers";
+import { AppContext } from 'contexts/App';
+import { Button } from 'components/ui/button';
+import {ChevronDown, Check} from "lucide-react";
+import { cn } from "lib/utils"
 
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+} from "components/ui/command"
+
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "components/ui/popover"  
 
 export default function Map(){
+
+    const {currentElection, setCurrentElection} = useContext(AppContext);
+
+    const [openElections, setOpenElections] = useState(false);
+    const [election, setElection] = useState(currentElection);
+    const [value, setValue] = useState(null);
 
     const mouseOffset = 60;
     const width = 500;
@@ -18,7 +42,21 @@ export default function Map(){
     const [theState, setTheState] = useState("");
     const [hoveringOverResult, setHoveringOverResult] = useState(false);
     const [mobile, setMobile] = useState(false);
- 
+
+    const elections = [
+        {
+            label: "Presidential Election 2023",
+            value: "presidential-election-2023-unit-1"
+        },
+        {
+            label: "House of Assembly Election",
+            value: "house-of=assembly-election-2023"
+        },
+        {
+            label: "Senatorial Election 2023",
+            value: "senatorial-election-2023"
+        }
+    ]; 
 
     const displayResult = (e) => {
         
@@ -85,9 +123,58 @@ export default function Map(){
     return (
         <div className="w-full pt-28" >
             <div className="relative flex justify-center">
-                <div id="trueMap" style={{maxWidth: '100%', overflow: 'hidden', width: 'fit-content'}}>
+                <div id="trueMap" style={{maxWidth: '100%', overflow: 'scroll', width: 'fit-content'}}>
+                    <div className="w-full flex justify-center md:hidden">
+                        <div className="w-[250px] font-semibold rounded-full ">
+                            {/* {activeMenu} Page */}
+                            <Popover open={openElections} onOpenChange={setOpenElections}>
+                                <PopoverTrigger asChild>
+                                    <Button
+                                        variant="outline"
+                                        role="combobox"
+                                        aria-expanded={openElections}
+                                        className="w-full justify-between rounded-full text-black text-xs h-9 shadow-lg"
+                                    >
+                                        {value
+                                            ? elections.find((election) => election.value === value)?.label
+                                            : "Select an Election"}
+                                        <ChevronDown className="opacity-50" />
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-full p-0">
+                                    <Command>
+                                        <CommandInput placeholder="Select Election" className="h-9" />
+                                        <CommandList>
+                                            <CommandEmpty>No elections found.</CommandEmpty>
+                                            <CommandGroup>
+                                                {elections.map((an_election) => (
+                                                    <CommandItem
+                                                        key={an_election.value}
+                                                        value={an_election.value}
+                                                        onSelect={(currentValue) => {
+                                                            setValue(currentValue === value ? "" : currentValue);
+                                                            setCurrentElection(currentValue);
+                                                            setOpenElections(false)
+                                                        }}
+                                                    >
+                                                    {an_election.label}
+                                                    <Check
+                                                        className={cn(
+                                                        "ml-auto",
+                                                        value === an_election.value ? "opacity-100" : "opacity-0"
+                                                        )}
+                                                    />
+                                                    </CommandItem>
+                                                ))}
+                                            </CommandGroup>
+                                        </CommandList>
+                                    </Command>
+                                </PopoverContent>
+                            </Popover>
+                        </div>
+                    </div>
                     <div className="overflow-y-scroll relative">      
-                        <svg id="mapFrame" className="w-[670px] md:w-[800px] relative m-auto" 
+                        <svg id="mapFrame" className="w-[500px] overflow-x-scroll md:w-[800px] relative m-auto" 
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 25 809.96 609.23">
                             <State id="KOGI" fill="#295D2E" onClick={handleStateClick} onMouseOver={displayResult} onMouseLeave={dismissResult} > {/* onMouseOver={(e: any) => handleMouseOver(e)} onMouseLeave={(e: any) => setStateDetailsHidden(true)}>*/}
                                 <path id="KOGI" className="cls-1" d="M263.61,353.87l2.2.57,2.77,1.58,3.52,3.25,2.77,4.32,2.55,8.25,3.71,2.3,2.71,2.69,5.47,7.27,2.72,2.54,1.63.25.33-.35.62-2.89,1.24-2.53.19-.26,1,.88.46-.09.06-3,3.57-1.74,1.12-3.25h0l7.46.15,1.4-.46h0l-.6,2.64L309,378.68v.86l.82,1.69,2.19,2.66.54,6.17-1.17,4.71,0,4.69-1.61,1.67-.85,2.12-.17,3.74.69.56,4.26-2.95,9.26-4.07,12.4-3.37,7.07-.7,3.58.68,7.7.57h0l-.32,2.84.54,5.87,1.88,3.22,2.7,2.61.73,1.85V421l.57,6.81,1.24,5.53,1.27,1.05,3.31-.32,1.48.47-.36,1.81-1.23,1.21-.47,1.29-.42,3.93-1.94,5.83-3.3,3.11-6.44,3.12-1,1.44-.34,4.42h-1.76l-1.35-1.05-.82.1-3.37-3.29-.84-.58-.41.5h0l-1.11-1.62-2.44-.75-3.31.76-2.14,2.1-2.44.91-6.18,7.42-6,3.86-5,5.39-1.24.33-.69-.34-1.33-2-.74-.05-.18-2.28-.91-.25-2.73,5h0l-1.34,1.87-1.54.86-2.24,2.31L300.27,484l-.06,2.73-1.84,2.51-1.43.89-3.59-.66-1.67.77h0l-1-6-1.41-2-.89-2.6.93-5.52L288,472l2.16-3.55,1.91-4.82-.06-4.16,1.62-3.94.31-1.92-.15-3.41-.79-2-1.45-1.08-.55-2.12-1.75-1.41-1.87.41-1.46,1-.43-.38-3.75.84-.66-1.63.24-.51-.74-.56L280.1,441l-.85-.61-.07-1.22-1.06-2-2.56-.15-.74.51-2.26.19-2-2.23-.55.06-1.26-1.41-.65.07-1.56-2.1L260.64,435l-2.13-.53-1.08-.78-.28-1.05.23-1.93,1-1.85-.27-.8-2.18.25-.46-.65.38-.89-.28-.68-.7-.36-1.75.37-.77-.64h0l-.23-.78-4.74-4.17-2-2.7.71-4.14-2.51-.43-4.62.88h0l-6.82-2.39L230.21,410l-1.28,0-1.32-1-1.32-3.75.08-1.56,2.29-3,1.34-.64.28-1.37-.56-.7-2.31-.27-3.67.64-2.48,1.42-.55-.45,0-4.28,1.09-.42h0l.75-1.44-.82-2.41L217,388.21l-.13-.59-2.42-1.81-.07-.67L212,382.69l-1.92-3.7.17-1,2.14-2.43,2.29-3.91,3.71-4,3.6-2.29,1.77,2.62,2.17,1.76,7,3,1.84.08,2.76,1.08,3.71-.21,2.13.69,3.92-.12,6.3,1.52,3-.5,1.57-3.76.64-6.49,2.31-7.79Z">                            

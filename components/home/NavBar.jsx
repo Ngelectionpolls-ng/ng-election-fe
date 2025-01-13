@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from "components/ui/button"
@@ -26,22 +26,14 @@ import {
 import { AppContext } from "contexts/App";
 import NavUserIcon from "components/commons/NavUserIcon";
 import { useRouter } from 'next/navigation';
-import { DashboardContext } from 'contexts/Dashboard'
+import { DashboardContext } from 'contexts/Dashboard';
+import { isMobile, navItems, subItems, itemIds } from "helpers";
+import MobileLinks from 'components/commons/MobileLinks';
+
 
 function NavBar() {
-    const navItems = ['Our Mission', 'Election Results', 'Eye Witness', 'Resources'];
-    const subItems = [
-        ["About Us", "Mission Statement", "Methodology", "Initiatives"],
-        ["Presidential", "Gubernational", "Senatorial", "Federal House of Representative", "State House of Representative", "Local Government", "Off-cycle elections"],
-        ["Objectives", "How to volunteer", "Available polling unit"],
-        ["Publications", "Elelction update", "Find polling unit"]
-    ];
-    const itemIds = [
-        ["#about-us", "#mission-statement", "#methodology", "#initiatives"],
-        ["#presidential", "#gubernational", "#senatorial", "#federal-house-of-representative", "#state-house-of-representative", "#local-government", "#off-cycle-elections"],
-        ["#objectives", "#how-to-volunteer", "#available-polling-unit"],
-        ["#publications", "#elelction-update", "#find-polling-unit"]
-    ];
+    const [open, setOpen] = useState(false);
+    const [mobile, setMobile] = useState(false);    
 
     const {isLoggedIn, user, setLoading} = useContext(AppContext);
     const {setActiveMenu} = useContext(DashboardContext);
@@ -52,6 +44,13 @@ function NavBar() {
 
     useEffect(() => {
         setLoading(false);
+        setMobile(isMobile());
+        window.onresize = () => {
+            setMobile(isMobile());
+            if(!isMobile()){
+                setOpen(false);
+            }
+        }
     }, []);
     
     return (
@@ -61,12 +60,27 @@ function NavBar() {
                 <Link href="/" onClick={() => setLoading(true)} className="flex items-center space-x-3 rtl:space-x-reverse">
                     <Image src={"/Nigelctionpolls 4.svg"} width={250} height={50} alt='NG Election logo' className='w-[140px] h-auto' />
                 </Link>
-                <button data-collapse-toggle="navbar-dropdown" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-dropdown" aria-expanded="false">
+                <button data-collapse-toggle="navbar-dropdown" type="button" onClick={() => setOpen(!open)} 
+                        className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden 
+                                     hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" 
+                                     aria-controls="navbar-dropdown" aria-expanded="false">
                     <span className="sr-only">Open main menu</span>
-                    <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
-                    </svg>
+                    {
+                        open ? (
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                                <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+                            </svg>
+                        ) : (
+                            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
+                            </svg>
+                        )
+                    }
+                    
                 </button>
+                {
+                    open && <MobileLinks />
+                }
                 <div className="hidden md:flex space-x-8">
                     <NavigationMenu>
                         <NavigationMenuList className="flex">

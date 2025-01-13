@@ -14,6 +14,20 @@ export const constants = {
     MY_ACCOUNT_INFO: "My Account Info"
 }
 
+export const navItems = ['Our Mission', 'Election Results', 'Eye Witness', 'Resources'];
+export const subItems = [
+        ["About Us", "Mission Statement", "Methodology", "Initiatives"],
+        ["Presidential", "Gubernational", "Senatorial", "Federal House of Representative", "State House of Representative", "Local Government", "Off-cycle elections"],
+        ["Objectives", "How to volunteer", "Available polling unit"],
+        ["Publications", "Elelction update", "Find polling unit"]
+    ];
+export const itemIds = [
+        ["#about-us", "#mission-statement", "#methodology", "#initiatives"],
+        ["#presidential", "#gubernational", "#senatorial", "#federal-house-of-representative", "#state-house-of-representative", "#local-government", "#off-cycle-elections"],
+        ["#objectives", "#how-to-volunteer", "#available-polling-unit"],
+        ["#publications", "#elelction-update", "#find-polling-unit"]
+    ];
+
 export function makeSlug(subject){
     if(!subject){
         return "";
