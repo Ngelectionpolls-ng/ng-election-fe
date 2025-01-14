@@ -3,7 +3,7 @@ import React from "react";
 
 function Hero() {
   return (
-    <div className="" style={{ backgroundColor: "rgba(0,0,0,.3)" }}>
+    <div className="w-screen" style={{ backgroundColor: "rgba(0,0,0,.3)" }}>
       <div
         className="relative bg-[#F2F2F2] flex flex-col items-center w-full"
         style={{

@@ -56,7 +56,7 @@ function NavBar() {
     return (
         
         <nav className="bg-gray-50 border-gray-200 dark:bg-gray-900 dark:border-gray-700 shadow-lg border-b border-b-green-900 fixed z-20 w-screen">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-2">
+            <div className="w-full flex items-center justify-between mx-auto px-4 py-2">
                 <Link href="/" onClick={() => setLoading(true)} className="flex items-center space-x-3 rtl:space-x-reverse">
                     <Image src={"/Nigelctionpolls 4.svg"} width={250} height={50} alt='NG Election logo' className='w-[140px] h-auto' />
                 </Link>
