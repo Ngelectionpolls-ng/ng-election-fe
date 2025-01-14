@@ -20,7 +20,7 @@ export default function SenatorialElections(){
     ];
 
     return (
-        <div className="w-screen flex flex-col">
+        <div className="w-full flex flex-col">
 
             <div className="relative w-full flex justify-center">
                 <svg viewBox="0 0 670 336" fill="none" xmlns="http://www.w3.org/2000/svg">
