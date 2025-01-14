@@ -27,7 +27,7 @@ export default function MobileLinks(){
     }
 
     return (
-        <div className="fixed right-2 top-16 z-10 w-full shadow-lg rounded bg-white flex flex-col space-y-8 px-4 py-8">
+        <div className="fixed left-0 top-16 z-10 w-screen shadow-lg rounded bg-white flex flex-col space-y-8 px-4 py-8">
             <span className="font-semibold text-xs text-green-900">Menu</span>
 
             {

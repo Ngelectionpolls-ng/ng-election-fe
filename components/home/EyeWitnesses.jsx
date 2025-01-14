@@ -7,9 +7,9 @@ import { Separator } from "components/ui/separator";
 function EyeWitnesses() {
   return (
     <>
-      <section className="w-screen flex justify-center bg-gray-50 show-on-scroll">
+      <section className="w-screen flex justify-center bg-gray-50 show-on-scroll overflow-hidden">
         <div className="md:w-[1124px] w-full flex flex-col md:flex-row px-4 md:px-0" >
-          <div className="w-full md:w-1/2 flex justify-right md:justify-center">
+          <div className="w-screen md:w-1/2 flex justify-right md:justify-center overflow-hidden">
             <img src="/assets/home/Team-cuate.png" className="w-full scale-150" alt="" />
           </div>
 

@@ -72,7 +72,7 @@ function NewsAndReports() {
     },
   ]
   return (
-    <section className="bg-white/90 w-screen flex flex-col justify-center items-center py-12 show-on-scroll">
+    <section className="bg-white/90 w-screen flex flex-col justify-center items-center py-12 show-on-scroll overflow-hidden">
       <div className="md:w-[1124px] px-4 md:px-0">
         <h2 className='text-xl md:text-3xl font-bold text-center md:text-left'>Election News & Reports</h2>
         <p className='text-gray-500 text-sm text-center md:text-left'>Latest installments in the Election Watxh Series. Click here to watch the Eyewitness Documentary</p>
