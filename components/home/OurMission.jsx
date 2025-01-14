@@ -2,7 +2,7 @@ import { Separator } from "components/ui/separator"
 
 function OurMission() {
     return (
-        <section className='w-screen flex justify-center flex-col items-center'>
+        <section className='w-screen flex justify-center flex-col items-center show-on-scroll'>
             <div className="px-4 md:px-0 md:w-[1124px]">
                 <h2 className='text-xl md:text-3xl text-center font-bold'>Our Mission</h2>
                 <p className='text-center text-sm text-gray-500'>Nigerian elections has lacked transparency and misinformation has been the order of the day. Now, we have come to make a positive change.</p>

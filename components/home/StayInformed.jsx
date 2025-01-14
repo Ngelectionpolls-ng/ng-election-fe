@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function StayInformed() {
   return (
-    <section className="my-14 px-4 lg:px-10 w-full lg:w-[85%] flex  flex-col justify-center mx-auto max-w-[1280px]">
+    <section className="my-14 px-4 lg:px-10 w-full lg:w-[85%] flex  flex-col justify-center mx-auto max-w-[1280px] show-on-scroll">
       <div className="mt-4 lg:m-0 flex justtify-center items-center flex-col gap-6">
         <h3 className="text-green-900 text-3xl font-bold text-center px-10">
           "Stay Informed. Monitor Election Results in Real-Time."
