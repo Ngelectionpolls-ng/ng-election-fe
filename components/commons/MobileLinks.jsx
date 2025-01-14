@@ -16,7 +16,15 @@ import Link from "next/link";
 
 export default function MobileLinks(){
 
+    const [openedMenu, setOpenedMenu] = useState(null);
 
+    const handleClick = (item) => {
+        if(openedMenu === item){
+            setOpenedMenu(null);
+        }else{
+            setOpenedMenu(item);
+        }
+    }
 
     return (
         <div className="fixed right-2 top-16 z-10 w-full shadow-lg rounded bg-white flex flex-col space-y-8 px-4 py-8">
@@ -24,22 +32,27 @@ export default function MobileLinks(){
 
             {
                 navItems.map((item, index) => (
-                    <DropdownMenu key={index} className="w-full rounded-lg">
-                        <DropdownMenuTrigger className="bg-slate-100 w-full shadow-md rounded-lg">
+                    <>
+                        <div className="bg-slate-100 w-full shadow-md rounded-lg cursor-pointer" onClick={() => handleClick(item)} >
                             <div className="rounded-lg px-4 hover:bg-white/50 flex justify-between items-center h-9">
                                 <span className="text-sm">{item}</span> <ChevronDown className="w-5 h-5" />                                    
                             </div>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                            {
-                                subItems[index].map((subItem, index2) => (
-                                  <DropdownMenuItem key={index2} className="w-full">
-                                    <Link href={itemIds[index2]} >{subItem}</Link>
-                                  </DropdownMenuItem>                                
-                                ))
-                            }
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                        </div>
+                        {
+                            openedMenu == item && (
+                                <div className={`w-full flex flex-col space-y-4 transition-all duration-200`}>
+                                    {
+                                        subItems[index].map((subItem, index2) => (
+                                        <div key={index2} className="w-full px-4">
+                                            <Link href={itemIds[index2]} >{subItem}</Link>
+                                        </div>                                
+                                        ))
+                                    }
+                                </div>
+                            )
+                        }
+                        
+                    </>
                 ))
             }
 

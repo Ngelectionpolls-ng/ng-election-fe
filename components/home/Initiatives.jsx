@@ -41,7 +41,7 @@ const initiativesData = [
 
 const Initiatives = () => {
   return (
-    <section className="w-screen flex bg-black/5 justify-center py-16">
+    <section className="w-screen flex bg-black/5 justify-center py-16 show-on-scroll">
       <div className="flex flex-col items-center md:w-[1124px] px-4 md:px-0">
         <h2 className="text-3xl font-bold mb-8">Our Initiatives</h2>
         <div className="w-full md:w-[1124px] grid grid-cols-1 md:grid-cols-3 md:gap-24">

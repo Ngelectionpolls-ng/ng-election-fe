@@ -75,7 +75,7 @@ function JoinCommunitySection() {
     }
 
     return (
-        <section className="w-screen flex justify-center py-16">
+        <section className="w-screen flex justify-center py-16 show-on-scroll">
             <div className="flex flex-col lg:flex-row w-full md:w-[1124px] ">
                 <div className="bg-green-900 w-full lg:w-1/2">
                     <div className="p-4 md:p-8">
