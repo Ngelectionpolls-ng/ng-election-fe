@@ -52,6 +52,10 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		keyframes: {
+			fadeIn: {
+				"0%": { opacity: 0, transform: 'scale(0.75)' },
+				"100%": { opacity: 1, transform: 'scale(1)' }
+			},
   			'accordion-down': {
   				from: {
   					height: '0'
@@ -70,14 +74,19 @@ module.exports = {
   			}
   		},
   		animation: {
+			fadeIn: "fadeIn 0.5s ease-in forwards",
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
   		},
 		transitionProperty: {
 			'height': 'height'
 		}
+		
   	}
   },
   plugins: [require("tailwindcss-animate")],
+  variants: {
+	animation: ["motion-safe"]
+  }
 }
 

@@ -2,11 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import backgroundImage from "../../public/assets/images/eyewitnessFlag.png"; // Replace with your actual image path
 import { Button } from "components/ui/button";
+import { Separator } from "components/ui/separator";
 
 function EyeWitnesses() {
   return (
     <>
-      <section className="w-screen flex justify-center bg-gray-50">
+      <section className="w-screen flex justify-center bg-gray-50 show-on-scroll">
         <div className="md:w-[1124px] w-full flex flex-col md:flex-row px-4 md:px-0" >
           <div className="w-full md:w-1/2 flex justify-right md:justify-center">
             <img src="/assets/home/Team-cuate.png" className="w-full scale-150" alt="" />
@@ -25,7 +26,7 @@ function EyeWitnesses() {
         </div>
       </section>
       
-      <section className="bg-white w-screen flex justify-center">
+      <section className="bg-white w-screen flex justify-center show-on-scroll">
         <div className="md:w-[1124px] py-16 w-full px-4 md:px-0">
           <div className="w-full md:w-4/5">
             <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center md:text-left">
@@ -38,36 +39,37 @@ function EyeWitnesses() {
             </p>
             <div className="space-y-8">
               <div className="flex items-start space-x-4">
-                <span className="text-2xl font-bold text-gray-400">01</span>
+                <span className="text-2xl font-bold text-gray-400 hidden md:block">01</span>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900">
+                  <h3 className="text-lg font-semibold text-gray-900 text-center md:text-left">
                     Click on the CTA buttons on the page.
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 text-center md:text-left">
                     Clicking on the call to action opens the authentication page
                     where you can input your personal information.
                   </p>
+                  {/* <Separator className="w-1/3 my-1 block mx-auto md:hidden bg-gray-400"/> */}
                 </div>
               </div>
               <div className="flex items-start space-x-4">
-                <span className="text-2xl font-bold text-gray-400">02</span>
+                <span className="text-2xl font-bold text-gray-400 hidden md:block">02</span>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900">
+                  <h3 className="text-lg font-semibold text-gray-900 text-center md:text-left">
                     Verify your information and identify
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 text-center md:text-left">
                     Your identity will be verified as we aim at curbing
                     misinformation and promoting transparency.
                   </p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
-                <span className="text-2xl font-bold text-gray-400">03</span>
+                <span className="text-2xl font-bold text-gray-400 hidden md:block">03</span>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900">
+                  <h3 className="text-lg font-semibold text-gray-900 text-center md:text-left">
                     Start reporting news, events happening in your voting centers.
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 text-center md:text-left">
                     As an eyewitness, you will join other well-meaning Nigerians
                     and non-Nigerians in updating the public with verified
                     information on the latest occurrences in your voting area or

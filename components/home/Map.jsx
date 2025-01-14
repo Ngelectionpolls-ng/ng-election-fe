@@ -121,7 +121,7 @@ export default function Map(){
 
         
     return (
-        <div className="w-full pt-28" >
+        <div className="w-full pt-28 animate-fadeIn" >
             <div className="relative flex justify-center">
                 <div id="trueMap" style={{maxWidth: '100%', overflow: 'scroll', width: 'fit-content'}}>
                     <div className="w-full flex justify-center md:hidden">
