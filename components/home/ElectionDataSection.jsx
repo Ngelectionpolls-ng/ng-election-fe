@@ -3,7 +3,7 @@ import { Button } from "../ui/button"
 
 export default function ElectionDataSection() {
   return (
-    <section className="bg-black/5 w-screen flex justify-center py-12 show-on-scroll">
+    <section className="bg-black/5 w-screen flex justify-center py-12 show-on-scroll overflow-hidden">
       <div className="flex flex-col md:flex-row justify-between md:w-[1124px] w-full md:space-x-8" >
         {/* Text Section */}
         <div className="text-md w-full md:w-1/2 flex flex-col justify-center space-y-12 px-4 md:px-0 mb-8">
@@ -27,7 +27,7 @@ export default function ElectionDataSection() {
         
           <img
             src={"/assets/home/stay-informed.png"}
-            className="w-full md:w-1/2 scale-125"
+            className="w-screen md:w-1/2 scale-125"
             alt=""
           />
       </div>
