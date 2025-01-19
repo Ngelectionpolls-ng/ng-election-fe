@@ -163,3 +163,34 @@ function getSinglePercentage(group_array, profile){
     }
     return Math.round(filled * 100 / group_array.length);
 }
+
+export function getImage(name){
+    switch(name){
+        case 'result': return "https://media.istockphoto.com/id/1191511208/photo/old-paper-documents-in-the-archive.jpg?s=1024x1024&w=is&k=20&c=v1fXiy7ufJvd0Wbp6SrHjPhESKpPt_MoUCXwc5eN-rY=";
+        case "vote_count": return "https://media.istockphoto.com/id/1194161847/photo/counting-ballot-papers-during-election.jpg?s=1024x1024&w=is&k=20&c=NX4dgZ5xzixZ9NBP8kZUr4_KnCXnjilSoU0Fcp9Cb_E=";
+        case "voting": return "https://cdn.pixabay.com/photo/2024/06/10/08/33/ai-generated-8820202_1280.jpg";
+        case "violence": return "https://cdn.pixabay.com/photo/2023/11/20/04/31/generative-ai-8400311_1280.jpg";
+        case "photo": return "https://cdn.pixabay.com/photo/2022/09/16/13/07/generated-7458584_1280.jpg"
+        default: return "https://cdn.pixabay.com/photo/2022/09/16/13/07/generated-7458584_1280.jpg"
+    }
+}
+
+export function getElection(election, elections){
+    const entry = elections.find((array_entry) => array_entry.name == election);
+    return entry;
+}
+
+export function getStateId (state, states) {
+    const entry = states.find((array_entry) => array_entry.name == state);
+    return entry.id;
+}
+
+export function getLGAId(lga, lgas) {
+    const entry = lgas.find((array_entry) => array_entry.name == lga);
+    return entry.id;
+}
+
+export function getWardId (ward, wards) {
+    const entry = wards.find((array_entry) => array_entry.name == ward);
+    return entry.id;
+}

@@ -54,7 +54,7 @@ import Messages from "components/commons/Messages";
 
 function DashboardNavBar() {
     
-    const {isLoggedIn, user, setLoading, currentElection, setCurrentElection} = useContext(AppContext);
+    const {isLoggedIn, user, setLoading, elections, currentElection, setCurrentElection} = useContext(AppContext);
     const {activeMenu, setActiveMenu} = useContext(DashboardContext);
     const router = useRouter();
 
@@ -62,25 +62,21 @@ function DashboardNavBar() {
     const [election, setElection] = useState(currentElection);
     const [value, setValue] = useState(null);
 
-    const elections = [
-        {
-            label: "Presidential Election 2023",
-            value: "presidential-election-2023-unit-1"
-        },
-        {
-            label: "House of Assembly Election",
-            value: "house-of=assembly-election-2023"
-        },
-        {
-            label: "Senatorial Election 2023",
-            value: "senatorial-election-2023"
+    const proccessElections = () => {
+        if(elections){
+            elections.forEach(election => {
+                election.label = election.name;
+                election.value = election.name;
+            });
         }
-    ];
+    }
+    
 
 
     useEffect(() => {
         setLoading(false);
-    }, []);
+        proccessElections();
+    }, [elections]);
     
     return (        
         
