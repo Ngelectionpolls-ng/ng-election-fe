@@ -68,6 +68,7 @@ function DashboardNavBar() {
                 election.label = election.name;
                 election.value = election.name;
             });
+            console.log("Elections Here", elections);
         }
     }
     
@@ -77,6 +78,10 @@ function DashboardNavBar() {
         setLoading(false);
         proccessElections();
     }, [elections]);
+
+    const getElection = (value) => {
+        return elections.find(election => election.name == value);
+    }
     
     return (        
         
@@ -110,7 +115,7 @@ function DashboardNavBar() {
                                             value={an_election.value}
                                             onSelect={(currentValue) => {
                                                 setValue(currentValue === value ? "" : currentValue);
-                                                setCurrentElection(currentValue);
+                                                setCurrentElection(getElection(currentValue));
                                                 setOpenElections(false)
                                             }}
                                         >

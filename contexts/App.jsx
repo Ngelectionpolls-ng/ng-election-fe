@@ -44,7 +44,7 @@ const AppProvider = ({children}) => {
                 
                 //we fill the elections
                 const resp = response.data.docs;
-                setElections(resp);                
+                setElections(resp);
                 
             }else{
     

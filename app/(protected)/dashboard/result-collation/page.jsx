@@ -16,18 +16,51 @@ export default function ResultCollation(){
 
     const results = [];
 
+    const [error, setError] = useState(null);
+    const [fetching, setFetching] = useState(false);
+    
 
 
-    const getWalletInfo = async (user_id) => {
+    const saveElectionResult = async (data) => {
         setError(null);
         setFetching(true);
-        const response = await GetWalletInfo(user_id);
+        const response = await SaveElectionResult(data);
         setFetching(false);
 
         console.log('reports', response);
         if(response.status >= 200 && response.status < 300){    
             
             //we fill the activities now            
+            
+        }else{
+
+            if(response.response.data.message){
+                setError(response.response.data.message);
+                toast({
+                    variant: 'destructive',
+                    description: response.response.data.message
+                });
+            }else{
+                toast({
+                    variant: 'destructive',
+                    description: 'Something went wrong. Please try again'
+                });
+            }
+        }
+    }
+
+    const getPoliticalParties = async () => {
+        setError(null);
+        setFetching(true);
+        const response = await GetPoliticalParties();
+        setFetching(false);
+
+        console.log(response);
+        if(response.status >= 200 && response.status < 300){    
+            
+            //we fill the states selection with all the stattes
+            const politicalParties = response.data.data.parties;
+            setPoliticalParties(politicalParties);
             
         }else{
 
