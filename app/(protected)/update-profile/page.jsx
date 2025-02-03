@@ -344,7 +344,7 @@ export default function UpdateProfile(){
                             submitting ? (
                                 <Button className="text-white/50 rounded-full w-full px-8 py-2 mt-4 h-12 bg-gray-700">Continuing to Dashboard...</Button>
                             ) : (
-                                <Button className="text-white rounded-full w-full px-8 py-2 mt-8 h-12 " onClick={() => {setSubmitting(true); setLoading(true); router.push('/dashboard');}}>Continue to Dashboard</Button>
+                                <Button className="text-white rounded-full w-full px-8 py-2 mt-8 h-12 " onClick={() => {setSubmitting(true); setLoading(true); location = '/dashboard';}}>Continue to Dashboard</Button>
                             )
                         }                        
                             

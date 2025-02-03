@@ -2,9 +2,9 @@
 
 import ResultProgress from "components/dashboard/ResultProgress";
 
-export default function NationalResults({candidates}){
+export default function NationalResults({data}){
 
     return (
-        <ResultProgress candidates={candidates} />
+        <ResultProgress data={data} />
     );
 }

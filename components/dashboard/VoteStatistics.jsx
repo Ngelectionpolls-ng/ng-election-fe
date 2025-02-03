@@ -1,13 +1,11 @@
 "use client"
 
 import { makeSlug, titleCase, ellipsify } from "helpers";
-import VoteCount from "components/commons/VoteCount";
-import { Separator } from "components/ui/separator";
 
 export default function VoteStatistics({accumulated_votes, vote_count, valid_votes, rejected_votes, type="normal"}){
 
     return (
-        <div className="w-full flex justify-between  text-gray-800">
+        <div className="w-full flex justify-between text-gray-800 mt-auto h-auto">
             <div className="my-4 flex flex-col w-1/5 justify-between">
                 <h6 className={`${type == 'small' ? 'text-[12px]' : 'text-xs'}`}>
                     {ellipsify('Total Accumulated Votes', 15)}

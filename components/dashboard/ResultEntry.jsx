@@ -64,6 +64,7 @@ import { getElection } from "helpers";
 import camera from "components/commons/Camera";
 import Error from "components/commons/Error";
 import ResultProgress from "components/dashboard/ResultProgress";
+import { Label } from 'components/ui/label'
 
 
 export default function ResultEntry(){
@@ -85,28 +86,34 @@ export default function ResultEntry(){
         enteringResult, setEnteringResult,
         captureFor, setCaptureFor
     } = useContext(DashboardContext);
-
-    const candidates = [
-        { name: 'Bola Tinubu', acronym: 'APC', votes: 343000, color: 'bg-green-600', image: '/assets/images/apc.png' },
-        { name: 'Abubakar Atiku', acronym: 'PDP', votes: 223000, color: 'bg-pink-600', image: '/assets/images/pdp.png' },
-        { name: 'Peter Obi', acronym: 'LP', votes: 1129000, color: 'bg-yellow-600', image: '/assets/images/apc.png' },
-        { name: 'Rabiu Kwankwaso', acronym: 'NNPP', votes: 4890, color: 'bg-green-400', image: '/assets/images/pdp.png' },
-    ];
+    
+    // const candidates = [
+    //     { name: 'Bola Tinubu', acronym: 'APC', votes: 343000, color: 'bg-green-600', image: '/assets/images/apc.png' },
+    //     { name: 'Abubakar Atiku', acronym: 'PDP', votes: 223000, color: 'bg-pink-600', image: '/assets/images/pdp.png' },
+    //     { name: 'Peter Obi', acronym: 'LP', votes: 1129000, color: 'bg-yellow-600', image: '/assets/images/apc.png' },
+    //     { name: 'Rabiu Kwankwaso', acronym: 'NNPP', votes: 4890, color: 'bg-green-400', image: '/assets/images/pdp.png' },
+    // ];
 
     const [data, setData] = useState(
         {
+            candidates: [],
             electionId: currentElection?.id,
             partyId: null,
+            pollingunitValidVotes: 0, 
             registeredVoters: 0,
             accreditedVoters: 0,
             rejectedVotes: 0,
-            spoiledVotes: 0,
-            pollingunitValidVotes: 0,
+            spoiledVotes: 0,            
             validVotes: 0,
             unusedBallotPapers: 0,
             statementOfResult: process.env.IMAGE_PROFILE != "live" ? getImage("result") : null
         }
-    )
+    )//this will represent the party's votes
+
+    const startNewResult = () => {
+        setData({...data, partyId: null, pollingunitValidVotes: 0});
+        setPreviewingResult(false);
+    }
 
     const validateResult = (data) => {
         if(!data.electionId){
@@ -177,6 +184,23 @@ export default function ResultEntry(){
                 });
             }
         }
+    }
+
+    const addCandidate = (party) => {
+        console.log('party', party);
+        console.log(data); 
+        console.log('candidates', data.candidates); 
+        let candidates = data.candidates;
+        const candidate = candidates.find((c) => c.partyId == party.id);
+        console.log('candidates', candidates); 
+        console.log('candidate found', candidate);        
+        if(!candidate){  
+            candidates.push({ name: 'Peter Obi', acronym: party.acronym, votes: parseInt(data.pollingunitValidVotes), color: party.color, image: '/assets/images/apc.png', partyId: party.id });
+            console.log('candidates', candidates); 
+        }else{           
+            candidate['votes'] = data.pollingunitValidVotes;
+        }
+        setData({...data, candidates: candidates, partyId: party.id});
     }
 
     const previewElectionResult = async () => {
@@ -274,7 +298,7 @@ export default function ResultEntry(){
                                     !previewingResult ? (
                                         ResultAddition()
                                     ) : (
-                                        ResultPreview({candidates})
+                                        ResultPreview()
                                     )
                                 
                             )
@@ -290,91 +314,122 @@ export default function ResultEntry(){
     function ResultAddition(){
         return (
             <>
-                <div className="text-white self-center p-6 grid grid-cols-2 grid-rows-4 gap-4 gap-y-10 mt-24 w-full text-xs relative">
+                <div className="text-white self-center p-6 grid grid-cols-2 grid-rows-4 gap-4 gap-y-8 mt-24 w-full text-xs relative">
                     
                     <div className="col-span-2 absolute w-full -top-8 px-4" ><Error error={error} /></div>
+
+                    <div className="flex flex-col space-y-0.5">
+                        <Label className="text-[12px] text-gray-200 w-full text-left">No. of registered voters</Label>
+                        <Input type="number" value={data.registeredVoters} placeholder="No. of registered voters" 
+                                onChange={(e) => {setData({...data, registeredVoters: e.target.value}); setError(false)}} 
+                            className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 h-12
+                                        focus:border-b focus:border-0 bg-white rounded text-black w-full mt-4" 
+                        />
+                    </div>
                     
-                    <Input type="number" placeholder="No. of registered voters" onChange={(e) => {setData({...data, registeredVoters: e.target.value}); setError(false)}} 
-                        className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 h-12
-                                    focus:border-b focus:border-0 bg-white rounded text-black w-full mt-4" 
-                    />
+                    <div className="flex flex-col space-y-0.5">
+                        <Label className="text-[12px] text-gray-200 w-full text-left">No. of accredited voters</Label>
+                        <Input type="number" value={data.accreditedVoters} placeholder="No. of accredited voters" 
+                                onChange={(e) => {setData({...data, accreditedVoters: e.target.value}); setError(false)}}
+                            className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 h-12
+                                        focus:border-b focus:border-0 bg-white rounded text-black w-full mt-4" 
+                        />
+                    </div>
 
-                    <Input type="number" placeholder="No. of accredited voters" onChange={(e) => {setData({...data, accreditedVoters: e.target.value}); setError(false)}}
-                        className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 h-12
-                                    focus:border-b focus:border-0 bg-white rounded text-black w-full mt-4" 
-                    />
+                    <div className="flex flex-col space-y-0.5">
+                        <Label className="text-[12px] text-gray-200 w-full text-left">No. of rejected voters</Label>
+                        <Input type="number" value={data.rejectedVotes} placeholder="No. of rejected voters" 
+                                onChange={(e) => {setData({...data, rejectedVotes: e.target.value}); setError(false)}}
+                            className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 h-12
+                                        focus:border-b focus:border-0 bg-white rounded text-black w-full" 
+                        />
+                    </div>
 
-                    <Input type="number" placeholder="No. of rejected voters" onChange={(e) => {setData({...data, rejectedVotes: e.target.value}); setError(false)}}
-                        className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 h-12
-                                    focus:border-b focus:border-0 bg-white rounded text-black w-full" 
-                    />
+                    <div className="flex flex-col space-y-0.5">
+                        <Label className="text-[12px] text-gray-200 w-full text-left">No. of spoiled voters</Label>
+                        <Input type="number" value={data.spoiledVotes} placeholder="No. of spoiled voters" 
+                                onChange={(e) => {setData({...data, spoiledVotes: e.target.value}); setError(false)}}
+                            className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 h-12
+                                        focus:border-b focus:border-0 bg-white rounded text-black w-full" 
+                        />
+                    </div>
 
-                    <Input type="number" placeholder="No. of spoiled voters" onChange={(e) => {setData({...data, spoiledVotes: e.target.value}); setError(false)}}
-                        className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 h-12
-                                    focus:border-b focus:border-0 bg-white rounded text-black w-full" 
-                    />
-
-                    <Input type="number" placeholder="No. of valid voters" onChange={(e) => { 
-                                                setData({...data, validVotes: e.target.value, pollingunitValidVotes: e.target.value}); setError(false);
-                                            }}
-                        className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 h-12
-                                    focus:border-b focus:border-0 bg-white rounded text-black w-full" 
-                    />
-
-                    <Input type="number" placeholder="No. of unused ballot papers" onChange={(e) => {setData({...data, unusedBallotPapers: e.target.value}); setError(false)}} 
-                        className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 h-12
-                                    focus:border-b focus:border-0 bg-white rounded text-black w-full" 
-                    />
-
-                    <Popover open={openPoliticalParty} onOpenChange={setOpenPoliticalParty}>
-                        <PopoverTrigger asChild>
-                            <Button
-                                variant="outline"
-                                role="combobox"
-                                aria-expanded={openPoliticalParty}
-                                className="w-full justify-between rounded text-gray-500 text-sm h-12 focus:border-white"
-                            >
-                                {partyValue
-                                    ? politicalParties.find((party) => party.value === partyValue)?.label
-                                    : "Select political party..."}
-                                <ChevronDown className="opacity-50" />
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-full p-0">
-                            <Command>
-                                <CommandInput placeholder="Search political parties..." className="h-12 text-sm" />
-                                <CommandList>
-                                    <CommandEmpty>No parties found.</CommandEmpty>
-                                    <CommandGroup>
-                                        {politicalParties.map((party) => (
-                                            <CommandItem className="text-xs" 
-                                                key={party.id}
-                                                value={party.name}
-                                                onSelect={(currentValue) => {
-                                                    setPartyValue(currentValue === partyValue ? "" : currentValue);
-                                                    setData({...data, partyId: party.id});
-                                                    setOpenPoliticalParty(false);
+                    <div className="flex flex-col space-y-0.5">
+                        <Label className="text-[12px] text-gray-200 w-full text-left">No. of valid votes</Label>
+                        <Input type="number" value={data.validVotes} placeholder="No. of valid votes" 
+                                                onChange={(e) => { 
+                                                    setData({...data, validVotes: e.target.value}); setError(false);
                                                 }}
-                                            >
-                                            <span className="w-8 flex mr-1 items-center"><img src={party.logo} alt="" className="mr-2 h-4" /></span> {`${titleCase(party.name)}, (${party.acronym.toUpperCase()})`}
-                                            <Check
-                                                className={cn(
-                                                "ml-auto",
-                                                    partyValue === party.value ? "opacity-100" : "opacity-0"
-                                                )}
-                                            />
-                                            </CommandItem>
-                                        ))}
-                                    </CommandGroup>
-                                </CommandList>
-                            </Command>
-                        </PopoverContent>
-                    </Popover>
+                            className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 h-12
+                                        focus:border-b focus:border-0 bg-white rounded text-black w-full" 
+                        />
+                    </div>
 
-                    <Input type="text" placeholder="Votes allocated to party" onChange={(e) => {}} 
-                        className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 h-12
-                                    focus:border-b focus:border-0 bg-white rounded text-black w-full" 
-                    />
+                    <div className="flex flex-col space-y-0.5">
+                        <Label className="text-[12px] text-gray-200 w-full text-left">No. of unused ballot papers</Label>
+                        <Input type="number" value={data.unusedBallotPapers}  placeholder="No. of unused ballot papers" 
+                                onChange={(e) => {setData({...data, unusedBallotPapers: e.target.value}); setError(false)}} 
+                            className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 h-12
+                                        focus:border-b focus:border-0 bg-white rounded text-black w-full" 
+                        />
+                    </div>
+
+                    <div className="flex flex-col space-y-0.5">
+                        <Label className="text-[12px] text-gray-200 w-full text-left">Political Party</Label>                        
+                        <Popover open={openPoliticalParty} onOpenChange={setOpenPoliticalParty}>
+                            <PopoverTrigger asChild>
+                                <Button
+                                    variant="outline"
+                                    role="combobox"
+                                    aria-expanded={openPoliticalParty}
+                                    className="w-full justify-between rounded text-gray-500 text-sm h-12 focus:border-white"
+                                >
+                                    {partyValue
+                                        ? politicalParties.find((party) => party.value === partyValue)?.label
+                                        : "Select political party..."}
+                                    <ChevronDown className="opacity-50" />
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-full p-0">
+                                <Command>
+                                    <CommandInput placeholder="Search political parties..." className="h-12 text-sm" />
+                                    <CommandList>
+                                        <CommandEmpty>No parties found.</CommandEmpty>
+                                        <CommandGroup>
+                                            {politicalParties.map((party) => (
+                                                <CommandItem className="text-xs" 
+                                                    key={party.id}
+                                                    value={party.name}
+                                                    onSelect={(currentValue) => {
+                                                        setPartyValue(currentValue === partyValue ? "" : currentValue);
+                                                        setData({...data, partyId: party.id});
+                                                        addCandidate(party);
+                                                        setOpenPoliticalParty(false);
+                                                    }}
+                                                >
+                                                <span className="w-8 flex mr-1 items-center"><img src={party.logo} alt="" className="mr-2 h-4" /></span> {`${titleCase(party.name)}, (${party.acronym.toUpperCase()})`}
+                                                <Check
+                                                    className={cn(
+                                                    "ml-auto",
+                                                        partyValue === party.value ? "opacity-100" : "opacity-0"
+                                                    )}
+                                                />
+                                                </CommandItem>
+                                            ))}
+                                        </CommandGroup>
+                                    </CommandList>
+                                </Command>
+                            </PopoverContent>
+                        </Popover>
+                    </div>
+
+                    <div className="flex flex-col space-y-0.5">
+                        <Label className="text-[12px] text-gray-200 w-full text-left">Votes allocated to party</Label>                        
+                        <Input type="text" placeholder="Votes allocated to party" onChange={(e) => {setData({...data, pollingunitValidVotes: e.target.value})}} 
+                            className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 h-12
+                                        focus:border-b focus:border-0 bg-white rounded text-black w-full" 
+                        />
+                    </div>
 
                     {
                         resultImage ? (
@@ -403,17 +458,17 @@ export default function ResultEntry(){
         )
     }
 
-    function ResultPreview({candidates}){
+    function ResultPreview(){
 
         return (
             <div className="flex flex-col space-y-4 w-full h-full p-6 mt-16">
                 <div className="flex w-full justify-end">
-                    <Button className="bg-white hover:bg-white/40 text-black hover:text-white text-xs rounded px-4 self-center" onClick={() => setPreviewingResult(false)}>Add Result</Button>
+                    <Button className="bg-white hover:bg-white/40 text-black hover:text-white text-xs rounded px-4 self-center" onClick={() => startNewResult()}>Add Result</Button>
                 </div>
 
                 <div className="rounded p-4 bg-white w-full h-[500px]">
 
-                    <ResultProgress candidates={candidates} type={'small'} />
+                    <ResultProgress data={data} type={'small'} />
 
                 </div>
 
