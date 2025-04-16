@@ -159,6 +159,8 @@ function getSinglePercentage(group_array, profile){
     for(const single of group_array){
         if(profile[single] && typeof(profile[single]) == 'string' && profile[single].trim() !== ""){
             filled++;
+        }else if(typeof(profile[single]) == 'object' && profile[single]?.name){
+            filled++;
         }
     }
     return Math.round(filled * 100 / group_array.length);

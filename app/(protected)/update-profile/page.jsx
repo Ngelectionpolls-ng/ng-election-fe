@@ -9,8 +9,8 @@ import { Button } from "components/ui/button";
 import { Input } from "components/ui/input";
 import { Label } from "components/ui/label";
 
-import { GetStates, GetStateLGAs, 
-        GetLGAWards, GetWardPollingUnits,
+import { GetProfile, GetStates, GetStateLGAs, 
+        GetLGAWards, GetWardPollingUnits, UpdateProfile,
         GetPoliticalParties } from "services/profile/api";
 
 import { useToast } from "hooks/use-toast";
@@ -42,11 +42,12 @@ const formSchema = z.object({
 });
 
 
-export default function UpdateProfile(){
+export default function ProfileUpdate(){
 
     const [submitting, setSubmitting] = useState(false);
     const [fetching, setFetching] = useState(false);
     const [error, setError] = useState(null);
+    const [updating, setUpdating] = useState(false);
     const router = useRouter();
     const {toast} = useToast();
 
@@ -56,7 +57,59 @@ export default function UpdateProfile(){
     const [pollingUnits, setPollingUnits] = useState([{id: 'pollingunit_0', name: 'Select a ward first'}]);
     const [politicalParties, setPoliticalParties] = useState([{id: 'political_party_0', name: 'Select a political party'}]);
 
+    const [selectedState, setSelectedState] = useState(null);
+    const [selectedLga, setSelectedLga] = useState(null);
+    const [selectedWard, setSelectedWard] = useState(null);
+    const [selectedPollingunit, setSelectedPollingunit] = useState(null);
+    const [selectedParty, setSelectedParty] = useState(null);
+
     const {user, setLoading} = useContext(AppContext);
+
+    const getProfile = async (user_id) => {
+            
+        setError(null);
+        setUpdating(true);
+        const response = await GetProfile(user_id);
+        setUpdating(false);
+
+        console.log('Profile', response);
+        if(response?.status >= 200 && response?.status < 300){
+
+            const profile = response.data;
+            if(
+                profile.state.name != null && 
+                profile.lga.name != null && 
+                profile.ward.name != null && 
+                profile.pollingunit.name != null 
+                && user?.role.toLowerCase() == 'pollingUnitAgent'.toLowerCase() 
+                && profile.party.name != null
+            ){
+                setLoading(true);
+                router.push('/dashboard');
+            }else{
+                profile.state.name && setSelectedState(profile.state.name);
+                profile.lga.name && setSelectedLga(profile.lga.name);
+                profile.ward.name && setSelectedWard(profile.ward.name);
+                profile.pollingUnit.name && setSelectedPollingunit(profile.pollingUnit.name);
+                profile.party.name && setSelectedParty(profile.party.name);
+            }
+            
+        }else{
+
+            if(response.response.data.message){
+                setError(response.response.data.message);
+                toast({
+                    variant: 'destructive',
+                    description: response.response.data.message
+                });
+            }else{
+                toast({
+                    variant: 'destructive',
+                    description: 'Something went wrong. Please try again'
+                });
+            }
+        }        
+    } 
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -223,11 +276,13 @@ export default function UpdateProfile(){
     }
 
     useEffect(() => {
+        
         setLoading(false);
         getAllStates();
         getPoliticalParties();
+        user && getProfile(user.id);
 
-    }, []);
+    }, [user]);
 
     const getStateId = (value) => {
         const entry = ngStates.find((array_entry) => array_entry.name == value);
@@ -243,6 +298,50 @@ export default function UpdateProfile(){
         const entry = wards.find((array_entry) => array_entry.name == value);
         return entry.id;
     }
+
+    const getPollingUnitId = (value) => {
+        const entry = pollingUnits.find((array_entry) => array_entry.name == value);
+        return entry.id;
+    }
+
+    const getPartyId = (value) => {
+        const entry = politicalParties.find((array_entry) => array_entry.name == value);
+        return entry.id;
+    }
+
+    const update = async (field, value, setCallback) => {
+
+        //call the update endpoint and set editing false
+        setError(null);
+        setUpdating(true);
+        const response = await UpdateProfile(user?.id, {[field]:value});
+        setUpdating(false);
+
+        if(response.status >= 200 && response.status < 300){
+            toast({
+                variant: 'positive',
+                description: "Updated successfully"
+            });
+            getProfile(user?.id);
+            
+        }else{
+
+            if(response.response.data.message){
+                setError(response.response.data.message);
+                toast({
+                    variant: 'destructive',
+                    description: response.response.data.message
+                });
+            }else{
+                toast({
+                    variant: 'destructive',
+                    description: 'Something went wrong. Please try again'
+                });
+            }
+        }
+
+        setCallback();
+    }
     
 
     return (
@@ -255,9 +354,12 @@ export default function UpdateProfile(){
                     <div className="w-[450px] flex flex-col space-y-3 text-left">
                         
                         <Label className="">State</Label>
-                        <Select onValueChange={(e) => getStateLGAs(getStateId(e))}>
+                        <Select onValueChange={(e) => {
+                            update('state', getStateId(e), () => setSelectedState(e));
+                            getStateLGAs(getStateId(e));
+                        }}>
                             <SelectTrigger className="w-full h-10">
-                                <SelectValue placeholder="Select a state" />
+                                <SelectValue placeholder={selectedState ?? "Select a state"} />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
@@ -271,9 +373,12 @@ export default function UpdateProfile(){
                         </Select>
 
                         <Label className="">LGA</Label>
-                        <Select onValueChange={(e) => getLGAWards(getLGAId(e))}>
+                        <Select onValueChange={(e) => {
+                            update('lga', getLGAId(e), () => setSelectedLga(e));
+                            getLGAWards(getLGAId(e))
+                        }}>
                             <SelectTrigger className="w-full h-10">
-                                <SelectValue placeholder="Select a LGA" />
+                                <SelectValue placeholder={selectedLga ?? "Select a LGA"} />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
@@ -287,9 +392,12 @@ export default function UpdateProfile(){
                         </Select>
 
                         <Label className="">Electoral ward</Label>
-                        <Select onValueChange={(e) => getWardPollingUnits(getWardId(e))}>
+                        <Select onValueChange={(e) => {
+                            update('ward', getWardId(e), () => setSelectedWard(e));
+                            getWardPollingUnits(getWardId(e))
+                        }}>
                             <SelectTrigger className="w-full h-10">
-                                <SelectValue placeholder="Select a ward" />
+                                <SelectValue placeholder={selectedWard ?? "Select a ward"} />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
@@ -303,9 +411,11 @@ export default function UpdateProfile(){
                         </Select>
 
                         <Label className="">Polling unit</Label>
-                        <Select onValueChange={(e) => console.log(e)}>
+                        <Select onValueChange={(e) => {
+                                update('pollingunit', getPollingUnitId(e), () => setSelectedPollingunit(e));
+                            }}>
                             <SelectTrigger className="w-full h-10">
-                                <SelectValue placeholder="Select a polling unit" />
+                                <SelectValue placeholder={selectedPollingunit ?? "Select a polling unit"} />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
@@ -319,12 +429,14 @@ export default function UpdateProfile(){
                         </Select>
 
                         {
-                            user?.role == 'iWitness' && (
+                            user?.role.toLowerCase() == 'pollingUnitAgent'.toLowerCase() && (
                                 <>
                                     <Label className="">Political party</Label>
-                                    <Select className="mb-8">
+                                    <Select className="mb-8" onValueChange={(e) => {
+                                            update('party', getPartyId(e), () => setSelectedParty(e));
+                                        }}>
                                         <SelectTrigger className="w-full h-10">
-                                            <SelectValue placeholder="Select a political party" />
+                                            <SelectValue placeholder={selectedParty ?? "Select a political party"} />
                                         </SelectTrigger>
                                         <SelectContent>
                                             <SelectGroup>
