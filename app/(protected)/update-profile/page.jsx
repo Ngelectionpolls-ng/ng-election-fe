@@ -90,7 +90,7 @@ export default function ProfileUpdate(){
                 profile.state.name && setSelectedState(profile.state.name);
                 profile.lga.name && setSelectedLga(profile.lga.name);
                 profile.ward.name && setSelectedWard(profile.ward.name);
-                profile.pollingUnit.name && setSelectedPollingunit(profile.pollingUnit.name);
+                profile.pollingunit.name && setSelectedPollingunit(profile.pollingunit.name);
                 profile.party.name && setSelectedParty(profile.party.name);
             }
             

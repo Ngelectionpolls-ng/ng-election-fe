@@ -76,6 +76,7 @@ export default function ResultEntry(){
     const [openPoliticalParty, setOpenPoliticalParty] = React.useState(false);
     const [politicalParties, setPoliticalParties] = React.useState([]);
     const [partyValue, setPartyValue] = React.useState("");
+    const [party, setParty] = React.useState(null);
 
     const { elections, currentElection, setCurrentElection } = useContext(AppContext);
 
@@ -191,19 +192,31 @@ export default function ResultEntry(){
         console.log(data); 
         console.log('candidates', data.candidates); 
         let candidates = data.candidates;
-        const candidate = candidates.find((c) => c.partyId == party.id);
-        console.log('candidates', candidates); 
-        console.log('candidate found', candidate);        
+        const candidate = candidates.find((c) => c.partyId == party.id);              
         if(!candidate){  
-            candidates.push({ name: 'Peter Obi', acronym: party.acronym, votes: parseInt(data.pollingunitValidVotes), color: party.color, image: '/assets/images/apc.png', partyId: party.id });
-            console.log('candidates', candidates); 
-        }else{           
+            candidates.push({ name: 'Peter Obi', acronym: party.acronym, votes: data.pollingunitValidVotes, color: party.color, image: '/assets/images/apc.png', partyId: party.id });
+            console.log('candidates', candidates);
+        }else{
             candidate['votes'] = data.pollingunitValidVotes;
         }
+        setParty(party);
+        console.log('candidates', candidates);
+        console.log('candidate found', candidate);
         setData({...data, candidates: candidates, partyId: party.id});
     }
 
     const previewElectionResult = async () => {
+        let candidates = data.candidates;
+        const candidate = candidates.find((c) => c.partyId == party.id);              
+        if(!candidate){  
+            candidates.push({ name: 'Peter Obi', acronym: party.acronym, votes: data.pollingunitValidVotes, color: party.color, image: '/assets/images/apc.png', partyId: party.id });
+            console.log('candidates', candidates);
+        }else{
+            candidate['votes'] = data.pollingunitValidVotes;
+        }
+        console.log('candidates', candidates);
+        console.log('candidate found', candidate);
+        setData({...data, candidates: candidates, partyId: party.id});
         console.log(data)
         if(!validateResult(data)) return;
         setPreviewingResult(true);
@@ -401,7 +414,7 @@ export default function ResultEntry(){
                                                     key={party.id}
                                                     value={party.name}
                                                     onSelect={(currentValue) => {
-                                                        setPartyValue(currentValue === partyValue ? "" : currentValue);
+                                                        setPartyValue(currentValue === partyValue ? "": currentValue);
                                                         setData({...data, partyId: party.id});
                                                         addCandidate(party);
                                                         setOpenPoliticalParty(false);
@@ -425,7 +438,8 @@ export default function ResultEntry(){
 
                     <div className="flex flex-col space-y-0.5">
                         <Label className="text-[12px] text-gray-200 w-full text-left">Votes allocated to party</Label>                        
-                        <Input type="text" placeholder="Votes allocated to party" onChange={(e) => {setData({...data, pollingunitValidVotes: e.target.value})}} 
+                        <Input type="text" value={data.pollingunitValidVotes} placeholder="Votes allocated to party" 
+                            onChange={(e) => {setData({...data, pollingunitValidVotes: e.target.value})}} 
                             className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 h-12
                                         focus:border-b focus:border-0 bg-white rounded text-black w-full" 
                         />

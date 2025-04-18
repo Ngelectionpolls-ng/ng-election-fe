@@ -6,13 +6,24 @@ import { Button } from "components/ui/button";
 import { useRouter } from "next/navigation";
 import DashboardMain from "components/commons/DashboardMain";
 import { AppContext } from "contexts/App";
-import { Layers2, Waypoints, BriefcaseBusiness, MoveUp, MoveDown } from "lucide-react";
+import { Layers2, Waypoints, BriefcaseBusiness, MoveUp, MoveDown, Plus } from "lucide-react";
 import { getTime } from "helpers";
 import RadialChart from "components/dashboard/RadialChart";
 import Barchart from "components/dashboard/Barchart";
 import { GetWalletInfo, ProcessWithdrawal, 
          GetTransactionHistory, WalletConversions } from "services/wallet/api";
 import Error from "components/commons/Error";
+import Withdrawal from "components/dashboard/Withdrawal";
+
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "components/ui/select";
 
 
 export default function Wallet(){
@@ -23,6 +34,13 @@ export default function Wallet(){
     const [activeWalletFilter, setActiveWalletFilter] = useState('today');
     const [error, setError] = useState(null);
     const [fetching, setFetching] = useState(false);
+    const [withdrawing, setWithdrawing] = useState(false);
+
+    const [posts, setPosts] = useState(0);
+    const [cash, setCash] = useState(0);
+    const [points, setPoints] = useState(0);
+    const [totalEarned, setTotalEarned] = useState(0);
+    const [withdrawn, setWithdrawn] = useState(0);
 
     const activities = [];
 
@@ -96,7 +114,41 @@ export default function Wallet(){
         console.log('reports', response);
         if(response.status >= 200 && response.status < 300){    
             
-            //we fill the activities now            
+            //we fill the activities now  
+            const resp = response.data;
+            setPosts(resp.posts);
+            setCash(resp.cash);
+            setPoints(resp.pointBalance);
+            setTotalEarned(resp.totalEarned);
+            setWithdrawn(resp.withdrawn);
+            
+            
+        }else{
+
+            if(response.response.data.message){
+                setError(response.response.data.message);
+                toast({
+                    variant: 'destructive',
+                    description: response.response.data.message
+                });
+            }else{
+                toast({
+                    variant: 'destructive',
+                    description: 'Something went wrong. Please try again'
+                });
+            }
+        }
+    }
+
+    const processWithdrawal = async (data) => {
+        setError(null);
+        setFetching(true);
+        const response = await ProcessWithdrawal(data);
+        setFetching(false);
+
+        console.log('voucher rsponse', response);
+        if(response.status >= 200 && response.status < 300){
+                        
             
         }else{
 
@@ -141,7 +193,7 @@ export default function Wallet(){
                         <span className="text-green-900 text-md font-semibold">{user?.role}</span>
                     </div>
                     
-                    <Button className="text-white rounded-full w-autoo px-8 py-2 mt-4 h-12 bg-green-900">Make a Withdrawal</Button>
+                    <Button className="text-white rounded-full w-autoo px-8 py-2 mt-4 h-12 bg-green-900" onClick={() => setWithdrawing(true)}>Make a Withdrawal</Button>
                 </div>
 
                 <div className="w-full flex flex-col md:flex-row justify-between space-y-10 md:space-y-0 md:space-x-4 py-4">
@@ -156,7 +208,7 @@ export default function Wallet(){
                                 </div>
                                 <div className="flex flex-col space-y-1">
                                     <span className="text-sm text-gray-500">Posts</span>
-                                    <span className="text-sm font-semibold text-gray-900">456</span>                                
+                                    <span className="text-sm font-semibold text-gray-900">{posts}</span>                                
                                 </div>
                             </div>
 
@@ -166,7 +218,7 @@ export default function Wallet(){
                                 </div>
                                 <div className="flex flex-col space-y-1">
                                     <span className="text-sm text-gray-500">Points Balance</span>
-                                    <span className="text-sm font-semibold text-gray-900">1200</span>                                
+                                    <span className="text-sm font-semibold text-gray-900">{points}</span>                                
                                 </div>
                             </div>
 
@@ -176,7 +228,7 @@ export default function Wallet(){
                                 </div>
                                 <div className="flex flex-col space-y-1">
                                     <span className="text-sm text-gray-500">Points Withdrawn</span>
-                                    <span className="text-sm font-semibold text-gray-900">4200</span>                                
+                                    <span className="text-sm font-semibold text-gray-900">{withdrawn}</span>                                
                                 </div>
                             </div>
                             
@@ -188,7 +240,7 @@ export default function Wallet(){
                                 </div>
                                 <div className="flex flex-col space-y-1">
                                     <span className="text-sm text-gray-500">Total Points Earned</span>
-                                    <span className="text-sm font-semibold text-gray-900">5400</span>                                
+                                    <span className="text-sm font-semibold text-gray-900">{totalEarned}</span>                                
                                 </div>
                             </div>
 
@@ -210,7 +262,7 @@ export default function Wallet(){
 
                     <div className="w-[320px] rounded-xl bg-purple-700 text-white text-sm h-[200px] p-4 flex flex-col order-1 md:order-2 justify-center space-y-4">
                         <span className="text-white/50 text-xs">Main Wallet</span>
-                        <span className="text-white text-xl">₦{"45,500"}</span>
+                        <span className="text-white text-xl">₦{cash}</span>
                         <div className="w-full justify-between flex items-center">
                             <span className="text-xs text-white/80">
                                 {user?.name}
@@ -312,6 +364,9 @@ export default function Wallet(){
                         
                 
             </DashboardMain>
+
+            <Withdrawal withdrawing={withdrawing} setWithdrawing={setWithdrawing} processWithdrawal={processWithdrawal} />
+               
 
         </main>
        
