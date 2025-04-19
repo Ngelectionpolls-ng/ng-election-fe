@@ -35,12 +35,12 @@ export default function Wallet(){
     const [error, setError] = useState(null);
     const [fetching, setFetching] = useState(false);
     const [withdrawing, setWithdrawing] = useState(false);
-
+    const [withdrawn, setWithdrawn] = useState(false);
     const [posts, setPosts] = useState(0);
     const [cash, setCash] = useState(0);
     const [points, setPoints] = useState(0);
     const [totalEarned, setTotalEarned] = useState(0);
-    const [withdrawn, setWithdrawn] = useState(0);
+    
 
     const activities = [];
 
@@ -122,33 +122,6 @@ export default function Wallet(){
             setTotalEarned(resp.totalEarned);
             setWithdrawn(resp.withdrawn);
             
-            
-        }else{
-
-            if(response.response.data.message){
-                setError(response.response.data.message);
-                toast({
-                    variant: 'destructive',
-                    description: response.response.data.message
-                });
-            }else{
-                toast({
-                    variant: 'destructive',
-                    description: 'Something went wrong. Please try again'
-                });
-            }
-        }
-    }
-
-    const processWithdrawal = async (data) => {
-        setError(null);
-        setFetching(true);
-        const response = await ProcessWithdrawal(data);
-        setFetching(false);
-
-        console.log('voucher rsponse', response);
-        if(response.status >= 200 && response.status < 300){
-                        
             
         }else{
 
@@ -365,8 +338,8 @@ export default function Wallet(){
                 
             </DashboardMain>
 
-            <Withdrawal withdrawing={withdrawing} setWithdrawing={setWithdrawing} processWithdrawal={processWithdrawal} />
-               
+            <Withdrawal withdrawing={withdrawing} setWithdrawing={setWithdrawing} />
+             
 
         </main>
        
