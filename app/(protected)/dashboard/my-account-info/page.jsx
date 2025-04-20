@@ -68,7 +68,7 @@ export default function Profile(){
     const [editingEmail, setEditingEmail] = useState(false);
 
     //selects
-    const [profile, setProfile] = useState({});
+    const [profile, setProfile] = useState(null);
     const [parties, setParties] = useState([]);
     const [states, setStates] = useState([]);
     const [lgas, setLgas] = useState([]);
@@ -90,6 +90,7 @@ export default function Profile(){
 
             setProfile(response.data);
             const profileData = response.data;
+            console.log('PROFILE DATA LGA', profileData.lga.name);
             setFirstName(getFirstName(profileData.name));
             setLastName(getLastName(profileData.name));
             setAge(profileData.age ?? 18);
@@ -101,8 +102,14 @@ export default function Profile(){
             profileData.whatsapp && setWhatsApp(profileData.whatsapp);
             setEmail(profileData.email);
             profileData.state?.name && setTheState(profileData.state.name);
+            profileData.state?.name && getStateLGAs(getStateId(profileData.state.name));
+
             profileData.lga?.name && setLGA(profileData.lga.name);
+            profileData.lga?.name && getLGAWards(getLGAId(profileData.lga.name));
+
             profileData.ward?.name && setWard(profileData.ward.name);
+            profileData.ward?.name && getWardPollingUnits(getWardId(profileData.ward.name));
+
             profileData.pollingunit?.name && setPollingUnit(profileData.pollingunit.name);
 
             setPercentages(getProfilePercentages(profileData));
@@ -134,7 +141,7 @@ export default function Profile(){
 
         user && getProfile(user.id);
 
-    }, [user, states, profile]);
+    }, [user, profile]);
 
     const getAllStates = async () => {
         setError(null);
@@ -390,6 +397,7 @@ export default function Profile(){
 
                     <div className="w-full flex flex-col md:flex-row py-3 md:space-x-2">
 
+                        {/* FIRST NAME */}
                         <div className="w-full md:w-[30%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">First Name</h4>
                             <div className="relative w-full">
@@ -424,7 +432,8 @@ export default function Profile(){
                                 }
                             </div>                            
                         </div>
-
+                        
+                        {/* LAST NAME */}
                         <div className="w-full md:w-[30%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">Last Name</h4>
                             <div className="relative w-full">
@@ -461,6 +470,7 @@ export default function Profile(){
                             </div>                            
                         </div>
 
+                        {/* AGE */}
                         <div className="w-full md:w-[30%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">Age</h4>
                             <div className="relative w-full">
@@ -501,6 +511,7 @@ export default function Profile(){
 
                     <div className="w-full flex flex-col md:flex-row py-3 md:space-x-2">
 
+                        {/* SEX */}
                         <div className="w-full md:w-[30%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">Sex</h4>
                             <div className="relative w-full">                                
@@ -521,6 +532,7 @@ export default function Profile(){
                             </div>                            
                         </div>
 
+                        {/* OCCUPATION */}
                         <div className="w-full md:w-[30%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">Occupation</h4>
                             <div className="relative w-full">
@@ -544,6 +556,7 @@ export default function Profile(){
                             </div>                            
                         </div>
 
+                        {/* PARTY */}
                         <div className="w-full md:w-[30%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">Party Affiliation</h4>
                             <div className="relative w-full">                                
@@ -699,7 +712,7 @@ export default function Profile(){
 
                     <div className="w-full flex flex-col md:flex-row py-3 md:space-x-2">
                         
-
+                        {/* STATE */}
                         <div className="w-full md:w-[25%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">State</h4>
                             <div className="relative w-full">                                
@@ -722,13 +735,14 @@ export default function Profile(){
                             </div>                            
                         </div>
 
+                        {/* LGA */}
                         <div className="w-full md:w-[25%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">LGA</h4>
                             <div className="relative w-full">                  
 
                                 <Select onValueChange={(e) => {update('lga', getLGAId(e), () => setLGA(e)); getLGAWards(getLGAId(e))}} value={LGA}>
                                     <SelectTrigger className="w-full" >
-                                        <SelectValue placeholder={LGA ?? "Select your state"} />
+                                        <SelectValue placeholder={profile?.lga?.name ?? "Select your state"} />
                                     </SelectTrigger>
                                     <SelectContent className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0">
                                         <SelectGroup>
@@ -744,6 +758,7 @@ export default function Profile(){
                             </div>                            
                         </div>
 
+                        {/* WARD */}
                         <div className="w-full md:w-[25%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">Ward</h4>
                             <div className="relative w-full">                                
@@ -766,6 +781,7 @@ export default function Profile(){
                             </div>                            
                         </div>
 
+                        {/* POLLING UNIT */}
                         <div className="w-full md:w-[25%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">Polling unit</h4>
                             <div className="relative w-full">                                

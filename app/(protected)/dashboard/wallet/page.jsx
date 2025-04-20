@@ -338,7 +338,7 @@ export default function Wallet(){
                 
             </DashboardMain>
 
-            <Withdrawal withdrawing={withdrawing} setWithdrawing={setWithdrawing} />
+            <Withdrawal withdrawing={withdrawing} setWithdrawing={setWithdrawing} cash={cash} />
              
 
         </main>

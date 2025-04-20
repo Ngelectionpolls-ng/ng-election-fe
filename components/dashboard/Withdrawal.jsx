@@ -63,14 +63,13 @@ import { GetWalletInfo, ProcessWithdrawal,
          GetTransactionHistory, WalletConversions } from "services/wallet/api";
 
 
-export default function Withdrawal({withdrawing, setWithdrawing}){
+export default function Withdrawal({withdrawing, setWithdrawing, cash}){
     
     const [error, setError] = useState(null);
     const {user} = useContext(AppContext);
 
     const [fetching, setFetching] = useState(false);
     const [posts, setPosts] = useState(0);
-    const [cash, setCash] = useState(0);
     const [points, setPoints] = useState(0);
     const [totalEarned, setTotalEarned] = useState(0);
     const [withdrawn, setWithdrawn] = useState(0);
