@@ -43,7 +43,8 @@ const AppProvider = ({children}) => {
             if(response.status >= 200 && response.status < 300){    
                 
                 //we fill the elections
-                const resp = response.data.docs;
+                // const resp = response.data.docs;
+                const resp = response.data;
                 setElections(resp);
                 
             }else{

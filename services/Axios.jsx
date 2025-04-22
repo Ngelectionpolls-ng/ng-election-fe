@@ -12,6 +12,8 @@ Axios.interceptors.response.use(null, (error) => {
     // console.log("error don show", error.status);
     if(error.status == 401){
         logout();
+    }else{
+        return error;
     }
 });
 

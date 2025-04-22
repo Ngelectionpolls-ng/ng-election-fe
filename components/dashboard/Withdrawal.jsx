@@ -77,19 +77,20 @@ export default function Withdrawal({withdrawing, setWithdrawing, cash}){
     const [expiryDate, setExpiryDate] = useState("");
 
     const [data, setData] = useState({
-        userId: null,
+        // userId: null,
         withdrawalType: "cash",
-        amount: 0,
+        amount: "0",
         merchant: null,
         phone: null
     });
 
     useEffect(() => {
-        setData({...data, userId: user?.id, phone: user?.phone});
+        // setData({...data, userId: user?.id, phone: user?.phone});
+        setData({...data, phone: user?.phone});
     }, [user]);
 
     const validateWithdrawal = () => {
-        if(cash < 100){
+        if(parseInt(cash) < 100){
             setError("You don't have enough cash");
             return false;
         }
@@ -104,7 +105,7 @@ export default function Withdrawal({withdrawing, setWithdrawing, cash}){
             return false;
         }
 
-        if(data.amount > cash){
+        if(parseInt(data.amount) > parseInt(cash)){
             setError("The amount is greater than the balance");
             return false;
         }
@@ -120,13 +121,23 @@ export default function Withdrawal({withdrawing, setWithdrawing, cash}){
         const response = await ProcessWithdrawal(data);
         setFetching(false);
 
-        setWithdrawing(false);
-        setWithdrawn(true);
+        
 
         console.log('withdrawal response', response);
         if(response.status >= 200 && response.status < 300){
 
+            const details = response.data.data.details;
+            setVoucherNumber(details.pin);
+            setExpiryDate(details.expiryDate ?? 'N/A');
+            
+            setWithdrawing(false);
+            setWithdrawn(true);
+
         }else{
+
+            console.log(response);
+
+            setError(response.message[0]);
 
             if(response.response.data.message){
                 setError(response.response.data.message);
@@ -207,7 +218,7 @@ export default function Withdrawal({withdrawing, setWithdrawing, cash}){
 
                                 <div className="flex flex-col space-y-2">
                                     <h6 className="text-xs text-gray-500">Select Amount</h6>
-                                    <Select onValueChange={(e) => {setError(null); setData({...data, amount: parseInt(e)}); console.log('amount', e)}} className="h-8 text-xs">
+                                    <Select onValueChange={(e) => {setError(null); setData({...data, amount: e}); console.log('amount', e)}} className="h-8 text-xs">
                                         <SelectTrigger className="h-8 bg-slate-200 w-[150px] text-xs" >
                                             <SelectValue placeholder="Select Amount" />
                                         </SelectTrigger>
@@ -215,6 +226,7 @@ export default function Withdrawal({withdrawing, setWithdrawing, cash}){
                                             <SelectGroup>
                                                 <SelectItem value="100">100</SelectItem>
                                                 <SelectItem value="200">200</SelectItem>
+                                                <SelectItem value="500">500</SelectItem>
                                             </SelectGroup>
                                         </SelectContent>
                                     </Select>
