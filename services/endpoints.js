@@ -33,3 +33,9 @@ export const GET_WALLET_INFO = `wallets/:user_id`;
 export const PROCESS_WITHDRAWAL = `wallets/withdrawals`;
 export const TRANSACTION_HISTORY = `wallets/transactions/history/:user_id`;
 export const WALLET_CONVERSIONS = `wallets/conversions`;
+
+//results
+export const SAVE_ELECTION_RESULT = `agents/upload`;
+
+//elections
+export const GET_ELECTIONS = `elections`;

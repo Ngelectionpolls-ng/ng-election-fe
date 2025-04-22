@@ -12,11 +12,19 @@ const DashboardProvider = ({children}) => {
     const [capturingVideo, setCapturingVideo] = useState(false);
     const [captured, setCaptured] = useState(false);
     const [enteringResult, setEnteringResult] = useState(false);
+    const [captureFor, setCaptureFor] = useState(""); //either result or report
+
+    const [resultImage, setResultImage] = useState(null);
+    const [reportImage, setReportImage] = useState(null);
+    
 
     return (
         <DashboardContext.Provider value={{activeMenu, setActiveMenu, capturing, setCapturing, 
                                             capturingVideo, setCapturingVideo, captured, setCaptured,
-                                            enteringResult, setEnteringResult}}>
+                                            enteringResult, setEnteringResult, 
+                                            captureFor, setCaptureFor,
+                                            resultImage, setResultImage,
+                                            reportImage, setReportImage}}>
             {children}
         </DashboardContext.Provider>
     )

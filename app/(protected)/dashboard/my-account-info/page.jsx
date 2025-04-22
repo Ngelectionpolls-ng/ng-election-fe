@@ -68,6 +68,7 @@ export default function Profile(){
     const [editingEmail, setEditingEmail] = useState(false);
 
     //selects
+    const [profile, setProfile] = useState(null);
     const [parties, setParties] = useState([]);
     const [states, setStates] = useState([]);
     const [lgas, setLgas] = useState([]);
@@ -87,22 +88,31 @@ export default function Profile(){
         console.log(response);
         if(response?.status >= 200 && response?.status < 300){
 
-            const profile = response.data;
-            setFirstName(getFirstName(profile.name));
-            setLastName(getLastName(profile.name));
-            setAge(profile.age ?? 18);
-            profile.sex && setSex(profile.sex ?? "");
-            profile.occupation && setOccupation(profile.occupation ?? "");
-            profile.party && setParty(profile.party ?? "");
-            profile.phone && setPhone(profile.phone ?? "");
-            profile.email && setEmail(profile.email ?? "");
-            profile.whatsapp && setWhatsApp(profile.whatsapp ?? "");
-            setEmail(profile.email);
-            profile.state && setTheState(profile.state ?? "");
-            profile.lga && setLGA(profile.lga ?? "");
-            profile.ward && setWard(profile.ward ?? "");
+            setProfile(response.data);
+            const profileData = response.data;
+            console.log('PROFILE DATA LGA', profileData.lga.name);
+            setFirstName(getFirstName(profileData.name));
+            setLastName(getLastName(profileData.name));
+            setAge(profileData.age ?? 18);
+            profileData.sex && setSex(profileData.sex);
+            profileData.occupation && setOccupation(profileData.occupation);
+            profileData.party && setParty(profileData.party.name);
+            profileData.phone && setPhone(profileData.phone);
+            profileData.email && setEmail(profileData.email);
+            profileData.whatsapp && setWhatsApp(profileData.whatsapp);
+            setEmail(profileData.email);
+            profileData.state?.name && setTheState(profileData.state.name);
+            profileData.state?.name && getStateLGAs(getStateId(profileData.state.name));
 
-            setPercentages(getProfilePercentages(profile));
+            profileData.lga?.name && setLGA(profileData.lga.name);
+            profileData.lga?.name && getLGAWards(getLGAId(profileData.lga.name));
+
+            profileData.ward?.name && setWard(profileData.ward.name);
+            profileData.ward?.name && getWardPollingUnits(getWardId(profileData.ward.name));
+
+            profileData.pollingunit?.name && setPollingUnit(profileData.pollingunit.name);
+
+            setPercentages(getProfilePercentages(profileData));
             // updateUser(profile);
             
         }else{
@@ -131,7 +141,7 @@ export default function Profile(){
 
         user && getProfile(user.id);
 
-    }, [user, states]);
+    }, [user, profile]);
 
     const getAllStates = async () => {
         setError(null);
@@ -345,6 +355,11 @@ export default function Profile(){
         return entry.id;
     }
 
+    const getPollingUnitId = (value) => {
+        const entry = pollingUnits.find((array_entry) => array_entry.name == value);
+        return entry.id;
+    }
+
     const updateUser = (profile) => {
         localStorage.setItem('user', JSON.stringify(profile));
     }
@@ -382,6 +397,7 @@ export default function Profile(){
 
                     <div className="w-full flex flex-col md:flex-row py-3 md:space-x-2">
 
+                        {/* FIRST NAME */}
                         <div className="w-full md:w-[30%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">First Name</h4>
                             <div className="relative w-full">
@@ -404,7 +420,7 @@ export default function Profile(){
                                         
                                     ) : (
                                         <>
-                                            <Input type="text" value={firstName} placeholder="Enter your first name..." onChange={(e) => setFirstName(e.target.value)} 
+                                            <Input type="text" value={getFirstName(profile?.name)} placeholder="Enter your first name..." onChange={(e) => setFirstName(e.target.value)} 
                                                 className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0"  
                                                 readOnly={"readOnly"} />
                                             <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1 bg-white">
@@ -416,7 +432,8 @@ export default function Profile(){
                                 }
                             </div>                            
                         </div>
-
+                        
+                        {/* LAST NAME */}
                         <div className="w-full md:w-[30%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">Last Name</h4>
                             <div className="relative w-full">
@@ -440,7 +457,7 @@ export default function Profile(){
                                         
                                     ) : (
                                         <>
-                                            <Input type="text" value={lastName} placeholder="Enter your last name..." onChange={(e) => setLastName(e.target.value)} 
+                                            <Input type="text" value={getLastName(profile?.name)} placeholder="Enter your last name..." onChange={(e) => setLastName(e.target.value)} 
                                                     className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0" 
                                                     readOnly="readOnly" />
                                             <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1 bg-white">
@@ -453,6 +470,7 @@ export default function Profile(){
                             </div>                            
                         </div>
 
+                        {/* AGE */}
                         <div className="w-full md:w-[30%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">Age</h4>
                             <div className="relative w-full">
@@ -475,7 +493,7 @@ export default function Profile(){
                                         
                                     ) : (
                                         <>
-                                            <Input type="number" min="18" value={age} placeholder="Enter your age..." onChange={(e) => setAge(e.target.value)} 
+                                            <Input type="number" min="18" value={profile?.age} placeholder="Enter your age..." onChange={(e) => setAge(e.target.value)} 
                                                 className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0"  
                                                 readOnly={"readOnly"} />
                                             <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1 bg-white">
@@ -493,19 +511,20 @@ export default function Profile(){
 
                     <div className="w-full flex flex-col md:flex-row py-3 md:space-x-2">
 
+                        {/* SEX */}
                         <div className="w-full md:w-[30%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">Sex</h4>
                             <div className="relative w-full">                                
                                 
                                 <Select onValueChange={(e) => {update('sex', e, () => {})}} value={sex} >
                                     <SelectTrigger className="w-full" >
-                                        <SelectValue placeholder="Select your sex" />
+                                        <SelectValue placeholder={"Select your sex"} />
                                     </SelectTrigger>
                                     <SelectContent className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0">
                                         <SelectGroup>
-                                            <SelectItem value="male">Male</SelectItem>
-                                            <SelectItem value="female">Female</SelectItem>
-                                            <SelectItem value="other">Other</SelectItem>
+                                            <SelectItem value="Male">Male</SelectItem>
+                                            <SelectItem value="Female">Female</SelectItem>
+                                            {/* <SelectItem value="other">Other</SelectItem> */}
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
@@ -513,46 +532,38 @@ export default function Profile(){
                             </div>                            
                         </div>
 
+                        {/* OCCUPATION */}
                         <div className="w-full md:w-[30%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">Occupation</h4>
-                            <div className="relative w-full">                                
-                                {
-                                    editingOccupation ? (
-                                        <>
-                                            <Input type="text" value={occupation} placeholder="Enter occupation..." onChange={(e) => setOccupation(e.target.value)} 
-                                                className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0" 
-                                                />
-                                            <div className="flex space-x-1 cursor-pointer absolute bottom-1 right-1 bg-white">
-                                                <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full ">
-                                                    <Check className="text-gray-500 w-4 h-4" onClick={() => update('occupation', occupation, () => setEditingOccupation(false))} />
-                                                </div>
-                                                <div className="flex justify-center items-center w-7 h-7 hover:bg-black/5 rounded-full">
-                                                    <X className="text-gray-500 w-4 h-4" onClick={() => reset(() => setOccupation(user?.occupation), () => setEditingOccupation(false))} />
-                                                </div>
-                                            </div>
-                                        </>                                        
-                                        
-                                    ) : (
-                                        <>
-                                            <Input type="text" value={occupation} placeholder="Enter occupation..." onChange={(e) => setOccupation(e.target.value)} 
-                                                className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0"  
-                                                readOnly={"readOnly"} />
-                                            <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1 bg-white">
-                                                <Pencil className="text-gray-500 w-4 h-4" onClick={() => setEditingOccupation(true)} />
-                                            </div>
-                                        </>                                        
-                                    )
-                                }
+                            <div className="relative w-full">
+                                <Select onValueChange={(e) => {
+                                        update('occupation', e, () => setOccupation(e));
+                                    }}>
+                                    <SelectTrigger className="w-full">
+                                        <SelectValue placeholder={occupation ?? "Select occupation"} />
+                                    </SelectTrigger>
+                                    <SelectContent className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0">
+                                        <SelectGroup>
+                                            <SelectItem key={"Employed"} value={"Employed"}>Employed</SelectItem>
+                                            <SelectItem key={"Unemployed"} value={"Unemployed"}>Unemployed</SelectItem>
+                                            <SelectItem key={"Self-Employed"} value={"Self-Employed"}>Self-Employed</SelectItem>
+                                            <SelectItem key={"Artisan"} value={"Artisan"}>Artisan</SelectItem>
+                                            <SelectItem key={"Student"} value={"Student"}>Studentt</SelectItem>
+                                        </SelectGroup>
+                                    </SelectContent>
+                                </Select>                           
+                               
                             </div>                            
                         </div>
 
+                        {/* PARTY */}
                         <div className="w-full md:w-[30%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">Party Affiliation</h4>
                             <div className="relative w-full">                                
                                 
                                 <Select onValueChange={(e) => update('party', e, () => {})} value={party}>
                                     <SelectTrigger className="w-full" >
-                                        <SelectValue placeholder="Select your party" />
+                                        <SelectValue placeholder={party ?? "Select your party"} />
                                     </SelectTrigger>
                                     <SelectContent className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0">
                                         <SelectGroup>
@@ -604,7 +615,7 @@ export default function Profile(){
                                         
                                     ) : (
                                         <>
-                                            <Input type="text" value={phone} placeholder="Enter your mobile..." onChange={(e) => setPhone(e.target.value)} 
+                                            <Input type="text" value={profile?.phone} placeholder="Enter your mobile..." onChange={(e) => setPhone(e.target.value)} 
                                                 className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-8"  
                                                 readOnly={"readOnly"} />
                                             <div className="flex justify-center items-center w-8 h-8 hover:bg-black/5 rounded-full cursor-pointer absolute bottom-1 right-1 bg-white">
@@ -701,14 +712,14 @@ export default function Profile(){
 
                     <div className="w-full flex flex-col md:flex-row py-3 md:space-x-2">
                         
-
+                        {/* STATE */}
                         <div className="w-full md:w-[25%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">State</h4>
                             <div className="relative w-full">                                
                                 
-                                <Select onValueChange={(e) => {update('state', e, () => {}); getStateLGAs(getStateId(e))}} value={theState}>
+                                <Select onValueChange={(e) => {update('state', getStateId(e), () => setTheState(e)); getStateLGAs(getStateId(e))}} value={theState}>
                                     <SelectTrigger className="w-full" >
-                                        <SelectValue placeholder="Select your state" />
+                                        <SelectValue placeholder={theState ?? "Select your state"} />
                                     </SelectTrigger>
                                     <SelectContent className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0">
                                         <SelectGroup>
@@ -724,13 +735,14 @@ export default function Profile(){
                             </div>                            
                         </div>
 
+                        {/* LGA */}
                         <div className="w-full md:w-[25%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">LGA</h4>
-                            <div className="relative w-full">                                
-                                
-                                <Select onValueChange={(e) => {update('lga', e, () => {}); getLGAWards(getLGAId(e))}} value={LGA}>
+                            <div className="relative w-full">                  
+
+                                <Select onValueChange={(e) => {update('lga', getLGAId(e), () => setLGA(e)); getLGAWards(getLGAId(e))}} value={LGA}>
                                     <SelectTrigger className="w-full" >
-                                        <SelectValue placeholder="Select LGA" />
+                                        <SelectValue placeholder={profile?.lga?.name ?? "Select your state"} />
                                     </SelectTrigger>
                                     <SelectContent className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0">
                                         <SelectGroup>
@@ -741,18 +753,19 @@ export default function Profile(){
                                             }
                                         </SelectGroup>
                                     </SelectContent>
-                                </Select>
-                                
+                                </Select>              
+                                                            
                             </div>                            
                         </div>
 
+                        {/* WARD */}
                         <div className="w-full md:w-[25%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">Ward</h4>
                             <div className="relative w-full">                                
                                 
-                                <Select onValueChange={(e) => {update('ward', e, () => {}); getWardPollingUnits(getWardId(e))}} value={ward}>
+                                <Select onValueChange={(e) => {update('ward', getWardId(e), () => setWard(e)); getWardPollingUnits(getWardId(e))}} value={ward}>
                                     <SelectTrigger className="w-full" >
-                                        <SelectValue placeholder="Select ward" />
+                                        <SelectValue placeholder={ward ?? "Select ward"} />
                                     </SelectTrigger>
                                     <SelectContent className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0">
                                         <SelectGroup>
@@ -768,21 +781,25 @@ export default function Profile(){
                             </div>                            
                         </div>
 
+                        {/* POLLING UNIT */}
                         <div className="w-full md:w-[25%] flex flex-col space-y-2 mt-4">
                             <h4 className="text-gray-900 text-xs font-semibold">Polling unit</h4>
                             <div className="relative w-full">                                
                                 
-                                <Select onValueChange={(e) => update('pollingUnit', e, () => {})} value={pollingUnit}>
+                                <Select onValueChange={(e) => update('pollingunit', getPollingUnitId(e), () => setPollingUnit(e))} value={pollingUnit}>
                                     <SelectTrigger className="w-full" >
-                                        <SelectValue placeholder="Select polling unit" />
+                                        <SelectValue placeholder={pollingUnit ?? "Select polling unit"} />
                                     </SelectTrigger>
                                     <SelectContent className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0">
                                         <SelectGroup>
                                             {
-                                                pollingUnits.map((a_pollingunit, index) => (
+                                                pollingUnits.length ? pollingUnits.map((a_pollingunit, index) => (
                                                     <SelectItem value={a_pollingunit.name} key={index}>{titleCase(a_pollingunit.name)}</SelectItem>
-                                                ))
+                                                )) : (
+                                                    <SelectItem value={"Select"}>{pollingUnit}</SelectItem> 
+                                                )
                                             }
+
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
