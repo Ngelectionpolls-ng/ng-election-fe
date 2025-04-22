@@ -1,5 +1,6 @@
 "use client"
 
+import React, { useEffect } from "react";
 import ProfileSummary from "components/dashboard/ProfileSummary";
 import { Button } from "components/ui/button";
 import { useRouter } from "next/navigation";
@@ -9,8 +10,11 @@ import DashboardMain from "components/commons/DashboardMain";
 export default function Dashboard(){
 
     const router = useRouter();
-
     const activities = [];
+
+    useEffect(() => {
+        
+    }, []);
 
     return (
         <main className="flex-1 p-4 flex">

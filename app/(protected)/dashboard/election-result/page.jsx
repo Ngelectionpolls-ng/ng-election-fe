@@ -363,6 +363,8 @@ export default function ElectionResult(){
         { name: 'Rabiu Hasan', acronym: 'WAPP', votes: 57790, color: 'bg-purple-400', image: '/assets/images/apc.png' },
     ];
 
+    const [data, setData] = useState({candidates: candidates, accreditedVoters: 1123456})
+
     
     useEffect(() => {
         getAllStates();
@@ -595,7 +597,7 @@ export default function ElectionResult(){
 
                     {
                         !stateValue && (
-                            <NationalResults candidates={candidates} />
+                            <NationalResults data={data} />
                         )
                     }
                     

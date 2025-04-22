@@ -36,6 +36,7 @@
     "react-hook-form": "^7.54.1",
     "react-remove-scroll": "^2.6.1",
     "react-remove-scroll-bar": "^2.3.8",
+    "react-share": "^5.2.2",
     "recharts": "^2.15.0",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",

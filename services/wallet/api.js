@@ -24,15 +24,15 @@ export const ProcessWithdrawal = async (data) => {
 
     let result = null;
 
-    await Axios.post(PROCESS_WITHDRAWAL, {...data}, {
+    return await Axios.post(PROCESS_WITHDRAWAL, {...data}, {
         headers: {
             Authorization: 'Bearer ' + getToken()
         }
     })
-    .then(response => {result = response})
-    .catch(error => {result = error});
+    .then(response => response)
+    .catch(error => error);
 
-    return result;
+    // return result;
 } 
 
 export const GetTransactionHistory = async () => {

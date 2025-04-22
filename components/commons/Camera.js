@@ -68,6 +68,7 @@ const camera = function () {
         stopCamera: function () {
             this.video.pause();
             const stream = video.srcObject;
+            if(!stream) return;
             const tracks = stream.getTracks();
 
             tracks.forEach((track) => {
@@ -76,7 +77,7 @@ const camera = function () {
 
             video.srcObject = null;
 
-            removeObjects(video, canvas);
+            // removeObjects(video, canvas);
         }
     
     }

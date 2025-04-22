@@ -44,6 +44,9 @@ import {GetReports} from "services/reports/api";
 import Error from "components/commons/Error";
 import { makeSlug, titleCase } from "helpers";
 
+import { FacebookShareButton, WhatsappShareButton, TwitterShareButton, 
+        FacebookIcon, WhatsappIcon, TwitterIcon } from "react-share";
+
 export default function EyeWitnessReport(){
 
     const {user, currentElection, setCurrentElection, setLoading} = useContext(AppContext);
@@ -60,6 +63,7 @@ export default function EyeWitnessReport(){
     const [wards, setWards] = useState([{label:"Select a ward", value: ""}]);
     const [openWardElections, setOpenWardElections] = useState(false);
     const [wardValue, setWardValue] = useState(null);
+    const [share, setShare] = useState(null);
     
     const [pollingUnits, setPollingUnits] = useState([{label:"Select a polling unit", value: ""}]);
     const [openPollingUnitElections, setOpenPollingUnitElections] = useState(false);
@@ -72,6 +76,7 @@ export default function EyeWitnessReport(){
 
     const activities = [
         {
+            id: 1,
             image: "/assets/images/list-1.png",
             pollingUnit: "polling unit 1",
             ward: "ward 1",
@@ -83,6 +88,7 @@ export default function EyeWitnessReport(){
             likes: '20k'
         },
         {
+            id: 2,
             image: "/assets/images/list-2.png",
             pollingUnit: "polling unit 1",
             ward: "ward 1",
@@ -94,6 +100,7 @@ export default function EyeWitnessReport(){
             likes: '20k'
         },
         {
+            id: 3,
             image: "/assets/images/list-1.png",
             pollingUnit: "polling unit 1",
             ward: "ward 1",
@@ -105,6 +112,7 @@ export default function EyeWitnessReport(){
             likes: '20k'
         },
         {
+            id: 4,
             image: "/assets/images/list-2.png",
             pollingUnit: "polling unit 1",
             ward: "ward 1",
@@ -116,6 +124,7 @@ export default function EyeWitnessReport(){
             likes: '20k'
         },
         {
+            id: 5,
             image: "/assets/images/list-1.png",
             pollingUnit: "polling unit 1",
             ward: "ward 1",
@@ -127,6 +136,7 @@ export default function EyeWitnessReport(){
             likes: '20k'
         },
         {
+            id: 6,
             image: "/assets/images/list-2.png",
             pollingUnit: "polling unit 1",
             ward: "ward 1",
@@ -143,6 +153,9 @@ export default function EyeWitnessReport(){
         setLoading(false);
         getAllStates();
         // states.length && getReports(states[0].id, user?.id);
+        window.addEventListener('click', (e) => {
+            if(share != null && e.target.id != 'share') setShare(null);
+        }); 
     }, []);
 
     
@@ -684,12 +697,32 @@ export default function EyeWitnessReport(){
                                                         <span>{activity.likes}</span>
                                                     </div>
                                                 </div>
-                                                <div className="text-xs text-gray-800 w-[100px] flex space-x-1">
-                                                    <div className="w-10 h-10 cursor-pointer flex justify-center items-center rounded-full hover:bg-slate-200">
+                                                <div className="text-xs text-gray-800 w-[100px] flex space-x-1 relative">
+                                                    <div className="w-10 h-10 cursor-pointer flex justify-center items-center rounded-full hover:bg-slate-200"
+                                                        onClick={() => {share == activity.id ? setShare(null) : setShare(activity.id)}} >
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-gray-800 fill-current">
                                                             <path fillRule="evenodd" d="M15.75 4.5a3 3 0 1 1 .825 2.066l-8.421 4.679a3.002 3.002 0 0 1 0 1.51l8.421 4.679a3 3 0 1 1-.729 1.31l-8.421-4.678a3 3 0 1 1 0-4.132l8.421-4.679a3 3 0 0 1-.096-.755Z" clipRule="evenodd" />
                                                         </svg>
                                                     </div>
+
+                                                    {
+                                                        share == activity.id && (
+                                                            <div id = "share" className="p-2 rounded-full flex space-x-3 bg-white shadow-lg absolute -top-10 l-0 z-10 ">
+                                                                <WhatsappShareButton url="https://facebook.com/something">
+                                                                    <WhatsappIcon size={32} round={true}/>
+                                                                </WhatsappShareButton>
+                                                                <FacebookShareButton url="https://facebook.com/something">
+                                                                    <FacebookIcon size={32} round={true}/>
+                                                                </FacebookShareButton>
+                                                                <TwitterShareButton url="https://facebook.com/something">
+                                                                    <TwitterIcon size={32} round={true}/>
+                                                                </TwitterShareButton>
+                                                            </div>)
+                                                    }
+
+                                                    
+
+                                                   
                                                 </div>
                                             </div>
 
