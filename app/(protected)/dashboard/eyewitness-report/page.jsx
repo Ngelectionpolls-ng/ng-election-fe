@@ -720,9 +720,6 @@ export default function EyeWitnessReport(){
                                                             </div>)
                                                     }
 
-                                                    
-
-                                                   
                                                 </div>
                                             </div>
 

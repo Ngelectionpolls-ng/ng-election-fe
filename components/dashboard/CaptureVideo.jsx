@@ -82,7 +82,8 @@ export default function CaptureVideo(){
         enteringResult, setEnteringResult,
         resultImage, setResultImage,
         reportImage, setReportImage,
-        captureFor, setCaptureFor
+        captureFor, setCaptureFor,
+        reporting, setReporting
     } = useContext(DashboardContext);
 
     useEffect(() => {
@@ -156,6 +157,7 @@ export default function CaptureVideo(){
     const goToAddReportDetail = () => {
         setCapturing(false);
         //we will do more here...
+        setReporting(true);
     }
 
     return (

@@ -19,6 +19,27 @@ const AppProvider = ({children}) => {
     const [fetching, setFetching] = useState(false);
     const [error, setError] = useState(null);
 
+    const [longitude, setLongitude] = useState(0);
+    const [latitude, setLatitude] = useState(0);
+
+    const getLocation = () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(locationGranted, locationRefused);
+        } else {
+          alert("Location permission not granted");
+        }
+    }
+      
+    const locationGranted = (position) => {
+        console.log("Location", position);
+        setLongitude(position.coords.longitude);
+        setLatitude(position.coords.latitude);
+    }
+
+    function locationRefused() {
+        alert("Sorry, no position available.");
+    }
+
 
     useEffect(() => {
         let storedUser = localStorage.getItem('user');
@@ -30,6 +51,8 @@ const AppProvider = ({children}) => {
         if(localStorage.getItem('token')){
             getElections();
         }
+
+        getLocation();
         
     }, []);
 
@@ -67,7 +90,7 @@ const AppProvider = ({children}) => {
     return (
         <AppContext.Provider value={{user, token, isLoggedIn, loading, 
                                      setLoading, currentElection, setCurrentElection, 
-                                     elections, setElections}}>
+                                     elections, setElections, longitude, latitude}}>
             {children}
         </AppContext.Provider>
     )
