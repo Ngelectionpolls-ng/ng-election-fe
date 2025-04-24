@@ -198,7 +198,7 @@ export default function Withdrawal({withdrawing, setWithdrawing, cash}){
                                         <SelectContent className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b">
                                             <SelectGroup>
                                                 <SelectItem value="mtn">MTN</SelectItem>
-                                                <SelectItem value="etisalat">Etisalat</SelectItem>
+                                                <SelectItem value=" 9mobile"> 9mobile</SelectItem>
                                                 <SelectItem value="airtel">Airtel</SelectItem>
                                                 <SelectItem value="glo">Glo</SelectItem>
                                             </SelectGroup>
@@ -298,9 +298,7 @@ export default function Withdrawal({withdrawing, setWithdrawing, cash}){
                                 
                             </div>
 
-                            <div className="flex flex-col space-y-4 w-1/3">
-                                
-                            <div className="flex flex-col space-y-4 w-1/3">
+                            <div className="flex flex-col space-y-4 w-1/3">                           
                                 
                                 <div className="flex flex-col space-y-2">
                                     <h6 className="text-xs text-gray-500">Voucher Number</h6>
@@ -313,8 +311,7 @@ export default function Withdrawal({withdrawing, setWithdrawing, cash}){
                                 </div>
                                 
                             </div>
-                                
-                            </div>
+
                         </div>
                     </div>
 

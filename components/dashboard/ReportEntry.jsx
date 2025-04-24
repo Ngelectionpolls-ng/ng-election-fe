@@ -67,6 +67,7 @@ import camera from "components/commons/Camera";
 import Error from "components/commons/Error";
 import ResultProgress from "components/dashboard/ResultProgress";
 import { Label } from 'components/ui/label'
+import LocationDisplay from 'components/dashboard/LocationDisplay';
 
 
 export default function ReportEntry(){
@@ -174,9 +175,9 @@ export default function ReportEntry(){
 
                         </div>
 
-                        
-
                         <img src={data.image} className="w-full" alt="" />
+
+                        <LocationDisplay latitude={data.latitude} longitude={data.longitude} />
 
                     </div>                        
 
