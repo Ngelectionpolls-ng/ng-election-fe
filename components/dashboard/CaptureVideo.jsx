@@ -61,11 +61,12 @@ import { GetPoliticalParties } from "services/profile/api";
 import { getImage, titleCase, getElection} from "helpers";
 import { AppContext } from 'contexts/App';
 import camera from "components/commons/Camera";
-
-
+import { SaveImage } from "services/images/api";
+import { useToast } from "hooks/use-toast";
 
 export default function CaptureVideo(){
     
+    const {toast} = useToast();
     const [error, setError] = useState(null);
     const [fetching, setFetching] = useState(false);
     const [addingResult, setAddingResult] = useState(false);
@@ -73,7 +74,9 @@ export default function CaptureVideo(){
     const [politicalParties, setPoliticalParties] = React.useState([]);
     const [value, setValue] = React.useState("");
 
-    const { elections, currentElection, setCurrentElection } = useContext(AppContext);
+    const { elections, currentElection, setCurrentElection, 
+            imageCaptured, setImageCaptured,
+            fileCaptured, setFileCaptured } = useContext(AppContext);
 
     const {
         capturing, setCapturing, 
@@ -87,7 +90,7 @@ export default function CaptureVideo(){
     } = useContext(DashboardContext);
 
     useEffect(() => {
-    }, []);
+    }, [fileCaptured]);
 
     const capture = () => {
         switch(captureFor){
@@ -105,7 +108,12 @@ export default function CaptureVideo(){
     }
 
     const takePhoto = () => {
-        camera.takeSnapshot();
+        camera.takeSnapshot();        
+        setImageCaptured(camera.canvas.toDataURL('image/png'));
+        camera.canvas.toBlob(function(blob) {
+            console.log("blob", blob);
+            setFileCaptured(blob);
+        });
         setCapturingVideo(false);
         setCapturing(true);
         setCaptured(true);
@@ -115,19 +123,21 @@ export default function CaptureVideo(){
         setCaptured(false);
         setCapturingVideo(true);
         camera.startCamera(800, 500);
-        camera.takeSnapshot();
     }
 
     const save = () => {
         setCaptured(false);
         setCapturingVideo(false);
-        if(process.env.IMAGE_PROFILE != 'live'){
+        if(process.env.NEXT_PUBLIC_IMAGE_PROFILE != 'live'){
             const image = getImage("result");
             setImage(image);
         }else{
+            setImage(imageCaptured);
             //we call a cloud service to save image here
+            saveImage(fileCaptured);
+            // saveImage(imageCaptured);
         }
-
+        camera.stopCamera();
         redirect();
     }
 
@@ -160,6 +170,35 @@ export default function CaptureVideo(){
         setReporting(true);
     }
 
+    const saveImage = async (file) => {
+    
+        setError(null);
+        setFetching(true);
+        const response = await SaveImage(file);
+        setFetching(false);
+
+        console.log('image response', response);
+        if(response.status >= 200 && response.status < 300){    
+            
+            //we fill the activities now            
+            
+        }else{
+
+            if(response.response.data.message){
+                setError(response.response.data.message);
+                toast({
+                    variant: 'destructive',
+                    description: response.response.data.message
+                });
+            }else{
+                toast({
+                    variant: 'destructive',
+                    description: 'Something went wrong. Please try again'
+                });
+            }
+        }
+    }
+
     return (
         <div  className={`${capturingVideo || captured ? 'block' : 'hidden'} fixed -top-2 left-0 z-10 text-white rounded-xl 
                             shadow-xl drop-shadow-xl flex flex-col items-center w-full h-full`}>
@@ -188,7 +227,7 @@ export default function CaptureVideo(){
                         <Camera className="w-5 h-5"/>
                     </span>
 
-                    <div className={`${captured ? 'flex' : 'hidden' } flex w-[130px] h-16 space-x-2 p-2 rounded-full bg-black/20`}>
+                    <div className={`${captured ? 'flex' : 'hidden' } flex w-[130px] h-16 space-x-2 p-2 rounded-full bg-black`}>
 
                         <span onClick={discard} 
                                 className="hover:bg-white/10 h-12 w-12 flex justify-center items-center rounded-full">

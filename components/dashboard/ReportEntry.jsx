@@ -68,20 +68,16 @@ import Error from "components/commons/Error";
 import ResultProgress from "components/dashboard/ResultProgress";
 import { Label } from 'components/ui/label'
 import LocationDisplay from 'components/dashboard/LocationDisplay';
+import { CreateReport } from "services/reports/api";
 
 
 export default function ReportEntry(){
 
-    const {user, setLoading} = useContext(AppContext);
+    const {user, imageCaptured} = useContext(AppContext);
     
     const [error, setError] = useState(null);
     const [fetching, setFetching] = useState(false);
-    const [addingResult, setAddingResult] = useState(false);
-    const [previewingResult, setPreviewingResult] = useState(false);
-    const [openPoliticalParty, setOpenPoliticalParty] = React.useState(false);
-    const [politicalParties, setPoliticalParties] = React.useState([]);
-    const [partyValue, setPartyValue] = React.useState("");
-    const [party, setParty] = React.useState(null);
+    const [addingReport, setAddingReport] = useState(false);
 
     const { elections, currentElection, setCurrentElection,
             longitude, latitude
@@ -105,19 +101,22 @@ export default function ReportEntry(){
             dateTime: "2023-11-07T12:00:00Z",
             location: "Nigeria",
             latitude: 0,
-            longitude: 0,
-            userRole: null
+            longitude: 0
         }
     )
 
-    const saveElectionResult = async () => {
+    const createReport = async () => {
+
+        console.log("data", data);
+
+        const role = user?.role == 'pollingUnitAgent' ? 'agents' : 'iwitness';
         
-        setAddingResult(true); 
+        setAddingReport(true); 
         setError(null);
         setFetching(true);
-        const response = await SaveElectionResult(data);
+        const response = await CreateReport(role, data);
         setFetching(false);
-        setAddingResult(false);
+        setAddingReport(false);
 
         console.log('reports', response);
         if(response.status >= 200 && response.status < 300){    
@@ -142,7 +141,7 @@ export default function ReportEntry(){
     }
     
     useEffect(() => {        
-        setData({...data, userRole: user?.role, image: reportImage, 
+        setData({...data, image: reportImage, 
                     longitude: longitude, latitude: latitude});
     }, [user, reportImage, longitude, latitude]);
 
@@ -169,9 +168,12 @@ export default function ReportEntry(){
                                 className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b 
                                         focus-visible:border-1 focus:border-green-900 pl-0 bg-white text-black px-2 flex-1 rounded-xl h-44" 
                             /> */}
-                            <Textarea placeholder="Add a comment..." className="w-full rounded bg-slate-100 h-12 text-black" />
+                            <Textarea placeholder="Add a comment..." 
+                                        className="w-full rounded bg-slate-100 h-12 text-black" 
+                                        onChange={(e) => setData({...data, caption: e.target.value})} />
                             
-                            <Button className="rounded-xl text-xs h-10 text-white" onChange={(e) => setData({...data, caption: e.target.value})}>Submit</Button>
+                            <Button className="rounded-xl text-xs h-10 text-white"  
+                                    onClick={() => createReport() }>Submit</Button>
 
                         </div>
 

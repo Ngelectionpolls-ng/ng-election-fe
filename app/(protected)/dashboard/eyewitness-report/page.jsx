@@ -153,6 +153,7 @@ export default function EyeWitnessReport(){
         setLoading(false);
         getAllStates();
         // states.length && getReports(states[0].id, user?.id);
+        getReports();
         window.addEventListener('click', (e) => {
             if(share != null && e.target.id != 'share') setShare(null);
         }); 
@@ -165,7 +166,7 @@ export default function EyeWitnessReport(){
         const response = await GetReports(stateId, iWitnessId);
         setFetching(false);
 
-        console.log('reports', response);
+        console.log('reports fetched', response);
         if(response.status >= 200 && response.status < 300){    
             
             //we fill the activities now            

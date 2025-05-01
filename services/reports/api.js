@@ -4,26 +4,26 @@ import { getToken } from "helpers";
 
 
 
-export const GetReports = async (stateId, iWitnessId) => {
+export const GetReports = async (stateId=null, iWitnessId=null) => {
 
-    let result = null;
+    // let result = null;
 
-    await Axios.get(GET_REPORTS + "?limit=6&page=1", {
+    return await Axios.get(GET_REPORTS + "?limit=6&page=1", {
         headers: {
             Authorization: 'Bearer ' + getToken()
         }
     })
-    .then(response => {result = response})
-    .catch(error => {result = error});
+    .then(response => response)
+    .catch(error => error);
     
-    return result;
+    // return result;
 } 
 
-export const CreateReport = async (data) => {
+export const CreateReport = async (role, data) => {
 
     let result = null;
 
-    await Axios.patch(CREATE_REPORT, {...data}, {
+    await Axios.post(CREATE_REPORT.replace(':role', role), {...data}, {
         headers: {
             Authorization: 'Bearer ' + getToken()
         }

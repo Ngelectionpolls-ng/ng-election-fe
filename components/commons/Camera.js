@@ -1,5 +1,6 @@
 "use client"
 
+
 const camera = function () {
     let width = 0;
     let height = 0;

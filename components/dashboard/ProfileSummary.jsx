@@ -44,7 +44,7 @@ export default function ProfileSummary(){
         const response = await GetProfile(user_id);
         setFetching(false);
 
-        console.log(response);
+        console.log("profile response", response);
         if(response?.status >= 200 && response?.status < 300){
             const profile = response.data;
 

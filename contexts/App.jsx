@@ -9,6 +9,8 @@ const AppContext = createContext();
 const AppProvider = ({children}) => {
     
     const [user, setUser] = useState(null);
+    const [imageCaptured, setImageCaptured] = useState(null);
+    const [fileCaptured, setFileCaptured] = useState(null);
     const [token, setToken] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -89,6 +91,8 @@ const AppProvider = ({children}) => {
 
     return (
         <AppContext.Provider value={{user, token, isLoggedIn, loading, 
+                                     imageCaptured, setImageCaptured,
+                                     fileCaptured, setFileCaptured,
                                      setLoading, currentElection, setCurrentElection, 
                                      elections, setElections, longitude, latitude}}>
             {children}

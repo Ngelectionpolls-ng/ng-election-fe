@@ -26,7 +26,7 @@ export const UPDATE_PROFILE = `common-resources/profile/:user_id`;
 
 //reports
 export const GET_REPORTS = `reports`;
-export const CREATE_REPORT = `reports`;
+export const CREATE_REPORT = `:role/reports`;
 
 //wallet
 export const GET_WALLET_INFO = `wallets/:user_id`;
@@ -39,3 +39,6 @@ export const SAVE_ELECTION_RESULT = `agents/upload`;
 
 //elections
 export const GET_ELECTIONS = `elections`;
+
+//save images
+export const SAVE_IMAGE = `uploads/resource`;
