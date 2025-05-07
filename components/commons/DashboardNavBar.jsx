@@ -118,7 +118,7 @@ function DashboardNavBar() {
         
         <div className="flex items-center justify-between px-4 py-4 h-16 w-full">
 
-            <div className="w-[250px] font-semibold">
+            <div className="w-[350px] font-semibold">
                {/* {activeMenu} Page */}
                 <Popover open={openElections} onOpenChange={setOpenElections}>
                     <PopoverTrigger asChild>
@@ -129,7 +129,7 @@ function DashboardNavBar() {
                             className="w-full justify-between rounded text-black text-xs h-9"
                         >
                             {value
-                                ? elections.find((election) => election.value === value)?.label
+                                ? ellipsify(elections.find((election) => election.value === value)?.label, 40)
                                 : "Select an Election"}
                             <ChevronDown className="opacity-50" />
                         </Button>
