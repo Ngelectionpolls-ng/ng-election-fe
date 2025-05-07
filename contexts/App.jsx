@@ -14,6 +14,7 @@ const AppProvider = ({children}) => {
     const [token, setToken] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [candidates, setCandidates] = useState([]);
 
     const [elections, setElections] = useState([]);
     const [currentElection, setCurrentElection] = useState(null);
@@ -59,42 +60,44 @@ const AppProvider = ({children}) => {
     }, []);
 
     const getElections = async () => {
-            setError(null);
-            setFetching(true);
-            const response = await GetElections();
-            setFetching(false);
-    
-            console.log('elections', response);
-            if(response.status >= 200 && response.status < 300){    
-                
-                //we fill the elections
-                // const resp = response.data.docs;
-                const resp = response.data.data.elections;
-                setElections(resp);
-                
+        setError(null);
+        setFetching(true);
+        const response = await GetElections();
+        setFetching(false);
+
+        console.log('elections', response);
+        if(response.status >= 200 && response.status < 300){    
+            
+            //we fill the elections
+            // const resp = response.data.docs;
+            const resp = response.data.data.elections;
+            setElections(resp);
+            
+        }else{
+
+            if(response.response.data.message){
+                setError(response.response.data.message);
+                toast({
+                    variant: 'destructive',
+                    description: response.response.data.message
+                });
             }else{
-    
-                if(response.response.data.message){
-                    setError(response.response.data.message);
-                    toast({
-                        variant: 'destructive',
-                        description: response.response.data.message
-                    });
-                }else{
-                    toast({
-                        variant: 'destructive',
-                        description: 'Something went wrong. Please try again'
-                    });
-                }
+                toast({
+                    variant: 'destructive',
+                    description: 'Something went wrong. Please try again'
+                });
             }
         }
+    }
 
     return (
         <AppContext.Provider value={{user, token, isLoggedIn, loading, 
                                      imageCaptured, setImageCaptured,
                                      fileCaptured, setFileCaptured,
                                      setLoading, currentElection, setCurrentElection, 
-                                     elections, setElections, longitude, latitude}}>
+                                     elections, setElections, 
+                                     longitude, latitude, 
+                                     candidates, setCandidates}}>
             {children}
         </AppContext.Provider>
     )

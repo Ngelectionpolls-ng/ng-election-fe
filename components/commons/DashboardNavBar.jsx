@@ -51,10 +51,15 @@ import { useRouter } from 'next/navigation';
 import NavUserIcon from "components/commons/NavUserIcon";
 import Notifications from "components/commons/Notifications";
 import Messages from "components/commons/Messages";
+import { GetCandidates } from "services/elections/api";
 
 function DashboardNavBar() {
-    
-    const {isLoggedIn, user, setLoading, elections, currentElection, setCurrentElection} = useContext(AppContext);
+
+    const [error, setError] = useState(false);    
+    const [fetching, setFetching] = useState(false);    
+    const {isLoggedIn, user, setLoading, elections, 
+        currentElection, setCurrentElection,         
+        candidates, setCandidates} = useContext(AppContext);
     const {activeMenu, setActiveMenu} = useContext(DashboardContext);
     const router = useRouter();
 
@@ -81,6 +86,32 @@ function DashboardNavBar() {
 
     const getElection = (value) => {
         return elections.find(election => election.name == value);
+    }
+
+    const getCandidates = async (election_id) => {
+        setError(null);
+        setFetching(true);
+        const response = await GetCandidates(election_id);
+        setFetching(false);
+
+        console.log('Candidates', response);
+        if(response.status >= 200 && response.status < 300){            
+            setCandidates(response.data.data.candidates);
+        }else{
+
+            if(response.response.data.message){
+                setError(response.response.data.message);
+                toast({
+                    variant: 'destructive',
+                    description: response.response.data.message
+                });
+            }else{
+                toast({
+                    variant: 'destructive',
+                    description: 'Something went wrong. Please try again'
+                });
+            }
+        }
     }
     
     return (        
@@ -111,12 +142,13 @@ function DashboardNavBar() {
                                 <CommandGroup>
                                     {elections.map((an_election) => (
                                         <CommandItem
-                                            key={an_election.value}
+                                            key={an_election.id}
                                             value={an_election.value}
                                             onSelect={(currentValue) => {
                                                 setValue(currentValue === value ? "" : currentValue);
                                                 setCurrentElection(getElection(currentValue));
-                                                setOpenElections(false)
+                                                setOpenElections(false);
+                                                getCandidates(an_election.id)
                                             }}
                                         >
                                         {an_election.label}

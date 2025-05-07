@@ -39,6 +39,7 @@ export const SAVE_ELECTION_RESULT = `agents/upload`;
 
 //elections
 export const GET_ELECTIONS = `elections`;
+export const GET_CANDIDATES = `elections/:election_id/candidates`;
 
 //save images
 export const SAVE_IMAGE = `uploads/resource`;
