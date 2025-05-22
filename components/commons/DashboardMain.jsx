@@ -43,6 +43,7 @@ import NavUserIcon from "components/commons/NavUserIcon";
 import Notifications from "components/commons/Notifications";
 import camera from "components/commons/Camera";
 import ResultEntry from "components/dashboard/ResultEntry";
+import ReportEntry from "components/dashboard/ReportEntry";
 import CaptureVideo from "components/dashboard/CaptureVideo";
 
 function DashboardMain({children}) {
@@ -52,7 +53,9 @@ function DashboardMain({children}) {
         capturingVideo, setCapturingVideo,
         captured, setCaptured,
         enteringResult, setEnteringResult,
-        addingResult, setAddingResult
+        addingResult, setAddingResult,
+        captureFor, setCaptureFor,
+        reporting, setReporting
     } = useContext(DashboardContext);
     
     const {isLoggedIn, user, setLoading} = useContext(AppContext);
@@ -69,7 +72,7 @@ function DashboardMain({children}) {
     const streamVideo = async () => {
         setCapturingVideo(true);
         camera.startCamera(800, 500);
-        camera.takeSnapshot();
+        // camera.takeSnapshot();
     }
    
     
@@ -109,7 +112,7 @@ function DashboardMain({children}) {
                     </div>
                 </div> */}
                 {/* Image capture */}
-                <div className="flex items-center justify-end space-x-2" onClick={streamVideo}>
+                <div className="flex items-center justify-end space-x-2" onClick={() => {setCaptureFor("report"); streamVideo()}}>
                     <span className="text-black text-xs">Capture Activity</span>
                     <div className="w-14 h-14 bg-green-900 hover:bg-gray-800 cursor-pointer text-white 
                             rounded-full shadow-xl drop-shadow-xl flex justify-center items-center">
@@ -140,6 +143,9 @@ function DashboardMain({children}) {
                            
             {/* Entering result */}
             <ResultEntry />
+
+            {/* entering report */}
+            <ReportEntry />
                            
         </div>
 

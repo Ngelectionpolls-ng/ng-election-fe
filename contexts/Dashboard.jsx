@@ -16,6 +16,7 @@ const DashboardProvider = ({children}) => {
 
     const [resultImage, setResultImage] = useState(null);
     const [reportImage, setReportImage] = useState(null);
+    const [reporting, setReporting] = useState(false);
     
 
     return (
@@ -24,7 +25,8 @@ const DashboardProvider = ({children}) => {
                                             enteringResult, setEnteringResult, 
                                             captureFor, setCaptureFor,
                                             resultImage, setResultImage,
-                                            reportImage, setReportImage}}>
+                                            reportImage, setReportImage,
+                                            reporting, setReporting}}>
             {children}
         </DashboardContext.Provider>
     )
