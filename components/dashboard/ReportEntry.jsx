@@ -69,6 +69,8 @@ import ResultProgress from "components/dashboard/ResultProgress";
 import { Label } from 'components/ui/label'
 import LocationDisplay from 'components/dashboard/LocationDisplay';
 import { CreateReport } from "services/reports/api";
+import { useToast } from "hooks/use-toast"
+
 
 
 export default function ReportEntry(){
@@ -78,6 +80,7 @@ export default function ReportEntry(){
     const [error, setError] = useState(null);
     const [fetching, setFetching] = useState(false);
     const [addingReport, setAddingReport] = useState(false);
+    const {toast} = useToast();
 
     const { elections, currentElection, setCurrentElection,
             longitude, latitude
@@ -121,7 +124,11 @@ export default function ReportEntry(){
         console.log('reports', response);
         if(response.status >= 200 && response.status < 300){    
             
-            //we fill the activities now            
+            setReporting(false); 
+            toast({
+                variant: 'positive',
+                description: "Report submitted successfully" //response.data.message
+            });         
             
         }else{
 
