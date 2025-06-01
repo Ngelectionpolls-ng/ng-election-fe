@@ -27,10 +27,9 @@ import {
 
 export default function Map(){
 
-    const {currentElection, setCurrentElection} = useContext(AppContext);
+    const {elections, setElections, currentElection, setCurrentElection} = useContext(AppContext);
 
     const [openElections, setOpenElections] = useState(false);
-    const [election, setElection] = useState(currentElection);
     const [value, setValue] = useState(null);
 
     const mouseOffset = 60;
@@ -43,20 +42,20 @@ export default function Map(){
     const [hoveringOverResult, setHoveringOverResult] = useState(false);
     const [mobile, setMobile] = useState(false);
 
-    const elections = [
-        {
-            label: "Presidential Election 2023",
-            value: "presidential-election-2023-unit-1"
-        },
-        {
-            label: "House of Assembly Election",
-            value: "house-of=assembly-election-2023"
-        },
-        {
-            label: "Senatorial Election 2023",
-            value: "senatorial-election-2023"
-        }
-    ]; 
+    // const elections = [
+    //     {
+    //         label: "Presidential Election 2023",
+    //         value: "presidential-election-2023-unit-1"
+    //     },
+    //     {
+    //         label: "House of Assembly Election",
+    //         value: "house-of=assembly-election-2023"
+    //     },
+    //     {
+    //         label: "Senatorial Election 2023",
+    //         value: "senatorial-election-2023"
+    //     }
+    // ]; 
 
     const displayResult = (e) => {
         
@@ -96,13 +95,15 @@ export default function Map(){
     }
 
     useEffect(() => {
-            window.addEventListener('click', (e) => {
-                console.log(e.target.id);
-                if(e.target.id != 'election_result' && visible){
-                    setVisible(false);
-                    setHoveringOverResult(false);
-                }
-            }, true);
+        window.addEventListener('click', (e) => {
+            console.log(e.target.id);
+            if(e.target.id != 'election_result' && visible){
+                setVisible(false);
+                setHoveringOverResult(false);
+            }
+        }, true);
+
+        console.log(elections);
     }, []);
 
     const handleStateClick = (e) => {
