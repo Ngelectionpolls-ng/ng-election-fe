@@ -196,3 +196,8 @@ export function getWardId (ward, wards) {
     const entry = wards.find((array_entry) => array_entry.name == ward);
     return entry.id;
 }
+
+export function getTheCandidate (candidates, partyId) {
+    const entry = candidates.find((array_entry) => array_entry.party.id == partyId);
+    return entry;
+}

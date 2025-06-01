@@ -3,7 +3,7 @@
 
 import React, {useContext, useEffect, useState} from 'react'
 import Link from 'next/link'
-
+import { GetCandidates } from "services/elections/api";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -60,7 +60,7 @@ import { SaveElectionResult } from "services/results/api";
 import { GetPoliticalParties } from "services/profile/api";
 import { getImage, titleCase } from "helpers";
 import { AppContext } from 'contexts/App';
-import { getElection } from "helpers";
+import { getElection, getTheCandidate } from "helpers";
 import camera from "components/commons/Camera";
 import Error from "components/commons/Error";
 import ResultProgress from "components/dashboard/ResultProgress";
@@ -78,7 +78,10 @@ export default function ResultEntry(){
     const [partyValue, setPartyValue] = React.useState("");
     const [party, setParty] = React.useState(null);
 
-    const { elections, currentElection, setCurrentElection } = useContext(AppContext);
+    const [candidate, setCandidate] = useState(null);
+
+    const { elections, currentElection, setCurrentElection, 
+            candidates, setCandidates } = useContext(AppContext);
 
     const {
         capturing, setCapturing, 
@@ -190,11 +193,16 @@ export default function ResultEntry(){
     const addCandidate = (party) => {
         console.log('party', party);
         console.log(data); 
-        console.log('candidates', data.candidates); 
+        console.log('candidates', data.candidates);         
         let candidates = data.candidates;
         const candidate = candidates.find((c) => c.partyId == party.id);              
         if(!candidate){  
-            candidates.push({ name: 'Peter Obi', acronym: party.acronym, votes: data.pollingunitValidVotes, color: party.color, image: '/assets/images/apc.png', partyId: party.id });
+            let newCandidate = getTheCandidate(candidates, party.id);
+            if(newCandidate){
+                candidates.push({ name: newCandidate.name, acronym: party.acronym, votes: data.pollingunitValidVotes, color: party.color, image: newCandidate.image, partyId: party.id });
+            }else{
+                candidates.push({ name: 'Placeholder', acronym: party.acronym, votes: data.pollingunitValidVotes, color: party.color, image: '/assets/images/apc.png', partyId: party.id });
+            }
             console.log('candidates', candidates);
         }else{
             candidate['votes'] = data.pollingunitValidVotes;
@@ -209,14 +217,14 @@ export default function ResultEntry(){
         let candidates = data.candidates;
         const candidate = candidates.find((c) => c.partyId == party.id);              
         if(!candidate){  
-            candidates.push({ name: 'Peter Obi', acronym: party.acronym, votes: data.pollingunitValidVotes, color: party.color, image: '/assets/images/apc.png', partyId: party.id });
+            candidates.push({ name: 'Placeholder', acronym: party?.name, votes: data.pollingunitValidVotes, color: party?.color, image: '/assets/images/apc.png', partyId: party?.id });
             console.log('candidates', candidates);
         }else{
             candidate['votes'] = data.pollingunitValidVotes;
         }
         console.log('candidates', candidates);
         console.log('candidate found', candidate);
-        setData({...data, candidates: candidates, partyId: party.id});
+        setData({...data, candidates: candidates, partyId: party?.id});
         console.log(data)
         if(!validateResult(data)) return;
         setPreviewingResult(true);
@@ -270,6 +278,32 @@ export default function ResultEntry(){
         streamVideo();
     }
 
+    const getCandidates = async (election_id) => {
+            setError(null);
+            setFetching(true);
+            const response = await GetCandidates(election_id);
+            setFetching(false);
+    
+            console.log('Candidates', response);
+            if(response.status >= 200 && response.status < 300){            
+                setCandidates(response.data.data.candidates);
+            }else{
+    
+                if(response.response.data.message){
+                    setError(response.response.data.message);
+                    toast({
+                        variant: 'destructive',
+                        description: response.response.data.message
+                    });
+                }else{
+                    toast({
+                        variant: 'destructive',
+                        description: 'Something went wrong. Please try again'
+                    });
+                }
+            }
+        }
+
     return (
         <div  className={`${enteringResult ? 'block' : 'hidden'} fixed -top-2 left-0 z-10 text-white rounded-xl 
                             shadow-xl drop-shadow-xl flex flex-col items-center w-full h-full`}>
@@ -282,7 +316,12 @@ export default function ResultEntry(){
                         <div className="absolute top-0 left-0 w-full flex justify-between p-6 self-start">
                             {/* Election select */}
                             <Select className="px-2 border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0" 
-                                    onValueChange={(e) => {console.log(e); setCurrentElection(getElection(e, elections))}} >
+                                    onValueChange={(e) => {
+                                                            console.log(e); 
+                                                            setCurrentElection(getElection(e, elections)); 
+                                                            getCandidates(getElection(e, elections).id)
+                                                        }
+                                                    } >
                                 <SelectTrigger className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0 w-auto" >
                                     <SelectValue placeholder="Select election" />
                                 </SelectTrigger>
@@ -418,6 +457,7 @@ export default function ResultEntry(){
                                                         setData({...data, partyId: party.id});
                                                         addCandidate(party);
                                                         setOpenPoliticalParty(false);
+                                                        setParty(party);
                                                     }}
                                                 >
                                                 <span className="w-8 flex mr-1 items-center"><img src={party.logo} alt="" className="mr-2 h-4" /></span> {`${titleCase(party.name)}, (${party.acronym.toUpperCase()})`}
