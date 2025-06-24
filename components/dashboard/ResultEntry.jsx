@@ -65,6 +65,7 @@ import camera from "components/commons/Camera";
 import Error from "components/commons/Error";
 import ResultProgress from "components/dashboard/ResultProgress";
 import { Label } from 'components/ui/label'
+import { useToast } from "hooks/use-toast";
 
 
 export default function ResultEntry(){
@@ -77,6 +78,7 @@ export default function ResultEntry(){
     const [politicalParties, setPoliticalParties] = React.useState([]);
     const [partyValue, setPartyValue] = React.useState("");
     const [party, setParty] = React.useState(null);
+     const {toast} = useToast();
 
     const [candidate, setCandidate] = useState(null);
 
@@ -194,7 +196,6 @@ export default function ResultEntry(){
         console.log('party', party);
         console.log(data); 
         console.log('candidates', data.candidates);         
-        let candidates = data.candidates;
         const candidate = candidates.find((c) => c.partyId == party.id);              
         if(!candidate){  
             let newCandidate = getTheCandidate(candidates, party.id);
@@ -214,8 +215,7 @@ export default function ResultEntry(){
     }
 
     const previewElectionResult = async () => {
-        let candidates = data.candidates;
-        const candidate = candidates.find((c) => c.partyId == party.id);              
+        const candidate = candidates.find((c) => c.party.id == party.id);              
         if(!candidate){  
             candidates.push({ name: 'Placeholder', acronym: party?.name, votes: data.pollingunitValidVotes, color: party?.color, image: '/assets/images/apc.png', partyId: party?.id });
             console.log('candidates', candidates);
@@ -285,7 +285,7 @@ export default function ResultEntry(){
             setFetching(false);
     
             console.log('Candidates', response);
-            if(response.status >= 200 && response.status < 300){            
+            if(response.status >= 200 && response.status < 300){        
                 setCandidates(response.data.data.candidates);
             }else{
     
