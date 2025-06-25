@@ -78,7 +78,10 @@ export default function ResultEntry(){
     const [politicalParties, setPoliticalParties] = React.useState([]);
     const [partyValue, setPartyValue] = React.useState("");
     const [party, setParty] = React.useState(null);
-     const {toast} = useToast();
+    const {toast} = useToast();
+    const {user, setLoading} = useContext(AppContext);
+
+    console.log("USER", user);
 
     const [candidate, setCandidate] = useState(null);
 
@@ -90,7 +93,8 @@ export default function ResultEntry(){
         capturingVideo, setCapturingVideo,
         resultImage, setResultImage,
         enteringResult, setEnteringResult,
-        captureFor, setCaptureFor
+        captureFor, setCaptureFor,
+        electionLevel, setElectionLevel
     } = useContext(DashboardContext);
     
     // const candidates = [
@@ -105,6 +109,7 @@ export default function ResultEntry(){
             candidates: [],
             electionId: currentElection?.id,
             partyId: null,
+            pollingUnitId: user.pollingUnit?.id,
             pollingunitValidVotes: 0, 
             registeredVoters: 0,
             accreditedVoters: 0,
@@ -112,7 +117,8 @@ export default function ResultEntry(){
             spoiledVotes: 0,            
             validVotes: 0,
             unusedBallotPapers: 0,
-            statementOfResult: process.env.IMAGE_PROFILE != "live" ? getImage("result") : null
+            statementOfResult: process.env.IMAGE_PROFILE != "live" ? getImage("result") : null,
+            electionLevel: null
         }
     )//this will represent the party's votes
 
@@ -196,7 +202,7 @@ export default function ResultEntry(){
         console.log('party', party);
         console.log(data); 
         console.log('candidates', data.candidates);         
-        const candidate = candidates.find((c) => c.partyId == party.id);              
+        const candidate = candidates.find((c) => c.party.id == party.id);              
         if(!candidate){  
             let newCandidate = getTheCandidate(candidates, party.id);
             if(newCandidate){
@@ -207,6 +213,7 @@ export default function ResultEntry(){
             console.log('candidates', candidates);
         }else{
             candidate['votes'] = data.pollingunitValidVotes;
+            candidate['acronym'] = party.acronym;
         }
         setParty(party);
         console.log('candidates', candidates);
@@ -235,6 +242,22 @@ export default function ResultEntry(){
         setAddingResult(true); 
         setError(null);
         setFetching(true);
+
+        delete data.partyId;
+        delete data.pollingunitValidVotes;
+
+        for(let c of candidates){            
+            c.candidateId = c.id;
+            c.partyId = c.party.id;
+            c.color = c.party.color; 
+            c.votes = isNaN(c.votes) ? 0 : parseInt(c.votes);
+            delete c.id;
+            delete c.contentionYear;
+            delete c.position;
+            delete c.party;
+            console.log(c);
+        }
+
         const response = await SaveElectionResult(data);
         setFetching(false);
         setAddingResult(false);
@@ -319,7 +342,9 @@ export default function ResultEntry(){
                                     onValueChange={(e) => {
                                                             console.log(e); 
                                                             setCurrentElection(getElection(e, elections)); 
-                                                            getCandidates(getElection(e, elections).id)
+                                                            setElectionLevel(getElection(e, elections)['level']);
+                                                            setData({...data, electionLevel: getElection(e, elections)['level']});
+                                                            getCandidates(getElection(e, elections).id);
                                                         }
                                                     } >
                                 <SelectTrigger className="border-none border-0 focus-visible:ring-none focus-visible:ring-0 focus:border-b focus:border-1 focus-visible:border-b focus-visible:border-1 focus:border-green-900 pl-0 w-auto" >

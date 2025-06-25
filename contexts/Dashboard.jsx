@@ -13,6 +13,7 @@ const DashboardProvider = ({children}) => {
     const [captured, setCaptured] = useState(false);
     const [enteringResult, setEnteringResult] = useState(false);
     const [captureFor, setCaptureFor] = useState(""); //either result or report
+    const [electionLevel, setElectionLevel] = useState(null);
 
     const [resultImage, setResultImage] = useState(null);
     const [reportImage, setReportImage] = useState(null);
@@ -26,7 +27,8 @@ const DashboardProvider = ({children}) => {
                                             captureFor, setCaptureFor,
                                             resultImage, setResultImage,
                                             reportImage, setReportImage,
-                                            reporting, setReporting}}>
+                                            reporting, setReporting,
+                                            electionLevel, setElectionLevel}}>
             {children}
         </DashboardContext.Provider>
     )

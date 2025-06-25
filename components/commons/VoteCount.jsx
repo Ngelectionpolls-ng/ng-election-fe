@@ -4,9 +4,9 @@ import { ellipsify } from "helpers";
 
 export default function VoteCount({data, total, type="normal"}){
 
-    const width = Math.round((data.votes / total) * 400);
+    const width = Math.round(((data.votes / total) ?? 0) * 400);
 
-    const percentage = Math.round((data.votes / total) * 100);
+    const percentage = Math.round(((data.votes / total) ?? 0) * 100);
     const indicatorLeft = width > 30 ? width - 30 : width;
     const indicatorColor = width > 30 ? 'text-white' : 'text-black';
 
@@ -21,7 +21,7 @@ export default function VoteCount({data, total, type="normal"}){
             </div>
             
             <div className={`${type == 'small' ? 'h-4 w-[350px]' : 'h-6 w-[400px]'}  rounded-full relative bg-black/20 overflow-hidden`}>
-                <div className={`${data.color} h-full`} style={{ width: `${width}px` }} ></div>
+                <div className={`h-full`} style={{ width: `${width}px`, backgroundColor: data.color }} ></div>
                 <div className={`absolute z-10 h-full w-full top-0 left-0 text-xs 
                                 shadow-white shadow-2xl mx-auto my-auto text-black 
                                 flex items-center`}>
